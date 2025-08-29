@@ -1,61 +1,28 @@
-import math
+abstract class Figura {
+    public abstract void area();  //Método abstracto
+}
 
-# Clase base
-class Figura:
-    def area(self):
-        pass  # Se implementará en las subclases
-    
-    def descripcion(self):
-        return "Soy una figura geométrica."
+class Circulo extends Figura {
+    @Override
+    public void area() {
+        System.out.println("Área del círculo = π * r²");
+    }
+}
 
-# Subclase: Círculo
-class Circulo(Figura):
-    def __init__(self, radio):
-        self.radio = radio
+class Cuadrado extends Figura {
+    @Override
+    public void area() {
+        System.out.println("Área del cuadrado = lado * lado");
+    }
+}
 
-    def area(self):
-        return math.pi * self.radio ** 2
-    
-    def descripcion(self):
-        return f"Soy un Círculo con radio {self.radio}"
+public class Main {
+    public static void main(String[] args) {
+        // Creamos un arreglo de figuras
+        Figura[] figuras = {new Circulo(), new Cuadrado()};
 
-# Subclase: Rectángulo
-class Rectangulo(Figura):
-    def __init__(self, base, altura):
-        self.base = base
-        self.altura = altura
-
-    def area(self):
-        return self.base * self.altura
-    
-    def descripcion(self):
-        return f"Soy un Rectángulo de {self.base} x {self.altura}"
-
-# Subclase: Triángulo
-class Triangulo(Figura):
-    def __init__(self, base, altura):
-        self.base = base
-        self.altura = altura
-
-    def area(self):
-        return (self.base * self.altura) / 2
-    
-    def descripcion(self):
-        return f"Soy un Triángulo con base {self.base} y altura {self.altura}"
-
-# Función que demuestra el polimorfismo
-def mostrar_informacion(figura):
-    print(figura.descripcion())
-    print(f"Área: {figura.area():.2f}")
-    print("-" * 30)
-
-# Programa principal
-if __name__ == "__main__":
-    figuras = [
-        Circulo(5),
-        Rectangulo(4, 6),
-        Triangulo(3, 7)
-    ]
-    
-    for f in figuras:
-        mostrar_informacion(f)
+        for (Figura f : figuras) {
+            f.area();
+        }
+    }
+}
