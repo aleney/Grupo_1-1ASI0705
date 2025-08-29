@@ -1,0 +1,38 @@
+class Cajero {
+  consultarSaldo() {
+    throw new Error("Método 'consultarSaldo()' debe ser implementado");
+  }
+
+  retirarDinero(monto) {
+    throw new Error("Método 'retirarDinero()' debe ser implementado");
+  }
+
+  depositarDinero(monto) {
+    throw new Error("Método 'depositarDinero()' debe ser implementado");
+  }
+}
+
+class CajeroBCP extends Cajero {
+  constructor(saldoInicial) {
+    super();
+    this.saldo = saldoInicial;
+  }
+
+  consultarSaldo() {
+    console.log(`Tu saldo disponible es: S/ ${this.saldo}`);
+  }
+
+  retirarDinero(monto) {
+    if (monto <= this.saldo) {
+      this.saldo -= monto;
+      console.log(`Has retirado S/ ${monto}. Nuevo saldo: S/ ${this.saldo}`);
+    } else {
+      console.log('⚠️ Fondos insuficientes');
+    }
+  }
+
+  depositarDinero(monto) {
+    this.saldo += monto;
+    console.log(`Has depositado S/ ${monto}. Nuevo saldo: S/ ${this.saldo}`);
+  }
+}
