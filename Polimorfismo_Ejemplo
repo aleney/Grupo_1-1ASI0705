@@ -1,5 +1,5 @@
 abstract class Figura {
-    public abstract void area();  //Método abstracto
+    public abstract void area();
 }
 
 class Circulo extends Figura {
@@ -26,3 +26,4 @@ public class Main {
         }
     }
 }
+
