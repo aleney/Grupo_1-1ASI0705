@@ -20,15 +20,11 @@ Consumidores
 - Capacidad de asignar productos o tiendas como favoritos.
 - Recomendaciones personalizadas basadas en los productos más consumidos por usuario.
 - Visualizar un historial de precios de un producto en un plazo máximo de 2 años.
-- Delimitar un presupuesto mensual el cual será notificado al 75% y al 100% de haberse consumido.
 - Ver y colocar reseñas y calificaciones a tiendas (calificación de confianza respecto a los precios, calificación de productos, reseñas)
-- Notificaciones por eventos (descuentos por temporada, bajones de precios en una zona en específico, anuncios varios).
 - Recibir reportes semanales de correos de los productos con mayor fluctuación de precios.
 - Recomendación de ahorro basado en cercanía de zonas del cliente e historial de preferencias de productos. (modificable)
 - Modo offline (En observación)
 - Pago directo mediante la app para separar productos (En observación).
-- Capacidad de exportar información personal de compras (balances mensuales, historial de facturación por compra).
-- Gamificación con recompensas que permita al usuario acumular puntos cada que realice cierta cantidad de compras o actividades en planificación dentro del aplicativo que resulte en beneficio para cada parte (En observación por su complejidad, además de estar ligada directamente con el pago directo).
 - Explicación de variación de precios en la semana.
 
 
@@ -37,7 +33,6 @@ Vendedor
 
 - Publicar productos junto a un precio, adjuntar una foto del producto y del precio y colocar una descripción detallada.
 - Registro e inicio de sesión mediante datos en la plataforma o mediante google.
-- Recibir reportes semanales de correos de los productos con mayor fluctuación de precios.
 - Comparación de precios entre zonas (mapeo de zonas a nivel Lima metropolitana de diferencias de precios) y unidad métrica (kg, gr, lt, unidad).
 - Reportes comparativos de su competencia local para lograr una venta más justa y competitiva.
 - Recibir un panel de ventas estimadas en base a las métricas de interés que se generan cada que un usuario revisa el producto.
