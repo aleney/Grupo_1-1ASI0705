@@ -22,4 +22,26 @@ public class LineaTiendasServiceImplement implements ILineaTiendasService {
     public void insert(LineaTiendas lt) {
         repository.save(lt);
     }
+
+    @Override
+    public LineaTiendas ListId(int id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void delete(int id) {
+        repository.deleteById(id);
+    }
+
+    @Override
+    public void update(LineaTiendas lt) {
+        repository.save(lt);
+    }
+
+    @Override
+    public List<LineaTiendas> buscarService(String nombre) {
+        return repository.buscar(nombre);
+    }
+
+
 }
