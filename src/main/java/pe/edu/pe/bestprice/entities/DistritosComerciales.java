@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="DistritoComerciales")
+@Table(name="DistritoC")
 public class DistritosComerciales {
 
 }
