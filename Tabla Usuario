@@ -44,7 +44,7 @@ public class Usuario {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.email = email;
-        this.contrasen = contrasen;
+        this.contraseña = contraseña;
         this.numTelefo = numTelefo;
         this.estadoActi = estadoActi;
         this.createdAt = createdAt;
@@ -81,7 +81,7 @@ public class Usuario {
     }
 
     public void setContrasen(String contrasen) {
-        this.contrasen = contrasen;
+        this.contraseña = contraseña;
     }
 
     public String getNumTelefo() {
