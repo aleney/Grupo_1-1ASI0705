@@ -1,0 +1,65 @@
+package ...
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "TicketReporte")
+public class TicketReporte {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idTicketReporte;
+
+    @Column(name = "detalle", columnDefinition = "TEXT", nullable = false)
+    private String detalle;
+
+    @Column(name = "createdAt", nullable = false)
+    private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "idCliente", nullable = false)
+    private Usuario cliente;
+
+    public TicketReporte() {
+    }
+
+    public TicketReporte(int idTicketReporte, String detalle, LocalDateTime createdAt, Usuario cliente) {
+        this.idTicketReporte = idTicketReporte;
+        this.detalle = detalle;
+        this.createdAt = createdAt;
+        this.cliente = cliente;
+    }
+
+    public int getIdTicketReporte() {
+        return idTicketReporte;
+    }
+
+    public void setIdTicketReporte(int idTicketReporte) {
+        this.idTicketReporte = idTicketReporte;
+    }
+
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Usuario getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Usuario cliente) {
+        this.cliente = cliente;
+    }
+}
