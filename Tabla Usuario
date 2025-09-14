@@ -1,0 +1,126 @@
+package ...
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "Usuario")
+public class Usuario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idUsuario;
+
+    @Column(name = "nombre", length = 50, nullable = false)
+    private String nombre;
+
+    @Column(name = "email", length = 99, nullable = false, nullable = false)
+    private String email;
+
+    @Column(name = "contraseña", length = 50, nullable = false)
+    private String contraseña;
+
+    @Column(name = "numTelefo", length = 11, nullable = false)
+    private String numTelefo;
+
+    @Column(name = "estadoActi", nullable = false)
+    private boolean estadoActi;
+
+    @Column(name = "createdAt", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updatedAt", nullable = false)
+    private LocalDateTime updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "rol_id", nullable = false)
+    private Rol rol;
+
+    public Usuario() {
+    }
+
+    public Usuario(int idUsuario, String nombre, String email, String contrasen, String numTelefo,
+                   boolean estadoActi, LocalDateTime createdAt, LocalDateTime updatedAt, Rol rol) {
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.email = email;
+        this.contrasen = contrasen;
+        this.numTelefo = numTelefo;
+        this.estadoActi = estadoActi;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.rol = rol;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContrasen() {
+        return contrasen;
+    }
+
+    public void setContrasen(String contrasen) {
+        this.contrasen = contrasen;
+    }
+
+    public String getNumTelefo() {
+        return numTelefo;
+    }
+
+    public void setNumTelefo(String numTelefo) {
+        this.numTelefo = numTelefo;
+    }
+
+    public boolean isEstadoActi() {
+        return estadoActi;
+    }
+
+    public void setEstadoActi(boolean estadoActi) {
+        this.estadoActi = estadoActi;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+}
