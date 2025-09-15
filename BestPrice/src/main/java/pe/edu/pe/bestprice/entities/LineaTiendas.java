@@ -18,17 +18,17 @@ public class LineaTiendas {
     @Column(name = "descripcionLineaTiendas", length = 450, nullable = true)
     private String descripcionLineaTiendas;
 
-    @Column(name = "createdAt", nullable = true)
-    private LocalDate createdAt;
+    @Column(name = "createdAtLineaTiendas", nullable = true)
+    private LocalDate createdAtLineaTiendas;
 
     public LineaTiendas() {
     }
 
-    public LineaTiendas(int idLineaTiendas, String nombreLineaTiendas, String descripcionLineaTiendas, LocalDate createdAt) {
+    public LineaTiendas(int idLineaTiendas, String nombreLineaTiendas, String descripcionLineaTiendas, LocalDate createdAtLineaTiendas) {
         this.idLineaTiendas = idLineaTiendas;
         this.nombreLineaTiendas = nombreLineaTiendas;
         this.descripcionLineaTiendas = descripcionLineaTiendas;
-        this.createdAt = createdAt;
+        this.createdAtLineaTiendas = createdAtLineaTiendas;
     }
 
     public int getIdLineaTiendas() {
@@ -56,16 +56,10 @@ public class LineaTiendas {
     }
 
     public LocalDate getCreatedAt() {
-        return createdAt;
+        return createdAtLineaTiendas;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(LocalDate createdAtLineaTiendas) {
+        this.createdAtLineaTiendas = createdAtLineaTiendas;
     }
 }
-
-
-
-
-
-
