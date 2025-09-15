@@ -19,7 +19,7 @@ public class LineaTiendasController {
     @Autowired
     private ILineaTiendasService service;
 
-    @GetMapping
+    @GetMapping("/listar")
     public List<LineaTiendasDTO>listar(){
         return service.list().stream().map(a->{
             ModelMapper m = new ModelMapper();
@@ -27,7 +27,7 @@ public class LineaTiendasController {
         }).collect(Collectors.toList());
     }
 
-    @PostMapping
+    @PostMapping("/insertar")
     public void insertar(@RequestBody LineaTiendasDTO dto) {
         ModelMapper m = new ModelMapper();
         LineaTiendas lt = m.map(dto, LineaTiendas.class);
