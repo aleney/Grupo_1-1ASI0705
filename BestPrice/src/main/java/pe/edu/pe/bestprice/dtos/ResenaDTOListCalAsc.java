@@ -18,7 +18,7 @@ public class ResenaDTOListCalAsc {
         return tipoResena;
     }
 
-    public void setTipoResena() {
+    public void setTipoResena(TipoResena tipoResena) {
         this.tipoResena = tipoResena;
     }
 }

@@ -9,6 +9,7 @@ import pe.edu.pe.bestprice.dtos.ResenaDTOInsert;
 import pe.edu.pe.bestprice.dtos.ResenaDTOList;
 import pe.edu.pe.bestprice.dtos.ResenaDTOListCalAsc;
 import pe.edu.pe.bestprice.entities.Resena;
+import pe.edu.pe.bestprice.entities.TipoResena;
 import pe.edu.pe.bestprice.servicesinterfaces.IResenaService;
 
 import java.util.ArrayList;
@@ -64,8 +65,6 @@ public class ResenaController {
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
-    /*
-
     @GetMapping("/calificacion")
     public ResponseEntity<?> CalificacionTipo() {
         List<String[]> calificacion = service.ListarCalificacionPorResena();
@@ -80,10 +79,14 @@ public class ResenaController {
         for (String[] columna : calificacion) {
             ResenaDTOListCalAsc dto = new ResenaDTOListCalAsc();
             dto.setCalificacionResena(Integer.parseInt(columna[0]));
-            dto.setTipoResena(Integer.parseInt(columna[1]));
+
+            TipoResena tipo = new TipoResena();
+            tipo.setIdTipoResena(Integer.parseInt(columna[1]));
+            dto.setTipoResena(tipo);
+
             ListaCalificacion.add(dto);
         }
         return ResponseEntity.ok(ListaCalificacion);
-    }*/
+    }
 
 }
