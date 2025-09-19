@@ -1,4 +1,9 @@
 package pe.edu.pe.bestprice.repositories;
 
-public interface ITiendasRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import pe.edu.pe.bestprice.entities.Tiendas;
+
+@Repository
+public interface ITiendasRepository extends JpaRepository<Tiendas,Integer> {
 }
