@@ -8,46 +8,46 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idProducto;
-    @Column(name = "NombreProducto", nullable = false, length = 25)
-    private String NombreProducto;
-    @Column(name = "DescripcionProducto", nullable = false, length = 150)
-    private String DescripcionProducto;
-    @Column(name = "MarcaProducto", nullable = false, length = 25)
-    private String MarcaProducto;
-    @Column(name = "PrecioProducto", nullable = false, length = 15)
-    private double PrecioProducto;
-    @Column(name = "StockProducto", nullable = false, length = 25)
-    private int StockProducto;
-    @Column(name = "NombreProducto", nullable = false, length = 20)
-    private float UnidadMetricaProducto;
-    @Column(name = "NombreProducto", nullable = false)
-    private boolean FavoritoProducto;
-    @Column(name = "NombreProducto", nullable = false)
-    private boolean DisponibleProducto;
+    @Column(name = "nombreProducto", nullable = false, length = 25)
+    private String nombreProducto;
+    @Column(name = "descripcionProducto", nullable = false, length = 150)
+    private String descripcionProducto;
+    @Column(name = "marcaProducto", nullable = false, length = 25)
+    private String marcaProducto;
+    @Column(name = "precioProducto", nullable = false, length = 15)
+    private double precioProducto;
+    @Column(name = "stockProducto", nullable = false, length = 25)
+    private int stockProducto;
+    @Column(name = "unidadMetricaProducto", nullable = false, length = 20)
+    private float unidadMetricaProducto;
+    @Column(name = "favoritoProducto", nullable = false)
+    private boolean favoritoProducto;
+    @Column(name = "disponibleProducto", nullable = false)
+    private boolean disponibleProducto;
 
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idTiendas")
-    private Tiendas TiendasProducto;
+    private Tiendas tiendasProducto;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idCategoriaProducto")
-    private CategoriaProducto CateProduct;
+    private CategoriaProducto cateProduct;
 
     public Producto() {
     }
 
     public Producto(int idProducto, String nombreProducto, String descripcionProducto, String marcaProducto, double precioProducto, int stockProducto, float unidadMetricaProducto, boolean favoritoProducto, boolean disponibleProducto, Tiendas tiendasProducto, CategoriaProducto cateProduct) {
         this.idProducto = idProducto;
-        NombreProducto = nombreProducto;
-        DescripcionProducto = descripcionProducto;
-        MarcaProducto = marcaProducto;
-        PrecioProducto = precioProducto;
-        StockProducto = stockProducto;
-        UnidadMetricaProducto = unidadMetricaProducto;
-        FavoritoProducto = favoritoProducto;
-        DisponibleProducto = disponibleProducto;
-        TiendasProducto = tiendasProducto;
-        CateProduct = cateProduct;
+        this.nombreProducto = nombreProducto;
+        this.descripcionProducto = descripcionProducto;
+        this.marcaProducto = marcaProducto;
+        this.precioProducto = precioProducto;
+        this.stockProducto = stockProducto;
+        this.unidadMetricaProducto = unidadMetricaProducto;
+        this.favoritoProducto = favoritoProducto;
+        this.disponibleProducto = disponibleProducto;
+        this.tiendasProducto = tiendasProducto;
+        this.cateProduct = cateProduct;
     }
 
     public int getIdProducto() {
@@ -59,82 +59,82 @@ public class Producto {
     }
 
     public String getNombreProducto() {
-        return NombreProducto;
+        return nombreProducto;
     }
 
     public void setNombreProducto(String nombreProducto) {
-        NombreProducto = nombreProducto;
+        this.nombreProducto = nombreProducto;
     }
 
     public String getDescripcionProducto() {
-        return DescripcionProducto;
+        return descripcionProducto;
     }
 
     public void setDescripcionProducto(String descripcionProducto) {
-        DescripcionProducto = descripcionProducto;
+        this.descripcionProducto = descripcionProducto;
     }
 
     public String getMarcaProducto() {
-        return MarcaProducto;
+        return marcaProducto;
     }
 
     public void setMarcaProducto(String marcaProducto) {
-        MarcaProducto = marcaProducto;
+        this.marcaProducto = marcaProducto;
     }
 
     public double getPrecioProducto() {
-        return PrecioProducto;
+        return precioProducto;
     }
 
     public void setPrecioProducto(double precioProducto) {
-        PrecioProducto = precioProducto;
+        this.precioProducto = precioProducto;
     }
 
     public int getStockProducto() {
-        return StockProducto;
+        return stockProducto;
     }
 
     public void setStockProducto(int stockProducto) {
-        StockProducto = stockProducto;
+        this.stockProducto = stockProducto;
     }
 
     public float getUnidadMetricaProducto() {
-        return UnidadMetricaProducto;
+        return unidadMetricaProducto;
     }
 
     public void setUnidadMetricaProducto(float unidadMetricaProducto) {
-        UnidadMetricaProducto = unidadMetricaProducto;
+        this.unidadMetricaProducto = unidadMetricaProducto;
     }
 
     public boolean isFavoritoProducto() {
-        return FavoritoProducto;
+        return favoritoProducto;
     }
 
     public void setFavoritoProducto(boolean favoritoProducto) {
-        FavoritoProducto = favoritoProducto;
+        this.favoritoProducto = favoritoProducto;
     }
 
     public boolean isDisponibleProducto() {
-        return DisponibleProducto;
+        return disponibleProducto;
     }
 
     public void setDisponibleProducto(boolean disponibleProducto) {
-        DisponibleProducto = disponibleProducto;
+        this.disponibleProducto = disponibleProducto;
     }
 
     public Tiendas getTiendasProducto() {
-        return TiendasProducto;
+        return tiendasProducto;
     }
 
     public void setTiendasProducto(Tiendas tiendasProducto) {
-        TiendasProducto = tiendasProducto;
+        this.tiendasProducto = tiendasProducto;
     }
 
     public CategoriaProducto getCateProduct() {
-        return CateProduct;
+        return cateProduct;
     }
 
     public void setCateProduct(CategoriaProducto cateProduct) {
-        CateProduct = cateProduct;
+        this.cateProduct = cateProduct;
     }
 }
