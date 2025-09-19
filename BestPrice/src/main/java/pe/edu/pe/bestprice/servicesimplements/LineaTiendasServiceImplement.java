@@ -43,5 +43,10 @@ public class LineaTiendasServiceImplement implements ILineaTiendasService {
         return repository.buscar(nombre);
     }
 
+    @Override
+    public List<String[]> TiendasCreadasEn2025() {
+        return repository.TiendasCreadasEn2025();
+    }
+
 
 }

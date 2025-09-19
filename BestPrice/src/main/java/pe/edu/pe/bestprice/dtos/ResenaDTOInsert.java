@@ -6,7 +6,7 @@ import pe.edu.pe.bestprice.entities.Usuario;
 
 import java.time.LocalDate;
 
-public class ResenaDTO {
+public class ResenaDTOInsert {
     private int idResena;
     private int calificacionResena;
     private String detalleResena;
