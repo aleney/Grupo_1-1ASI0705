@@ -1,4 +1,4 @@
 package pe.edu.pe.bestprice.dtos;
 
-public class DistritoComercialDTO {
+public class CategoriaProductoDTO {
 }
