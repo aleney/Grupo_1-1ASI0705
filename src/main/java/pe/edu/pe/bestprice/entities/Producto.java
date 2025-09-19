@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idProducto;
     @Column(name = "NombreProducto", nullable = false, length = 25)
     private String NombreProducto;
     @Column(name = "DescripcionProducto", nullable = false, length = 150)
@@ -25,14 +25,19 @@ public class Producto {
     @Column(name = "NombreProducto", nullable = false)
     private boolean DisponibleProducto;
 
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idTiendas")
     private Tiendas TiendasProducto;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idCategoriaProducto")
     private CategoriaProducto CateProduct;
 
     public Producto() {
     }
 
-    public Producto(int id, String nombreProducto, String descripcionProducto, String marcaProducto, double precioProducto, int stockProducto, float unidadMetricaProducto, boolean favoritoProducto, boolean disponibleProducto, Tiendas tiendasProducto, CategoriaProducto cateProduct) {
-        this.id = id;
+    public Producto(int idProducto, String nombreProducto, String descripcionProducto, String marcaProducto, double precioProducto, int stockProducto, float unidadMetricaProducto, boolean favoritoProducto, boolean disponibleProducto, Tiendas tiendasProducto, CategoriaProducto cateProduct) {
+        this.idProducto = idProducto;
         NombreProducto = nombreProducto;
         DescripcionProducto = descripcionProducto;
         MarcaProducto = marcaProducto;
@@ -45,12 +50,12 @@ public class Producto {
         CateProduct = cateProduct;
     }
 
-    public int getId() {
-        return id;
+    public int getIdProducto() {
+        return idProducto;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
     public String getNombreProducto() {
