@@ -10,4 +10,5 @@ public interface IResenaService {
     public void update(Resena resena);
     public void delete(int id);
     public Resena ListId(Integer id);
+    public List<String[]> ListarCalificacionPorResena();
 }

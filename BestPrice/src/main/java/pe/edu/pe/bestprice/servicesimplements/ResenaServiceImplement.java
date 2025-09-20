@@ -38,4 +38,9 @@ public class ResenaServiceImplement implements IResenaService {
     public Resena ListId(Integer id) {
         return repository.findById(id).orElse(null);
     }
+
+    @Override
+    public List<String[]> ListarCalificacionPorResena() {
+        return repository.ListarCalificacionPorResena();
+    }
 }

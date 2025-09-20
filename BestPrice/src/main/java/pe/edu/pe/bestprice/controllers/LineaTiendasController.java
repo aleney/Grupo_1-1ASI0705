@@ -6,9 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.pe.bestprice.dtos.LineaTiendasDTO;
+import pe.edu.pe.bestprice.dtos.LineaTiendasDTOTiendasAnho;
 import pe.edu.pe.bestprice.entities.LineaTiendas;
 import pe.edu.pe.bestprice.servicesinterfaces.ILineaTiendasService;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -92,4 +95,23 @@ public class LineaTiendasController {
         return ResponseEntity.ok(listaDTO);
     }
 
+    @GetMapping("/tiendas2025")
+    public ResponseEntity<?> TiendasAnhoactual() {
+        List<String[]> tiendas = service.TiendasCreadasEn2025();
+        List<LineaTiendasDTOTiendasAnho> ListaTiendas = new ArrayList<>();
+
+        if (tiendas.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron proveedores registrados");
+        }
+
+        //columna -> Item de la lista de elementos que retorna monto
+        for (String[] columna : tiendas) {
+            LineaTiendasDTOTiendasAnho dto = new LineaTiendasDTOTiendasAnho();
+            dto.setCreatedAt(LocalDate.parse(columna[1]));
+            dto.setNombreLineaTiendas((columna[0]));
+            ListaTiendas.add(dto);
+        }
+        return ResponseEntity.ok(ListaTiendas);
+    }
 }
