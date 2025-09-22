@@ -23,7 +23,7 @@ public class TiendasController {
     private ITiendasService Ts;
 
     @GetMapping("listartiendas")
-    public List<TiendasDTO> RegistrarTienda() {
+    public List<TiendasDTO> listarTienda() {
         return Ts.listarTiendas().stream().map(a->{
             ModelMapper m=new ModelMapper();
             return m.map(a,TiendasDTO.class);
