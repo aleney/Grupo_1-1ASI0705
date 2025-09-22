@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.pe.bestprice.dtos.TiendasDTO;
 import pe.edu.pe.bestprice.dtos.TipoTiendaDTO;
-import pe.edu.pe.bestprice.entities.Tiendas;
 import pe.edu.pe.bestprice.entities.TipoTienda;
 import pe.edu.pe.bestprice.servicesinterfaces.ITipoTiendaService;
 
@@ -16,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/TipoTiendas")
+@RequestMapping("/tipoTiendas")
 public class TipoTiendaController {
 
     @Autowired
@@ -41,7 +39,7 @@ public class TipoTiendaController {
     public ResponseEntity<?> listarIdTipoTienda(@PathVariable("id") Integer id) {
         TipoTienda ttdtos = Tts.listarIdTipoTienda(id);
         if (ttdtos == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ningun registro de tiendas" + id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ningun registro de Tipo tiendas" + id);
         }
         ModelMapper m = new ModelMapper();
         TipoTiendaDTO ttdt = m.map(ttdtos, TipoTiendaDTO.class);
