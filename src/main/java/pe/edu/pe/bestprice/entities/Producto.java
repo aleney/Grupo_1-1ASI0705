@@ -25,18 +25,10 @@ public class Producto {
     @Column(name = "disponibleProducto", nullable = false)
     private boolean disponibleProducto;
 
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idTiendas")
-    private Tiendas tiendasProducto;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idCategoriaProducto")
-    private CategoriaProducto cateProduct;
-
     public Producto() {
     }
 
-    public Producto(int idProducto, String nombreProducto, String descripcionProducto, String marcaProducto, double precioProducto, int stockProducto, float unidadMetricaProducto, boolean favoritoProducto, boolean disponibleProducto, Tiendas tiendasProducto, CategoriaProducto cateProduct) {
+    public Producto(int idProducto, String nombreProducto, String descripcionProducto, String marcaProducto, double precioProducto, int stockProducto, float unidadMetricaProducto, boolean favoritoProducto, boolean disponibleProducto) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.descripcionProducto = descripcionProducto;
@@ -46,8 +38,6 @@ public class Producto {
         this.unidadMetricaProducto = unidadMetricaProducto;
         this.favoritoProducto = favoritoProducto;
         this.disponibleProducto = disponibleProducto;
-        this.tiendasProducto = tiendasProducto;
-        this.cateProduct = cateProduct;
     }
 
     public int getIdProducto() {
@@ -120,21 +110,5 @@ public class Producto {
 
     public void setDisponibleProducto(boolean disponibleProducto) {
         this.disponibleProducto = disponibleProducto;
-    }
-
-    public Tiendas getTiendasProducto() {
-        return tiendasProducto;
-    }
-
-    public void setTiendasProducto(Tiendas tiendasProducto) {
-        this.tiendasProducto = tiendasProducto;
-    }
-
-    public CategoriaProducto getCateProduct() {
-        return cateProduct;
-    }
-
-    public void setCateProduct(CategoriaProducto cateProduct) {
-        this.cateProduct = cateProduct;
     }
 }
