@@ -3,6 +3,7 @@ package pe.edu.pe.bestprice.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="Tienda")
@@ -25,10 +26,14 @@ public class Tiendas {
     @JoinColumn(name = "idTipoTienda")
     private TipoTienda tipoTienda;
 
+    @OneToMany
+    @JoinColumn(name="idProducto")
+    private List<Producto> productosTienda;
+
     public Tiendas() {
     }
 
-    public Tiendas(int idTiendas, String nombreTienda, String descripcionTienda, String numeroTelefono, boolean estadoTienda, LocalDate fechaTienda, TipoTienda tipoTienda) {
+    public Tiendas(int idTiendas, String nombreTienda, String descripcionTienda, String numeroTelefono, boolean estadoTienda, LocalDate fechaTienda, TipoTienda tipoTienda, List<Producto> productosTienda) {
         this.idTiendas = idTiendas;
         this.nombreTienda = nombreTienda;
         this.descripcionTienda = descripcionTienda;
@@ -36,6 +41,7 @@ public class Tiendas {
         this.estadoTienda = estadoTienda;
         this.fechaTienda = fechaTienda;
         this.tipoTienda = tipoTienda;
+        this.productosTienda = productosTienda;
     }
 
     public int getIdTiendas() {
@@ -92,5 +98,13 @@ public class Tiendas {
 
     public void setTipoTienda(TipoTienda tipoTienda) {
         this.tipoTienda = tipoTienda;
+    }
+
+    public List<Producto> getProductosTienda() {
+        return productosTienda;
+    }
+
+    public void setProductosTienda(List<Producto> productosTienda) {
+        this.productosTienda = productosTienda;
     }
 }
