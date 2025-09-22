@@ -3,7 +3,7 @@ package pe.edu.upc.apibestprice.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Rol")
+@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"idUsuario", "tipoUsuario"})})
 
 public class Rol {
 

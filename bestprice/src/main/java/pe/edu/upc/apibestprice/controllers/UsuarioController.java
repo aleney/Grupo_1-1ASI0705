@@ -6,9 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.apibestprice.dtos.UsuarioDTOInsert;
+import pe.edu.upc.apibestprice.dtos.UsuarioDTOList;
 import pe.edu.upc.apibestprice.entities.Usuario;
 import pe.edu.upc.apibestprice.serviceinterfaces.IUsuarioService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,11 +21,22 @@ public class UsuarioController {
     private IUsuarioService service;
 
     @GetMapping("/listar")
-    public List<UsuarioDTOInsert> listarUsuarios() {
-        return service.listarUsuarios().stream().map(a -> {
-            ModelMapper m = new ModelMapper();
-            return m.map(a, UsuarioDTOInsert.class);
-        }).collect(Collectors.toList());
+    public ResponseEntity<?> listar() {
+        List<String[]> usuarios = service.listar();
+        List<UsuarioDTOList> listaUsuarios = new ArrayList<>();
+
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron usuarios registrados");
+        }
+        for (String[] columna : usuarios) {
+            UsuarioDTOList dto = new UsuarioDTOList();
+            dto.setNombre(columna[0]);
+            dto.setEmail(columna[1]);
+            dto.setEstado(Boolean.parseBoolean(columna[2]));
+            dto.setTipoUsuario(columna[3]);
+            listaUsuarios.add(dto);
+        }
+        return ResponseEntity.ok(listaUsuarios);
     }
 
     @PostMapping("/insertar")
@@ -33,33 +46,39 @@ public class UsuarioController {
         service.insertarUsuario(u);
     }
 
-    @GetMapping("/busquedas")
-    public ResponseEntity<?> buscarUsuario(@RequestParam String n) {
-        List<Usuario> usuarios = service.buscarUsuario(n);
+    @GetMapping("/buscar")
+    public ResponseEntity<?> buscarUsuario(@RequestParam String nombre) {
+        List<String[]> usuarios = service.buscarUsuario(nombre);
         if (usuarios.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron usuarios: " + n);
+                    .body("No se encontraron usuarios: " + nombre);
         }
-        List<UsuarioDTOInsert> listaDTO = usuarios.stream().map(x -> {
-            ModelMapper m = new ModelMapper();
-            return m.map(x, UsuarioDTOInsert.class);
-        }).collect(Collectors.toList());
-        return ResponseEntity.ok(listaDTO);
 
+        List<UsuarioDTOList> listaDTO = new ArrayList<>();
+        for (String[] columna : usuarios) {
+            UsuarioDTOList dto = new UsuarioDTOList();
+            dto.setNombre(columna[0]);
+            dto.setEmail(columna[1]);
+            dto.setEstado(Boolean.parseBoolean(columna[2]));
+            dto.setTipoUsuario(columna[3]);
+            listaDTO.add(dto);
+        }
+        return ResponseEntity.ok(listaDTO);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
-        Usuario prov = service.listarId(id);
-        if (prov == null) {
+        Usuario user = service.listarId(id);
+        if (user == null) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body("No existe un registro con el ID: " + id);
         }
         ModelMapper m = new ModelMapper();
-        UsuarioDTOInsert dto = m.map(prov, UsuarioDTOInsert.class);
+        UsuarioDTOList dto = m.map(user, UsuarioDTOList.class);
         return ResponseEntity.ok(dto);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Integer id) {

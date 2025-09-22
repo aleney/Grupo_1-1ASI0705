@@ -10,6 +10,15 @@ import java.util.List;
 
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario,Integer>{
-    @Query(value = "SELECT u.id_usuario, u.nombre FROM usuario u WHERE u.nombre LIKE '%nombre%'", nativeQuery = true)
-    public List<Usuario> buscarUsuario(@Param("nombre") String nombre);
+    @Query(value = "SELECT u.nombre, u.email, u.estado, r.tipo_usuario\n" +
+            "FROM usuario u\n" +
+            "INNER JOIN rol r \n" +
+            "ON u.id_rol = r.id_rol;", nativeQuery = true)
+    public List<String[]> buscarUsuario(@Param("nombre") String nombre);
+
+    @Query(value="SELECT u.nombre, u.email, u.estado, r.tipo_usuario\n" +
+            "FROM usuario u\n" +
+            "INNER JOIN rol r \n" +
+            "ON u.id_rol = r.id_rol;", nativeQuery = true)
+    public List<String[]> listar();
 }
