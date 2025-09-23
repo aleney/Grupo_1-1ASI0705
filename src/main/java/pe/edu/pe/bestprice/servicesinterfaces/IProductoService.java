@@ -10,5 +10,7 @@ public interface IProductoService {
     public List<Producto> List();
     public void insert (Producto p);
     public Producto listId(int id);
+    public void update(Producto p);
+    public void delete(int id);
 
 }

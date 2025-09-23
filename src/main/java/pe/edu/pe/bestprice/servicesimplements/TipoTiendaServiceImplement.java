@@ -29,4 +29,14 @@ public class TipoTiendaServiceImplement implements ITipoTiendaService {
     public TipoTienda listarIdTipoTienda(int id) {
         return Ttr.findById(id).orElse(null);
     }
+
+    @Override
+    public void update(TipoTienda tipoTienda) {
+        Ttr.save(tipoTienda);
+    }
+
+    @Override
+    public void delete(int id) {
+        Ttr.deleteById(id);
+    }
 }

@@ -10,6 +10,7 @@ import pe.edu.pe.bestprice.dtos.ProductoDTO;
 import pe.edu.pe.bestprice.entities.Producto;
 import pe.edu.pe.bestprice.servicesinterfaces.IProductoService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,4 +45,26 @@ public class ProductoController {
         return ResponseEntity.ok(dtos);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
+        Producto p = Ps.listId(id);
+        if (p == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
+        }
+        Ps.delete(id);
+        return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
+    }
+    @PutMapping
+    public ResponseEntity<String> modificar(@RequestBody ProductoDTO pdto) {
+        ModelMapper m = new ModelMapper();
+        Producto p = m.map(pdto, Producto.class);
+        Producto existente = Ps.listId(p.getIdProducto());
+        if (existente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se puede modificar. No existe un registro con el ID: " + p.getIdProducto());
+        }
+        Ps.update(p);
+        return ResponseEntity.ok("Registro con ID " + p.getIdProducto() + " modificado correctamente.");
+    }
 }

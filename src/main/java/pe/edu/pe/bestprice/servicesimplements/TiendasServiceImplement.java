@@ -28,4 +28,14 @@ public class TiendasServiceImplement implements ITiendasService {
     public Tiendas listarIdTiendas(int id) {
         return Tr.findById(id).orElse(null);
     }
+
+    @Override
+    public void update(Tiendas tiendas) {
+        Tr.save(tiendas);
+    }
+
+    @Override
+    public void delete(int id) {
+        Tr.deleteById(id);
+    }
 }

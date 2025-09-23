@@ -29,4 +29,14 @@ public class CategoriaProductoServiceImplement implements ICategoriaProductoServ
     public CategoriaProducto listId(int id) {
         return Cpr.findById(id).orElse(null);
     }
+
+    @Override
+    public void update(CategoriaProducto catePro) {
+        Cpr.save(catePro);
+    }
+
+    @Override
+    public void delete(int id) {
+        Cpr.deleteById(id);
+    }
 }

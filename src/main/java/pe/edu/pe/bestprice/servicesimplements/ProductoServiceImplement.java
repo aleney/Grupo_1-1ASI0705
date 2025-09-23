@@ -29,4 +29,14 @@ public class ProductoServiceImplement implements IProductoService {
     public Producto listId(int id) {
         return Pr.findById(id).orElse(null);
     }
+
+    @Override
+    public void update(Producto p) {
+        Pr.save(p);
+    }
+
+    @Override
+    public void delete(int id) {
+        Pr.deleteById(id);
+    }
 }
