@@ -1,18 +1,19 @@
 package pe.edu.pe.bestprice.dtos;
+import jakarta.persistence.Column;
 import pe.edu.pe.bestprice.entities.CategoriaProducto;
 import pe.edu.pe.bestprice.entities.Tiendas;
 
 public class ProductoDTO {
 
     private int idProducto;
-    private String NombreProducto;
-    private String DescripcionProducto;
-    private String MarcaProducto;
-    private double PrecioProducto;
-    private int StockProducto;
-    private float UnidadMetricaProducto;
-    private boolean FavoritoProducto;
-    private boolean DisponibleProducto;
+    private String nombreProducto;
+    private String descripcionProducto;
+    private String marcaProducto;
+    private double precioProducto;
+    private int stockProducto;
+    private float unidadMetricaProducto;
+    private boolean favoritoProducto;
+    private boolean disponibleProducto;
 
     public int getIdProducto() {
         return idProducto;
@@ -23,66 +24,66 @@ public class ProductoDTO {
     }
 
     public String getNombreProducto() {
-        return NombreProducto;
+        return nombreProducto;
     }
 
     public void setNombreProducto(String nombreProducto) {
-        NombreProducto = nombreProducto;
+        this.nombreProducto = nombreProducto;
     }
 
     public String getDescripcionProducto() {
-        return DescripcionProducto;
+        return descripcionProducto;
     }
 
     public void setDescripcionProducto(String descripcionProducto) {
-        DescripcionProducto = descripcionProducto;
+        this.descripcionProducto = descripcionProducto;
     }
 
     public String getMarcaProducto() {
-        return MarcaProducto;
+        return marcaProducto;
     }
 
     public void setMarcaProducto(String marcaProducto) {
-        MarcaProducto = marcaProducto;
+        this.marcaProducto = marcaProducto;
     }
 
     public double getPrecioProducto() {
-        return PrecioProducto;
+        return precioProducto;
     }
 
     public void setPrecioProducto(double precioProducto) {
-        PrecioProducto = precioProducto;
+        this.precioProducto = precioProducto;
     }
 
     public int getStockProducto() {
-        return StockProducto;
+        return stockProducto;
     }
 
     public void setStockProducto(int stockProducto) {
-        StockProducto = stockProducto;
+        this.stockProducto = stockProducto;
     }
 
     public float getUnidadMetricaProducto() {
-        return UnidadMetricaProducto;
+        return unidadMetricaProducto;
     }
 
     public void setUnidadMetricaProducto(float unidadMetricaProducto) {
-        UnidadMetricaProducto = unidadMetricaProducto;
+        this.unidadMetricaProducto = unidadMetricaProducto;
     }
 
     public boolean isFavoritoProducto() {
-        return FavoritoProducto;
+        return favoritoProducto;
     }
 
     public void setFavoritoProducto(boolean favoritoProducto) {
-        FavoritoProducto = favoritoProducto;
+        this.favoritoProducto = favoritoProducto;
     }
 
     public boolean isDisponibleProducto() {
-        return DisponibleProducto;
+        return disponibleProducto;
     }
 
     public void setDisponibleProducto(boolean disponibleProducto) {
-        DisponibleProducto = disponibleProducto;
+        this.disponibleProducto = disponibleProducto;
     }
 }
