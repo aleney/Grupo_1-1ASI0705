@@ -58,13 +58,21 @@
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
+<<<<<<< HEAD
+            <version>3.2.0</version>
+        </dependency>
+                     <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+=======
             <version>3.2.4</version>
         </dependency>
+>>>>>>> main
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.8.13</version>
         </dependency>
+<<<<<<< HEAD
+=======
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -93,6 +101,7 @@
             <version>0.13.0</version>
             <scope>runtime</scope>
         </dependency>
+>>>>>>> main
     </dependencies>
 
     <build>
