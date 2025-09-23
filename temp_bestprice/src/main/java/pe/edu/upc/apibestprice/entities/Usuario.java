@@ -18,7 +18,7 @@ public class Usuario {
     private String email;
 
     @Column(name = "password",length = 50,nullable = false)
-    private String pasword;
+    private String password;
 
     @Column(name = "numeroTelefono",length = 9,nullable = false)
     private int numeroTelefono;
@@ -40,7 +40,7 @@ public class Usuario {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.email = email;
-        this.pasword = pasword;
+        this.password = pasword;
         this.numeroTelefono = numeroTelefono;
         this.estado = estado;
         this.createdAt = createdAt;
@@ -77,11 +77,11 @@ public class Usuario {
     }
 
     public String getPasword() {
-        return pasword;
+        return password;
     }
 
     public void setPasword(String pasword) {
-        this.pasword = pasword;
+        this.password = password;
     }
 
     public int getNumeroTelefono() {
@@ -123,4 +123,6 @@ public class Usuario {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+
 }

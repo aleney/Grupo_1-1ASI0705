@@ -2,6 +2,7 @@ package pe.edu.upc.apibestprice.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.apibestprice.dtos.RolDTO;
 import pe.edu.upc.apibestprice.entities.Rol;
@@ -26,6 +27,7 @@ public class RolController {
     }
 
     @PostMapping("/insertar")
+    @PreAuthorize("hasAuthority('administrador')")
     public void insertar(@RequestBody RolDTO dto) {
         ModelMapper m=new ModelMapper();
         Rol soft=m.map(dto,Rol.class);

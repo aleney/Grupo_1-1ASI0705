@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.apibestprice.dtos.UsuarioDTOInsert;
 import pe.edu.upc.apibestprice.dtos.UsuarioDTOList;
@@ -40,6 +41,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/insertar")
+    @PreAuthorize("hasAuthority('administrador')")
     public void insertarUsuario(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper m=new ModelMapper();
         Usuario u=m.map(dto,Usuario.class);
@@ -81,6 +83,8 @@ public class UsuarioController {
 
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('administrador')")
+
     public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
         Usuario u = service.listarId(id);
         if (u == null) {
@@ -92,6 +96,7 @@ public class UsuarioController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('administrador')")
     public ResponseEntity<String> editar(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Usuario p = m.map(dto, Usuario.class);

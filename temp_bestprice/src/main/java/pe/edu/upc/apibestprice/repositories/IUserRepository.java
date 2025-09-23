@@ -11,17 +11,17 @@ import pe.edu.upc.apibestprice.entities.Usuario;
 
 @Repository
 public interface IUserRepository extends JpaRepository<Usuario, Long> {
-    public Usuario findOneByUsername(String username);
+    public Usuario findOneByNombre(String nombre);
 
     //BUSCAR POR NOMBRE
     @Query("select count(u.nombre) from Usuario u where u.nombre =:username")
-    public int buscarUsername(@Param("username") String nombre);
+    public int buscarNombre(@Param("nombre") String nombre);
 
 
     //INSERTAR ROLES
     @Transactional
     @Modifying
-    @Query(value = "insert into roles (rol, user_id) VALUES (:rol, :user_id)", nativeQuery = true)
+    @Query(value = "insert into roles (idRol, tipoUsuario) VALUES (:id_rol, :tipo_usuario)", nativeQuery = true)
     public void insRol(@Param("rol") String authority, @Param("user_id") Long user_id);
 
 }
