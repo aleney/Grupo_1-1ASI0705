@@ -1,7 +1,9 @@
 package pe.edu.pe.bestprice.dtos;
+import pe.edu.pe.bestprice.entities.Producto;
 import pe.edu.pe.bestprice.entities.TipoTienda;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class TiendasDTO {
 
@@ -12,6 +14,7 @@ public class TiendasDTO {
     private boolean estadoTienda;
     private LocalDate fechaTienda;
     private TipoTienda tipoTienda;
+    private List<Producto> productosTienda;
 
     public int getIdTiendas() {
         return idTiendas;
@@ -67,5 +70,13 @@ public class TiendasDTO {
 
     public void setTipoTienda(TipoTienda tipoTienda) {
         this.tipoTienda = tipoTienda;
+    }
+
+    public List<Producto> getProductosTienda() {
+        return productosTienda;
+    }
+
+    public void setProductosTienda(List<Producto> productosTienda) {
+        this.productosTienda = productosTienda;
     }
 }
