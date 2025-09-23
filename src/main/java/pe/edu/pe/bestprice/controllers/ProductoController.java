@@ -31,7 +31,7 @@ public class ProductoController {
     @PostMapping("/Registrar")
     public void Registar(@RequestBody ProductoDTO dtos){
         ModelMapper m=new ModelMapper();
-        Producto prodc=m.map(dtos,Producto.class);
+        Producto prodc =m.map(dtos,Producto.class);
         Ps.insert(prodc);
     }
     @GetMapping("/{id}")

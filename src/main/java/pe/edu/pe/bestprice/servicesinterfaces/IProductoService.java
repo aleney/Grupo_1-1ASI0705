@@ -1,8 +1,5 @@
 package pe.edu.pe.bestprice.servicesinterfaces;
-
-
 import pe.edu.pe.bestprice.entities.Producto;
-
 import java.util.List;
 
 public interface IProductoService {
@@ -12,5 +9,4 @@ public interface IProductoService {
     public Producto listId(int id);
     public void update(Producto p);
     public void delete(int id);
-
 }

@@ -13,8 +13,6 @@ public class ProductoDTO {
     private float UnidadMetricaProducto;
     private boolean FavoritoProducto;
     private boolean DisponibleProducto;
-    private Tiendas TiendasProducto;
-    private CategoriaProducto CateProduct;
 
     public int getIdProducto() {
         return idProducto;
@@ -86,21 +84,5 @@ public class ProductoDTO {
 
     public void setDisponibleProducto(boolean disponibleProducto) {
         DisponibleProducto = disponibleProducto;
-    }
-
-    public Tiendas getTiendasProducto() {
-        return TiendasProducto;
-    }
-
-    public void setTiendasProducto(Tiendas tiendasProducto) {
-        TiendasProducto = tiendasProducto;
-    }
-
-    public CategoriaProducto getCateProduct() {
-        return CateProduct;
-    }
-
-    public void setCateProduct(CategoriaProducto cateProduct) {
-        CateProduct = cateProduct;
     }
 }
