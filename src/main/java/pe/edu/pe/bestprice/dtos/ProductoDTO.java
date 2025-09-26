@@ -14,6 +14,7 @@ public class ProductoDTO {
     private float unidadMetricaProducto;
     private boolean favoritoProducto;
     private boolean disponibleProducto;
+    private Tiendas tiendas;
 
     public int getIdProducto() {
         return idProducto;
@@ -85,5 +86,13 @@ public class ProductoDTO {
 
     public void setDisponibleProducto(boolean disponibleProducto) {
         this.disponibleProducto = disponibleProducto;
+    }
+
+    public Tiendas getTiendas() {
+        return tiendas;
+    }
+
+    public void setTiendas(Tiendas tiendas) {
+        this.tiendas = tiendas;
     }
 }

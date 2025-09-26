@@ -13,17 +13,12 @@ public class CategoriaProducto {
     @Column(name="nombreCategoriaProducto", nullable=false, length=50)
     private String nombreCategoriaProducto;
 
-    @OneToMany
-    @JoinColumn(name="idProducto")
-    private List<Producto> cateproductos;
-
     public CategoriaProducto() {
     }
 
-    public CategoriaProducto(int idCategoriaProducto, String nombreCategoriaProducto, List<Producto> cateproductos) {
+    public CategoriaProducto(int idCategoriaProducto, String nombreCategoriaProducto) {
         this.idCategoriaProducto = idCategoriaProducto;
         this.nombreCategoriaProducto = nombreCategoriaProducto;
-        this.cateproductos = cateproductos;
     }
 
     public int getIdCategoriaProducto() {
@@ -40,13 +35,5 @@ public class CategoriaProducto {
 
     public void setNombreCategoriaProducto(String nombreCategoriaProducto) {
         this.nombreCategoriaProducto = nombreCategoriaProducto;
-    }
-
-    public List<Producto> getCateproductos() {
-        return cateproductos;
-    }
-
-    public void setCateproductos(List<Producto> cateproductos) {
-        this.cateproductos = cateproductos;
     }
 }

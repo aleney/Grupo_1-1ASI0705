@@ -7,7 +7,6 @@ public class CategoriaProductoDTO {
 
     private int idCategoriaProducto;
     private String nombreCategoriaProducto;
-    private List<Producto> Cateproductos;
 
     public int getIdCategoriaProducto() {
         return idCategoriaProducto;
@@ -23,13 +22,5 @@ public class CategoriaProductoDTO {
 
     public void setNombreCategoriaProducto(String nombreCategoriaProducto) {
         this.nombreCategoriaProducto = nombreCategoriaProducto;
-    }
-
-    public List<Producto> getCateproductos() {
-        return Cateproductos;
-    }
-
-    public void setCateproductos(List<Producto> cateproductos) {
-        Cateproductos = cateproductos;
     }
 }

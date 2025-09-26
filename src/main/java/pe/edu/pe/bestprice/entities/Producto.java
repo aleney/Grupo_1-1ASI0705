@@ -25,10 +25,14 @@ public class Producto {
     @Column(name = "disponibleProducto", nullable = false)
     private boolean disponibleProducto;
 
+    @ManyToOne
+    @JoinColumn(name="idTiendas")
+    private Tiendas tiendas;
+
     public Producto() {
     }
 
-    public Producto(int idProducto, String nombreProducto, String descripcionProducto, String marcaProducto, double precioProducto, int stockProducto, float unidadMetricaProducto, boolean favoritoProducto, boolean disponibleProducto) {
+    public Producto(int idProducto, String nombreProducto, String descripcionProducto, String marcaProducto, double precioProducto, int stockProducto, float unidadMetricaProducto, boolean favoritoProducto, boolean disponibleProducto, Tiendas tiendas) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.descripcionProducto = descripcionProducto;
@@ -38,6 +42,7 @@ public class Producto {
         this.unidadMetricaProducto = unidadMetricaProducto;
         this.favoritoProducto = favoritoProducto;
         this.disponibleProducto = disponibleProducto;
+        this.tiendas = tiendas;
     }
 
     public int getIdProducto() {
@@ -110,5 +115,13 @@ public class Producto {
 
     public void setDisponibleProducto(boolean disponibleProducto) {
         this.disponibleProducto = disponibleProducto;
+    }
+
+    public Tiendas getTiendas() {
+        return tiendas;
+    }
+
+    public void setTiendas(Tiendas tiendas) {
+        this.tiendas = tiendas;
     }
 }

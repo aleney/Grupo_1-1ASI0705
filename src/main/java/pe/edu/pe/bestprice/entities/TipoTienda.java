@@ -11,17 +11,12 @@ public class TipoTienda {
     @Column(name ="nombreTipoTienda", nullable = false, length = 50)
     private String nombreTipoTienda;
 
-    @OneToOne
-    @JoinColumn(name="idTiendas")
-    private Tiendas tiendas;
-
     public TipoTienda() {
     }
 
-    public TipoTienda(int idTipoTienda, String nombreTipoTienda, Tiendas tiendas) {
+    public TipoTienda(int idTipoTienda, String nombreTipoTienda) {
         this.idTipoTienda = idTipoTienda;
         this.nombreTipoTienda = nombreTipoTienda;
-        this.tiendas = tiendas;
     }
 
     public int getIdTipoTienda() {
@@ -38,13 +33,5 @@ public class TipoTienda {
 
     public void setNombreTipoTienda(String nombreTipoTienda) {
         this.nombreTipoTienda = nombreTipoTienda;
-    }
-
-    public Tiendas getTiendas() {
-        return tiendas;
-    }
-
-    public void setTiendas(Tiendas tiendas) {
-        this.tiendas = tiendas;
     }
 }

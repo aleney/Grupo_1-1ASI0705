@@ -14,7 +14,6 @@ public class TiendasDTO {
     private boolean estadoTienda;
     private LocalDate fechaTienda;
     private TipoTienda tipoTienda;
-    private List<Producto> productosTienda;
 
     public int getIdTiendas() {
         return idTiendas;
@@ -72,11 +71,4 @@ public class TiendasDTO {
         this.tipoTienda = tipoTienda;
     }
 
-    public List<Producto> getProductosTienda() {
-        return productosTienda;
-    }
-
-    public void setProductosTienda(List<Producto> productosTienda) {
-        this.productosTienda = productosTienda;
-    }
 }
