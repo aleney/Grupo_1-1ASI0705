@@ -1,20 +1,57 @@
-package pe.edu.upc.bestprice.dto;
+package pe.edu.upc.bestprice.entities;
 
-import pe.edu.upc.bestprice.entitie.Tienda;
-import pe.edu.upc.bestprice.entitie.TipoResena;
-import pe.edu.upc.bestprice.entitie.Usuario;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-public class ResenaDTOInsert {
+@Entity
+@Table
+public class Resena {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idResena;
+
+    @Column(name = "calificacionResena", nullable = false)
     private int calificacionResena;
+
+    @Column(name = "detalleResena", length = 200, nullable = true)
     private String detalleResena;
+
+    @Column(name = "exactitudPrecioResena", nullable = true)
     private boolean exactitudPrecioResena;
+
+    @Column(name = "createdAtResena", nullable = true)
     private LocalDate createdAtResena;
+
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
     private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "idTienda")
     private Tienda tienda;
+
+    @ManyToOne
+    @JoinColumn(name = "idtipoResena")
     private TipoResena tipoResena;
+
+
+    public Resena() {
+    }
+
+    public Resena(int idResena, int calificacionResena, String detalleResena, boolean exactitudPrecioResena, LocalDate createdAtResena) {
+        this.idResena = idResena;
+        this.calificacionResena = calificacionResena;
+        this.detalleResena = detalleResena;
+        this.exactitudPrecioResena = exactitudPrecioResena;
+        this.createdAtResena = createdAtResena;
+    }
+
+    public Resena(Usuario usuario, Tienda tienda, TipoResena tipoResena) {
+        this.usuario = usuario;
+        this.tienda = tienda;
+        this.tipoResena = tipoResena;
+    }
 
     public int getIdResena() {
         return idResena;

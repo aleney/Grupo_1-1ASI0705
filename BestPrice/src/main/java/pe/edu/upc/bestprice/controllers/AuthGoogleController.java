@@ -3,9 +3,9 @@ package pe.edu.upc.bestprice.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dto.AuthGoogleDTOInsert;
-import pe.edu.upc.bestprice.dto.AuthGoogleDTOList;
-import pe.edu.upc.bestprice.entitie.AuthGoogle;
+import pe.edu.upc.bestprice.dtos.AuthGoogleDTOInsert;
+import pe.edu.upc.bestprice.dtos.AuthGoogleDTOList;
+import pe.edu.upc.bestprice.entities.AuthGoogle;
 import pe.edu.upc.bestprice.serviceinterfaces.IAuthGoogleService;
 
 import java.util.List;

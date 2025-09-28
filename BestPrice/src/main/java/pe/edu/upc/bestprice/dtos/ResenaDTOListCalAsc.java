@@ -1,6 +1,6 @@
-package pe.edu.upc.bestprice.dto;
+package pe.edu.upc.bestprice.dtos;
 
-import pe.edu.upc.bestprice.entitie.TipoResena;
+import pe.edu.upc.bestprice.entities.TipoResena;
 
 public class ResenaDTOListCalAsc {
     private int calificacionResena;

@@ -1,6 +1,6 @@
-package pe.edu.upc.bestprice.dto;
+package pe.edu.upc.bestprice.dtos;
 
-import pe.edu.upc.bestprice.entitie.Usuario;
+import pe.edu.upc.bestprice.entities.Usuario;
 
 import java.time.LocalDate;
 
