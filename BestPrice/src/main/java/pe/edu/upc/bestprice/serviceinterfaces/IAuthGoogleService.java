@@ -1,4 +1,4 @@
-package pe.edu.upc.bestprice.servicesinterfaces;
+package pe.edu.upc.bestprice.serviceinterfaces;
 
 import pe.edu.upc.bestprice.entities.AuthGoogle;
 

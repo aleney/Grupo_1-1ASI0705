@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.LineaTiendasDTO;
 import pe.edu.upc.bestprice.dtos.LineaTiendasDTOTiendasAnho;
 import pe.edu.upc.bestprice.entities.LineaTiendas;
-import pe.edu.upc.bestprice.servicesinterfaces.ILineaTiendasService;
+import pe.edu.upc.bestprice.serviceinterfaces.ILineaTiendasService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

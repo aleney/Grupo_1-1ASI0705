@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.AuthGoogleDTOInsert;
 import pe.edu.upc.bestprice.dtos.AuthGoogleDTOList;
 import pe.edu.upc.bestprice.entities.AuthGoogle;
-import pe.edu.upc.bestprice.servicesinterfaces.IAuthGoogleService;
+import pe.edu.upc.bestprice.serviceinterfaces.IAuthGoogleService;
 
 import java.util.List;
 import java.util.stream.Collectors;

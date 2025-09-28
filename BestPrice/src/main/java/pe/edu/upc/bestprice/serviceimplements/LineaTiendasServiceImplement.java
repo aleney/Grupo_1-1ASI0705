@@ -1,10 +1,10 @@
-package pe.edu.upc.bestprice.servicesimplements;
+package pe.edu.upc.bestprice.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.bestprice.entities.LineaTiendas;
 import pe.edu.upc.bestprice.repositories.ILineaTiendasRepository;
-import pe.edu.upc.bestprice.servicesinterfaces.ILineaTiendasService;
+import pe.edu.upc.bestprice.serviceinterfaces.ILineaTiendasService;
 
 import java.util.List;
 @Service
