@@ -1,4 +1,4 @@
-package pe.edu.upc.bestprice.entities;
+package pe.edu.upc.bestprice.entitie;
 
 import jakarta.persistence.*;
 

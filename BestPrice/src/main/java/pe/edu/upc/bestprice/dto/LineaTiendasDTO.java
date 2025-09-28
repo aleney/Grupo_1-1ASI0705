@@ -1,4 +1,4 @@
-package pe.edu.upc.bestprice.dtos;
+package pe.edu.upc.bestprice.dto;
 
 import java.time.LocalDate;
 

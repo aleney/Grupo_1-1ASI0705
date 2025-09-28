@@ -1,4 +1,4 @@
-package pe.edu.upc.bestprice.dtos;
+package pe.edu.upc.bestprice.dto;
 
 public class ResenaDTOList {
     private int idResena;

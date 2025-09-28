@@ -1,6 +1,6 @@
 package pe.edu.upc.bestprice.serviceinterfaces;
 
-import pe.edu.upc.bestprice.entities.Resena;
+import pe.edu.upc.bestprice.entitie.Resena;
 
 import java.util.List;
 

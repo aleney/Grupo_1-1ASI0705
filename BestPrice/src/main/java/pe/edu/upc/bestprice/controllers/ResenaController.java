@@ -5,11 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.ResenaDTOInsert;
-import pe.edu.upc.bestprice.dtos.ResenaDTOList;
-import pe.edu.upc.bestprice.dtos.ResenaDTOListCalAsc;
-import pe.edu.upc.bestprice.entities.Resena;
-import pe.edu.upc.bestprice.entities.TipoResena;
+import pe.edu.upc.bestprice.dto.ResenaDTOInsert;
+import pe.edu.upc.bestprice.dto.ResenaDTOList;
+import pe.edu.upc.bestprice.dto.ResenaDTOListCalAsc;
+import pe.edu.upc.bestprice.entitie.Resena;
+import pe.edu.upc.bestprice.entitie.TipoResena;
 import pe.edu.upc.bestprice.serviceinterfaces.IResenaService;
 
 import java.util.ArrayList;

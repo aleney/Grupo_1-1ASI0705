@@ -1,6 +1,6 @@
 package pe.edu.upc.bestprice.serviceinterfaces;
 
-import pe.edu.upc.bestprice.entities.AuthGoogle;
+import pe.edu.upc.bestprice.entitie.AuthGoogle;
 
 import java.util.List;
 

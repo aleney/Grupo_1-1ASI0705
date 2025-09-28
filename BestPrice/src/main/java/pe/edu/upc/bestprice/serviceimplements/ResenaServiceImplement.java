@@ -2,7 +2,7 @@ package pe.edu.upc.bestprice.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.bestprice.entities.Resena;
+import pe.edu.upc.bestprice.entitie.Resena;
 import pe.edu.upc.bestprice.repositories.IResenaRepository;
 import pe.edu.upc.bestprice.serviceinterfaces.IResenaService;
 
