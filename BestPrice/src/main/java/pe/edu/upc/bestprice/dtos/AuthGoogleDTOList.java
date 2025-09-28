@@ -5,7 +5,7 @@ import pe.edu.upc.bestprice.entities.Usuario;
 public class AuthGoogleDTOList {
     private String nombreAuthGoogle;
     private String emailAuthGoogle;
-    private Usuario usuario;
+    private int idUsuario;
 
     public String getNombreAuthGoogle() {
         return nombreAuthGoogle;
@@ -23,11 +23,11 @@ public class AuthGoogleDTOList {
         this.emailAuthGoogle = emailAuthGoogle;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table
-public class AuthGoogle {
+public class AuthGoogle  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

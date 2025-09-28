@@ -54,7 +54,7 @@ public class ResenaController {
         return ResponseEntity.ok("Registro con ID " + r.getIdResena() + " modificado correctamente.");
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         Resena r = service.ListId(id);
         if (r == null) {

@@ -37,7 +37,7 @@ public class LineaTiendasController {
         service.insert(lt);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/eliminar/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         LineaTiendas lt = service.ListId(id);
         if (lt == null) {
@@ -78,7 +78,7 @@ public class LineaTiendasController {
         return ResponseEntity.ok("Registro con ID " + lt.getIdLineaTiendas() + " modificado correctamente.");
     }
 
-    @GetMapping("/busquedas")
+    @GetMapping("/buscarnombre")
     public ResponseEntity<?> buscar(@RequestParam String n) {
         List<LineaTiendas> lt = service.buscarService(n);
 
