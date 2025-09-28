@@ -1,5 +1,7 @@
 package pe.edu.upc.bestprice.dtos;
 
+import pe.edu.upc.bestprice.entities.Usuario;
+
 public class AuthGoogleDTOList {
     private String nombreAuthGoogle;
     private String emailAuthGoogle;
