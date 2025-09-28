@@ -1,10 +1,10 @@
-package pe.edu.upc.apibestprice.repositories;
+package pe.edu.upc.bestprice.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pe.edu.upc.apibestprice.entities.Usuario;
+import pe.edu.upc.bestprice.entities.Usuario;
 
 import java.util.List;
 

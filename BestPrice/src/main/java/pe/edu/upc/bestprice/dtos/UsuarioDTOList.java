@@ -1,4 +1,4 @@
-package pe.edu.upc.apibestprice.dtos;
+package pe.edu.upc.bestprice.dtos;
 
 public class UsuarioDTOList {
     private String nombre;

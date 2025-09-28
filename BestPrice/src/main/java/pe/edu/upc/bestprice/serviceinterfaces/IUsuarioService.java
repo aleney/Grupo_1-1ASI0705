@@ -1,6 +1,6 @@
-package pe.edu.upc.apibestprice.serviceinterfaces;
+package pe.edu.upc.bestprice.serviceinterfaces;
 
-import pe.edu.upc.apibestprice.entities.Usuario;
+import pe.edu.upc.bestprice.entities.Usuario;
 
 import java.util.List;
 

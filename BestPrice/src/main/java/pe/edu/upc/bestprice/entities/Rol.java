@@ -39,4 +39,5 @@ public class Rol {
         this.tipoUsuario = tipoUsuario;
     }
 
+
 }

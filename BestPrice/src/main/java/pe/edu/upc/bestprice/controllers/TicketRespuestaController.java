@@ -1,12 +1,12 @@
-package pe.edu.upc.apibestprice.controllers;
+package pe.edu.upc.bestprice.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.apibestprice.dtos.RolDTO;
-import pe.edu.upc.apibestprice.dtos.TicketRespuestaDTO;
-import pe.edu.upc.apibestprice.entities.TicketRespuesta;
-import pe.edu.upc.apibestprice.serviceinterfaces.ITicketRespuestaService;
+import pe.edu.upc.bestprice.dtos.RolDTO;
+import pe.edu.upc.bestprice.dtos.TicketRespuestaDTO;
+import pe.edu.upc.bestprice.entities.TicketRespuesta;
+import pe.edu.upc.bestprice.serviceinterfaces.ITicketRespuestaService;
 
 import java.util.List;
 import java.util.stream.Collectors;

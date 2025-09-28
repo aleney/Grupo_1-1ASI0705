@@ -1,4 +1,4 @@
-package pe.edu.upc.apibestprice.securities;
+package pe.edu.upc.bestprice.securities;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

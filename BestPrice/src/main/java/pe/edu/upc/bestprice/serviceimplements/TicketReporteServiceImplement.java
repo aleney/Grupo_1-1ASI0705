@@ -1,11 +1,10 @@
-package pe.edu.upc.apibestprice.serviceimplements;
+package pe.edu.upc.bestprice.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.apibestprice.entities.TicketReporte;
-import pe.edu.upc.apibestprice.entities.TicketRespuesta;
-import pe.edu.upc.apibestprice.repositories.ITicketReporteRepository;
-import pe.edu.upc.apibestprice.serviceinterfaces.ITicketReporteService;
+import pe.edu.upc.bestprice.entities.TicketReporte;
+import pe.edu.upc.bestprice.repositories.ITicketReporteRepository;
+import pe.edu.upc.bestprice.serviceinterfaces.ITicketReporteService;
 
 import java.util.List;
 

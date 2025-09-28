@@ -1,10 +1,10 @@
-package pe.edu.upc.apibestprice.serviceimplements;
+package pe.edu.upc.bestprice.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.apibestprice.entities.Rol;
-import pe.edu.upc.apibestprice.repositories.IRolRepository;
-import pe.edu.upc.apibestprice.serviceinterfaces.IRolService;
+import pe.edu.upc.bestprice.entities.Rol;
+import pe.edu.upc.bestprice.repositories.IRolRepository;
+import pe.edu.upc.bestprice.serviceinterfaces.IRolService;
 
 import java.util.List;
 

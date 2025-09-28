@@ -1,4 +1,4 @@
-package pe.edu.upc.apibestprice.controllers;
+package pe.edu.upc.bestprice.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,10 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.apibestprice.dtos.UsuarioDTOInsert;
-import pe.edu.upc.apibestprice.dtos.UsuarioDTOList;
-import pe.edu.upc.apibestprice.entities.Usuario;
-import pe.edu.upc.apibestprice.serviceinterfaces.IUsuarioService;
+import pe.edu.upc.bestprice.dtos.UsuarioDTOInsert;
+import pe.edu.upc.bestprice.dtos.UsuarioDTOList;
+import pe.edu.upc.bestprice.entities.Usuario;
+import pe.edu.upc.bestprice.serviceinterfaces.IUsuarioService;
 
 import java.util.ArrayList;
 import java.util.List;

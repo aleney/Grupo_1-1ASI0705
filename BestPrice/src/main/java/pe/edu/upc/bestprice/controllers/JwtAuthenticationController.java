@@ -1,4 +1,4 @@
-package pe.edu.upc.apibestprice.controllers;
+package pe.edu.upc.bestprice.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import pe.edu.upc.apibestprice.dtos.JwtRequestDTO;
-import pe.edu.upc.apibestprice.dtos.JwtResponseDTO;
-import pe.edu.upc.apibestprice.securities.JwtTokenUtil;
-import pe.edu.upc.apibestprice.serviceimplements.JwtUserDetailsService;
+import pe.edu.upc.bestprice.dtos.JwtRequestDTO;
+import pe.edu.upc.bestprice.dtos.JwtResponseDTO;
+import pe.edu.upc.bestprice.securities.JwtTokenUtil;
+import pe.edu.upc.bestprice.serviceimplements.JwtUserDetailsService;
 
 
 //Clase 3
