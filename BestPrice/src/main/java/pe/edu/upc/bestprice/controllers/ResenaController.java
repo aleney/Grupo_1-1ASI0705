@@ -10,7 +10,7 @@ import pe.edu.upc.bestprice.dtos.ResenaDTOList;
 import pe.edu.upc.bestprice.dtos.ResenaDTOListCalAsc;
 import pe.edu.upc.bestprice.entities.Resena;
 import pe.edu.upc.bestprice.entities.TipoResena;
-import pe.edu.upc.bestprice.servicesinterfaces.IResenaService;
+import pe.edu.upc.bestprice.serviceinterfaces.IResenaService;
 
 import java.util.ArrayList;
 import java.util.List;
