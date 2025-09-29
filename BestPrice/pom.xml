@@ -9,6 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>pe.edu.pe</groupId>
+
     <artifactId>BestPrice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>BestPrice</name>
