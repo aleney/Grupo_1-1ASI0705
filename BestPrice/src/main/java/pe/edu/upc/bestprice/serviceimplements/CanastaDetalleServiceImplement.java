@@ -37,7 +37,7 @@ public abstract class CanastaDetalleServiceImplement implements ICanastaService 
     }
 
     @Override
-    public List<CanastaDetalle> buscarService(String nombre) {
+    public List<Canasta> buscarService(String nombre) {
         return repository.buscar(nombre);
     }
 
