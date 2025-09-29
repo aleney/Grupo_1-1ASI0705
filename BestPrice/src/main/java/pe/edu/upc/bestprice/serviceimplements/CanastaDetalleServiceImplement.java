@@ -2,7 +2,6 @@ package pe.edu.upc.bestprice.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.bestprice.entities.Canasta;
 import pe.edu.upc.bestprice.entities.CanastaDetalle;
 import pe.edu.upc.bestprice.repositories.ICanastaDetalleRepository;
 import pe.edu.upc.bestprice.serviceinterfaces.ICanastaService;
@@ -16,10 +15,10 @@ public abstract class CanastaDetalleServiceImplement implements ICanastaService 
     private ICanastaDetalleRepository repository;
 
 
-    @Override
+    /*@Override
     public void insert(CanastaDetalle cd) {
         repository.save(cd);
-    }
+    }*/
 
     @Override
     public CanastaDetalle listId(int id) {
@@ -31,15 +30,15 @@ public abstract class CanastaDetalleServiceImplement implements ICanastaService 
         repository.deleteById(id);
     }
 
-    @Override
+   /* @Override
     public void edit(CanastaDetalle cd) {
         repository.save(cd);
-    }
+    }*/
 
-    @Override
-    public List<Canasta> buscarService(String nombre) {
+    /*@Override
+    public List<CanastaDetalle> buscarService(String nombre) {
         return repository.buscar(nombre);
-    }
+    }*/
 
     public abstract CanastaDetalle listId(String id);
 }

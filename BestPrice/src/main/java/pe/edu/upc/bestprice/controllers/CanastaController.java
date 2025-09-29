@@ -2,6 +2,7 @@ package pe.edu.upc.bestprice.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/canastas")
 public class CanastaController {
+    @Qualifier("canastaServiceImplement")
     @Autowired
     private ICanastaService service;
 
@@ -74,7 +76,7 @@ public class CanastaController {
     }
     @GetMapping("/busquedas")
     public ResponseEntity<?> buscar(@RequestParam String n) {
-        List<Canasta> canastas = service.buscarService(n);
+        List<Canasta> canastas = service.insert(n);
         if (canastas.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No se encontraron proveedores: " + n);

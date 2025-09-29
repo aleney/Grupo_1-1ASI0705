@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface ICanastaDetalleRepository extends JpaRepository<CanastaDetalle,Integer> {
 
-    List<Canasta> buscar(String nombre);
+    List<CanastaDetalle> buscar(String nombre);
 }

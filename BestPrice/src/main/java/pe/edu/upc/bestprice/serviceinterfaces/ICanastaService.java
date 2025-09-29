@@ -8,10 +8,11 @@ import java.util.List;
 public interface ICanastaService {
     public List<Canasta> list();
     public void insert(Canasta c);
-    public void insert(CanastaDetalle cd);
+
     public Canasta listId(int id);
     public void delete(int id);
     public void edit(Canasta c);
-    public void edit(CanastaDetalle cd);
-    public List<Canasta> buscarService(String usuario);
+
+  public  List<Canasta> insert(String n);
+
 }

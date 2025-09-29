@@ -3,6 +3,7 @@ package pe.edu.upc.bestprice.serviceimplements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.bestprice.entities.Canasta;
+import pe.edu.upc.bestprice.entities.CanastaDetalle;
 import pe.edu.upc.bestprice.repositories.ICanastaRepository;
 import pe.edu.upc.bestprice.serviceinterfaces.ICanastaService;
 
@@ -26,8 +27,5 @@ public abstract class CanastaServiceImplement implements ICanastaService {
 
     @Override
     public void edit(Canasta c){repository.save(c);}
-
-    @Override
-    public List<Canasta> buscarService(String usuario){return repository.buscar(usuario);}
 
 }
