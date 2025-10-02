@@ -9,5 +9,5 @@ public interface ICanastaDetalleRepository extends JpaRepository<CanastaDetalle,
     public List<CanastaDetalle>list();
     public void insert(CanastaDetalle cd);
     public List<CanastaDetalle> buscar(String id);
-
+    public List<CanastaDetalle> findAll(String nombre);
 }

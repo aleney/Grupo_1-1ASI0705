@@ -16,7 +16,12 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/canastas")
 public class CanastaController {
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     @Autowired
+    @Qualifier("CanastaServiceImplement")
     private ICanastaService service;
 
     @GetMapping
