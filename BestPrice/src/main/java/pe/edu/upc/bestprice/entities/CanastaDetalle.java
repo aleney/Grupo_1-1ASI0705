@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "CanastaDetalle")
-public class CanastaDetalle extends Canasta {
+public class CanastaDetalle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String idCanastaDetalle;

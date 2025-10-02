@@ -9,9 +9,9 @@ public interface ICanastaDetalleService {
     public List<CanastaDetalle> buscarService(String nombre);
     public void insert(CanastaDetalle cd);
 
-    List<CanastaDetalle> list();
+    public List<CanastaDetalle> list();
 
-    CanastaDetalle listId(String id);
+    public CanastaDetalle listId(String id);
 
     public void edit(CanastaDetalle cd);
 }
