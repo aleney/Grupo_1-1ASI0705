@@ -31,8 +31,8 @@ public class CanastaController {
     @PostMapping
     public void insertar(@RequestBody CanastaDTO dto) {
         ModelMapper m=new ModelMapper();
-        Canasta cana=m.map(dto,Canasta.class);
-        service.insert(cana);
+        Canasta canasta=m.map(dto,Canasta.class);
+        service.insert(canasta);
     }
     //obtener una canasta por id
     @GetMapping("/{id}")
@@ -48,11 +48,12 @@ public class CanastaController {
         CanastaDTO dto=m.map(cana, CanastaDTO.class);
         return ResponseEntity.ok(dto);
     }
+
     //eliminar una canasta
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
-        Canasta c = service.listId(id);
-        if (c == null) {
+        Canasta canasta = service.listId(id);
+        if (canasta == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existe un registro con el ID: " + id);
         }
@@ -72,18 +73,19 @@ public class CanastaController {
         service.edit(c);
         return ResponseEntity.ok("Registro con ID " + c.getIdCanasta() + " modificado correctamente.");
     }
+
     @GetMapping("/busquedas")
-    public ResponseEntity<?> buscar(@RequestParam String n) {
-        List<Canasta> canastas = service.buscarService(n);
+    public ResponseEntity<?> buscar(@RequestParam String usuario) {
+        List<Canasta> canastas = service.buscarService(usuario);
         if (canastas.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron proveedores: " + n);
+                    .body("No se encontraron proveedores: " + usuario);
         }
-        List<CanastaDTO> listaDTO = canastas.stream().map(x -> {
+        List<CanastaDTO> canastaDTOS = canastas.stream().map(x -> {
             ModelMapper m = new ModelMapper();
             return m.map(x, CanastaDTO.class);
         }).collect(Collectors.toList());
-        return ResponseEntity.ok(listaDTO);
+        return ResponseEntity.ok(canastaDTOS);
     }
 
 }
