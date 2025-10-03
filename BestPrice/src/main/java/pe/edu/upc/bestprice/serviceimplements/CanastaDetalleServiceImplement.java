@@ -9,26 +9,34 @@ import pe.edu.upc.bestprice.serviceinterfaces.ICanastaDetalleService;
 import java.util.List;
 
 @Service
+public class CanastaDetalleServiceImplement implements ICanastaDetalleService {
 
-public abstract class CanastaDetalleServiceImplement implements ICanastaDetalleService {
     @Autowired
     private ICanastaDetalleRepository repository;
 
+    @Override
+    public List<CanastaDetalle> buscarService(String nombre) {
+        return repository.findAll();  // Retorna todos los detalles de la canasta
+    }
 
-    /*@Override
+    @Override
     public void insert(CanastaDetalle cd) {
         repository.save(cd);
-    }*/
+    }
 
     @Override
-    public List<CanastaDetalle> list(){return repository.findAll();}
+    public List<CanastaDetalle> list() {
+        return repository.findAll();  // Retorna todos los detalles de la canasta
+    }
 
     @Override
-    public CanastaDetalle listId(String id){return repository.findById(id).orElse(null);}
+    public CanastaDetalle listId(String id) {
+        return repository.findById(id).orElse(null);  // Obtiene un detalle de canasta por ID
+    }
 
-   /* @Override
+    @Override
     public void edit(CanastaDetalle cd) {
         repository.save(cd);
-    }*/
+    }
 
 }

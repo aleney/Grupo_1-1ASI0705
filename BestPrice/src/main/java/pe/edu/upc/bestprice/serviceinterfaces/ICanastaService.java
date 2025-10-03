@@ -10,6 +10,5 @@ public interface ICanastaService {
     public Canasta listId(int id);
     public void delete(int id);
     public void edit(Canasta c);
-
-   public List<Canasta> buscarService(String usuario);
+    public List<Canasta> buscarService(String usuario);
 }

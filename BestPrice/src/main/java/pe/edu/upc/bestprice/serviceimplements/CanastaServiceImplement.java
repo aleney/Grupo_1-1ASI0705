@@ -7,8 +7,9 @@ import pe.edu.upc.bestprice.repositories.ICanastaRepository;
 import pe.edu.upc.bestprice.serviceinterfaces.ICanastaService;
 
 import java.util.List;
-@Service
-public abstract class CanastaServiceImplement implements ICanastaService {
+@Service("CanastaServiceImplement")
+public class CanastaServiceImplement implements ICanastaService {
+
     @Autowired
     private ICanastaRepository repository;
 
@@ -26,5 +27,10 @@ public abstract class CanastaServiceImplement implements ICanastaService {
 
     @Override
     public void edit(Canasta c){repository.save(c);}
+
+    @Override
+    public List<Canasta> buscarService(String usuario) {
+        return repository.findAll();
+    }
 
 }

@@ -7,32 +7,32 @@ import jakarta.persistence.*;
 public class CanastaDetalle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String idCanastaDetalle;
+    private Integer idCanastaDetalle;
 
-    @Column(name = "cantidadCanastaDetalle",nullable = false)
+    @Column(name = "cantidadCanastaDetalle", nullable = false)
     private int cantidadCanastaDetalle;
 
-    @Column(name = "productoCanastaDetalle",nullable = false)
+    @Column(name = "productoCanastaDetalle", nullable = false)
     private int productoCanastaDetalle;
 
-    @Column(name = "canastaCanastaDetalle",nullable = false)
+    @Column(name = "canastaCanastaDetalle", nullable = false)
     private int canastaCanastaDetalle;
 
     public CanastaDetalle() {
     }
 
-    public CanastaDetalle(String idCanastaDetalle, int cantidadCanastaDetalle, int productoCanastaDetalle, int canastaCCanastaDetalle) {
+    public CanastaDetalle(Integer idCanastaDetalle, int cantidadCanastaDetalle, int productoCanastaDetalle, int canastaCCanastaDetalle) {
         this.idCanastaDetalle = idCanastaDetalle;
         this.cantidadCanastaDetalle = cantidadCanastaDetalle;
         this.productoCanastaDetalle = productoCanastaDetalle;
         this.canastaCanastaDetalle = canastaCCanastaDetalle;
     }
 
-    public String getIdCanastaDetalle() {
+    public Integer getIdCanastaDetalle() {
         return idCanastaDetalle;
     }
 
-    public void setIdCanastaDetalle(String idCanastaDetalle) {
+    public void setIdCanastaDetalle(Integer idCanastaDetalle) {
         this.idCanastaDetalle = idCanastaDetalle;
     }
 

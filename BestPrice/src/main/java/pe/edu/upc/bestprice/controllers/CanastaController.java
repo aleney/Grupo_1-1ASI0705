@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.CanastaDTO;
 import pe.edu.upc.bestprice.entities.Canasta;
-import pe.edu.upc.bestprice.entities.CanastaDetalle;
 import pe.edu.upc.bestprice.serviceinterfaces.ICanastaService;
 
 import java.util.List;
@@ -17,41 +16,42 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/canastas")
 public class CanastaController {
-    @Qualifier("canastaServiceImplement")
     @Autowired
+    @Qualifier("CanastaServiceImplement")
     private ICanastaService service;
 
+    // Listar todas las canastas
     @GetMapping
-    public List<CanastaDTO>listar(){
-        return service.list().stream().map(a->{
-            ModelMapper m=new ModelMapper();
-            return m.map(a,CanastaDTO.class);
+    public List<CanastaDTO> listar() {
+        return service.list().stream().map(a -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(a, CanastaDTO.class);
         }).collect(Collectors.toList());
     }
 
-
+    // Insertar una nueva canasta
     @PostMapping
-    public void insertar(@RequestBody CanastaDTO dto) {
-        ModelMapper m=new ModelMapper();
-        Canasta canasta=m.map(dto,Canasta.class);
+    public ResponseEntity<String> insertar(@RequestBody CanastaDTO dto) {
+        ModelMapper m = new ModelMapper();
+        Canasta canasta = m.map(dto, Canasta.class);
         service.insert(canasta);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Canasta creada correctamente.");
     }
-    //obtener una canasta por id
-    @GetMapping("/{id}")
-    public ResponseEntity<?> listarId(@PathVariable("id") Integer id){
-        Canasta cana=service.listId(id);
-        if(cana==null){
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("No existe un registro con el ID:"+id);
 
+    // Obtener una canasta por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
+        Canasta cana = service.listId(id);
+        if (cana == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
         }
         ModelMapper m = new ModelMapper();
-        CanastaDTO dto=m.map(cana, CanastaDTO.class);
+        CanastaDTO dto = m.map(cana, CanastaDTO.class);
         return ResponseEntity.ok(dto);
     }
 
-    //eliminar una canasta
+    // Eliminar una canasta
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         Canasta canasta = service.listId(id);
@@ -62,7 +62,8 @@ public class CanastaController {
         service.delete(id);
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
-    //actualizar una canasta
+
+    // Actualizar una canasta
     @PutMapping
     public ResponseEntity<String> modificar(@RequestBody CanastaDTO dto) {
         ModelMapper m = new ModelMapper();
@@ -76,12 +77,13 @@ public class CanastaController {
         return ResponseEntity.ok("Registro con ID " + c.getIdCanasta() + " modificado correctamente.");
     }
 
+    // Buscar canasta por usuario
     @GetMapping("/busquedas")
     public ResponseEntity<?> buscar(@RequestParam String usuario) {
         List<Canasta> canastas = service.buscarService(usuario);
         if (canastas.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron proveedores: " + usuario);
+                    .body("No se encontraron canastas para el usuario: " + usuario);
         }
         List<CanastaDTO> canastaDTOS = canastas.stream().map(x -> {
             ModelMapper m = new ModelMapper();
@@ -89,5 +91,4 @@ public class CanastaController {
         }).collect(Collectors.toList());
         return ResponseEntity.ok(canastaDTOS);
     }
-
 }
