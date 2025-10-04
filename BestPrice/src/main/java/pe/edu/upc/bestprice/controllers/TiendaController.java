@@ -5,49 +5,49 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.TiendasDTO;
-import pe.edu.upc.bestprice.entities.Tiendas;
-import pe.edu.upc.bestprice.serviceinterfaces.ITiendasService;
+import pe.edu.upc.bestprice.dtos.TiendaDTO;
+import pe.edu.upc.bestprice.entities.Tienda;
+import pe.edu.upc.bestprice.serviceinterfaces.ITiendaService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/tiendas")
-public class TiendasController {
+@RequestMapping("/Tienda")
+public class TiendaController {
 
     @Autowired
-    private ITiendasService Ts;
+    private ITiendaService Ts;
 
-    @GetMapping("listartiendas")
-    public List<TiendasDTO> listarTienda() {
-        return Ts.listarTiendas().stream().map(a->{
+    @GetMapping("listarTienda")
+    public List<TiendaDTO> listarTienda() {
+        return Ts.listarTienda().stream().map(a->{
             ModelMapper m=new ModelMapper();
-            return m.map(a,TiendasDTO.class);
+            return m.map(a,TiendaDTO.class);
         }).collect(Collectors.toList());
     }
 
     @PostMapping("registrarTienda")
-    public void RegistrarTienda(@RequestBody TiendasDTO tdtos) {
+    public void RegistrarTienda(@RequestBody TiendaDTO tdtos) {
         ModelMapper m=new ModelMapper();
-        Tiendas t=m.map(tdtos,Tiendas.class);
+        Tienda t=m.map(tdtos,Tienda.class);
         Ts.insert(t);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> listarIdTienda(@PathVariable("id") Integer id) {
-        Tiendas tdtos = Ts.listarIdTiendas(id);
+        Tienda tdtos = Ts.listarIdTienda(id);
         if (tdtos == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ningun registro de tiendas" + id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ningun registro de Tienda" + id);
         }
         ModelMapper m = new ModelMapper();
-        TiendasDTO tdt = m.map(tdtos, TiendasDTO.class);
+        TiendaDTO tdt = m.map(tdtos, TiendaDTO.class);
         return ResponseEntity.ok(tdt);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
-        Tiendas td = Ts.listarIdTiendas(id);
+        Tienda td = Ts.listarIdTienda(id);
         if (td == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existe un registro con el ID: " + id);
@@ -57,18 +57,18 @@ public class TiendasController {
     }
 
     @PutMapping
-    public ResponseEntity<String> modificar(@RequestBody TiendasDTO dto) {
+    public ResponseEntity<String> modificar(@RequestBody TiendaDTO dto) {
         ModelMapper m = new ModelMapper();
-        Tiendas t = m.map(dto, Tiendas.class);
-        Tiendas existente = Ts.listarIdTiendas(t.getIdTiendas());
+        Tienda t = m.map(dto, Tienda.class);
+        Tienda existente = Ts.listarIdTienda(t.getIdTienda());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un registro con el ID: " + t.getIdTiendas());
+                    .body("No se puede modificar. No existe un registro con el ID: " + t.getIdTienda());
         }
 
         // Actualización si pasa validaciones
         Ts.update(t);
-        return ResponseEntity.ok("Registro con ID " + t.getIdTiendas() + " modificado correctamente.");
+        return ResponseEntity.ok("Registro con ID " + t.getIdTienda() + " modificado correctamente.");
     }
 
 }

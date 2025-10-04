@@ -4,9 +4,9 @@ import pe.edu.upc.bestprice.entities.TipoTienda;
 
 import java.time.LocalDate;
 
-public class TiendasDTO {
+public class TiendaDTO {
 
-    private int idTiendas;
+    private int idTienda;
     private String nombreTienda;
     private String descripcionTienda;
     private String numeroTelefono;
@@ -14,12 +14,12 @@ public class TiendasDTO {
     private LocalDate fechaTienda;
     private TipoTienda tipoTienda;
 
-    public int getIdTiendas() {
-        return idTiendas;
+    public int getIdTienda() {
+        return idTienda;
     }
 
-    public void setIdTiendas(int idTiendas) {
-        this.idTiendas = idTiendas;
+    public void setIdTienda(int idTienda) {
+        this.idTienda = idTienda;
     }
 
     public String getNombreTienda() {

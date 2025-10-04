@@ -72,7 +72,7 @@ public class ResenaController {
 
         if (calificacion.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron reseñas");
+                    .body("No se encontraron Resenas");
         }
 
         //columna -> Item de la lista de elementos que retorna monto

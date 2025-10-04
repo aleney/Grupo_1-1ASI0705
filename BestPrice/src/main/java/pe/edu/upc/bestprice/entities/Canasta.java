@@ -13,11 +13,11 @@ public class Canasta {
     @Column(name = "nombreCanasta",length = 50,nullable = false)
     private String nombreCanasta;
 
-    @Column(name = "createdACanasta",nullable = false)
-    private Timestamp createdACanasta;
+    @Column(name = "createdAtCanasta",nullable = false)
+    private Timestamp createdAtCanasta;
 
-    @Column(name = "updateACanasta",nullable = false)
-    private Timestamp updateACanasta;
+    @Column(name = "updatedAtCanasta",nullable = false)
+    private Timestamp updatedAtCanasta;
 
     @Column(name = "usuarioCanasta",length = 50,nullable = false)
     private String usuarioCanasta;
@@ -25,11 +25,11 @@ public class Canasta {
     public Canasta() {
     }
 
-    public Canasta(int idCanasta, String nombreCanasta, Timestamp createdACanasta, Timestamp updateACanasta, String usuarioCanasta) {
+    public Canasta(int idCanasta, String nombreCanasta, Timestamp createdAtCanasta, Timestamp updatedAtCanasta, String usuarioCanasta) {
         this.idCanasta = idCanasta;
         this.nombreCanasta = nombreCanasta;
-        this.createdACanasta = createdACanasta;
-        this.updateACanasta = updateACanasta;
+        this.createdAtCanasta = createdAtCanasta;
+        this.updatedAtCanasta = updatedAtCanasta;
         this.usuarioCanasta = usuarioCanasta;
     }
 
@@ -50,19 +50,19 @@ public class Canasta {
     }
 
     public Timestamp getCreatedACanasta() {
-        return createdACanasta;
+        return createdAtCanasta;
     }
 
-    public void setCreatedACanasta(Timestamp createdACanasta) {
-        this.createdACanasta = createdACanasta;
+    public void setCreatedACanasta(Timestamp createdAtCanasta) {
+        this.createdAtCanasta = createdAtCanasta;
     }
 
     public Timestamp getUpdateACanasta() {
-        return updateACanasta;
+        return updatedAtCanasta;
     }
 
-    public void setUpdateACanasta(Timestamp updateACanasta) {
-        this.updateACanasta = updateACanasta;
+    public void setUpdateACanasta(Timestamp updatedAtCanasta) {
+        this.updatedAtCanasta = updatedAtCanasta;
     }
 
     public String getUsuarioCanasta() {

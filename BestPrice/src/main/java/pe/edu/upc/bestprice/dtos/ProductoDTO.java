@@ -1,7 +1,7 @@
 package pe.edu.upc.bestprice.dtos;
 
 import pe.edu.upc.bestprice.entities.CategoriaProducto;
-import pe.edu.upc.bestprice.entities.Tiendas;
+import pe.edu.upc.bestprice.entities.Tienda;
 
 public class ProductoDTO {
 
@@ -14,7 +14,7 @@ public class ProductoDTO {
     private float UnidadMetricaProducto;
     private boolean FavoritoProducto;
     private boolean DisponibleProducto;
-    private Tiendas TiendasProducto;
+    private Tienda TiendaProducto;
     private CategoriaProducto CateProduct;
 
     public int getIdProducto() {
@@ -89,12 +89,12 @@ public class ProductoDTO {
         DisponibleProducto = disponibleProducto;
     }
 
-    public Tiendas getTiendasProducto() {
-        return TiendasProducto;
+    public Tienda getTiendaProducto() {
+        return TiendaProducto;
     }
 
-    public void setTiendasProducto(Tiendas tiendasProducto) {
-        TiendasProducto = tiendasProducto;
+    public void setTiendaProducto(Tienda TiendaProducto) {
+        TiendaProducto = TiendaProducto;
     }
 
     public CategoriaProducto getCateProduct() {

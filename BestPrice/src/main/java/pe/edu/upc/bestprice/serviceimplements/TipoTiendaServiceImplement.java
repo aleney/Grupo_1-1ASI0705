@@ -16,7 +16,7 @@ public class TipoTiendaServiceImplement implements ITipoTiendaService {
 
 
     @Override
-    public List<TipoTienda> listarTipoTiendas() {
+    public List<TipoTienda> listarTipoTienda() {
         return Ttr.findAll();
     }
 

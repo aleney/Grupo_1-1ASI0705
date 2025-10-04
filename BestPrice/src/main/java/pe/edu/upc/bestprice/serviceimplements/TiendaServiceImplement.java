@@ -3,30 +3,30 @@ package pe.edu.upc.bestprice.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.bestprice.entities.Tiendas;
-import pe.edu.upc.bestprice.repositories.ITiendasRepository;
-import pe.edu.upc.bestprice.serviceinterfaces.ITiendasService;
+import pe.edu.upc.bestprice.entities.Tienda;
+import pe.edu.upc.bestprice.repositories.ITiendaRepository;
+import pe.edu.upc.bestprice.serviceinterfaces.ITiendaService;
 
 import java.util.List;
 
 @Service
-public class TiendasServiceImplement implements ITiendasService {
+public class TiendaServiceImplement implements ITiendaService {
 
     @Autowired
-    private ITiendasRepository Tr;
+    private ITiendaRepository Tr;
 
     @Override
-    public List<Tiendas> listarTiendas() {
+    public List<Tienda> listarTienda() {
         return Tr.findAll();
     }
 
     @Override
-    public void insert(Tiendas tiendas) {
-        Tr.save(tiendas);
+    public void insert(Tienda Tienda) {
+        Tr.save(Tienda);
     }
 
     @Override
-    public Tiendas listarIdTiendas(int id) {
+    public Tienda listarIdTienda(int id) {
         return Tr.findById(id).orElse(null);
     }
 
@@ -36,7 +36,7 @@ public class TiendasServiceImplement implements ITiendasService {
     }
 
     @Override
-    public void update(Tiendas t) {
+    public void update(Tienda t) {
         Tr.save(t);
     }
 }

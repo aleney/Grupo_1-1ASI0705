@@ -13,15 +13,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/tipoTiendas")
+@RequestMapping("/tipoTienda")
 public class TipoTiendaController {
 
     @Autowired
     private ITipoTiendaService Tts;
 
-    @GetMapping("listartiendas")
+    @GetMapping("listarTienda")
     public List<TipoTiendaDTO> ListarTipoTienda() {
-        return Tts.listarTipoTiendas().stream().map(a->{
+        return Tts.listarTipoTienda().stream().map(a->{
             ModelMapper m=new ModelMapper();
             return m.map(a,TipoTiendaDTO.class);
         }).collect(Collectors.toList());
@@ -38,7 +38,7 @@ public class TipoTiendaController {
     public ResponseEntity<?> listarIdTipoTienda(@PathVariable("id") Integer id) {
         TipoTienda ttdtos = Tts.listarIdTipoTienda(id);
         if (ttdtos == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ningun registro de Tipo tiendas" + id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ningun registro de Tipo Tienda" + id);
         }
         ModelMapper m = new ModelMapper();
         TipoTiendaDTO ttdt = m.map(ttdtos, TipoTiendaDTO.class);
