@@ -49,6 +49,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/buscar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> buscarUsuario(@RequestParam String nombre) {
         List<String[]> usuarios = service.buscarUsuario(nombre);
         if (usuarios.isEmpty()) {
@@ -69,6 +70,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         Usuario user = service.listarId(id);
         if (user == null) {
@@ -95,7 +97,7 @@ public class UsuarioController {
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
-    @PutMapping
+    @PutMapping("/editar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> editar(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper m = new ModelMapper();
