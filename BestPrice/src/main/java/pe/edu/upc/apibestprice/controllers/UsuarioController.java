@@ -22,7 +22,7 @@ public class UsuarioController {
     private IUsuarioService service;
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('administrador')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listar() {
         List<String[]> usuarios = service.listar();
         List<UsuarioDTOList> listaUsuarios = new ArrayList<>();
@@ -42,7 +42,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/insertar")
-    @PreAuthorize("hasAuthority('administrador')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void insertarUsuario(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper m=new ModelMapper();
         Usuario u=m.map(dto,Usuario.class);
@@ -84,7 +84,7 @@ public class UsuarioController {
 
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('administrador')")
+    @PreAuthorize("hasAuthority('ADMIN')")
 
     public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
         Usuario u = service.listarId(id);
@@ -97,7 +97,7 @@ public class UsuarioController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('administrador')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> editar(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Usuario p = m.map(dto, Usuario.class);
