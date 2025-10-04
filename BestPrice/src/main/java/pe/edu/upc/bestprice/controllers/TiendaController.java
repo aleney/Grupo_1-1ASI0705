@@ -13,15 +13,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/Tienda")
+@RequestMapping("/tienda")
 public class TiendaController {
 
     @Autowired
-    private ITiendaService Ts;
+    private ITiendaService service;
 
     @GetMapping("listarTienda")
     public List<TiendaDTO> listarTienda() {
-        return Ts.listarTienda().stream().map(a->{
+        return service.listarTienda().stream().map(a->{
             ModelMapper m=new ModelMapper();
             return m.map(a,TiendaDTO.class);
         }).collect(Collectors.toList());
@@ -31,12 +31,12 @@ public class TiendaController {
     public void RegistrarTienda(@RequestBody TiendaDTO tdtos) {
         ModelMapper m=new ModelMapper();
         Tienda t=m.map(tdtos,Tienda.class);
-        Ts.insert(t);
+        service.insert(t);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> listarIdTienda(@PathVariable("id") Integer id) {
-        Tienda tdtos = Ts.listarIdTienda(id);
+        Tienda tdtos = service.listarIdTienda(id);
         if (tdtos == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ningun registro de Tienda" + id);
         }
@@ -47,12 +47,12 @@ public class TiendaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
-        Tienda td = Ts.listarIdTienda(id);
+        Tienda td = service.listarIdTienda(id);
         if (td == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existe un registro con el ID: " + id);
         }
-        Ts.delete(id);
+        service.delete(id);
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
@@ -60,14 +60,14 @@ public class TiendaController {
     public ResponseEntity<String> modificar(@RequestBody TiendaDTO dto) {
         ModelMapper m = new ModelMapper();
         Tienda t = m.map(dto, Tienda.class);
-        Tienda existente = Ts.listarIdTienda(t.getIdTienda());
+        Tienda existente = service.listarIdTienda(t.getIdTienda());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No se puede modificar. No existe un registro con el ID: " + t.getIdTienda());
         }
 
         // Actualización si pasa validaciones
-        Ts.update(t);
+        service.update(t);
         return ResponseEntity.ok("Registro con ID " + t.getIdTienda() + " modificado correctamente.");
     }
 

@@ -13,9 +13,9 @@ public class Tienda {
     private int idTienda;
     @Column(name="nombreTienda", nullable = false, length = 50)
     private String nombreTienda;
-    @Column(name="descripcionTienda", nullable = false, length = 250)
+    @Column(name="descripcionTienda", nullable = true, length = 250)
     private String descripcionTienda;
-    @Column(name="numeroTelefono", nullable = false, length = 9)
+    @Column(name="numeroTelefono", nullable = true, length = 9)
     private String numeroTelefono;
     @Column(name="estadoTienda", nullable = false)
     private boolean estadoTienda;

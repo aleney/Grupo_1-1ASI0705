@@ -3,6 +3,8 @@ package pe.edu.upc.bestprice.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
+
 @Entity
 @Table(name = "Usuario")
 
@@ -23,24 +25,24 @@ public class Usuario {
     @Column(name = "numeroTelefono",length = 9,nullable = false)
     private int numeroTelefono;
 
-    @Column(name = "estado",length = 9,nullable = false)
+    @Column(name = "estado", nullable = false)
     private Boolean estado;
 
-    @Column(name = "createdAt",length = 9,nullable = false)
+    @Column(name = "createdAt", nullable = false)
     private LocalDate createdAt;
 
-    @Column(name = "updatedAt",length = 9,nullable = false)
+    @Column(name = "updatedAt",nullable = false)
     private LocalDate updatedAt;
 
-    @ManyToOne
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idRol")
-    private Rol rol;
+    private List<Rol> rol;
 
-    public Usuario(int idUsuario, String nombre, String email, String pasword, int numeroTelefono, Boolean estado, LocalDate createdAt, LocalDate updatedAt, Rol rol) {
+    public Usuario(int idUsuario, String nombre, String email, String password, int numeroTelefono, Boolean estado, LocalDate createdAt, LocalDate updatedAt, List<Rol> rol) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.email = email;
-        this.password = pasword;
+        this.password = password;
         this.numeroTelefono = numeroTelefono;
         this.estado = estado;
         this.createdAt = createdAt;
@@ -116,13 +118,19 @@ public class Usuario {
         this.updatedAt = updatedAt;
     }
 
-    public Rol getRol() {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Rol> getRol() {
         return rol;
     }
 
-    public void setRol(Rol rol) {
+    public void setRol(List<Rol> rol) {
         this.rol = rol;
     }
-
-
 }

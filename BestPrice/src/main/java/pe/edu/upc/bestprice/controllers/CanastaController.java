@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/canastas")
+@RequestMapping("/canasta")
 public class CanastaController {
+
     @Autowired
-    @Qualifier("CanastaServiceImplement")
     private ICanastaService service;
 
     // Listar todas las canastas

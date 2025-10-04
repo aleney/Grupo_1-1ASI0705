@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/ticketrespuesta")
+@RequestMapping("/ticket-respuesta")
 public class TicketRespuestaController {
 
     @Autowired

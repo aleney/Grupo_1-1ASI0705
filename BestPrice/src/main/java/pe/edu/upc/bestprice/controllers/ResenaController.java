@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/Resenas")
+@RequestMapping("/resena")
 public class ResenaController {
 
     @Autowired
@@ -54,7 +54,7 @@ public class ResenaController {
         return ResponseEntity.ok("Registro con ID " + r.getIdResena() + " modificado correctamente.");
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         Resena r = service.ListId(id);
         if (r == null) {

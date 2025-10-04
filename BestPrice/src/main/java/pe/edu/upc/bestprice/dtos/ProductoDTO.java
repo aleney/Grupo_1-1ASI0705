@@ -11,7 +11,7 @@ public class ProductoDTO {
     private String MarcaProducto;
     private double PrecioProducto;
     private int StockProducto;
-    private float UnidadMetricaProducto;
+    private String UnidadMetricaProducto;
     private boolean FavoritoProducto;
     private boolean DisponibleProducto;
     private Tienda TiendaProducto;
@@ -65,11 +65,11 @@ public class ProductoDTO {
         StockProducto = stockProducto;
     }
 
-    public float getUnidadMetricaProducto() {
+    public String getUnidadMetricaProducto() {
         return UnidadMetricaProducto;
     }
 
-    public void setUnidadMetricaProducto(float unidadMetricaProducto) {
+    public void setUnidadMetricaProducto(String unidadMetricaProducto) {
         UnidadMetricaProducto = unidadMetricaProducto;
     }
 

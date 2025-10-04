@@ -13,31 +13,31 @@ import java.util.List;
 public class ProductoServiceImplement implements IProductoService {
 
     @Autowired
-    private IProductoRepository Pr;
+    private IProductoRepository repository;
 
 
     @Override
     public List<Producto> List() {
-        return Pr.findAll();
+        return repository.findAll();
     }
 
     @Override
     public void insert(Producto p) {
-        Pr.save(p);
+        repository.save(p);
     }
 
     @Override
     public Producto listId(int id) {
-        return Pr.findById(id).orElse(null);
+        return repository.findById(id).orElse(null);
     }
 
     @Override
     public void delete(int id) {
-        Pr.deleteById(id);
+        repository.deleteById(id);
     }
 
     @Override
     public void update(Producto p) {
-        Pr.save(p);
+        repository.save(p);
     }
 }

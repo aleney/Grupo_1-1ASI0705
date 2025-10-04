@@ -13,15 +13,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/productos")
+@RequestMapping("/producto")
 public class ProductoController {
 
     @Autowired
-    private IProductoService Ps;
+    private IProductoService service;
 
     @GetMapping
     public List<ProductoDTO> Listar(){
-        return Ps.List().stream().map(a->{
+        return service.List().stream().map(a->{
             ModelMapper m=new ModelMapper();
             return m.map(a,ProductoDTO.class);
         }).collect(Collectors.toList());
@@ -30,11 +30,11 @@ public class ProductoController {
     public void Registar(@RequestBody ProductoDTO dtos){
         ModelMapper m=new ModelMapper();
         Producto prodc=m.map(dtos,Producto.class);
-        Ps.insert(prodc);
+        service.insert(prodc);
     }
     @GetMapping("/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id){
-        Producto prodc=Ps.listId(id);
+        Producto prodc=service.listId(id);
         if(prodc==null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ningun registro de producto" + id);
         }
@@ -45,12 +45,12 @@ public class ProductoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
-        Producto p = Ps.listId(id);
+        Producto p = service.listId(id);
         if (p == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existe un registro con el ID: " + id);
         }
-        Ps.delete(id);
+        service.delete(id);
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
@@ -58,14 +58,14 @@ public class ProductoController {
     public ResponseEntity<String> modificar(@RequestBody ProductoDTO dto) {
         ModelMapper m = new ModelMapper();
         Producto p = m.map(dto, Producto.class);
-        Producto existente = Ps.listId(p.getIdProducto());
+        Producto existente = service.listId(p.getIdProducto());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No se puede modificar. No existe un registro con el ID: " + p.getIdProducto());
         }
 
         // Actualización si pasa validaciones
-        Ps.update(p);
+        service.update(p);
         return ResponseEntity.ok("Registro con ID " + p.getIdProducto() + " modificado correctamente.");
     }
 

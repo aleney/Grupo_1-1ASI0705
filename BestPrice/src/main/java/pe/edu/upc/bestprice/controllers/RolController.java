@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/roles")
+@RequestMapping("/rol")
 public class RolController {
     @Autowired
     private IRolService rolService;

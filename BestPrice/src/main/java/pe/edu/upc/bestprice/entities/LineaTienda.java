@@ -18,7 +18,7 @@ public class LineaTienda {
     @Column(name = "descripcionLineaTienda", length = 450, nullable = true)
     private String descripcionLineaTienda;
 
-    @Column(name = "createdAtLineaTienda", nullable = true)
+    @Column(name = "createdAtLineaTienda", nullable = false)
     private LocalDate createdAtLineaTienda;
 
     public LineaTienda() {

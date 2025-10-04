@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/LineaTienda")
+@RequestMapping("/linea-tienda")
 public class LineaTiendaController {
 
     @Autowired
@@ -37,7 +37,7 @@ public class LineaTiendaController {
         service.insert(lt);
     }
 
-    @GetMapping("/eliminar/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         LineaTienda lt = service.ListId(id);
         if (lt == null) {

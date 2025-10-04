@@ -13,15 +13,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/categoriaProductos")
+@RequestMapping("/categoria-producto")
 public class CategoriaProductoController {
 
     @Autowired
-    private ICategoriaProductoService Cps;
+    private ICategoriaProductoService service;
 
     @GetMapping
     public List<CategoriaProductoDTO> Listar(){
-        return Cps.listarCategoriaProducto().stream().map(a->{
+        return service.listarCategoriaProducto().stream().map(a->{
             ModelMapper m=new ModelMapper();
             return m.map(a,CategoriaProductoDTO.class);
         }).collect(Collectors.toList());
@@ -30,11 +30,11 @@ public class CategoriaProductoController {
     public void Registar(@RequestBody CategoriaProductoDTO dtos){
         ModelMapper m=new ModelMapper();
         CategoriaProducto ctp=m.map(dtos,CategoriaProducto.class);
-        Cps.insertarCateProduct(ctp);
+        service.insertarCateProduct(ctp);
     }
     @GetMapping("/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id){
-        CategoriaProducto ctps=Cps.listId(id);
+        CategoriaProducto ctps=service.listId(id);
         if(ctps==null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ningun registro de la Categoria del producto" + id);
         }
@@ -44,12 +44,12 @@ public class CategoriaProductoController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
-        CategoriaProducto Ctp = Cps.listId(id);
+        CategoriaProducto Ctp = service.listId(id);
         if (Ctp == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existe un registro con el ID: " + id);
         }
-        Cps.delete(id);
+        service.delete(id);
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
@@ -57,14 +57,14 @@ public class CategoriaProductoController {
     public ResponseEntity<String> modificar(@RequestBody CategoriaProductoDTO dto) {
         ModelMapper m = new ModelMapper();
         CategoriaProducto ctp = m.map(dto, CategoriaProducto.class);
-        CategoriaProducto existente = Cps.listId(ctp.getIdCategoriaProducto());
+        CategoriaProducto existente = service.listId(ctp.getIdCategoriaProducto());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No se puede modificar. No existe un registro con el ID: " + ctp.getIdCategoriaProducto());
         }
 
         // Actualización si pasa validaciones
-        Cps.update(ctp);
+        service.update(ctp);
         return ResponseEntity.ok("Registro con ID " + ctp.getIdCategoriaProducto() + " modificado correctamente.");
     }
 }

@@ -10,7 +10,7 @@ public class Producto {
     private int idProducto;
     @Column(name = "nombreProducto", nullable = false, length = 25)
     private String nombreProducto;
-    @Column(name = "descripcionProducto", nullable = false, length = 150)
+    @Column(name = "descripcionProducto", nullable = true, length = 250)
     private String descripcionProducto;
     @Column(name = "marcaProducto", nullable = false, length = 25)
     private String marcaProducto;
@@ -19,8 +19,8 @@ public class Producto {
     @Column(name = "stockProducto", nullable = false, length = 25)
     private int stockProducto;
     @Column(name = "unidadMetricaProducto", nullable = false, length = 20)
-    private float unidadMetricaProducto;
-    @Column(name = "favoritoProducto", nullable = false)
+    private String unidadMetricaProducto;
+    @Column(name = "favoritoProducto", nullable = true)
     private boolean favoritoProducto;
     @Column(name = "disponibleProducto", nullable = false)
     private boolean disponibleProducto;
@@ -28,7 +28,7 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(int idProducto, String nombreProducto, String descripcionProducto, String marcaProducto, double precioProducto, int stockProducto, float unidadMetricaProducto, boolean favoritoProducto, boolean disponibleProducto) {
+    public Producto(int idProducto, String nombreProducto, String descripcionProducto, String marcaProducto, double precioProducto, int stockProducto, String unidadMetricaProducto, boolean favoritoProducto, boolean disponibleProducto) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.descripcionProducto = descripcionProducto;
@@ -88,11 +88,11 @@ public class Producto {
         this.stockProducto = stockProducto;
     }
 
-    public float getUnidadMetricaProducto() {
+    public String getUnidadMetricaProducto() {
         return unidadMetricaProducto;
     }
 
-    public void setUnidadMetricaProducto(float unidadMetricaProducto) {
+    public void setUnidadMetricaProducto(String unidadMetricaProducto) {
         this.unidadMetricaProducto = unidadMetricaProducto;
     }
 
