@@ -1,9 +1,10 @@
+
 package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"idUsuario", "tipoUsuario"})})
+@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"idRol", "tipoUsuario"})})
 
 public class Rol {
 
@@ -14,17 +15,13 @@ public class Rol {
     @Column(name = "tipoUsuario",length = 20, nullable = false)
     private String tipoUsuario;
 
-    @ManyToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
-    private Usuario usuario;
-
-    public Rol(int idRol, String tipoUsuario, Usuario usuario) {
+    public Rol(int idRol, String tipoUsuario) {
         this.idRol = idRol;
         this.tipoUsuario = tipoUsuario;
-        this.usuario = usuario;
     }
 
     public Rol() {
+
     }
 
     public int getIdRol() {
@@ -43,11 +40,5 @@ public class Rol {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 }

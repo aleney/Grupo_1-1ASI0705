@@ -13,12 +13,13 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/rol")
+@RequestMapping("/roles")
 public class RolController {
     @Autowired
     private IRolService rolService;
 
     @GetMapping("/listar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<RolDTO> listar(){
         return rolService.listarRoles().stream().map(a->{
             ModelMapper m=new ModelMapper();
@@ -27,7 +28,7 @@ public class RolController {
     }
 
     @PostMapping("/insertar")
-    @PreAuthorize("hasAuthority('administrador')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void insertar(@RequestBody RolDTO dto) {
         ModelMapper m=new ModelMapper();
         Rol soft=m.map(dto,Rol.class);

@@ -13,7 +13,6 @@ import pe.edu.upc.bestprice.serviceinterfaces.IUsuarioService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuario")
@@ -22,7 +21,7 @@ public class UsuarioController {
     private IUsuarioService service;
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('administrador')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listar() {
         List<String[]> usuarios = service.listar();
         List<UsuarioDTOList> listaUsuarios = new ArrayList<>();
@@ -42,7 +41,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/insertar")
-    @PreAuthorize("hasAuthority('administrador')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void insertarUsuario(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper m=new ModelMapper();
         Usuario u=m.map(dto,Usuario.class);
@@ -50,6 +49,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/buscar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> buscarUsuario(@RequestParam String nombre) {
         List<String[]> usuarios = service.buscarUsuario(nombre);
         if (usuarios.isEmpty()) {
@@ -70,6 +70,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         Usuario user = service.listarId(id);
         if (user == null) {
@@ -84,7 +85,7 @@ public class UsuarioController {
 
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('administrador')")
+    @PreAuthorize("hasAuthority('ADMIN')")
 
     public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
         Usuario u = service.listarId(id);
@@ -96,8 +97,8 @@ public class UsuarioController {
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
-    @PutMapping
-    @PreAuthorize("hasAuthority('administrador')")
+    @PutMapping("/editar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> editar(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Usuario p = m.map(dto, Usuario.class);
