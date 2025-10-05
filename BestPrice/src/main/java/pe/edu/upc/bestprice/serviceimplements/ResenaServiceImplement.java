@@ -40,7 +40,12 @@ public class ResenaServiceImplement implements IResenaService {
     }
 
     @Override
-    public List<String[]> ListarCalificacionPorResena() {
-        return repository.ListarCalificacionPorResena();
+    public List<String[]> ListarCalificacionPorTipoResena() {
+        return repository.ListarCalificacionPorTipoResena();
+    }
+
+    @Override
+    public List<String[]> ListarTiendaporCalificacion() {
+        return repository.ListarTiendaporCalificacion();
     }
 }

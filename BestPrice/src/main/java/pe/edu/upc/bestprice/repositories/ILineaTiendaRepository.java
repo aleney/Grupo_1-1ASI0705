@@ -14,8 +14,8 @@ public interface ILineaTiendaRepository extends JpaRepository<LineaTienda, Integ
     @Query("Select lt from LineaTienda lt WHERE lt.nombreLineaTienda like %:nombre%")
     public List<LineaTienda> buscar(@Param("nombre") String nombre);
 
-    @Query(value = "SELECT Nombre_linea_Tienda as nombre, created_at_linea_Tienda as Creado_en_2025\n" +
-            " FROM linea_Tienda\n" +
-            " WHERE created_at_linea_Tienda BETWEEN '2025-01-01' AND '2025-12-31'", nativeQuery = true)
-    public List<String[]> TiendaCreadasEn2025();
+    @Query(value = "SELECT Nombre_linea_tiendas as nombre, created_at_linea_tiendas as Creado_en_2025\n" +
+            " FROM linea_tiendas\n" +
+            " WHERE created_at_linea_tiendas BETWEEN '2025-01-01' AND '2025-12-31'", nativeQuery = true)
+    public List<String[]> TiendasCreadasEn2025();
 }

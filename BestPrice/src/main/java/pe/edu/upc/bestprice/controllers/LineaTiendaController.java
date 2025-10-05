@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.LineaTiendaDTO;
-import pe.edu.upc.bestprice.dtos.LineaTiendaDTOTiendaAnio;
+import pe.edu.upc.bestprice.dtos.LineaTiendaDTOTiendasAnio;
 import pe.edu.upc.bestprice.entities.LineaTienda;
 import pe.edu.upc.bestprice.serviceinterfaces.ILineaTiendaService;
 
@@ -23,21 +23,40 @@ public class LineaTiendaController {
     private ILineaTiendaService service;
 
     @GetMapping("/listar")
-    public List<LineaTiendaDTO>listar(){
-        return service.list().stream().map(a->{
+    public ResponseEntity<?> listar() {
+        List<LineaTiendaDTO> lista = service.list().stream().map(a -> {
             ModelMapper m = new ModelMapper();
             return m.map(a, LineaTiendaDTO.class);
         }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron líneas de tienda registradas.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
     @PostMapping("/insertar")
-    public void insertar(@RequestBody LineaTiendaDTO dto) {
-        ModelMapper m = new ModelMapper();
-        LineaTienda lt = m.map(dto, LineaTienda.class);
-        service.insert(lt);
+    public ResponseEntity<String> insertar(@RequestBody LineaTiendaDTO dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            LineaTienda lt = m.map(dto, LineaTienda.class);
+            service.insert(lt);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Línea de tienda registrada correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar la línea de tienda. Verifica que los datos enviados sean correctos.");
+        }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/eliminar/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         LineaTienda lt = service.ListId(id);
         if (lt == null) {
@@ -84,7 +103,7 @@ public class LineaTiendaController {
 
         if (lt.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron Tienda de nombre o caracter: " + n);
+                    .body("No se encontraron tiendas de nombre o caracter: " + n);
         }
 
         List<LineaTiendaDTO> listaDTO = lt.stream().map(a -> {
@@ -95,23 +114,23 @@ public class LineaTiendaController {
         return ResponseEntity.ok(listaDTO);
     }
 
-    @GetMapping("/Tienda2025")
-    public ResponseEntity<?> TiendaAnioactual() {
-        List<String[]> Tienda = service.TiendaCreadasEn2025();
-        List<LineaTiendaDTOTiendaAnio> ListaTienda = new ArrayList<>();
+    @GetMapping("/tiendas2025")
+    public ResponseEntity<?> TiendasAnioactual() {
+        List<String[]> tiendas = service.TiendasCreadasEn2025();
+        List<LineaTiendaDTOTiendasAnio> ListaTiendas = new ArrayList<>();
 
-        if (Tienda.isEmpty()) {
+        if (tiendas.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No se encontraron proveedores registrados");
         }
 
         //columna -> Item de la lista de elementos que retorna monto
-        for (String[] columna : Tienda) {
-            LineaTiendaDTOTiendaAnio dto = new LineaTiendaDTOTiendaAnio();
+        for (String[] columna : tiendas) {
+            LineaTiendaDTOTiendasAnio dto = new LineaTiendaDTOTiendasAnio();
             dto.setCreatedAt(LocalDate.parse(columna[1]));
             dto.setNombreLineaTienda((columna[0]));
-            ListaTienda.add(dto);
+            ListaTiendas.add(dto);
         }
-        return ResponseEntity.ok(ListaTienda);
+        return ResponseEntity.ok(ListaTiendas);
     }
 }

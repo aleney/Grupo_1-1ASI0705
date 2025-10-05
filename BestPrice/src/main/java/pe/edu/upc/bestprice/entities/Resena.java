@@ -20,7 +20,7 @@ public class Resena {
     @Column(name = "exactitudPrecioResena", nullable = true)
     private boolean exactitudPrecioResena;
 
-    @Column(name = "createdAtResena", nullable = true)
+    @Column(name = "createdAtResena", nullable = false)
     private LocalDate createdAtResena;
 
     @ManyToOne

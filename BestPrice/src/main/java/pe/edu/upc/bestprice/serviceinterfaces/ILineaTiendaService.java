@@ -11,5 +11,5 @@ public interface ILineaTiendaService {
     public void delete(int id);
     public void update(LineaTienda lt);
     public List<LineaTienda> buscarService(String nombre);
-    public List<String[]> TiendaCreadasEn2025();
+    public List<String[]> TiendasCreadasEn2025();
 }

@@ -44,8 +44,8 @@ public class LineaTiendaServiceImplement implements ILineaTiendaService {
     }
 
     @Override
-    public List<String[]> TiendaCreadasEn2025() {
-        return repository.TiendaCreadasEn2025();
+    public List<String[]> TiendasCreadasEn2025() {
+        return repository.TiendasCreadasEn2025();
     }
 
 
