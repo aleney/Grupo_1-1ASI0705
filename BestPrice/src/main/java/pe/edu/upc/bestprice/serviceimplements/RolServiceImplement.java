@@ -23,4 +23,14 @@ public class RolServiceImplement implements IRolService{
     public void insertarRol(Rol rol){
         repository.save(rol);
     }
+
+    @Override
+    public void edit(Rol r) {
+        repository.save(r);
+    }
+
+    @Override
+    public Rol listarId(int idRol) {
+        return repository.findById(idRol).orElse(null);
+    }
 }
