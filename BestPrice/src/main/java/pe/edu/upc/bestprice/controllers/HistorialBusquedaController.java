@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.HistorialBusquedaDTO;
 import pe.edu.upc.bestprice.entities.Distrito;
@@ -21,6 +22,7 @@ public class HistorialBusquedaController {
     private IHistorialBusquedaService service;
 
     @GetMapping("/listar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listar() {
         List<HistorialBusquedaDTO> lista = service.list().stream().map(hb -> {
             ModelMapper m = new ModelMapper();
@@ -36,6 +38,7 @@ public class HistorialBusquedaController {
     }
 
     @PostMapping("/insertar")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
     public ResponseEntity<String> insertar(@RequestBody HistorialBusquedaDTO dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()
@@ -56,6 +59,7 @@ public class HistorialBusquedaController {
 
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         HistorialBusqueda historialBusqueda = service.listId(id);
         if (historialBusqueda == null) {
@@ -69,6 +73,7 @@ public class HistorialBusquedaController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         HistorialBusqueda hb = service.listId(id);
         if (hb == null) {

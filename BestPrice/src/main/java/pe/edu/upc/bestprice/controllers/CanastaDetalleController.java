@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.CanastaDetalleDTO;
 import pe.edu.upc.bestprice.entities.CanastaDetalle;
@@ -22,6 +23,8 @@ public class CanastaDetalleController{
     private CanastaDetalleServiceImplement service;
 
     @GetMapping("/listar")
+    @PreAuthorize("hasAuthority('ADMIN')")
+
     public ResponseEntity<?> listar() {
         List<CanastaDetalleDTO> lista = service.list().stream().map(a -> {
             ModelMapper m = new ModelMapper();
@@ -37,6 +40,7 @@ public class CanastaDetalleController{
     }
 
     @PostMapping("/insertar")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
     public ResponseEntity<String> insertar(@RequestBody CanastaDetalleDTO dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()
@@ -56,6 +60,7 @@ public class CanastaDetalleController{
     }
 
     @GetMapping("/id")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarId(@PathVariable String id) {
         CanastaDetalle detalle = service.listId(id);
         if (detalle == null) {

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.CanastaDTO;
 import pe.edu.upc.bestprice.entities.Canasta;
@@ -22,6 +23,7 @@ public class CanastaController {
 
     // Listar todas las canastas
     @GetMapping("/listar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listar() {
         List<CanastaDTO> lista = service.list().stream().map(a -> {
             ModelMapper m = new ModelMapper();
@@ -38,6 +40,7 @@ public class CanastaController {
 
     // Insertar una nueva canasta
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
     public ResponseEntity<String> insertar(@RequestBody CanastaDTO dto) {
         ModelMapper m = new ModelMapper();
         Canasta canasta = m.map(dto, Canasta.class);
@@ -47,6 +50,7 @@ public class CanastaController {
 
     // Obtener una canasta por ID
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         Canasta cana = service.listId(id);
         if (cana == null) {
@@ -60,6 +64,7 @@ public class CanastaController {
 
     // Eliminar una canasta
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         Canasta canasta = service.listId(id);
         if (canasta == null) {
@@ -72,6 +77,7 @@ public class CanastaController {
 
     // Actualizar una canasta
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
     public ResponseEntity<String> modificar(@RequestBody CanastaDTO dto) {
         ModelMapper m = new ModelMapper();
         Canasta c = m.map(dto, Canasta.class);
@@ -86,6 +92,7 @@ public class CanastaController {
 
     // Buscar canasta por usuario
     @GetMapping("/busquedas")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> buscar(@RequestParam String usuario) {
         List<Canasta> canastas = service.buscarService(usuario);
         if (canastas.isEmpty()) {

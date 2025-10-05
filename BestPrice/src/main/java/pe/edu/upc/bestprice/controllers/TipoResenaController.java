@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.ResenaDTOInsert;
 import pe.edu.upc.bestprice.dtos.TipoResenaDTO;
@@ -21,6 +22,7 @@ public class TipoResenaController {
     private TipoResenaServiceImplement service;
 
     @GetMapping("/listar")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<?> listar() {
         List<TipoResenaDTO> lista = service.listarTipoResena().stream().map(a -> {
             ModelMapper m = new ModelMapper();
@@ -36,6 +38,7 @@ public class TipoResenaController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         TipoResena tr = service.ListId(id);
         if (tr == null) {
@@ -49,6 +52,7 @@ public class TipoResenaController {
     }
 
     @PostMapping("/insertar")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
     public ResponseEntity<String> insertar(@RequestBody TipoResenaDTO dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()
@@ -68,6 +72,7 @@ public class TipoResenaController {
     }
 
     @PutMapping("/modificar")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
     public ResponseEntity<String> modificar(@RequestBody ResenaDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         TipoResena tr = m.map(dto, TipoResena.class);
@@ -84,6 +89,7 @@ public class TipoResenaController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         TipoResena r = service.ListId(id);
         if (r == null) {
