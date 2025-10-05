@@ -3,6 +3,8 @@ package pe.edu.upc.bestprice.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "Usuario")
 
@@ -27,16 +29,16 @@ public class Usuario {
     private Boolean estado;
 
     @Column(name = "createdAt",length = 9,nullable = false)
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updatedAt",length = 9,nullable = false)
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "idRol")
     private Rol rol;
 
-    public Usuario(int idUsuario, String nombre, String email, String pasword, int numeroTelefono, Boolean estado, LocalDate createdAt, LocalDate updatedAt, Rol rol) {
+    public Usuario(int idUsuario, String nombre, String email, String pasword, int numeroTelefono, Boolean estado, LocalDateTime createdAt, LocalDateTime updatedAt, Rol rol) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.email = email;
@@ -100,19 +102,19 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDate getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDate updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

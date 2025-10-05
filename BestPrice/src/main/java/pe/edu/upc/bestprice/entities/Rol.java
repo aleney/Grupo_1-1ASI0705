@@ -3,6 +3,7 @@ package pe.edu.upc.bestprice.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Rol")
@@ -20,9 +21,9 @@ public class Rol {
     private LocalDate createdAt;
 
     @Column(name = "updatedAt",length = 9,nullable = false)
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 
-    public Rol(int idRol, String tipoUsuario, LocalDate createdAt, LocalDate updatedAt) {
+    public Rol(int idRol, String tipoUsuario, LocalDate createdAt, LocalDateTime updatedAt) {
         this.idRol = idRol;
         this.tipoUsuario = tipoUsuario;
         this.createdAt = createdAt;
@@ -57,11 +58,11 @@ public class Rol {
         this.createdAt = createdAt;
     }
 
-    public LocalDate getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDate updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

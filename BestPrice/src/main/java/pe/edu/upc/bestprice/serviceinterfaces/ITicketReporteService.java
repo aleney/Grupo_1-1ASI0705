@@ -1,5 +1,6 @@
 package pe.edu.upc.bestprice.serviceinterfaces;
 
+import pe.edu.upc.bestprice.entities.Rol;
 import pe.edu.upc.bestprice.entities.TicketReporte;
 
 import java.util.List;
@@ -7,4 +8,6 @@ import java.util.List;
 public interface ITicketReporteService {
     public List<TicketReporte> listarTicketReporte();
     public void insertarTicketReporte(TicketReporte ticketReporte);
+    public void edit(TicketReporte ticketReporte);
+    public TicketReporte listarId(int idTicketReporte);
 }

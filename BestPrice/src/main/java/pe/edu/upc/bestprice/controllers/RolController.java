@@ -13,9 +13,7 @@ import pe.edu.upc.bestprice.entities.Rol;
 import pe.edu.upc.bestprice.entities.Usuario;
 import pe.edu.upc.bestprice.serviceinterfaces.IRolService;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -27,11 +25,21 @@ public class RolController {
 
     @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public List<RolDTO> listar(){
-        return rolService.listarRoles().stream().map(a->{
-            ModelMapper m=new ModelMapper();
-            return m.map(a,RolDTO.class);
-        }).collect(Collectors.toList());
+    public ResponseEntity<?> listar() {
+        List<RolDTO> lista = rolService.listarRoles()
+                .stream()
+                .map(a -> new ModelMapper().map(a, RolDTO.class))
+                .collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            // Si no hay registros, devuelve un mensaje y estado 204 (No Content) o 404 si prefieres
+            Map<String, String> respuesta = new HashMap<>();
+            respuesta.put("mensaje", "No existen registros");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
+        }
+
+        // Si hay registros, devuelve la lista normalmente
+        return ResponseEntity.ok(lista);
     }
 
     @PostMapping("/insertar")
