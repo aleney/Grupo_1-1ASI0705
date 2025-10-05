@@ -10,8 +10,8 @@ public class Producto {
     private int idProducto;
     @Column(name = "nombreProducto", nullable = false, length = 25)
     private String nombreProducto;
-    @Column(name = "descripcionProducto", nullable = true, length = 250)
-    private String descripcionProducto;
+    @Column(name = "detalleProducto", nullable = true, length = 250)
+    private String detalleProducto;
     @Column(name = "marcaProducto", nullable = false, length = 25)
     private String marcaProducto;
     @Column(name = "precioProducto", nullable = false, length = 15)
@@ -28,10 +28,10 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(int idProducto, String nombreProducto, String descripcionProducto, String marcaProducto, double precioProducto, int stockProducto, String unidadMetricaProducto, boolean favoritoProducto, boolean disponibleProducto) {
+    public Producto(int idProducto, String nombreProducto, String detalleProducto, String marcaProducto, double precioProducto, int stockProducto, String unidadMetricaProducto, boolean favoritoProducto, boolean disponibleProducto) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
-        this.descripcionProducto = descripcionProducto;
+        this.detalleProducto = detalleProducto;
         this.marcaProducto = marcaProducto;
         this.precioProducto = precioProducto;
         this.stockProducto = stockProducto;
@@ -56,12 +56,12 @@ public class Producto {
         this.nombreProducto = nombreProducto;
     }
 
-    public String getDescripcionProducto() {
-        return descripcionProducto;
+    public String getDetalleProducto() {
+        return detalleProducto;
     }
 
-    public void setDescripcionProducto(String descripcionProducto) {
-        this.descripcionProducto = descripcionProducto;
+    public void setDetalleProducto(String detalleProducto) {
+        this.detalleProducto = detalleProducto;
     }
 
     public String getMarcaProducto() {

@@ -8,7 +8,7 @@ public class TiendaDTO {
 
     private int idTienda;
     private String nombreTienda;
-    private String descripcionTienda;
+    private String detalleTienda;
     private String numeroTelefono;
     private boolean estadoTienda;
     private LocalDate fechaTienda;
@@ -30,12 +30,12 @@ public class TiendaDTO {
         this.nombreTienda = nombreTienda;
     }
 
-    public String getDescripcionTienda() {
-        return descripcionTienda;
+    public String getDetalleTienda() {
+        return detalleTienda;
     }
 
-    public void setDescripcionTienda(String descripcionTienda) {
-        this.descripcionTienda = descripcionTienda;
+    public void setDetalleTienda(String detalleTienda) {
+        this.detalleTienda = detalleTienda;
     }
 
     public String getNumeroTelefono() {

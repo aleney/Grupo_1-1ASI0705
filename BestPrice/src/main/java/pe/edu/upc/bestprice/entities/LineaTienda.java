@@ -15,8 +15,8 @@ public class LineaTienda {
     @Column(name = "nombreLineaTienda", length = 50, nullable = false)
     private String nombreLineaTienda;
 
-    @Column(name = "descripcionLineaTienda", length = 450, nullable = true)
-    private String descripcionLineaTienda;
+    @Column(name = "detalleLineaTienda", length = 450, nullable = true)
+    private String detalleLineaTienda;
 
     @Column(name = "createdAtLineaTienda", nullable = false)
     private LocalDate createdAtLineaTienda;
@@ -24,10 +24,10 @@ public class LineaTienda {
     public LineaTienda() {
     }
 
-    public LineaTienda(int idLineaTienda, String nombreLineaTienda, String descripcionLineaTienda, LocalDate createdAtLineaTienda) {
+    public LineaTienda(int idLineaTienda, String nombreLineaTienda, String detalleLineaTienda, LocalDate createdAtLineaTienda) {
         this.idLineaTienda = idLineaTienda;
         this.nombreLineaTienda = nombreLineaTienda;
-        this.descripcionLineaTienda = descripcionLineaTienda;
+        this.detalleLineaTienda = detalleLineaTienda;
         this.createdAtLineaTienda = createdAtLineaTienda;
     }
 
@@ -47,12 +47,12 @@ public class LineaTienda {
         this.nombreLineaTienda = nombreLineaTienda;
     }
 
-    public String getDescripcionLineaTienda() {
-        return descripcionLineaTienda;
+    public String getDetalleLineaTienda() {
+        return detalleLineaTienda;
     }
 
-    public void setDescripcionLineaTienda(String descripcionLineaTienda) {
-        this.descripcionLineaTienda = descripcionLineaTienda;
+    public void setDetalleLineaTienda(String detalleLineaTienda) {
+        this.detalleLineaTienda = detalleLineaTienda;
     }
 
     public LocalDate getCreatedAt() {

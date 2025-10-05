@@ -13,8 +13,8 @@ public class Tienda {
     private int idTienda;
     @Column(name="nombreTienda", nullable = false, length = 50)
     private String nombreTienda;
-    @Column(name="descripcionTienda", nullable = true, length = 250)
-    private String descripcionTienda;
+    @Column(name="detalleTienda", nullable = true, length = 250)
+    private String detalleTienda;
     @Column(name="numeroTelefono", nullable = true, length = 9)
     private String numeroTelefono;
     @Column(name="estadoTienda", nullable = false)
@@ -33,10 +33,10 @@ public class Tienda {
     public Tienda() {
     }
 
-    public Tienda(int idTienda, String nombreTienda, String descripcionTienda, String numeroTelefono, boolean estadoTienda, LocalDate fechaTienda, TipoTienda tipoTienda, List<Producto> productosTienda) {
+    public Tienda(int idTienda, String nombreTienda, String detalleTienda, String numeroTelefono, boolean estadoTienda, LocalDate fechaTienda, TipoTienda tipoTienda, List<Producto> productosTienda) {
         this.idTienda = idTienda;
         this.nombreTienda = nombreTienda;
-        this.descripcionTienda = descripcionTienda;
+        this.detalleTienda = detalleTienda;
         this.numeroTelefono = numeroTelefono;
         this.estadoTienda = estadoTienda;
         this.fechaTienda = fechaTienda;
@@ -60,12 +60,12 @@ public class Tienda {
         this.nombreTienda = nombreTienda;
     }
 
-    public String getDescripcionTienda() {
-        return descripcionTienda;
+    public String getDetalleTienda() {
+        return detalleTienda;
     }
 
-    public void setDescripcionTienda(String descripcionTienda) {
-        this.descripcionTienda = descripcionTienda;
+    public void setDetalleTienda(String detalleTienda) {
+        this.detalleTienda = detalleTienda;
     }
 
     public String getNumeroTelefono() {

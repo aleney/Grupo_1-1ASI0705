@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 public class DistritoDTO {
     private int idDistrito;
     private String nombreDistrito;
-    private String descripcionDistrito;
+    private String detalleDistrito;
     private BigDecimal longitudDistrito;
     private BigDecimal latitudDistrito;
     private Timestamp createdAtDistrito;
@@ -27,12 +27,12 @@ public class DistritoDTO {
         this.nombreDistrito = nombreDistrito;
     }
 
-    public String getDescripcionDistrito() {
-        return descripcionDistrito;
+    public String getDetalleDistrito() {
+        return detalleDistrito;
     }
 
-    public void setDescripcionDistrito(String descripcionDistrito) {
-        this.descripcionDistrito = descripcionDistrito;
+    public void setDetalleDistrito(String detalleDistrito) {
+        this.detalleDistrito = detalleDistrito;
     }
 
     public BigDecimal getLongitudDistrito() {

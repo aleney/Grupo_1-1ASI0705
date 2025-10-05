@@ -6,7 +6,7 @@ public class LineaTiendaDTO {
 
     private int idLineaTienda;
     private String nombreLineaTienda;
-    private String descripcionLineaTienda;
+    private String detalleLineaTienda;
     private LocalDate createdAt;
 
     public int getIdLineaTienda() {
@@ -25,12 +25,12 @@ public class LineaTiendaDTO {
         this.nombreLineaTienda = nombreLineaTienda;
     }
 
-    public String getDescripcionLineaTienda() {
-        return descripcionLineaTienda;
+    public String getDetalleLineaTienda() {
+        return detalleLineaTienda;
     }
 
-    public void setDescripcionLineaTienda(String descripcionLineaTienda) {
-        this.descripcionLineaTienda = descripcionLineaTienda;
+    public void setDetalleLineaTienda(String detalleLineaTienda) {
+        this.detalleLineaTienda = detalleLineaTienda;
     }
 
     public LocalDate getCreatedAt() {

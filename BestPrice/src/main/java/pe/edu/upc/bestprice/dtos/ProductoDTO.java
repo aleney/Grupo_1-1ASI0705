@@ -7,7 +7,7 @@ public class ProductoDTO {
 
     private int idProducto;
     private String NombreProducto;
-    private String DescripcionProducto;
+    private String DetalleProducto;
     private String MarcaProducto;
     private double PrecioProducto;
     private int StockProducto;
@@ -33,12 +33,12 @@ public class ProductoDTO {
         NombreProducto = nombreProducto;
     }
 
-    public String getDescripcionProducto() {
-        return DescripcionProducto;
+    public String getDetalleProducto() {
+        return DetalleProducto;
     }
 
-    public void setDescripcionProducto(String descripcionProducto) {
-        DescripcionProducto = descripcionProducto;
+    public void setDetalleProducto(String detalleProducto) {
+        DetalleProducto = detalleProducto;
     }
 
     public String getMarcaProducto() {

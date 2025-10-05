@@ -16,8 +16,8 @@ public class Distrito {
     @Column(name = "nombreDistrito", length = 50, nullable = false)
     private String nombreDistrito;
 
-    @Column(name = "descripcionDistrito", length = 450, nullable = false)
-    private String descripcionDistrito;
+    @Column(name = "detalleDistrito", length = 450, nullable = false)
+    private String detalleDistrito;
 
     @Column(name = "longitudDistrito", precision = 2, scale = 6, nullable = false)
     private BigDecimal longitudDistrito;
@@ -31,10 +31,10 @@ public class Distrito {
     public Distrito() {
     }
 
-    public Distrito(int idDistrito, String nombreDistrito, String descripcionDistrito, BigDecimal longitudDistrito, BigDecimal latitudDistrito, Timestamp createdAtDistrito) {
+    public Distrito(int idDistrito, String nombreDistrito, String detalleDistrito, BigDecimal longitudDistrito, BigDecimal latitudDistrito, Timestamp createdAtDistrito) {
         this.idDistrito = idDistrito;
         this.nombreDistrito = nombreDistrito;
-        this.descripcionDistrito = descripcionDistrito;
+        this.detalleDistrito = detalleDistrito;
         this.longitudDistrito = longitudDistrito;
         this.latitudDistrito = latitudDistrito;
         this.createdAtDistrito = createdAtDistrito;
@@ -56,12 +56,12 @@ public class Distrito {
         this.nombreDistrito = nombreDistrito;
     }
 
-    public String getDescripcionDistrito() {
-        return descripcionDistrito;
+    public String getDetalleDistrito() {
+        return detalleDistrito;
     }
 
-    public void setDescripcionDistrito(String descripcionDistrito) {
-        this.descripcionDistrito = descripcionDistrito;
+    public void setDetalleDistrito(String detalleDistrito) {
+        this.detalleDistrito = detalleDistrito;
     }
 
     public BigDecimal getLongitudDistrito() {
