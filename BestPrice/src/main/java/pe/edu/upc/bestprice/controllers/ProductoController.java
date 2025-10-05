@@ -26,12 +26,14 @@ public class ProductoController {
             return m.map(a,ProductoDTO.class);
         }).collect(Collectors.toList());
     }
+
     @PostMapping("/Registrar")
     public void Registar(@RequestBody ProductoDTO dtos){
         ModelMapper m=new ModelMapper();
         Producto prodc=m.map(dtos,Producto.class);
         service.insert(prodc);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id){
         Producto prodc=service.listId(id);

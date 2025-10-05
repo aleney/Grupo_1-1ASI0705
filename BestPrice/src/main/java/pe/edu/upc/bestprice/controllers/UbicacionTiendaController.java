@@ -18,19 +18,38 @@ public class UbicacionTiendaController {
     @Autowired
     private IUbicacionTiendaService service;
 
-    @GetMapping
-    public List<UbicacionTiendaDTO> listar() {
-        return service.list().stream().map(u -> {
+    @GetMapping("/listar")
+    public ResponseEntity<?> listar() {
+        List<UbicacionTiendaDTO> lista = service.list().stream().map(u -> {
             ModelMapper m = new ModelMapper();
             return m.map(u, UbicacionTiendaDTO.class);
         }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron ubicaciones de tienda registradas.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
     @PostMapping("/insertar")
-    public void insertar(@RequestBody UbicacionTiendaDTO dto) {
-        ModelMapper m = new ModelMapper();
-        UbicacionTienda u = m.map(dto, UbicacionTienda.class);
-        service.insert(u);
+    public ResponseEntity<String> insertar(@RequestBody UbicacionTiendaDTO dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            UbicacionTienda u = m.map(dto, UbicacionTienda.class);
+            service.insert(u);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Ubicación de tienda registrada correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar la ubicación de tienda. Verifica que los datos enviados sean correctos.");
+        }
     }
 
     @GetMapping("/{id}")

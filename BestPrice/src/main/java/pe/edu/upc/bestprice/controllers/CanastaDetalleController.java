@@ -21,19 +21,38 @@ public class CanastaDetalleController{
     @Autowired
     private CanastaDetalleServiceImplement service;
 
-    @GetMapping
-    public List<CanastaDetalleDTO> listar() {
-        return service.list().stream().map(a -> {
+    @GetMapping("/listar")
+    public ResponseEntity<?> listar() {
+        List<CanastaDetalleDTO> lista = service.list().stream().map(a -> {
             ModelMapper m = new ModelMapper();
             return m.map(a, CanastaDetalleDTO.class);
         }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron detalles de canasta registrados.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
-    @PostMapping
-    public void insertar(@RequestBody CanastaDetalleDTO dto) {
-        ModelMapper m = new ModelMapper();
-        CanastaDetalle detalle = m.map(dto, CanastaDetalle.class);
-        service.insert(detalle);
+    @PostMapping("/insertar")
+    public ResponseEntity<String> insertar(@RequestBody CanastaDetalleDTO dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            CanastaDetalle detalle = m.map(dto, CanastaDetalle.class);
+            service.insert(detalle);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Detalle de canasta registrado correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar el detalle de canasta. Verifica que los datos enviados sean correctos.");
+        }
     }
 
     @GetMapping("/id")

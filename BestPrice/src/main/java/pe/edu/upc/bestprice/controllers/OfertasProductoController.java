@@ -20,18 +20,37 @@ public class OfertasProductoController {
     private IOfertasProductoService service;
 
     @GetMapping("/listar")
-    public List<OfertasProductoDTO> listar() {
-        return service.list().stream().map(o -> {
+    public ResponseEntity<?> listar() {
+        List<OfertasProductoDTO> lista = service.list().stream().map(o -> {
             ModelMapper m = new ModelMapper();
             return m.map(o, OfertasProductoDTO.class);
         }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron ofertas de productos registradas.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
     @PostMapping("/insertar")
-    public void insertar(@RequestBody OfertasProductoDTO dto) {
-        ModelMapper m = new ModelMapper();
-        OfertasProducto op = m.map(dto, OfertasProducto.class);
-        service.insert(op);
+    public ResponseEntity<String> insertar(@RequestBody OfertasProductoDTO dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            OfertasProducto op = m.map(dto, OfertasProducto.class);
+            service.insert(op);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Oferta de producto registrada correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar la oferta de producto. Verifica que los datos enviados sean correctos.");
+        }
     }
 
     @GetMapping("/{id}")

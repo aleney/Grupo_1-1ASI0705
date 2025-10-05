@@ -21,12 +21,19 @@ public class CanastaController {
     private ICanastaService service;
 
     // Listar todas las canastas
-    @GetMapping
-    public List<CanastaDTO> listar() {
-        return service.list().stream().map(a -> {
+    @GetMapping("/listar")
+    public ResponseEntity<?> listar() {
+        List<CanastaDTO> lista = service.list().stream().map(a -> {
             ModelMapper m = new ModelMapper();
             return m.map(a, CanastaDTO.class);
         }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron canastas registradas.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
     // Insertar una nueva canasta

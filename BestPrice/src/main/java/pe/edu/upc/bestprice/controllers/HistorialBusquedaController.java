@@ -21,19 +21,39 @@ public class HistorialBusquedaController {
     private IHistorialBusquedaService service;
 
     @GetMapping("/listar")
-    public List<HistorialBusquedaDTO> listar() {
-        return service.list().stream().map(hb -> {
+    public ResponseEntity<?> listar() {
+        List<HistorialBusquedaDTO> lista = service.list().stream().map(hb -> {
             ModelMapper m = new ModelMapper();
             return m.map(hb, HistorialBusquedaDTO.class);
         }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron historiales de búsqueda registrados.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
     @PostMapping("/insertar")
-    public void insertar(@RequestBody HistorialBusquedaDTO dto) {
-        ModelMapper m = new ModelMapper();
-        HistorialBusqueda hb = m.map(dto, HistorialBusqueda.class);
-        service.insert(hb);
+    public ResponseEntity<String> insertar(@RequestBody HistorialBusquedaDTO dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            HistorialBusqueda hb = m.map(dto, HistorialBusqueda.class);
+            service.insert(hb);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Historial de búsqueda registrado correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar el historial de búsqueda. Verifica que los datos enviados sean correctos.");
+        }
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {

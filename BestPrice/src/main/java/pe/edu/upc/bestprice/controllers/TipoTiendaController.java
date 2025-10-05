@@ -19,20 +19,40 @@ public class TipoTiendaController {
     @Autowired
     private ITipoTiendaService service;
 
-    @GetMapping("listarTienda")
-    public List<TipoTiendaDTO> ListarTipoTienda() {
-        return service.listarTipoTienda().stream().map(a->{
-            ModelMapper m=new ModelMapper();
-            return m.map(a,TipoTiendaDTO.class);
+    @GetMapping("/listar")
+    public ResponseEntity<?> listar() {
+        List<TipoTiendaDTO> lista = service.listarTipoTienda().stream().map(a -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(a, TipoTiendaDTO.class);
         }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron tipos de tienda registrados.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
-    @PostMapping("registrarTipoTienda")
-    public void RegistrarTipoTienda(@RequestBody TipoTiendaDTO ttdto) {
-        ModelMapper m=new ModelMapper();
-        TipoTienda tt=m.map(ttdto,TipoTienda.class);
-        service.insert(tt);
+    @PostMapping("/insertar")
+    public ResponseEntity<String> insertar(@RequestBody TipoTiendaDTO dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            TipoTienda tt = m.map(dto, TipoTienda.class);
+            service.insert(tt);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Tipo de tienda registrado correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar el tipo de tienda. Verifica que los datos enviados sean correctos.");
+        }
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> listarIdTipoTienda(@PathVariable("id") Integer id) {

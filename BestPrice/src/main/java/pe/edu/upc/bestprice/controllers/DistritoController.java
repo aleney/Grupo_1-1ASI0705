@@ -19,19 +19,39 @@ public class DistritoController {
     private IDistritoService service;
 
     @GetMapping("/listar")
-    public List<DistritoDTO> listar() {
-        return service.list().stream().map(d -> {
+    public ResponseEntity<?> listar() {
+        List<DistritoDTO> lista = service.list().stream().map(d -> {
             ModelMapper m = new ModelMapper();
             return m.map(d, DistritoDTO.class);
         }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron distritos registrados.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
     @PostMapping("/insertar")
-    public void insertar(@RequestBody DistritoDTO dto) {
-        ModelMapper m = new ModelMapper();
-        Distrito distrito = m.map(dto, Distrito.class);
-        service.insert(distrito);
+    public ResponseEntity<String> insertar(@RequestBody DistritoDTO dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            Distrito distrito = m.map(dto, Distrito.class);
+            service.insert(distrito);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Distrito registrado correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar el distrito. Verifica que los datos enviados sean correctos.");
+        }
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {

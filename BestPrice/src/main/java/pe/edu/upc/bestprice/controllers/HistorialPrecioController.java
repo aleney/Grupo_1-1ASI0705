@@ -20,19 +20,39 @@ public class HistorialPrecioController {
     private IHistorialPrecioService service;
 
     @GetMapping("/listar")
-    public List<HistorialPrecioDTO> listar() {
-        return service.list().stream().map(hp -> {
+    public ResponseEntity<?> listar() {
+        List<HistorialPrecioDTO> lista = service.list().stream().map(hp -> {
             ModelMapper m = new ModelMapper();
             return m.map(hp, HistorialPrecioDTO.class);
         }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron historiales de precios registrados.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
     @PostMapping("/insertar")
-    public void insertar(@RequestBody HistorialPrecioDTO dto) {
-        ModelMapper m = new ModelMapper();
-        HistorialPrecio hp = m.map(dto, HistorialPrecio.class);
-        service.insert(hp);
+    public ResponseEntity<String> insertar(@RequestBody HistorialPrecioDTO dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            HistorialPrecio hp = m.map(dto, HistorialPrecio.class);
+            service.insert(hp);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Historial de precio registrado correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar el historial de precio. Verifica que los datos enviados sean correctos.");
+        }
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {

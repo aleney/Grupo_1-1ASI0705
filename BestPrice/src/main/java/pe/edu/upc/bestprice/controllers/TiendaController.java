@@ -19,19 +19,38 @@ public class TiendaController {
     @Autowired
     private ITiendaService service;
 
-    @GetMapping("listarTienda")
-    public List<TiendaDTO> listarTienda() {
-        return service.listarTienda().stream().map(a->{
-            ModelMapper m=new ModelMapper();
-            return m.map(a,TiendaDTO.class);
+    @GetMapping("/listarTienda")
+    public ResponseEntity<?> listarTienda() {
+        List<TiendaDTO> lista = service.listarTienda().stream().map(a -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(a, TiendaDTO.class);
         }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron tiendas registradas.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
-    @PostMapping("registrarTienda")
-    public void RegistrarTienda(@RequestBody TiendaDTO tdtos) {
-        ModelMapper m=new ModelMapper();
-        Tienda t=m.map(tdtos,Tienda.class);
-        service.insert(t);
+    @PostMapping("/registrarTienda")
+    public ResponseEntity<String> registrarTienda(@RequestBody TiendaDTO dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            Tienda tienda = m.map(dto, Tienda.class);
+            service.insert(tienda);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Tienda registrada correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar la tienda. Verifica que los datos enviados sean correctos.");
+        }
     }
 
     @GetMapping("/{id}")

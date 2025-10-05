@@ -19,19 +19,40 @@ public class CategoriaProductoController {
     @Autowired
     private ICategoriaProductoService service;
 
-    @GetMapping
-    public List<CategoriaProductoDTO> Listar(){
-        return service.listarCategoriaProducto().stream().map(a->{
-            ModelMapper m=new ModelMapper();
-            return m.map(a,CategoriaProductoDTO.class);
+    @GetMapping("/listar")
+    public ResponseEntity<?> listar() {
+        List<CategoriaProductoDTO> lista = service.listarCategoriaProducto().stream().map(a -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(a, CategoriaProductoDTO.class);
         }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron categorías de producto registradas.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
-    @PostMapping("/Registrar")
-    public void Registar(@RequestBody CategoriaProductoDTO dtos){
-        ModelMapper m=new ModelMapper();
-        CategoriaProducto ctp=m.map(dtos,CategoriaProducto.class);
-        service.insertarCateProduct(ctp);
+
+    @PostMapping("/insertar")
+    public ResponseEntity<String> insertar(@RequestBody CategoriaProductoDTO dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            CategoriaProducto categoria = m.map(dto, CategoriaProducto.class);
+            service.insertarCateProduct(categoria);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Categoría de producto registrada correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar la categoría de producto. Verifica que los datos enviados sean correctos.");
+        }
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id){
         CategoriaProducto ctps=service.listId(id);
@@ -42,6 +63,7 @@ public class CategoriaProductoController {
         CategoriaProductoDTO cpdtos=m.map(ctps,CategoriaProductoDTO.class);
         return ResponseEntity.ok(cpdtos);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         CategoriaProducto Ctp = service.listId(id);

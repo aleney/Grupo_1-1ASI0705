@@ -21,11 +21,18 @@ public class TipoResenaController {
     private TipoResenaServiceImplement service;
 
     @GetMapping("/listar")
-    public List<TipoResenaDTO> listar(){
-        return service.listarTipoResena().stream().map(a->{
+    public ResponseEntity<?> listar() {
+        List<TipoResenaDTO> lista = service.listarTipoResena().stream().map(a -> {
             ModelMapper m = new ModelMapper();
             return m.map(a, TipoResenaDTO.class);
         }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron tipos de reseña registrados.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
     @GetMapping("/{id}")
@@ -42,10 +49,22 @@ public class TipoResenaController {
     }
 
     @PostMapping("/insertar")
-    public void insertar(@RequestBody TipoResenaDTO dto){
-        ModelMapper m = new ModelMapper();
-        TipoResena tr = m.map(dto, TipoResena.class);
-        service.insert(tr);
+    public ResponseEntity<String> insertar(@RequestBody TipoResenaDTO dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            TipoResena tr = m.map(dto, TipoResena.class);
+            service.insert(tr);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Tipo de reseña registrado correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar el tipo de reseña. Verifica que los datos enviados sean correctos.");
+        }
     }
 
     @PutMapping("/modificar")
