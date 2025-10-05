@@ -32,13 +32,12 @@ public class TicketRespuestaController {
                 .collect(Collectors.toList());
 
         if (lista.isEmpty()) {
-            // 🟠 Si la lista está vacía, devolver mensaje personalizado
+
             Map<String, String> respuesta = new HashMap<>();
             respuesta.put("mensaje", "No existen registros");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
         }
 
-        // 🟢 Si hay registros, devolver lista normalmente
         return ResponseEntity.ok(lista);
     }
 

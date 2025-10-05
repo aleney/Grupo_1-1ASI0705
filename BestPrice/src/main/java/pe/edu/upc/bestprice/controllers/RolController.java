@@ -32,13 +32,11 @@ public class RolController {
                 .collect(Collectors.toList());
 
         if (lista.isEmpty()) {
-            // Si no hay registros, devuelve un mensaje y estado 204 (No Content) o 404 si prefieres
             Map<String, String> respuesta = new HashMap<>();
             respuesta.put("mensaje", "No existen registros");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
         }
 
-        // Si hay registros, devuelve la lista normalmente
         return ResponseEntity.ok(lista);
     }
 
