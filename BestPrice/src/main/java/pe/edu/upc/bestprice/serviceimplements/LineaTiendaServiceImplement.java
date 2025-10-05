@@ -2,29 +2,29 @@ package pe.edu.upc.bestprice.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.bestprice.entities.LineaTiendas;
-import pe.edu.upc.bestprice.repositories.ILineaTiendasRepository;
-import pe.edu.upc.bestprice.serviceinterfaces.ILineaTiendasService;
+import pe.edu.upc.bestprice.entities.LineaTienda;
+import pe.edu.upc.bestprice.repositories.ILineaTiendaRepository;
+import pe.edu.upc.bestprice.serviceinterfaces.ILineaTiendaService;
 
 import java.util.List;
 @Service
-public class LineaTiendasServiceImplement implements ILineaTiendasService {
+public class LineaTiendaServiceImplement implements ILineaTiendaService {
 
     @Autowired
-    private ILineaTiendasRepository repository;
+    private ILineaTiendaRepository repository;
 
     @Override
-    public List<LineaTiendas>list(){
+    public List<LineaTienda>list(){
         return repository.findAll();
     }
 
     @Override
-    public void insert(LineaTiendas lt) {
+    public void insert(LineaTienda lt) {
         repository.save(lt);
     }
 
     @Override
-    public LineaTiendas ListId(int id) {
+    public LineaTienda ListId(int id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -34,12 +34,12 @@ public class LineaTiendasServiceImplement implements ILineaTiendasService {
     }
 
     @Override
-    public void update(LineaTiendas lt) {
+    public void update(LineaTienda lt) {
         repository.save(lt);
     }
 
     @Override
-    public List<LineaTiendas> buscarService(String nombre) {
+    public List<LineaTienda> buscarService(String nombre) {
         return repository.buscar(nombre);
     }
 

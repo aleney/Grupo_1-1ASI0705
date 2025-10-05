@@ -15,5 +15,14 @@ public interface IResenaRepository extends JpaRepository<Resena, Integer>{
             " JOIN tipo_resena t ON r.idtipo_resena = t.id_tipo_resena\n" +
             " WHERE t.id_tipo_resena = 1\n" +
             " ORDER BY r.calificacion_resena ASC;", nativeQuery = true)
-    public List<String[]> ListarCalificacionPorResena();
+    public List<String[]> ListarCalificacionPorTipoResena();
+
+    @Query(value = "SELECT r.calificacion_resena as calificacion, t.nombre_tienda as nombre\n" +
+            "FROM resena r\n" +
+            "JOIN \n" +
+            "tienda t\n" +
+            "ON r.id_tienda = t.id_tienda\n" +
+            "GROUP BY r.calificacion_resena, t.nombre_tienda\n" +
+            "LIMIT 5", nativeQuery = true)
+    public List<String[]> ListarTiendaporCalificacion();
 }

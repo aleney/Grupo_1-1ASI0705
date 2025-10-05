@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.ResenaDTOInsert;
 import pe.edu.upc.bestprice.dtos.ResenaDTOList;
 import pe.edu.upc.bestprice.dtos.ResenaDTOListCalAsc;
+import pe.edu.upc.bestprice.dtos.ResenaDTOListTiendaCal;
 import pe.edu.upc.bestprice.entities.Resena;
-import pe.edu.upc.bestprice.entities.TipoResena;
 import pe.edu.upc.bestprice.serviceinterfaces.IResenaService;
 
 import java.util.ArrayList;
@@ -17,25 +17,45 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/Resenas")
+@RequestMapping("/resena")
 public class ResenaController {
 
     @Autowired
     private IResenaService service;
 
+
     @GetMapping("/listar")
-    public List<ResenaDTOList> listar(){
-        return service.list().stream().map(a->{
+    public ResponseEntity<?> listar() {
+        List<ResenaDTOList> lista = service.list().stream().map(a -> {
             ModelMapper m = new ModelMapper();
             return m.map(a, ResenaDTOList.class);
         }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron reseñas registradas.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
     @PostMapping("/insertar")
-    public void insertar(@RequestBody ResenaDTOInsert dto){
-        ModelMapper m = new ModelMapper();
-        Resena r = m.map(dto, Resena.class);
-        service.insert(r);
+    public ResponseEntity<String> insertar(@RequestBody ResenaDTOInsert dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            Resena r = m.map(dto, Resena.class);
+            service.insert(r);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Reseña registrada correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar la reseña. Verifica que los datos enviados sean correctos.");
+        }
     }
 
     @PutMapping("/modificar")
@@ -67,7 +87,7 @@ public class ResenaController {
 
     @GetMapping("/calificacion")
     public ResponseEntity<?> CalificacionTipo() {
-        List<String[]> calificacion = service.ListarCalificacionPorResena();
+        List<String[]> calificacion = service.ListarCalificacionPorTipoResena();
         List<ResenaDTOListCalAsc> ListaCalificacion = new ArrayList<>();
 
         if (calificacion.isEmpty()) {
@@ -79,10 +99,28 @@ public class ResenaController {
         for (String[] columna : calificacion) {
             ResenaDTOListCalAsc dto = new ResenaDTOListCalAsc();
             dto.setCalificacionResena(Integer.parseInt(columna[0]));
+            dto.setTiporeseTipoResena(columna[1]);
 
-            TipoResena tipo = new TipoResena();
-            tipo.setIdTipoResena(Integer.parseInt(columna[1]));
-            dto.setTipoResena(tipo);
+            ListaCalificacion.add(dto);
+        }
+        return ResponseEntity.ok(ListaCalificacion);
+    }
+
+    @GetMapping("/tienda-calificada")
+    public ResponseEntity<?> CalificacionMejores5Tiendas() {
+        List<String[]> tiendacalificada = service.ListarCalificacionPorTipoResena();
+        List<ResenaDTOListTiendaCal> ListaCalificacion = new ArrayList<>();
+
+        if (tiendacalificada.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron reseñas");
+        }
+
+        //columna -> Item de la lista de elementos que retorna monto
+        for (String[] columna : tiendacalificada) {
+            ResenaDTOListTiendaCal dto = new ResenaDTOListTiendaCal();
+            dto.setCalificacionResena(Integer.parseInt(columna[0]));
+            dto.setNombreTienda(columna[1]);
 
             ListaCalificacion.add(dto);
         }

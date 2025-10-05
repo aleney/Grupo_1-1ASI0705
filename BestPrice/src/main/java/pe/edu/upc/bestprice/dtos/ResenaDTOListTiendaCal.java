@@ -1,8 +1,8 @@
 package pe.edu.upc.bestprice.dtos;
 
-public class ResenaDTOListCalAsc {
+public class ResenaDTOListTiendaCal {
     private int calificacionResena;
-    private String tiporeseTipoResena;
+    private String nombreTienda;
 
     public int getCalificacionResena() {
         return calificacionResena;
@@ -12,11 +12,11 @@ public class ResenaDTOListCalAsc {
         this.calificacionResena = calificacionResena;
     }
 
-    public String getTiporeseTipoResena() {
-        return tiporeseTipoResena;
+    public String getNombreTienda() {
+        return nombreTienda;
     }
 
-    public void setTiporeseTipoResena(String tiporeseTipoResena) {
-        this.tiporeseTipoResena = tiporeseTipoResena;
+    public void setNombreTienda(String nombreTienda) {
+        this.nombreTienda = nombreTienda;
     }
 }

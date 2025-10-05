@@ -9,11 +9,23 @@ public class Tienda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idTienda;
 
+    @Column(name="nombreTienda", nullable = false, length = 50)
+    private String nombreTienda;
+
     public Tienda() {
     }
 
-    public Tienda(int idTienda) {
+    public Tienda(int idTienda, String nombreTienda) {
         this.idTienda = idTienda;
+        this.nombreTienda = nombreTienda;
+    }
+
+    public String getNombreTienda() {
+        return nombreTienda;
+    }
+
+    public void setNombreTienda(String nombreTienda) {
+        this.nombreTienda = nombreTienda;
     }
 
     public int getIdTienda() {
