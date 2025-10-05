@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.CategoriaProductoDTO;
 import pe.edu.upc.bestprice.entities.CategoriaProducto;
@@ -20,6 +21,7 @@ public class CategoriaProductoController {
     private ICategoriaProductoService service;
 
     @GetMapping("/listar")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
     public ResponseEntity<?> listar() {
         List<CategoriaProductoDTO> lista = service.listarCategoriaProducto().stream().map(a -> {
             ModelMapper m = new ModelMapper();
@@ -35,6 +37,7 @@ public class CategoriaProductoController {
     }
 
     @PostMapping("/insertar")
+    @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
     public ResponseEntity<String> insertar(@RequestBody CategoriaProductoDTO dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()
@@ -54,6 +57,7 @@ public class CategoriaProductoController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id){
         CategoriaProducto ctps=service.listId(id);
         if(ctps==null){
@@ -65,6 +69,7 @@ public class CategoriaProductoController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         CategoriaProducto Ctp = service.listId(id);
         if (Ctp == null) {
@@ -76,6 +81,7 @@ public class CategoriaProductoController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
     public ResponseEntity<String> modificar(@RequestBody CategoriaProductoDTO dto) {
         ModelMapper m = new ModelMapper();
         CategoriaProducto ctp = m.map(dto, CategoriaProducto.class);

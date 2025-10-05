@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.ProductoDTO;
 import pe.edu.upc.bestprice.entities.Producto;
@@ -20,6 +21,7 @@ public class ProductoController {
     private IProductoService service;
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
     public List<ProductoDTO> Listar(){
         return service.List().stream().map(a->{
             ModelMapper m=new ModelMapper();
@@ -28,6 +30,7 @@ public class ProductoController {
     }
 
     @PostMapping("/Registrar")
+    @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
     public void Registar(@RequestBody ProductoDTO dtos){
         ModelMapper m=new ModelMapper();
         Producto prodc=m.map(dtos,Producto.class);
@@ -35,6 +38,7 @@ public class ProductoController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id){
         Producto prodc=service.listId(id);
         if(prodc==null){
@@ -46,6 +50,7 @@ public class ProductoController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         Producto p = service.listId(id);
         if (p == null) {
@@ -57,6 +62,7 @@ public class ProductoController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
     public ResponseEntity<String> modificar(@RequestBody ProductoDTO dto) {
         ModelMapper m = new ModelMapper();
         Producto p = m.map(dto, Producto.class);

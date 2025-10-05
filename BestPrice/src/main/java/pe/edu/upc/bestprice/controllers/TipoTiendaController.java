@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.TipoTiendaDTO;
 import pe.edu.upc.bestprice.entities.TipoTienda;
@@ -20,6 +21,7 @@ public class TipoTiendaController {
     private ITipoTiendaService service;
 
     @GetMapping("/listar")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
     public ResponseEntity<?> listar() {
         List<TipoTiendaDTO> lista = service.listarTipoTienda().stream().map(a -> {
             ModelMapper m = new ModelMapper();
@@ -55,6 +57,7 @@ public class TipoTiendaController {
 
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
     public ResponseEntity<?> listarIdTipoTienda(@PathVariable("id") Integer id) {
         TipoTienda ttdtos = service.listarIdTipoTienda(id);
         if (ttdtos == null) {
@@ -77,6 +80,7 @@ public class TipoTiendaController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
     public ResponseEntity<String> modificar(@RequestBody TipoTiendaDTO dto) {
         ModelMapper m = new ModelMapper();
         TipoTienda tt = m.map(dto, TipoTienda.class);
