@@ -1,6 +1,5 @@
 package pe.edu.upc.bestprice.serviceinterfaces;
 
-import pe.edu.upc.bestprice.entities.Rol;
 import pe.edu.upc.bestprice.entities.TicketReporte;
 
 import java.util.List;
