@@ -2,8 +2,10 @@ package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
-@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"idRol", "tipoUsuario"})})
+@Table(name = "Rol")
 
 public class Rol {
 
@@ -14,9 +16,17 @@ public class Rol {
     @Column(name = "tipoUsuario",length = 20, nullable = false)
     private String tipoUsuario;
 
-    public Rol(int idRol, String tipoUsuario) {
+    @Column(name = "createdAt",length = 9,nullable = false)
+    private LocalDate createdAt;
+
+    @Column(name = "updatedAt",length = 9,nullable = false)
+    private LocalDate updatedAt;
+
+    public Rol(int idRol, String tipoUsuario, LocalDate createdAt, LocalDate updatedAt) {
         this.idRol = idRol;
         this.tipoUsuario = tipoUsuario;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Rol() {
@@ -39,5 +49,19 @@ public class Rol {
         this.tipoUsuario = tipoUsuario;
     }
 
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
 
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDate getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDate updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

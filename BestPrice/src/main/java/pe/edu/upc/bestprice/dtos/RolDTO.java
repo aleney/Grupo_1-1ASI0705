@@ -1,22 +1,42 @@
 package pe.edu.upc.bestprice.dtos;
 
+import java.time.LocalDate;
+
 public class RolDTO {
-    private String nombre;
-    private String descripcion;
+    private int idRol;
+    private String tipoUsuario;
+    private LocalDate createdAt;
+    private LocalDate updatedAt;
 
-    public String getNombre() {
-        return nombre;
+    public int getIdRol() {
+        return idRol;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getTipoUsuario() {
+        return tipoUsuario;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDate getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDate updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
