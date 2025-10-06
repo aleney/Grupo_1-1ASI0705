@@ -17,10 +17,10 @@ public class Rol {
     @Column(name = "tipoUsuario",length = 20, nullable = false)
     private String tipoUsuario;
 
-    @Column(name = "createdAt",length = 9,nullable = false)
+    @Column(name = "createdAt",nullable = false)
     private LocalDate createdAt;
 
-    @Column(name = "updatedAt",length = 9,nullable = false)
+    @Column(name = "updatedAt",nullable = false)
     private LocalDateTime updatedAt;
 
     public Rol(int idRol, String tipoUsuario, LocalDate createdAt, LocalDateTime updatedAt) {
