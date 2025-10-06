@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.ResenaDTOInsert;
 import pe.edu.upc.bestprice.dtos.ResenaDTOList;
@@ -25,6 +26,7 @@ public class ResenaController {
 
 
     @GetMapping("/listar")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<?> listar() {
         List<ResenaDTOList> lista = service.list().stream().map(a -> {
             ModelMapper m = new ModelMapper();
@@ -40,6 +42,7 @@ public class ResenaController {
     }
 
     @PostMapping("/insertar")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT')")
     public ResponseEntity<String> insertar(@RequestBody ResenaDTOInsert dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()
@@ -59,6 +62,7 @@ public class ResenaController {
     }
 
     @PutMapping("/modificar")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT')")
     public ResponseEntity<String> modificar(@RequestBody ResenaDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Resena r = m.map(dto, Resena.class);
@@ -75,6 +79,7 @@ public class ResenaController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         Resena r = service.ListId(id);
         if (r == null) {
@@ -86,6 +91,7 @@ public class ResenaController {
     }
 
     @GetMapping("/calificacion")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<?> CalificacionTipo() {
         List<String[]> calificacion = service.ListarCalificacionPorTipoResena();
         List<ResenaDTOListCalAsc> ListaCalificacion = new ArrayList<>();
@@ -107,8 +113,9 @@ public class ResenaController {
     }
 
     @GetMapping("/tienda-calificada")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<?> CalificacionMejores5Tiendas() {
-        List<String[]> tiendacalificada = service.ListarCalificacionPorTipoResena();
+        List<String[]> tiendacalificada = service.ListarTiendaporCalificacion();
         List<ResenaDTOListTiendaCal> ListaCalificacion = new ArrayList<>();
 
         if (tiendacalificada.isEmpty()) {

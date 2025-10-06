@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.LineaTiendaDTO;
 import pe.edu.upc.bestprice.dtos.LineaTiendaDTOTiendasAnio;
@@ -23,6 +24,7 @@ public class LineaTiendaController {
     private ILineaTiendaService service;
 
     @GetMapping("/listar")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
     public ResponseEntity<?> listar() {
         List<LineaTiendaDTO> lista = service.list().stream().map(a -> {
             ModelMapper m = new ModelMapper();
@@ -38,6 +40,7 @@ public class LineaTiendaController {
     }
 
     @PostMapping("/insertar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> insertar(@RequestBody LineaTiendaDTO dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()
@@ -56,7 +59,8 @@ public class LineaTiendaController {
         }
     }
 
-    @GetMapping("/eliminar/{id}")
+    @GetMapping("/listar/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         LineaTienda lt = service.ListId(id);
         if (lt == null) {
@@ -70,6 +74,7 @@ public class LineaTiendaController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         LineaTienda lt = service.ListId(id);
         if (lt == null) {
@@ -81,6 +86,7 @@ public class LineaTiendaController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody LineaTiendaDTO dto) {
         ModelMapper m = new ModelMapper();
         LineaTienda lt = m.map(dto, LineaTienda.class);
@@ -98,6 +104,7 @@ public class LineaTiendaController {
     }
 
     @GetMapping("/buscarnombre")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
     public ResponseEntity<?> buscar(@RequestParam String n) {
         List<LineaTienda> lt = service.buscarService(n);
 
@@ -115,6 +122,7 @@ public class LineaTiendaController {
     }
 
     @GetMapping("/tiendas2025")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
     public ResponseEntity<?> TiendasAnioactual() {
         List<String[]> tiendas = service.TiendasCreadasEn2025();
         List<LineaTiendaDTOTiendasAnio> ListaTiendas = new ArrayList<>();
