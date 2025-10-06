@@ -1,5 +1,1 @@
-FROM oracleopenjdk:17-alpine-jdk
-MAINTAINER MarcoChavez
-COPY target/BestPrice-0.0.1-SNAPSHOT.jar BestpriceBackend.jar
-ENTRYPOINT ["java","-jar","/BestpriceBackend.jar"]
 
