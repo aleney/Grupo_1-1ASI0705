@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.bestprice.entities.Usuario;
-import pe.edu.upc.bestprice.repositories.IUserRepository;
+import pe.edu.upc.bestprice.repositories.IUsuarioRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
     @Autowired
-    private IUserRepository repo;
+    private IUsuarioRepository repo;
 
 
     @Override

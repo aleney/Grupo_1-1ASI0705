@@ -45,7 +45,7 @@ public class TicketReporteController {
 
 
     @PostMapping("/insertar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT')")
     public void insertar(@RequestBody TicketReporteDTO dto) {
         ModelMapper m = new ModelMapper();
         TicketReporte soft = m.map(dto,TicketReporte.class);

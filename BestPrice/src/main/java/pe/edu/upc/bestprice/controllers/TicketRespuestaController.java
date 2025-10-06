@@ -24,7 +24,7 @@ public class TicketRespuestaController {
     private ITicketRespuestaService reporteService;
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAnyAuthority('CONSUMER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('CLIENT','ADMIN')")
     public ResponseEntity<?> listar() {
         List<TicketRespuesta> lista = reporteService.listarTicketRespuesta()
                 .stream()
