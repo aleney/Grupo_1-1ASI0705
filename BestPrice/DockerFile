@@ -1,4 +1,4 @@
-FROM amazoncorretto:17-alpine-jdk
+FROM oracleopenjdk:24-alpine-jdk
 MAINTAINER cramo
 COPY target/BestPrice-0.0.1-SNAPSHOT.jar BestPrice.jar
 ENTRYPOINT ["java","-jar","/Bestprice.jar"]
