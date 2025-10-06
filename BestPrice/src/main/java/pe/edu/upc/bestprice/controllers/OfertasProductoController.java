@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.OfertasProductoDTO;
 import pe.edu.upc.bestprice.entities.OfertasProducto;
@@ -20,6 +21,7 @@ public class OfertasProductoController {
     private IOfertasProductoService service;
 
     @GetMapping("/listar")
+    @PreAuthorize("hasAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<?> listar() {
         List<OfertasProductoDTO> lista = service.list().stream().map(o -> {
             ModelMapper m = new ModelMapper();
@@ -35,6 +37,7 @@ public class OfertasProductoController {
     }
 
     @PostMapping("/insertar")
+    @PreAuthorize("hasAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<String> insertar(@RequestBody OfertasProductoDTO dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()
@@ -54,6 +57,7 @@ public class OfertasProductoController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         OfertasProducto op = service.listId(id);
         if (op == null) {
@@ -66,6 +70,7 @@ public class OfertasProductoController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         OfertasProducto op = service.listId(id);
         if (op == null) {
@@ -77,6 +82,7 @@ public class OfertasProductoController {
     }
 
     @PutMapping("/modificar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody OfertasProductoDTO dto) {
         ModelMapper m = new ModelMapper();
         OfertasProducto op = m.map(dto, OfertasProducto.class);
@@ -90,6 +96,7 @@ public class OfertasProductoController {
     }
 
     @GetMapping("/buscar-fecha")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<OfertasProductoDTO> buscarPorProductoYFecha(@RequestParam int idProducto,
                                                             @RequestParam String fecha) {
         LocalDate fechaConsulta = LocalDate.parse(fecha);
@@ -99,6 +106,7 @@ public class OfertasProductoController {
     }
 
     @GetMapping("/buscar-rango")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<OfertasProductoDTO> buscarPorProductoYRangoFechas(@RequestParam int idProducto,
                                                                   @RequestParam String fechaInicio,
                                                                   @RequestParam String fechaFin) {
