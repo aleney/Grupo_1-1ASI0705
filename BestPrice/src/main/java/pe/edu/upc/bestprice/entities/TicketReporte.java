@@ -19,17 +19,20 @@ public class TicketReporte {
     @Column(name = "createdAt", nullable = false)
     public LocalDateTime createdAt;
 
+    @Column(name = "status", nullable = false)
+    public Boolean ticketStatus;
+
     @ManyToOne
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
-    public TicketReporte(int idTicketRep, String detalle, LocalDateTime createdAt, Usuario usuario) {
+    public TicketReporte(int idTicketRep, String detalle, LocalDateTime createdAt, Boolean ticketStatus, Usuario usuario) {
         this.idTicketRep = idTicketRep;
         this.detalle = detalle;
         this.createdAt = createdAt;
+        this.ticketStatus = ticketStatus;
         this.usuario = usuario;
     }
-
 
     public TicketReporte() {
 
@@ -59,6 +62,14 @@ public class TicketReporte {
         this.createdAt = createdAt;
     }
 
+    public Boolean getTicketStatus() {
+        return ticketStatus;
+    }
+
+    public void setTicketStatus(Boolean ticketStatus) {
+        this.ticketStatus = ticketStatus;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -67,3 +78,6 @@ public class TicketReporte {
         this.usuario = usuario;
     }
 }
+
+
+

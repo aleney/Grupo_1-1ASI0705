@@ -10,6 +10,8 @@ public class TicketReporteDTO {
 
     public LocalDateTime createdAt;
 
+    public Boolean ticketStatus;
+
     public int getIdTicketRep() {
         return idTicketRep;
     }
@@ -32,5 +34,13 @@ public class TicketReporteDTO {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Boolean getTicketStatus() {
+        return ticketStatus;
+    }
+
+    public void setTicketStatus(Boolean ticketStatus) {
+        this.ticketStatus = ticketStatus;
     }
 }

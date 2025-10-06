@@ -1,7 +1,6 @@
 package pe.edu.upc.bestprice.serviceinterfaces;
 
 import pe.edu.upc.bestprice.entities.Rol;
-import pe.edu.upc.bestprice.entities.Usuario;
 
 import java.util.List;
 

@@ -41,7 +41,6 @@ public class UsuarioController {
     }
 
     @PostMapping("/insertar")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public void insertarUsuario(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper m=new ModelMapper();
         Usuario u=m.map(dto,Usuario.class);
@@ -98,7 +97,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/editar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<String> editar(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Usuario p = m.map(dto, Usuario.class);

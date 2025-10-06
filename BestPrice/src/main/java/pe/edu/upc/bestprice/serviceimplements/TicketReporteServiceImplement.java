@@ -22,4 +22,14 @@ public class TicketReporteServiceImplement implements ITicketReporteService {
     public void insertarTicketReporte(TicketReporte ticketReporte) {
         repository.save(ticketReporte);
     }
+
+    @Override
+    public void edit(TicketReporte ticketReporte) {
+        repository.save(ticketReporte);
+    }
+
+    @Override
+    public TicketReporte listarId(int idTicketReporte) {
+        return repository.findById(idTicketReporte).orElse(null);
+    }
 }
