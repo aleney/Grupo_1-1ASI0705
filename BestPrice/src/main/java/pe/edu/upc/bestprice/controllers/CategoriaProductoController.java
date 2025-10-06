@@ -80,7 +80,7 @@ public class CategoriaProductoController {
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
-    @PutMapping
+    @PutMapping("/editar")
     @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
     public ResponseEntity<String> modificar(@RequestBody CategoriaProductoDTO dto) {
         ModelMapper m = new ModelMapper();

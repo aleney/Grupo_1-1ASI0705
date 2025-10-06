@@ -31,6 +31,10 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
             "ON u.id_rol = r.id_rol;", nativeQuery = true)
     public List<String[]> listar();
 
+    @Query(value = "select *from usuario \n" +
+            "where estado = %estado%", nativeQuery = true)
+    public List<String[]> listarUsuariosInactivos(String estado);
+
     //INSERTAR ROLES
     @Transactional
     @Modifying

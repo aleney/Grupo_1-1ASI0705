@@ -21,7 +21,7 @@ public class OfertasProductoController {
     private IOfertasProductoService service;
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN', 'CLIENT', 'SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<?> listar() {
         List<OfertasProductoDTO> lista = service.list().stream().map(o -> {
             ModelMapper m = new ModelMapper();
@@ -37,7 +37,7 @@ public class OfertasProductoController {
     }
 
     @PostMapping("/insertar")
-    @PreAuthorize("hasAuthority('ADMIN', 'CLIENT', 'SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<String> insertar(@RequestBody OfertasProductoDTO dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()

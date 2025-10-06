@@ -12,4 +12,5 @@ public interface IUsuarioService {
     public void edit(Usuario p);
     public List<String[]> buscarUsuario(String nombre);
     public List<String[]> listar();
+    public List<String[]> listarUsuariosInactivos(String estado);
 }

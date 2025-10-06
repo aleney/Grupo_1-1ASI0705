@@ -21,7 +21,7 @@ public class HistorialPrecioController {
     private IHistorialPrecioService service;
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN', 'CLIENT', 'SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<?> listar() {
         List<HistorialPrecioDTO> lista = service.list().stream().map(hp -> {
             ModelMapper m = new ModelMapper();
@@ -37,7 +37,7 @@ public class HistorialPrecioController {
     }
 
     @PostMapping("/insertar")
-    @PreAuthorize("hasAuthority('ADMIN', 'CLIENT', 'SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<String> insertar(@RequestBody HistorialPrecioDTO dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()
@@ -105,7 +105,7 @@ public class HistorialPrecioController {
     }
 
     @GetMapping("/{fecha}")
-    @PreAuthorize("hasAuthority('ADMIN', 'CLIENT', 'SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public List<HistorialPrecioDTO> buscarPorFecha(@PathVariable("fecha") String fecha) {
         LocalDate fechaConvertida = LocalDate.parse(fecha); // formato yyyy-MM-dd
         return service.buscarPorFecha(fechaConvertida).stream().map(hp -> {

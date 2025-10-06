@@ -20,7 +20,7 @@ public class UbicacionTiendaController {
     private IUbicacionTiendaService service;
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN', 'CLIENT', 'SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<?> listar() {
         List<UbicacionTiendaDTO> lista = service.list().stream().map(u -> {
             ModelMapper m = new ModelMapper();
@@ -56,7 +56,7 @@ public class UbicacionTiendaController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN', 'CLIENT', 'SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         UbicacionTienda u = service.listId(id);
         if (u == null) {

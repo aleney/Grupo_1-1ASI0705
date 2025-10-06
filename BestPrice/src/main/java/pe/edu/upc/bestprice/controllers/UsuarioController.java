@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.bestprice.dtos.UsuarioActivoDTO;
 import pe.edu.upc.bestprice.dtos.UsuarioDTOInsert;
 import pe.edu.upc.bestprice.dtos.UsuarioDTOList;
 import pe.edu.upc.bestprice.entities.Usuario;
@@ -38,6 +39,23 @@ public class UsuarioController {
             listaUsuarios.add(dto);
         }
         return ResponseEntity.ok(listaUsuarios);
+    }
+
+    @GetMapping("/estado")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> usuarioActivo(@RequestParam String estado) {
+        List<String[]> usuariosact = service.buscarUsuario(estado);
+        if (usuariosact.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron usuarios: " + estado);
+        }
+
+        for (String[] columna : usuariosact) {
+            UsuarioActivoDTO dto = new UsuarioActivoDTO();
+            dto.setNombre(columna[0]);
+            dto.setEstado(Boolean.parseBoolean(columna[1]));
+        }
+        return ResponseEntity.ok(usuariosact);
     }
 
     @PostMapping("/insertar")

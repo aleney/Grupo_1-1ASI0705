@@ -21,7 +21,6 @@ public class CanastaController {
     @Autowired
     private ICanastaService service;
 
-    // Listar todas las canastas
     @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listar() {
@@ -38,7 +37,6 @@ public class CanastaController {
         return ResponseEntity.ok(lista);
     }
 
-    // Insertar una nueva canasta
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
     public ResponseEntity<String> insertar(@RequestBody CanastaDTO dto) {
@@ -48,7 +46,6 @@ public class CanastaController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Canasta creada correctamente.");
     }
 
-    // Obtener una canasta por ID
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
@@ -62,7 +59,6 @@ public class CanastaController {
         return ResponseEntity.ok(dto);
     }
 
-    // Eliminar una canasta
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
@@ -75,7 +71,6 @@ public class CanastaController {
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
-    // Actualizar una canasta
     @PutMapping
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
     public ResponseEntity<String> modificar(@RequestBody CanastaDTO dto) {
@@ -90,7 +85,6 @@ public class CanastaController {
         return ResponseEntity.ok("Registro con ID " + c.getIdCanasta() + " modificado correctamente.");
     }
 
-    // Buscar canasta por usuario
     @GetMapping("/busquedas")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> buscar(@RequestParam String usuario) {

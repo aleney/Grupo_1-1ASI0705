@@ -44,5 +44,9 @@ public class UsuarioServiceImplement implements IUsuarioService {
     @Override
     public List<String[]> listar(){ return repository.listar();};
 
+    @Override
+    public List<String[]> listarUsuariosInactivos(String estado) {
+        return repository.listarUsuariosInactivos(estado);
+    }
 
 }

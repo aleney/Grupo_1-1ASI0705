@@ -20,7 +20,7 @@ public class DistritoController {
     private IDistritoService service;
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN', 'CLIENT', 'SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<?> listar() {
         List<DistritoDTO> lista = service.list().stream().map(d -> {
             ModelMapper m = new ModelMapper();

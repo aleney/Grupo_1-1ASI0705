@@ -20,7 +20,7 @@ public class ProductoController {
     @Autowired
     private IProductoService service;
 
-    @GetMapping
+    @GetMapping("/listar")
     @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
     public List<ProductoDTO> Listar(){
         return service.List().stream().map(a->{
@@ -61,7 +61,7 @@ public class ProductoController {
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
-    @PutMapping
+    @PutMapping("/editar")
     @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
     public ResponseEntity<String> modificar(@RequestBody ProductoDTO dto) {
         ModelMapper m = new ModelMapper();
