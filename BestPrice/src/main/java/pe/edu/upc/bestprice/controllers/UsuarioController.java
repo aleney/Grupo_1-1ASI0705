@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.bestprice.dtos.RolDTO;
 import pe.edu.upc.bestprice.dtos.UsuarioDTOInsert;
 import pe.edu.upc.bestprice.dtos.UsuarioDTOList;
 import pe.edu.upc.bestprice.entities.Usuario;
@@ -13,6 +14,7 @@ import pe.edu.upc.bestprice.serviceinterfaces.IUsuarioService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuario")
@@ -22,22 +24,11 @@ public class UsuarioController {
 
     @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<?> listar() {
-        List<String[]> usuarios = service.listar();
-        List<UsuarioDTOList> listaUsuarios = new ArrayList<>();
-
-        if (usuarios.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron usuarios registrados");
-        }
-        for (String[] columna : usuarios) {
-            UsuarioDTOList dto = new UsuarioDTOList();
-            dto.setNombre(columna[0]);
-            dto.setEmail(columna[1]);
-            dto.setEstado(Boolean.parseBoolean(columna[2]));
-            dto.setTipoUsuario(columna[3]);
-            listaUsuarios.add(dto);
-        }
-        return ResponseEntity.ok(listaUsuarios);
+    public List<UsuarioDTOInsert> listar(){
+        return service.listarUsuarios().stream().map(a->{
+            ModelMapper m=new ModelMapper();
+            return m.map(a,UsuarioDTOInsert.class);
+        }).collect(Collectors.toList());
     }
 
     @PostMapping("/insertar")
@@ -68,6 +59,27 @@ public class UsuarioController {
         return ResponseEntity.ok(listaDTO);
     }
 
+//    @GetMapping("/buscar")
+//    @PreAuthorize("hasAuthority('ADMIN')")
+//    public ResponseEntity<?> buscarUsuario(@RequestParam String estado) {
+//        List<String[]> usuarios = service.buscarUsuario(nombre);
+//        if (usuarios.isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+//                    .body("No se encontraron usuarios: " + nombre);
+//        }
+//
+//        List<UsuarioDTOList> listaDTO = new ArrayList<>();
+//        for (String[] columna : usuarios) {
+//            UsuarioDTOList dto = new UsuarioDTOList();
+//            dto.setNombre(columna[0]);
+//            dto.setEmail(columna[1]);
+//            dto.setEstado(Boolean.parseBoolean(columna[2]));
+//            dto.setTipoUsuario(columna[3]);
+//            listaDTO.add(dto);
+//        }
+//        return ResponseEntity.ok(listaDTO);
+//    }
+
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
@@ -97,7 +109,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/editar")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CONSUMER','SELLER')")
     public ResponseEntity<String> editar(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Usuario p = m.map(dto, Usuario.class);
