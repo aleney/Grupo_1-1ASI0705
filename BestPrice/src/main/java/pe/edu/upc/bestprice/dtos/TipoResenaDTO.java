@@ -1,22 +1,14 @@
-package pe.edu.upc.bestprice.entities;
+package pe.edu.upc.bestprice.dtos;
 
-import jakarta.persistence.*;
-import java.time.LocalDate;
+public class TipoResenaDTO {
 
-@Entity
-@Table(name = "TipoResena")
-public class TipoResena {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idTipoResena;
-
-    @Column(name = "tiporeseTipoResena",length = 50,nullable = false)
     private String tiporeseTipoResena;
 
-    public TipoResena() {
+    public TipoResenaDTO() {
     }
 
-    public TipoResena(int idTipoResena, String tiporeseTipoResena) {
+    public TipoResenaDTO(int idTipoResena, String tiporeseTipoResena) {
         this.idTipoResena = idTipoResena;
         this.tiporeseTipoResena = tiporeseTipoResena;
     }
