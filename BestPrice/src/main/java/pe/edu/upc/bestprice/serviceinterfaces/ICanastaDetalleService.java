@@ -9,6 +9,10 @@ public interface ICanastaDetalleService {
     public void insert(CanastaDetalle cd);  // Insertar detalle
     public List<CanastaDetalle> list();  // Listar todos los detalles
     public CanastaDetalle listId(String id);  // Obtener detalle por ID
+
+    // Cambia el tipo de "id" a Integer, ya que idCanastaDetalle es Integer en la entidad
+    CanastaDetalle listId(Integer id);
+
     public void edit(CanastaDetalle cd);  // Editar detalle
 }
 

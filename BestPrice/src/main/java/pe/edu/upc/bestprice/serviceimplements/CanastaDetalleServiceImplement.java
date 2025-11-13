@@ -31,6 +31,12 @@ public class CanastaDetalleServiceImplement implements ICanastaDetalleService {
 
     @Override
     public CanastaDetalle listId(String id) {
+        return null;
+    }
+
+    // Cambia el tipo de "id" a Integer, ya que idCanastaDetalle es Integer en la entidad
+    @Override
+    public CanastaDetalle listId(Integer id) {
         return repository.findById(id).orElse(null);  // Obtiene un detalle de canasta por ID
     }
 
