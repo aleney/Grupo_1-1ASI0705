@@ -1,6 +1,7 @@
 package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "TipoResena")

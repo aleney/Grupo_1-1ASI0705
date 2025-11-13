@@ -1,14 +1,27 @@
 package pe.edu.upc.bestprice.dtos;
 
-import jakarta.persistence.Column;
-
 import java.time.LocalDate;
 
 public class HistorialBusquedaDTO {
+
     private int idHistorialBusqueda;
     private LocalDate fechabusqueHistorialBusqueda;
     private int productoidHistoriaBusqueda;
     private int usuarioidHistoriaBusqueda;
+
+    public HistorialBusquedaDTO() {
+    }
+
+    public HistorialBusquedaDTO(int idHistorialBusqueda,
+                                LocalDate fechabusqueHistorialBusqueda,
+                                int productoidHistoriaBusqueda,
+                                int usuarioidHistoriaBusqueda) {
+
+        this.idHistorialBusqueda = idHistorialBusqueda;
+        this.fechabusqueHistorialBusqueda = fechabusqueHistorialBusqueda;
+        this.productoidHistoriaBusqueda = productoidHistoriaBusqueda;
+        this.usuarioidHistoriaBusqueda = usuarioidHistoriaBusqueda;
+    }
 
     public int getIdHistorialBusqueda() {
         return idHistorialBusqueda;
