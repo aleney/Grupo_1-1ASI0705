@@ -33,4 +33,9 @@ public class RolServiceImplement implements IRolService{
     public Rol listarId(int idRol) {
         return repository.findById(idRol).orElse(null);
     }
+
+    @Override
+    public void delete(int idRol) {
+       repository.deleteById(idRol);
+    }
 }
