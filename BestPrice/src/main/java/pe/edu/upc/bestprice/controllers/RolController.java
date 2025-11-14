@@ -7,10 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.RolDTO;
-import pe.edu.upc.bestprice.dtos.UsuarioDTOInsert;
-import pe.edu.upc.bestprice.dtos.UsuarioDTOList;
 import pe.edu.upc.bestprice.entities.Rol;
-import pe.edu.upc.bestprice.entities.Usuario;
 import pe.edu.upc.bestprice.serviceinterfaces.IRolService;
 
 import java.util.*;
@@ -60,5 +57,18 @@ public class RolController {
         }
         rolService.edit(r);
         return ResponseEntity.ok("Registro con ID " + r.getIdRol() + " modificado correctamente.");
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
+        Rol r = rolService.listarId(id);
+        if (r == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
+        }
+        rolService.delete(id);
+        return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 }
