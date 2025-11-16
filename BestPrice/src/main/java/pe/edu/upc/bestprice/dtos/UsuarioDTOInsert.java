@@ -9,7 +9,7 @@ public class UsuarioDTOInsert {
     private int idUsuario;
     private String nombre;
     private String email;
-    private String pasword;
+    private String password;
     private int numeroTelefono;
     private Boolean estado;
     private LocalDateTime createdAt;
@@ -40,12 +40,12 @@ public class UsuarioDTOInsert {
         this.email = email;
     }
 
-    public String getPasword() {
-        return pasword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasword(String pasword) {
-        this.pasword = pasword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getNumeroTelefono() {

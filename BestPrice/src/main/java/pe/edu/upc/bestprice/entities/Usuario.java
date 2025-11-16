@@ -37,11 +37,11 @@ public class Usuario {
     @JoinColumn(name = "idRol")
     private Rol rol;
 
-    public Usuario(int idUsuario, String nombre, String email, String pasword, int numeroTelefono, Boolean estado, LocalDateTime createdAt, LocalDateTime updatedAt, Rol rol) {
+    public Usuario(int idUsuario, String nombre, String email, String password, int numeroTelefono, Boolean estado, LocalDateTime createdAt, LocalDateTime updatedAt, Rol rol) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.email = email;
-        this.password = pasword;
+        this.password = password;
         this.numeroTelefono = numeroTelefono;
         this.estado = estado;
         this.createdAt = createdAt;
@@ -77,11 +77,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getPasword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPasword(String pasword) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
