@@ -2,8 +2,6 @@ package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name="CategoriaProducto")
 public class CategoriaProducto {
