@@ -1,0 +1,62 @@
+<div class="menu-background">
+<mat-toolbar color="primary" class="toolbar">
+  <div class="logo-area">
+    <button matIconButton class="Menu-Desplegable" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <img src="assets/images/Menu_LogoBestPrice.png" alt="">
+    <span class="title">ESTPRICE</span>
+  </div>
+
+  <span class="spacer"></span>
+
+<button matIconButton class="Canasta" aria-label="Example icon-button with menu icon">
+       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="shopping_cart"></mat-icon>
+    </button>
+
+  <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn">
+    <mat-icon>account_circle</mat-icon>
+    user_admin
+  </button>
+
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item routerLink="/perfil">
+      <mat-icon>person</mat-icon> Perfil
+    </button>
+    <button mat-menu-item routerLink="/favorites">
+      <mat-icon>favorites</mat-icon> Favoritos
+    </button>
+    <button mat-menu-item routerLink="/historial">
+      <mat-icon>history</mat-icon> Historial
+    </button>
+    <button mat-menu-item routerLink="/ajustes">
+      <mat-icon>settings</mat-icon> Ajustes
+    </button>
+    <button mat-menu-item routerLink="/logout">
+      <mat-icon>logout</mat-icon> Cerrar sesión
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<div class="search-container">
+  <mat-form-field appearance="outline" class="search-field" style="
+  background-color: #ffffff;">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput placeholder="Buscar..." >
+  </mat-form-field>
+</div>
+
+<div class="menu-grid">
+
+  <mat-card class="menu-card" routerLink="/usuario">
+    <img src="assets/images/Menu_Productos.png" class="icon">
+    <p>Productos</p>
+  </mat-card>
+
+  <mat-card class="menu-card" routerLink="/tienda">
+    <img src="assets/images/Menu_Tiendas.png" class="icon">
+    <p>Tiendas</p>
+  </mat-card>
+
+</div>
+</div>

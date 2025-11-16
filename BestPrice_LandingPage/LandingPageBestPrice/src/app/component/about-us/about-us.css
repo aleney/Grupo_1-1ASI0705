@@ -1,0 +1,63 @@
+.about-section {
+  background-color: #d7d4df;
+  text-align: center;
+  padding-top: 6rem; /* margen superior por el navbar fijo */
+  padding-bottom: 4rem;
+  font-family: 'Poppins', sans-serif;
+  color: #2e2e2e;
+}
+
+.about-header {
+  background-color: #f5a300;
+  color: white;
+  width: 25%;
+  margin: 0 auto 2rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 80px;
+  border-bottom-left-radius: 80px;
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.intro {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.about-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #f5a300;
+  color: white;
+  border-radius: 100px 100px 0 0;
+  width: 300px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 1rem;
+}
+
+.logo-symbol img {
+  width: 80px;
+  height: auto;
+}
+
+@media (max-width: 900px) {
+  .about-header {
+    width: 60%;
+  }
+  .about-content {
+    flex-direction: column;
+  }
+}

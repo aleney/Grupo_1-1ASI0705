@@ -1,0 +1,109 @@
+.menu-background {
+  background-color: #dadada;  /* <-- Aquí cambias el color */
+  margin: 0;
+  font-family: Arial, sans-serif;
+  height: 100%;
+}
+
+.menu-btn {
+  margin-right: 15px;
+}
+
+/* Top bar */
+.toolbar {
+  background-color: #f4a300;
+  padding: 0 20px;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-area img {
+  height: 60px;
+  margin-bottom: 5px;
+}
+
+.logo-area span{
+  font-family: 'Sundae Ice', sans-serif;
+  color: white;
+}
+
+.btc-icon {
+  font-size: 28px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* User button */
+.user-btn mat-icon {
+  margin-right: 5px;
+}
+
+/* Search + historial */
+.search-container {
+  margin: 25px auto;
+  max-width: 900px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.search-field {
+  flex: 1;
+  height: 55px;
+  border-radius: 5px;
+}
+
+.search-field input {
+  font-size: 16px;
+}
+
+/* Cards grid */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 380px); /* 2 columnas fijas */
+  gap: 40px 80px; /* separación: filas - columnas */
+  justify-content: center; /* centra horizontalmente */
+  align-items: center; /* centra verticalmente */
+  margin-top: 40px;
+}
+
+.menu-card {
+  width: 380px;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  font-size: 40px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+.menu-card {
+  text-align: center;
+  padding: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.menu-card:hover {
+  transform: scale(1.05);
+}
+
+.icon {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 10px;
+}

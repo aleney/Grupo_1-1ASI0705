@@ -1,0 +1,31 @@
+<mat-toolbar color="primary" class="navbar">
+  <div class="navbar-left">
+    <span class="logo">BESTPRICE</span>
+  </div>
+
+  <div class="navbar-center">
+    <button mat-button routerLink="/src/app/component/inicio/inicio.html">Inicio</button>
+    <button mat-button routerLink="/about">About us</button>
+    <button mat-button>Use</button>
+  </div>
+
+  <div class="navbar-right">
+    <button mat-raised-button color="accent" class="btn-cuenta">Cuenta</button>
+    <button class="menu-icon" (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+
+<!-- Menú móvil -->
+<div class="mobile-menu" [class.open]="menuOpen">
+  <button mat-icon-button class="close-icon" (click)="toggleMenu()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div class="mobile-links">
+    <a routerLink="/" (click)="toggleMenu()">Inicio</a>
+    <a routerLink="/about" (click)="toggleMenu()">About us</a>
+    <a (click)="toggleMenu()">Use</a>
+    <button mat-raised-button color="accent" (click)="toggleMenu()">Cuenta</button>
+  </div>
+</div>

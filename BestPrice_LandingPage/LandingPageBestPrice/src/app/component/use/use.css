@@ -1,0 +1,76 @@
+.use-section {
+  background-color: #d7d4df;
+  text-align: center;
+  padding: 5rem 2rem;
+  font-family: 'Poppins', sans-serif;
+  color: #2e2e2e;
+}
+
+.use-header {
+  background-color: #f5a300;
+  padding: 1rem;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.join-text {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.join-btn {
+  color: #e53935;
+  margin: 0;
+}
+
+.title {
+  color: #d32f2f;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.highlight {
+  color: #f5a300;
+  font-weight: bold;
+}
+
+.steps-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.step-card {
+  background-color: #f5a300;
+  color: #2e2e2e;
+  width: 320px;
+  border-radius: 25px;
+  padding: 1.5rem;
+  text-align: left;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+}
+
+.step-card p strong {
+  color: #000;
+}
+
+.step-card img {
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  .step-card {
+    width: 90%;
+  }
+}

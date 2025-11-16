@@ -1,0 +1,47 @@
+<section class="testimonios-section">
+  <h2 class="main-title">Testimonios</h2>
+  <p class="subtitle">¿Qué dicen nuestros clientes?</p>
+
+  <div class="testimonios-container" style="display: flex; align-items: center; justify-content: center;">
+    <button mat-fab color="accent" (click)="prevTestimonio()">&#60;</button>
+
+    <div class="cards-container">
+      @if (currentIndex === 0) {
+        <div class="testimonio-card active">
+          <div class="testimonio-top">
+            <mat-icon style="width: auto; height: auto;">account_circle</mat-icon>
+            <p class="nombre">{{ testimonios[0].nombre }}</p>
+            <span class="rating">{{ testimonios[0].rating }}★</span>
+          </div>
+          <div class="testimonio-bottom">
+            <p>{{ testimonios[0].texto }}</p>
+          </div>
+        </div>
+      } @else if (currentIndex === 1) {
+        <div class="testimonio-card active">
+          <div class="testimonio-top">
+            <mat-icon style="width: auto; height: auto;">account_circle</mat-icon>
+            <p class="nombre">{{ testimonios[1].nombre }}</p>
+            <span class="rating">{{ testimonios[1].rating }}★</span>
+          </div>
+          <div class="testimonio-bottom">
+            <p>{{ testimonios[1].texto }}</p>
+          </div>
+        </div>
+      } @else if (currentIndex === 2) {
+        <div class="testimonio-card active">
+          <div class="testimonio-top">
+            <mat-icon style="width: auto; height: auto;">account_circle</mat-icon>
+            <p class="nombre">{{ testimonios[2].nombre }}</p>
+            <span class="rating">{{ testimonios[2].rating }}★</span>
+          </div>
+          <div class="testimonio-bottom">
+            <p>{{ testimonios[2].texto }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <button mat-fab color="accent" (click)="nextTestimonio()">&#62;</button>
+  </div>
+</section>
