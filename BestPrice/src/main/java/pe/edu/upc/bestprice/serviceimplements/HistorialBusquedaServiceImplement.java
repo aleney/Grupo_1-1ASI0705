@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.bestprice.entities.HistorialBusqueda;
 import pe.edu.upc.bestprice.serviceinterfaces.IHistorialBusquedaService;
-import pe.edu.upc.bestprice.repositories.iHistorialBusquedaRepository;
+import pe.edu.upc.bestprice.repositories.IHistorialBusquedaRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,7 @@ import java.util.Optional;
 public class HistorialBusquedaServiceImplement implements IHistorialBusquedaService {
 
     @Autowired
-    private iHistorialBusquedaRepository historialBusquedaRepository;
+    private IHistorialBusquedaRepository historialBusquedaRepository;
 
     @Override
     public List<HistorialBusqueda> getAllHistorialBusqueda() {
