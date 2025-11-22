@@ -1,6 +1,8 @@
 package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
 @Entity
@@ -13,9 +15,11 @@ public class Canasta {
     @Column(name = "nombreCanasta",length = 50,nullable = false)
     private String nombreCanasta;
 
-    @Column(name = "createdAtCanasta",nullable = false)
+    @CreationTimestamp
+    @Column(name = "createdAtCanasta",nullable = false,updatable = false)
     private Timestamp createdAtCanasta;
 
+    @UpdateTimestamp
     @Column(name = "updatedAtCanasta",nullable = false)
     private Timestamp updatedAtCanasta;
 
@@ -39,6 +43,22 @@ public class Canasta {
         this.createdAtCanasta = createdAtCanasta;
         this.updatedAtCanasta = updatedAtCanasta;
         this.usuarioCanasta = usuarioCanasta;
+    }
+
+    public Timestamp getCreatedAtCanasta() {
+        return createdAtCanasta;
+    }
+
+    public void setCreatedAtCanasta(Timestamp createdAtCanasta) {
+        this.createdAtCanasta = createdAtCanasta;
+    }
+
+    public Timestamp getUpdatedAtCanasta() {
+        return updatedAtCanasta;
+    }
+
+    public void setUpdatedAtCanasta(Timestamp updatedAtCanasta) {
+        this.updatedAtCanasta = updatedAtCanasta;
     }
 
     public int getIdCanasta() {

@@ -1,6 +1,7 @@
 package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 
@@ -11,7 +12,8 @@ public class HistorialBusqueda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idHistorialBusqueda;
 
-    @Column(name = "fechabusqueHistorialBusqueda",nullable = false)
+    @CreationTimestamp
+    @Column(name = "fechabusqueHistorialBusqueda",nullable = false,updatable = false)
     private LocalDate fechabusqueHistorialBusqueda;
 
     @Column(name = "productoidHistoriaBusqueda",nullable = false)
@@ -41,6 +43,7 @@ public class HistorialBusqueda {
         this.productoidHistoriaBusqueda = productoidHistoriaBusqueda;
         this.usuarioidHistoriaBusqueda = usuarioidHistoriaBusqueda;
     }
+
 
     public int getIdHistorialBusqueda() {
         return idHistorialBusqueda;
