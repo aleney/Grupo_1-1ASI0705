@@ -20,6 +20,18 @@ public class HistorialBusqueda {
     @Column(name = "usuarioidHistoriaBusqueda")
     private int usuarioidHistoriaBusqueda;
 
+    @ManyToOne
+    @JoinColumn(name = "idProducto")
+    private Producto producto;
+
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
+
+    public HistorialBusqueda(Producto producto ,Usuario usuario){
+        this.producto = producto;
+        this.usuario = usuario;
+    }
     public HistorialBusqueda() {
     }
 

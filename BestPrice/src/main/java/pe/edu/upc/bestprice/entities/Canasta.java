@@ -22,6 +22,14 @@ public class Canasta {
     @Column(name = "usuarioCanasta",length = 50,nullable = false)
     private String usuarioCanasta;
 
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
+
+    public Canasta(Usuario usuario){
+        this.usuario = usuario;
+    }
+
     public Canasta() {
     }
 
