@@ -1,23 +1,24 @@
 package pe.edu.upc.bestprice.dtos;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+// import java.time.LocalDateTime;
 
 public class HistorialBusquedaDTOInsert {
-    private LocalDateTime fechabusqueHistorialBusqueda;
+    // La fecha NO es necesaria aquí debido a @CreationTimestamp en la entidad.
+    // private LocalDateTime fechabusqueHistorialBusqueda;
+
+    private int productoidHistoriaBusqueda;
+    private int usuarioidHistoriaBusqueda;
 
     public HistorialBusquedaDTOInsert() {
     }
 
-    public HistorialBusquedaDTOInsert(LocalDateTime fechabusqueHistorialBusqueda) {
-        this.fechabusqueHistorialBusqueda = fechabusqueHistorialBusqueda;
+    public HistorialBusquedaDTOInsert(int productoidHistoriaBusqueda, int usuarioidHistoriaBusqueda) {
+        this.productoidHistoriaBusqueda = productoidHistoriaBusqueda;
+        this.usuarioidHistoriaBusqueda = usuarioidHistoriaBusqueda;
     }
 
-    public LocalDateTime getFechabusqueHistorialBusqueda() {
-        return fechabusqueHistorialBusqueda;
-    }
-
-    public void setFechabusqueHistorialBusqueda(LocalDateTime fechabusqueHistorialBusqueda) {
-        this.fechabusqueHistorialBusqueda = fechabusqueHistorialBusqueda;
-    }
+    public int getProductoidHistoriaBusqueda() { return productoidHistoriaBusqueda; }
+    public void setProductoidHistoriaBusqueda(int productoidHistoriaBusqueda) { this.productoidHistoriaBusqueda = productoidHistoriaBusqueda; }
+    public int getUsuarioidHistoriaBusqueda() { return usuarioidHistoriaBusqueda; }
+    public void setUsuarioidHistoriaBusqueda(int usuarioidHistoriaBusqueda) { this.usuarioidHistoriaBusqueda = usuarioidHistoriaBusqueda; }
 }

@@ -3,7 +3,6 @@ package pe.edu.upc.bestprice.entities;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -35,7 +34,11 @@ public class HistorialBusqueda {
         this.producto = producto;
         this.usuario = usuario;
     }
+    public HistorialBusqueda(int idHistorialBusqueda, LocalDateTime fechabusqueHistorialBusqueda, int productoidHistoriaBusqueda, int usuarioidHistoriaBusqueda) {
+    }
+
     public HistorialBusqueda() {
+
     }
 
     public int getIdHistorialBusqueda() {

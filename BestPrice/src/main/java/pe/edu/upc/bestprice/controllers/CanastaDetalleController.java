@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.CanastaDetalleDTO;
+import pe.edu.upc.bestprice.dtos.CanastaDetalleDTOInsert;
 import pe.edu.upc.bestprice.entities.CanastaDetalle;
 import pe.edu.upc.bestprice.repositories.ICanastaDetalleRepository;
 import pe.edu.upc.bestprice.serviceimplements.CanastaDetalleServiceImplement;
@@ -41,7 +42,7 @@ public class CanastaDetalleController{
 
     @PostMapping("/insertar")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
-    public ResponseEntity<String> insertar(@RequestBody CanastaDetalleDTO dto) {
+    public ResponseEntity<String> insertar(@RequestBody CanastaDetalleDTOInsert dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()
                     .body("El cuerpo de la solicitud está vacío o es inválido.");

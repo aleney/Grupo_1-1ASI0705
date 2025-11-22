@@ -1,9 +1,11 @@
 package pe.edu.upc.bestprice.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.TipoResenaDTO;
+import pe.edu.upc.bestprice.dtos.TipoResenaDTOInsert;
 import pe.edu.upc.bestprice.entities.TipoResena;
 import pe.edu.upc.bestprice.serviceinterfaces.ITipoResenaService;
 
@@ -17,7 +19,9 @@ public class TipoResenaController {
     @Autowired
     private ITipoResenaService tipoResenaService;
 
-    // Obtener todos los tipos de reseña
+    // ---------------------------
+    // GET: todos los tipos
+    // ---------------------------
     @GetMapping
     public List<TipoResenaDTO> getAllTipoResena() {
         List<TipoResena> tipoResenaList = tipoResenaService.getAllTipoResena();
@@ -26,7 +30,9 @@ public class TipoResenaController {
                 .collect(Collectors.toList());
     }
 
-    // Obtener un tipo de reseña por ID
+    // ---------------------------
+    // GET: por ID
+    // ---------------------------
     @GetMapping("/{id}")
     public ResponseEntity<TipoResenaDTO> getTipoResenaById(@PathVariable int id) {
         TipoResena tipoResena = tipoResenaService.getTipoResenaById(id);
@@ -37,36 +43,65 @@ public class TipoResenaController {
         }
     }
 
-    // Crear un nuevo tipo de reseña
+    // ---------------------------
+    // POST: crear (usa DTOInsert)
+    // ---------------------------
     @PostMapping
-    public ResponseEntity<TipoResenaDTO> createTipoResena(@RequestBody TipoResenaDTO tipoResenaDTO) {
-        TipoResena tipoResena = convertToEntity(tipoResenaDTO);
+    public ResponseEntity<TipoResenaDTOInsert> createTipoResena(
+            @RequestBody TipoResenaDTOInsert tipoResenaDTOInsert) {
+
+        // Usa la sobrecarga convertToEntity(TipoResenaDTOInsert)
+        TipoResena tipoResena = convertToEntity(tipoResenaDTOInsert);
         TipoResena createdTipoResena = tipoResenaService.createTipoResena(tipoResena);
-        return ResponseEntity.status(201).body(convertToDTO(createdTipoResena));
+
+        // Devuelve TipoResenaDTOInsert (solo el campo tiporeseTipoResena)
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(convertToDTOInsert(createdTipoResena));
     }
 
-    // Actualizar un tipo de reseña
+    // ---------------------------
+    // PUT: actualizar (usa DTOInsert)
+    // ---------------------------
     @PutMapping("/{id}")
-    public ResponseEntity<TipoResenaDTO> updateTipoResena(@PathVariable int id, @RequestBody TipoResenaDTO tipoResenaDTO) {
+    public ResponseEntity<TipoResenaDTOInsert> updateTipoResena(
+            @PathVariable int id,
+            @RequestBody TipoResenaDTOInsert tipoResenaDTOInsert) {
+
         TipoResena existingTipoResena = tipoResenaService.getTipoResenaById(id);
+
         if (existingTipoResena != null) {
-            TipoResena updatedTipoResena = convertToEntity(tipoResenaDTO);
+            // Usa la sobrecarga convertToEntity(TipoResenaDTOInsert)
+            TipoResena updatedTipoResena = convertToEntity(tipoResenaDTOInsert);
+
+            // Asigna el ID existente
             updatedTipoResena.setIdTipoResena(id);
+
+            // Si TipoResena tiene otros campos además de tiporeseTipoResena,
+            // aquí podrías copiarlos desde existingTipoResena.
+
             tipoResenaService.updateTipoResena(updatedTipoResena);
-            return ResponseEntity.ok(convertToDTO(updatedTipoResena));
+
+            // Devuelve TipoResenaDTOInsert (solo la descripción)
+            return ResponseEntity.ok(convertToDTOInsert(updatedTipoResena));
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    // Eliminar un tipo de reseña
+    // ---------------------------
+    // DELETE: eliminar por ID
+    // ---------------------------
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTipoResena(@PathVariable int id) {
         tipoResenaService.deleteTipoResena(id);
         return ResponseEntity.noContent().build();
     }
 
-    // Convertir entidad a DTO
+    // ===========================
+    // MÉTODOS DE CONVERSIÓN
+    // ===========================
+
+    // Entidad -> TipoResenaDTO (para GET)
     private TipoResenaDTO convertToDTO(TipoResena tipoResena) {
         return new TipoResenaDTO(
                 tipoResena.getIdTipoResena(),
@@ -74,11 +109,26 @@ public class TipoResenaController {
         );
     }
 
-    // Convertir DTO a entidad
+    // Entidad -> TipoResenaDTOInsert (para respuestas de POST/PUT)
+    private TipoResenaDTOInsert convertToDTOInsert(TipoResena tipoResena) {
+        return new TipoResenaDTOInsert(
+                tipoResena.getTiporeseTipoResena()
+        );
+    }
+
+    // TipoResenaDTO -> Entidad (no lo usas ahora, pero lo dejo por si acaso)
     private TipoResena convertToEntity(TipoResenaDTO tipoResenaDTO) {
         return new TipoResena(
                 tipoResenaDTO.getIdTipoResena(),
                 tipoResenaDTO.getTiporeseTipoResena()
+        );
+    }
+
+    // TipoResenaDTOInsert -> Entidad (para POST y PUT)
+    private TipoResena convertToEntity(TipoResenaDTOInsert tipoResenaDTOInsert) {
+        return new TipoResena(
+                0, // el ID lo asigna la BD o se setea en el PUT
+                tipoResenaDTOInsert.getTiporeseTipoResena()
         );
     }
 }
