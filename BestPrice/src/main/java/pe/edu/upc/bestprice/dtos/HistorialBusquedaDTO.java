@@ -1,11 +1,12 @@
 package pe.edu.upc.bestprice.dtos;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class HistorialBusquedaDTO {
 
     private int idHistorialBusqueda;
-    private LocalDate fechabusqueHistorialBusqueda;
+    private LocalDateTime fechabusqueHistorialBusqueda;
     private int productoidHistoriaBusqueda;
     private int usuarioidHistoriaBusqueda;
 
@@ -13,7 +14,7 @@ public class HistorialBusquedaDTO {
     }
 
     public HistorialBusquedaDTO(int idHistorialBusqueda,
-                                LocalDate fechabusqueHistorialBusqueda,
+                                LocalDateTime fechabusqueHistorialBusqueda,
                                 int productoidHistoriaBusqueda,
                                 int usuarioidHistoriaBusqueda) {
 
@@ -31,11 +32,11 @@ public class HistorialBusquedaDTO {
         this.idHistorialBusqueda = idHistorialBusqueda;
     }
 
-    public LocalDate getFechabusqueHistorialBusqueda() {
+    public LocalDateTime getFechabusqueHistorialBusqueda() {
         return fechabusqueHistorialBusqueda;
     }
 
-    public void setFechabusqueHistorialBusqueda(LocalDate fechabusqueHistorialBusqueda) {
+    public void setFechabusqueHistorialBusqueda(LocalDateTime fechabusqueHistorialBusqueda) {
         this.fechabusqueHistorialBusqueda = fechabusqueHistorialBusqueda;
     }
 
