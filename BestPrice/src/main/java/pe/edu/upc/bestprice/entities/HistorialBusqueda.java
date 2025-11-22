@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "HistorialBusqueda")
@@ -14,7 +15,7 @@ public class HistorialBusqueda {
 
     @CreationTimestamp
     @Column(name = "fechabusqueHistorialBusqueda",nullable = false,updatable = false)
-    private LocalDate fechabusqueHistorialBusqueda;
+    private LocalDateTime fechabusqueHistorialBusqueda;
 
     @Column(name = "productoidHistoriaBusqueda",nullable = false)
     private int productoidHistoriaBusqueda;
@@ -37,14 +38,6 @@ public class HistorialBusqueda {
     public HistorialBusqueda() {
     }
 
-    public HistorialBusqueda(int idHistorialBusqueda, LocalDate fechabusqueHistorialBusqueda, int productoidHistoriaBusqueda, int usuarioidHistoriaBusqueda) {
-        this.idHistorialBusqueda = idHistorialBusqueda;
-        this.fechabusqueHistorialBusqueda = fechabusqueHistorialBusqueda;
-        this.productoidHistoriaBusqueda = productoidHistoriaBusqueda;
-        this.usuarioidHistoriaBusqueda = usuarioidHistoriaBusqueda;
-    }
-
-
     public int getIdHistorialBusqueda() {
         return idHistorialBusqueda;
     }
@@ -53,11 +46,11 @@ public class HistorialBusqueda {
         this.idHistorialBusqueda = idHistorialBusqueda;
     }
 
-    public LocalDate getFechabusqueHistorialBusqueda() {
+    public LocalDateTime getFechabusqueHistorialBusqueda() {
         return fechabusqueHistorialBusqueda;
     }
 
-    public void setFechabusqueHistorialBusqueda(LocalDate fechabusqueHistorialBusqueda) {
+    public void setFechabusqueHistorialBusqueda(LocalDateTime fechabusqueHistorialBusqueda) {
         this.fechabusqueHistorialBusqueda = fechabusqueHistorialBusqueda;
     }
 
