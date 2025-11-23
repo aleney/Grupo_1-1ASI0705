@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Lineatiendamodel } from '../../../models/lineatiendamodel';
+import { Lineatienda } from '../../../models/lineatienda';
 import { LineatiendaService } from '../../../services/lineatiendaservice';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { provideNativeDateAdapter } from '@angular/material/core';
@@ -27,7 +27,7 @@ import { MatMenuModule } from '@angular/material/menu';
 })
 export class Lineatiendasinsert implements OnInit{
   form: FormGroup = new FormGroup({});
-  lt: Lineatiendamodel = new Lineatiendamodel();
+  lt: Lineatienda = new Lineatienda();
   id: number = 0;
   today = new Date();
   edicion: boolean = false;
@@ -59,7 +59,6 @@ registrar(): void {
     this.lt.idLineaTienda = this.form.value.id;
     this.lt.nombreLineaTienda = this.form.value.nombre;
     this.lt.detalleLineaTienda = this.form.value.detalle;
-    this.lt.createdAt = this.form.value.date;
     if (this.edicion) {
       this.ltS.update(this.lt).subscribe(() =>{
         this.ltS.list().subscribe((data) => {
@@ -73,7 +72,7 @@ registrar(): void {
     })
   })
   }
-  this.router.navigate(['linea-tienda'])
+  this.router.navigate(['lineatienda'])
 }
 
 
@@ -84,8 +83,7 @@ init() {
       this.form = new FormGroup({
         id: new FormControl(data.idLineaTienda),
         nombre: new FormControl(data.nombreLineaTienda),
-        detalle: new FormControl(data.detalleLineaTienda),
-        date: new FormControl(data.createdAt)
+        detalle: new FormControl(data.detalleLineaTienda)
       });
     });
   }

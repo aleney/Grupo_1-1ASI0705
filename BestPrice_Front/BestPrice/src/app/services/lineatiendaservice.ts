@@ -2,41 +2,49 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { environment } from '../environments/environment';
-import { Lineatiendamodel } from '../models/lineatiendamodel';
+import { Lineatienda } from '../models/lineatienda';
 const base_url = environment.base;
 
 @Injectable({
   providedIn: 'root'
 })
 export class LineatiendaService {
-  private url = `${base_url}/lineatiendas`;
-  private listaLineaTienda = new Subject<Lineatiendamodel[]>();
+  private url = `${base_url}/linea-tienda`;
+  private listaLineaTienda = new Subject<Lineatienda[]>();
   constructor(private http: HttpClient) {}
   
   list() {
-    return this.http.get<Lineatiendamodel[]>(this.url);
+    return this.http.get<Lineatienda[]>(`${this.url}/listar`);
   }
-  insert(lt: Lineatiendamodel) {
-    return this.http.post(this.url, lt);
+  insert(lt: Lineatienda) {
+    return this.http.post(`${this.url}/insertar`, lt);
   }
-  setList(listaNueva: Lineatiendamodel[]) {
+
+  setList(listaNueva: Lineatienda[]) {
     this.listaLineaTienda.next(listaNueva);
   }
+
   getList() {
     return this.listaLineaTienda.asObservable();
   }
+
   listId(id: number) {
-    return this.http.get<Lineatiendamodel>(`${this.url}/${id}`);
+    return this.http.get<Lineatienda>(`${this.url}/listar/${id}`);
   }
-  update(lt: Lineatiendamodel) {
-    return this.http.put(`${this.url}`, lt, { responseType: 'text' });
+
+  update(lt: Lineatienda) {
+    return this.http.put(`${this.url}/modificar`, lt, { responseType: 'text' });
   }
+
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
+
+/* 
   searchName(nombre: string) {
     const params = {n: nombre};
-    return this.http.get<Lineatiendamodel[]>(`${this.url}/buscarnombre`, {params});
+    return this.http.get<Lineatienda[]>(`${this.url}/buscarnombre`, {params});
   }
+ */
 
 }

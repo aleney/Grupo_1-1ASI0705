@@ -7,13 +7,39 @@
 }
 
 /* ENCABEZADO */
-.header {
-  background-color: #f6a700;
+
+.menu-btn {
+  margin-right: 15px;
+}
+
+/* Top bar */
+.toolbar {
+  background-color: #f4a300;
+  padding: 0 20px;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-area img {
+  height: 60px;
+  margin-bottom: 5px;
+}
+
+.logo-area span{
+  font-family: 'Sundae Ice', sans-serif;
   color: white;
 }
 
+.btc-icon {
+  font-size: 28px;
+}
+
 .title {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -21,45 +47,43 @@
   flex: 1 1 auto;
 }
 
-.logout-btn {
-  color: white;
-  font-weight: bold;
+/* User button */
+.user-btn mat-icon {
+  margin-right: 5px;
+}
+
+
+.spacer {
+  flex: 1 1 auto;
 }
 
 /* BOTÓN VOLVER */
 .btn-volver {
   margin: 20px;
-  background-color: #f6a700;
-  color: white;
   font-weight: bold;
+}
+
+.btn-volver[mat-raised-button] {
+  color: rgb(238, 244, 241);
+  background-color: #f6a700;
+}
+
+/* BOTÓN Registrar */
+.btn-registrar {
+  margin: 20px;
+  font-weight: bold;
+}
+
+.btn-registrar[mat-raised-button] {
+  color: rgb(238, 244, 241);
+  background-color: #f6a700;
 }
 
 /* TÍTULO CENTRAL */
 .titulo {
   text-align: center;
-  font-size: 28px;
+  font-size: 60px;
   margin-top: 10px;
   font-weight: bold;
-}
-
-/* FORMULARIO */
-.form-container {
-  width: 60%;
-  margin: 30px auto;
-  padding: 25px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.full-width {
-  width: 100%;
-}
-
-.btn-registrar {
-  margin-top: 20px;
-  width: 100%;
-  background-color: #f6a700;
-  color: white;
-  font-weight: bold;
+  font-family: "Sundae ice";
 }

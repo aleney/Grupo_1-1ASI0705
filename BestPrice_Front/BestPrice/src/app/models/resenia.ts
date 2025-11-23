@@ -4,4 +4,10 @@ export class Resenia {
     detalleResena: string='';
     exactitudPrecioResena: boolean=true;
     createdAtResena: Date=new Date();
+    updatedAtResena: Date=new Date();
+    /* 
+    usuario: Usuario=new Usuario();
+    tienda: Tienda =new Tienda();
+    tipoResena: TipoResena=new TipoResena(); 
+    */
 }
