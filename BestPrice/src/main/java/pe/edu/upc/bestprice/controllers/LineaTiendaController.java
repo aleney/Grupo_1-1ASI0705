@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.LineaTiendaDTO;
+import pe.edu.upc.bestprice.dtos.LineaTiendaDTOInsert;
 import pe.edu.upc.bestprice.dtos.LineaTiendaDTOTiendasAnio;
 import pe.edu.upc.bestprice.entities.LineaTienda;
 import pe.edu.upc.bestprice.serviceinterfaces.ILineaTiendaService;
@@ -41,7 +42,7 @@ public class LineaTiendaController {
 
     @PostMapping("/insertar")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<String> insertar(@RequestBody LineaTiendaDTO dto) {
+    public ResponseEntity<String> insertar(@RequestBody LineaTiendaDTOInsert dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()
                     .body("El cuerpo de la solicitud está vacío o es inválido.");
@@ -87,7 +88,7 @@ public class LineaTiendaController {
 
     @PutMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<String> modificar(@RequestBody LineaTiendaDTO dto) {
+    public ResponseEntity<String> modificar(@RequestBody LineaTiendaDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         LineaTienda lt = m.map(dto, LineaTienda.class);
 

@@ -1,8 +1,11 @@
 package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "LineaTienda")
@@ -18,17 +21,21 @@ public class LineaTienda {
     @Column(name = "detalleLineaTienda", length = 450, nullable = true)
     private String detalleLineaTienda;
 
-    @Column(name = "createdAtLineaTienda", nullable = true)
-    private LocalDate createdAtLineaTienda;
+    @CreationTimestamp
+    @Column(name = "createdAtLineaTienda", nullable = true, updatable = false)
+    private LocalDateTime createdAtLineaTienda;
+
+    @UpdateTimestamp
+    @Column(name = "updatedAtLineaTienda", nullable = true)
+    private LocalDateTime updatedAtLineaTienda;
 
     public LineaTienda() {
     }
 
-    public LineaTienda(int idLineaTienda, String nombreLineaTienda, String detalleLineaTienda, LocalDate createdAtLineaTienda) {
+    public LineaTienda(int idLineaTienda, String nombreLineaTienda, String detalleLineaTienda) {
         this.idLineaTienda = idLineaTienda;
         this.nombreLineaTienda = nombreLineaTienda;
         this.detalleLineaTienda = detalleLineaTienda;
-        this.createdAtLineaTienda = createdAtLineaTienda;
     }
 
     public int getIdLineaTienda() {
@@ -55,11 +62,19 @@ public class LineaTienda {
         this.detalleLineaTienda = detalleLineaTienda;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAtLineaTienda() {
         return createdAtLineaTienda;
     }
 
-    public void setCreatedAt(LocalDate createdAtLineaTienda) {
+    public void setCreatedAtLineaTienda(LocalDateTime createdAtLineaTienda) {
         this.createdAtLineaTienda = createdAtLineaTienda;
+    }
+
+    public LocalDateTime getUpdatedAtLineaTienda() {
+        return updatedAtLineaTienda;
+    }
+
+    public void setUpdatedAtLineaTienda(LocalDateTime updatedAtLineaTienda) {
+        this.updatedAtLineaTienda = updatedAtLineaTienda;
     }
 }
