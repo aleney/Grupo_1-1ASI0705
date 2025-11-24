@@ -1,6 +1,7 @@
 package pe.edu.upc.bestprice.dtos;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class UsuarioDTOInsert {
     private int idUsuario;
@@ -9,8 +10,8 @@ public class UsuarioDTOInsert {
     private String pasword;
     private int numeroTelefono;
     private Boolean estado;
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private int idRol;
 
     public int getIdUsuario() {
@@ -61,19 +62,19 @@ public class UsuarioDTOInsert {
         this.estado = estado;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDate getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDate updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

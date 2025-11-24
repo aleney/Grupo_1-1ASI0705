@@ -2,7 +2,7 @@ package pe.edu.upc.bestprice.dtos;
 
 import java.time.LocalDateTime;
 
-public class TicketRespuestaDTO {
+public class TicketRespuestaDTOInsert {
     public int idTicketRes;
 
     public String detalle;

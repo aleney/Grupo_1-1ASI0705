@@ -1,9 +1,8 @@
 package pe.edu.upc.bestprice.dtos;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class RolDTO {
+public class RolDTOInsert {
     private int idRol;
     private String tipoUsuario;
     private LocalDateTime createdAt;

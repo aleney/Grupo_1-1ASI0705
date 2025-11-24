@@ -6,8 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.RolDTO;
-import pe.edu.upc.bestprice.dtos.TicketRespuestaDTO;
+import pe.edu.upc.bestprice.dtos.TicketRespuestaDTOInsert;
 import pe.edu.upc.bestprice.entities.TicketRespuesta;
 import pe.edu.upc.bestprice.serviceinterfaces.ITicketRespuestaService;
 
@@ -44,7 +43,7 @@ public class TicketRespuestaController {
 
     @PostMapping("/insertar")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void insertar(@RequestBody TicketRespuestaDTO dto) {
+    public void insertar(@RequestBody TicketRespuestaDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         TicketRespuesta soft = m.map(dto,TicketRespuesta.class);
         reporteService.insertarTicketRespuesta(soft);

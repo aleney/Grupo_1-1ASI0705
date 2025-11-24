@@ -2,7 +2,7 @@ package pe.edu.upc.bestprice.dtos;
 
 import java.time.LocalDateTime;
 
-public class TicketReporteDTO {
+public class TicketReporteDTOInsert {
 
     public int idTicketRep;
 

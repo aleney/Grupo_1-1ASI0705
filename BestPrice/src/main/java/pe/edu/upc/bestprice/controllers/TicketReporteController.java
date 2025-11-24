@@ -6,11 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.RolDTO;
-import pe.edu.upc.bestprice.dtos.TicketReporteDTO;
-import pe.edu.upc.bestprice.dtos.UsuarioDTOInsert;
+import pe.edu.upc.bestprice.dtos.TicketReporteDTOInsert;
 import pe.edu.upc.bestprice.entities.TicketReporte;
-import pe.edu.upc.bestprice.entities.Usuario;
 import pe.edu.upc.bestprice.serviceinterfaces.ITicketReporteService;
 
 import java.util.HashMap;
@@ -28,9 +25,9 @@ public class TicketReporteController {
     @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listar() {
-        List<TicketReporteDTO> lista = reporteService.listarTicketReporte()
+        List<TicketReporteDTOInsert> lista = reporteService.listarTicketReporte()
                 .stream()
-                .map(a -> new ModelMapper().map(a, TicketReporteDTO.class))
+                .map(a -> new ModelMapper().map(a, TicketReporteDTOInsert.class))
                 .collect(Collectors.toList());
 
         if (lista.isEmpty()) {
@@ -46,7 +43,7 @@ public class TicketReporteController {
 
     @PostMapping("/insertar")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT')")
-    public void insertar(@RequestBody TicketReporteDTO dto) {
+    public void insertar(@RequestBody TicketReporteDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         TicketReporte soft = m.map(dto,TicketReporte.class);
         reporteService.insertarTicketReporte(soft);
@@ -54,7 +51,7 @@ public class TicketReporteController {
 
     @PutMapping("/editar")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<String> editar(@RequestBody TicketReporteDTO dto) {
+    public ResponseEntity<String> editar(@RequestBody TicketReporteDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         TicketReporte ticketReporte = m.map(dto, TicketReporte.class);
         TicketReporte existente = reporteService.listarId(ticketReporte.getIdTicketRep());

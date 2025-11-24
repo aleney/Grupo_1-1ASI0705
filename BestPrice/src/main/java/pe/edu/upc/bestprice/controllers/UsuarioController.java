@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.RolDTO;
 import pe.edu.upc.bestprice.dtos.UsuarioDTOInsert;
 import pe.edu.upc.bestprice.dtos.UsuarioDTOList;
 import pe.edu.upc.bestprice.entities.Usuario;

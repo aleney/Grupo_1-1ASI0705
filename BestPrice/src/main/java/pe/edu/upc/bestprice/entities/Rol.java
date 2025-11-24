@@ -18,12 +18,12 @@ public class Rol {
     private String tipoUsuario;
 
     @Column(name = "createdAt",length = 9,nullable = false)
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updatedAt",length = 9,nullable = false)
     private LocalDateTime updatedAt;
 
-    public Rol(int idRol, String tipoUsuario, LocalDate createdAt, LocalDateTime updatedAt) {
+    public Rol(int idRol, String tipoUsuario, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.idRol = idRol;
         this.tipoUsuario = tipoUsuario;
         this.createdAt = createdAt;
@@ -50,11 +50,11 @@ public class Rol {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
