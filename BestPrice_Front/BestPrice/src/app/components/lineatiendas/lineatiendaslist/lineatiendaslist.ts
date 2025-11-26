@@ -4,10 +4,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
-import { Lineatienda } from '../../../models/lineatienda';
 import { LineatiendaService } from '../../../services/lineatiendaservice';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { LineatiendaList } from '../../../models/lineatiendalist';
 
 @Component({
   selector: 'app-lineatiendaslist',
@@ -17,8 +17,8 @@ import { MatMenuModule } from '@angular/material/menu';
 })
 export class Lineatiendaslist implements OnInit {
 
-  dataSource: MatTableDataSource<Lineatienda> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5'];
+  dataSource: MatTableDataSource<LineatiendaList> = new MatTableDataSource();
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
 
   constructor(private ltS: LineatiendaService) {}
 

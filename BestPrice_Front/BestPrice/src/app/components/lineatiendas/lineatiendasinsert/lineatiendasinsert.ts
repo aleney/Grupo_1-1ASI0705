@@ -4,12 +4,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Lineatienda } from '../../../models/lineatienda';
 import { LineatiendaService } from '../../../services/lineatiendaservice';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { LineatiendaInsert } from '../../../models/lineatiendainsert';
 
 @Component({
   selector: 'app-lineatiendasinsert',
@@ -27,7 +27,7 @@ import { MatMenuModule } from '@angular/material/menu';
 })
 export class Lineatiendasinsert implements OnInit{
   form: FormGroup = new FormGroup({});
-  lt: Lineatienda = new Lineatienda();
+  lt: LineatiendaInsert = new LineatiendaInsert();
   id: number = 0;
   today = new Date();
   edicion: boolean = false;
@@ -39,7 +39,10 @@ constructor(
   private route: ActivatedRoute
 ) { }
 
+
+
 ngOnInit(): void {
+
   this.route.params.subscribe((data: Params) => {
     this.id = data['id'];
     this.edicion = data['id'] != null;
@@ -50,8 +53,8 @@ ngOnInit(): void {
       id: [''],
       nombre: ['', Validators.required],
       detalle: ['', Validators.required],
-      date: ['', Validators.required]
     });
+  
 }
 
 registrar(): void {
@@ -72,21 +75,23 @@ registrar(): void {
     })
   })
   }
-  this.router.navigate(['lineatienda'])
+  this.router.navigate(['lineatienda/lineatiendalist']);
 }
 
 
 }
+
 init() {
   if (this.edicion) {
     this.ltS.listId(this.id).subscribe((data) => {
       this.form = new FormGroup({
         id: new FormControl(data.idLineaTienda),
         nombre: new FormControl(data.nombreLineaTienda),
-        detalle: new FormControl(data.detalleLineaTienda)
+        detalle: new FormControl(data.detalleLineaTienda),
       });
     });
   }
 }
+
 
 }

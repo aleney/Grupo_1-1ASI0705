@@ -7,7 +7,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { ReseniaService } from '../../../services/reseniaservice';
-import { Resenia } from '../../../models/resenia';
+import { ReseniaList } from '../../../models/resenialist';
 
 @Component({
   selector: 'app-resenialist',
@@ -17,8 +17,8 @@ import { Resenia } from '../../../models/resenia';
 })
 export class Resenialist implements OnInit {
 
-  dataSource: MatTableDataSource<Resenia> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
+  dataSource: MatTableDataSource<ReseniaList> = new MatTableDataSource();
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8'];
 
   constructor(private rS: ReseniaService) {}
 

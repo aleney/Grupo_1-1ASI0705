@@ -1,4 +1,4 @@
-export class Resenia {
+export class ReseniaList {
     idResena: number=0;
     calificacionResena: number=0;
     detalleResena: string='';

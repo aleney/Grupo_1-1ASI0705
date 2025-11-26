@@ -1,4 +1,4 @@
-export class Lineatienda {
+export class LineatiendaList {
     idLineaTienda: number=0
     nombreLineaTienda: string=''
     detalleLineaTienda: string=''

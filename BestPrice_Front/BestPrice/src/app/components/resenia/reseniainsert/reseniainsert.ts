@@ -7,11 +7,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
-import { Resenia } from '../../../models/resenia';
 import { ReseniaService } from '../../../services/reseniaservice';
 import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
 import { MatOption } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { ReseniaInsert } from '../../../models/reseniainsert';
 
 @Component({
   selector: 'app-reseniainsert',
@@ -30,7 +30,7 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class Reseniainsert implements OnInit{
   form: FormGroup = new FormGroup({});
-  r: Resenia = new Resenia();
+  r: ReseniaInsert = new ReseniaInsert();
   id: number = 0;
   today = new Date();
   edicion: boolean = false;
@@ -86,7 +86,7 @@ registrar(): void {
     })
   })
   }
-  this.router.navigate(['resenia'])
+  this.router.navigate(['resenia/resenialist'])
 }
 
 
@@ -96,9 +96,9 @@ init() {
     this.rS.listId(this.id).subscribe((data) => {
       this.form = new FormGroup({
         id: new FormControl(data.idResena),
-        nombre: new FormControl(data.calificacionResena),
+        calificacion: new FormControl(data.calificacionResena),
         detalle: new FormControl(data.detalleResena),
-        date: new FormControl(data.exactitudPrecioResena)
+        exactitudPrecio: new FormControl(data.exactitudPrecioResena)
       });
     });
   }
