@@ -4,8 +4,6 @@ import pe.edu.upc.bestprice.entities.Tienda;
 import pe.edu.upc.bestprice.entities.TipoResena;
 import pe.edu.upc.bestprice.entities.Usuario;
 
-import java.time.LocalDate;
-
 public class ResenaDTOInsert {
     private int idResena;
     private int calificacionResena;

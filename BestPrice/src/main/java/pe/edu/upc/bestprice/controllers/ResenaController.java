@@ -6,10 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.ResenaDTOInsert;
-import pe.edu.upc.bestprice.dtos.ResenaDTOList;
-import pe.edu.upc.bestprice.dtos.ResenaDTOListCalAsc;
-import pe.edu.upc.bestprice.dtos.ResenaDTOListTiendaCal;
+import pe.edu.upc.bestprice.dtos.*;
+import pe.edu.upc.bestprice.entities.Resena;
 import pe.edu.upc.bestprice.entities.Resena;
 import pe.edu.upc.bestprice.serviceinterfaces.IResenaService;
 
@@ -112,6 +110,20 @@ public class ResenaController {
         return ResponseEntity.ok(ListaCalificacion);
     }
 
+    @GetMapping("/listar/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
+    public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
+        Resena r = service.ListId(id);
+        if (r == null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
+        }
+        ModelMapper m = new ModelMapper();
+        ResenaDTOList dto = m.map(r, ResenaDTOList.class);
+        return ResponseEntity.ok(dto);
+    }
+    
     @GetMapping("/tienda-calificada")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<?> CalificacionMejores5Tiendas() {

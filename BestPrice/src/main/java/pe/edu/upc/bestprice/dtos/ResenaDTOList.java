@@ -1,7 +1,5 @@
 package pe.edu.upc.bestprice.dtos;
 
-import pe.edu.upc.bestprice.entities.Usuario;
-
 import java.time.LocalDateTime;
 
 public class ResenaDTOList {
