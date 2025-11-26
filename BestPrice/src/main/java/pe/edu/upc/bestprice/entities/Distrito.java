@@ -19,10 +19,10 @@ public class Distrito {
     @Column(name = "descripcionDistrito", length = 450, nullable = false)
     private String descripcionDistrito;
 
-    @Column(name = "longitudDistrito", precision = 2, scale = 6, nullable = false)
+    @Column(name = "longitudDistrito", precision = 10, scale = 6, nullable = false)
     private BigDecimal longitudDistrito;
 
-    @Column(name = "latitudDistrito", precision = 2, scale = 6, nullable = false)
+    @Column(name = "latitudDistrito", precision = 10, scale = 6, nullable = false)
     private BigDecimal latitudDistrito;
 
     @Column(name = "createdAtDistrito", nullable = false)
