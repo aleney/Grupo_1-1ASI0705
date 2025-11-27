@@ -1,40 +1,12 @@
-package pe.edu.upc.bestprice.entities;
+package pe.edu.upc.bestprice.dtos;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "Rol")
-
-public class Rol {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RolDTOList {
     private int idRol;
-
-    @Column(name = "tipoUsuario",length = 20, nullable = false)
     private String tipoUsuario;
-
-    @CreationTimestamp
-    @Column(name = "createdAt",length = 9,nullable = true, updatable = false)
     private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updatedAt",length = 9,nullable = true)
     private LocalDateTime updatedAt;
-
-    public Rol(int idRol, String tipoUsuario) {
-        this.idRol = idRol;
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public Rol() {
-
-    }
 
     public int getIdRol() {
         return idRol;

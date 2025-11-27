@@ -7,8 +7,6 @@ public class TicketRespuestaDTOInsert {
 
     public String detalle;
 
-    public LocalDateTime createdAt;
-
     public int getIdTicketRes() {
         return idTicketRes;
     }
@@ -24,14 +22,5 @@ public class TicketRespuestaDTOInsert {
     public void setDetalle(String detalle) {
         this.detalle = detalle;
     }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
 
 }
