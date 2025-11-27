@@ -12,7 +12,10 @@ import pe.edu.upc.bestprice.dtos.LineaTiendaDTOTiendasAnio;
 import pe.edu.upc.bestprice.entities.LineaTienda;
 import pe.edu.upc.bestprice.serviceinterfaces.ILineaTiendaService;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -133,11 +136,16 @@ public class LineaTiendaController {
                     .body("No se encontraron proveedores registrados");
         }
 
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern("yyyy-MM-dd HH:mm:ss")
+                .appendFraction(ChronoField.MICRO_OF_SECOND, 1, 6, true)
+                .toFormatter();
+
         //columna -> Item de la lista de elementos que retorna monto
         for (String[] columna : tiendas) {
             LineaTiendaDTOTiendasAnio dto = new LineaTiendaDTOTiendasAnio();
-            dto.setCreatedAt(LocalDate.parse(columna[1]));
             dto.setNombreLineaTienda((columna[0]));
+            dto.setCreatedAtLineaTienda(LocalDateTime.parse(columna[1], formatter));
             ListaTiendas.add(dto);
         }
         return ResponseEntity.ok(ListaTiendas);
