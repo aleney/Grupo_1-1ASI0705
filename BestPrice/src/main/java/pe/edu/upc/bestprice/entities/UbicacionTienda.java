@@ -15,10 +15,10 @@ public class UbicacionTienda {
     @Column(name = "direccionUbicacionTienda", length = 200, nullable = false)
     private String direccionUbicacionTienda;
 
-    @Column(name = "longitudUbicacionTienda", precision = 2, scale = 6, nullable = false)
+    @Column(name = "longitudUbicacionTienda", precision = 10, scale = 6, nullable = false)
     private BigDecimal longitudUbicacionTienda;
 
-    @Column(name = "latitudUbicacionTienda", precision = 2, scale = 6, nullable = false)
+    @Column(name = "latitudUbicacionTienda", precision = 10, scale = 6, nullable = false)
     private BigDecimal latitudUbicacionTienda;
 
     @Column(name = "createdAtUbicacionTienda", nullable = false)
