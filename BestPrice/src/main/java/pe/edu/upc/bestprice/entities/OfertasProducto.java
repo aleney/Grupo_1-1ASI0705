@@ -12,10 +12,10 @@ public class OfertasProducto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idOfertasProducto;
 
-    @Column(name = "fechainicioHistorialPrecio", nullable = false)
+    @Column(name = "fechainicioOfertasProducto", nullable = false)
     private LocalDate fechainicioOfertasProducto;
 
-    @Column(name = "fechafinHistorialPrecio", nullable = false)
+    @Column(name = "fechafinOfertasProducto", nullable = false)
     private LocalDate fechafinOfertasProducto;
 
     @Column(name = "createdAtOfertasProducto", nullable = false)
