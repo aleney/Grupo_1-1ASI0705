@@ -41,24 +41,13 @@
 </mat-toolbar>
 
   <!-- BOTÓN VOLVER -->
-  <button mat-raised-button class="btn-volver" routerLink="/menu">
+  <button mat-raised-button class="btn-volver" routerLink="/lineatienda/lineatiendalist">
     <mat-icon>arrow_back_ios</mat-icon>
     Volver
   </button>
 
-    <!-- BOTÓN REGISTRAR -->
-    <button mat-raised-button class="btn-registrar" routerLink="/lineatienda/lineatiendainsert">
-        <mat-icon>add</mat-icon>
-      Registrar
-  </button>
-
-  <!-- BOTÓN REGISTRAR -->
-    <button mat-raised-button class="btn-registrar" routerLink="/lineatienda/lineatiendas-anioactual">
-        <mat-icon>add</mat-icon>
-      Tiendas del anio actual
-  </button>
   <!-- TÍTULO CENTRAL -->
-  <h1 class="titulo">Linea de Tiendas</h1>
+  <h1 class="titulo">Linea de Tiendas en el anio 2025</h1>
 
   <!-- TABLA DE DATOS -->
   <div>
@@ -101,27 +90,6 @@
         </td>
       </ng-container>
 
-     <ng-container matColumnDef="c6">
-        <th mat-header-cell *matHeaderCellDef>Actualizar</th>
-        <td mat-cell *matCellDef="let element">
-          <button  matButton
-            [routerLink]="['edits',element.idLineaTienda]" >
-            <mat-icon>edit</mat-icon>
-            
-          </button>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="c7">
-        <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-        <td mat-cell *matCellDef="let element">
-          <button  matButton 
-            (click)="eliminar(element.idLineaTienda)" >
-             <mat-icon>delete</mat-icon>
-            
-          </button>
-        </td>
-      </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>

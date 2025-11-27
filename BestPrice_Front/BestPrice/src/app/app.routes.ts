@@ -8,6 +8,7 @@ import { Resenialist } from './components/resenia/resenialist/resenialist';
 import { Lineatiendaslist } from './components/lineatiendas/lineatiendaslist/lineatiendaslist';
 import { seguridadGuard } from './guard/security-guard';
 import { Autenticador } from './components/autenticador/autenticador';
+import { Reportelineatiendas2025 } from './components/lineatiendas/reportelineatiendas2025/reportelineatiendas2025';
 
 export const routes: Routes = [
 
@@ -25,7 +26,8 @@ export const routes: Routes = [
       children:[
         { path: 'lineatiendalist', component: Lineatiendaslist},
         { path: 'edits/:id', component: Lineatiendasinsert},
-        { path: 'lineatiendainsert', component: Lineatiendasinsert}
+        { path: 'lineatiendainsert', component: Lineatiendasinsert},
+        { path: 'lineatiendas-anioactual', component: Reportelineatiendas2025}
       ],
       canActivate: [seguridadGuard]
     },

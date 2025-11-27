@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { LineatiendaList } from '../models/lineatiendalist';
 import { LineatiendaInsert } from '../models/lineatiendainsert';
+import { Lineatiendaanio2025 } from '../models/lineatiendaanio2025';
 const base_url = environment.base;
 
 @Injectable({
@@ -41,11 +42,13 @@ export class LineatiendaService {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
 
-/* 
   searchName(nombre: string) {
     const params = {n: nombre};
-    return this.http.get<Lineatienda[]>(`${this.url}/buscarnombre`, {params});
+    return this.http.get<LineatiendaList[]>(`${this.url}/buscarnombre`, {params});
   }
- */
+
+  getTiendasAnioactual(): Observable<Lineatiendaanio2025[]> {
+    return this.http.get<Lineatiendaanio2025[]>(`${this.url}/tiendas2025`);
+  }
 
 }
