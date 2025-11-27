@@ -6,11 +6,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.bestprice.dtos.UsuarioDTOEstado;
 import pe.edu.upc.bestprice.dtos.UsuarioDTOInsert;
 import pe.edu.upc.bestprice.dtos.UsuarioDTOList;
 import pe.edu.upc.bestprice.entities.Usuario;
 import pe.edu.upc.bestprice.serviceinterfaces.IUsuarioService;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,46 +43,22 @@ public class UsuarioController {
     }
 
     @GetMapping("/buscar")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<?> buscarUsuario(@RequestParam String nombre) {
-        List<String[]> usuarios = service.buscarUsuario(nombre);
-        if (usuarios.isEmpty()) {
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    public ResponseEntity<?> buscarUsuario(@RequestParam String n) {
+        List<Usuario> us = service.buscarUsuario(n);
+
+        if (us.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron usuarios: " + nombre);
+                    .body("No se encontraron tiendas de nombre o caracter: " + n);
         }
 
-        List<UsuarioDTOList> listaDTO = new ArrayList<>();
-        for (String[] columna : usuarios) {
-            UsuarioDTOList dto = new UsuarioDTOList();
-            dto.setNombre(columna[0]);
-            dto.setEmail(columna[1]);
-            dto.setEstado(Boolean.parseBoolean(columna[2]));
-            dto.setTipoUsuario(columna[3]);
-            listaDTO.add(dto);
-        }
+        List<UsuarioDTOInsert> listaDTO = us.stream().map(a -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(a, UsuarioDTOInsert.class);
+        }).collect(Collectors.toList());
+
         return ResponseEntity.ok(listaDTO);
     }
-
-//    @GetMapping("/buscar")
-//    @PreAuthorize("hasAuthority('ADMIN')")
-//    public ResponseEntity<?> buscarUsuario(@RequestParam String estado) {
-//        List<String[]> usuarios = service.buscarUsuario(nombre);
-//        if (usuarios.isEmpty()) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-//                    .body("No se encontraron usuarios: " + nombre);
-//        }
-//
-//        List<UsuarioDTOList> listaDTO = new ArrayList<>();
-//        for (String[] columna : usuarios) {
-//            UsuarioDTOList dto = new UsuarioDTOList();
-//            dto.setNombre(columna[0]);
-//            dto.setEmail(columna[1]);
-//            dto.setEstado(Boolean.parseBoolean(columna[2]));
-//            dto.setTipoUsuario(columna[3]);
-//            listaDTO.add(dto);
-//        }
-//        return ResponseEntity.ok(listaDTO);
-//    }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -120,4 +101,34 @@ public class UsuarioController {
         service.edit(p);
         return ResponseEntity.ok("Registro con ID " + p.getIdUsuario() + " modificado correctamente.");
     }
+
+    @GetMapping("/estado")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    public ResponseEntity<?> UsuariosPorEstado() {
+        List<String[]> usEst = service.filtrarUsuariosPorEstado();
+        List<UsuarioDTOEstado> usEstado = new ArrayList<>();
+
+        if (usEst.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron usuarios registrados");
+        }
+
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern("yyyy-MM-dd HH:mm:ss")
+                .appendFraction(ChronoField.MICRO_OF_SECOND, 1, 6, true)
+                .toFormatter();
+
+        //columna -> Item de la lista de elementos que retorna monto
+        for (String[] columna : usEst) {
+            UsuarioDTOEstado dto = new UsuarioDTOEstado();
+            dto.setIdUsuario(Integer.parseInt(columna[0]));   // idUsuario
+            dto.setNombre(columna[1]);                        // nombre
+            dto.setCreatedAt(LocalDateTime.parse(columna[2], formatter)); // createdAt
+            dto.setEstado(Boolean.parseBoolean(columna[3]));   // estado
+
+            usEstado.add(dto);
+        }
+        return ResponseEntity.ok(usEstado);
+    }
 }
+

@@ -10,6 +10,6 @@ public interface IUsuarioService {
     public Usuario listarId(int idUsuario);
     public void delete(int idUsuario);
     public void edit(Usuario p);
-    public List<String[]> buscarUsuario(String nombre);
-    public List<String[]> listarUsuariosInactivos(String estado);
+    List<Usuario> buscarUsuario(String nombre);
+    public List<String[]> filtrarUsuariosPorEstado();
 }

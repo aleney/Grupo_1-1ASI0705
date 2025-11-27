@@ -38,13 +38,15 @@ public class UsuarioServiceImplement implements IUsuarioService {
     }
 
     @Override
-    public List<String[]> buscarUsuario(String nombre){ return repository.buscarUsuario(nombre);
+    public List<Usuario> buscarUsuario(String nombre){
+        return repository.buscarUsuario(nombre);
     }
 
     @Override
-    public List<String[]> listarUsuariosInactivos(String estado) {
-        return repository.listarUsuariosInactivos(estado);
+    public List<String[]> filtrarUsuariosPorEstado() {
+        return repository.filtrarUsuariosPorEstado();
     }
+
 
 
 }

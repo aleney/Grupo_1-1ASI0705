@@ -40,7 +40,6 @@ public class TicketReporteController {
         return ResponseEntity.ok(lista);
     }
 
-
     @PostMapping("/insertar")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT')")
     public void insertar(@RequestBody TicketReporteDTOInsert dto) {
