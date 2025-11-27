@@ -144,8 +144,11 @@ public class LineaTiendaController {
         //columna -> Item de la lista de elementos que retorna monto
         for (String[] columna : tiendas) {
             LineaTiendaDTOTiendasAnio dto = new LineaTiendaDTOTiendasAnio();
-            dto.setNombreLineaTienda((columna[0]));
-            dto.setCreatedAtLineaTienda(LocalDateTime.parse(columna[1], formatter));
+            dto.setIdLineaTienda(Integer.parseInt(columna[0]));
+            dto.setNombreLineaTienda((columna[1]));
+            dto.setDetalleLineaTienda(columna[2]);
+            dto.setCreatedAtLineaTienda(LocalDateTime.parse(columna[3], formatter));
+            dto.setUpdatedAtLineaTienda(LocalDateTime.parse(columna[4], formatter));
             ListaTiendas.add(dto);
         }
         return ResponseEntity.ok(ListaTiendas);
