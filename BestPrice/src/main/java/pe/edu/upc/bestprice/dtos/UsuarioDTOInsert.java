@@ -1,13 +1,10 @@
 package pe.edu.upc.bestprice.dtos;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 public class UsuarioDTOInsert {
     private int idUsuario;
     private String nombre;
     private String email;
-    private String pasword;
+    private String password;
     private int numeroTelefono;
     private Boolean estado;
     private int idRol;
@@ -37,11 +34,11 @@ public class UsuarioDTOInsert {
     }
 
     public String getPasword() {
-        return pasword;
+        return password;
     }
 
-    public void setPasword(String pasword) {
-        this.pasword = pasword;
+    public void setPasword(String password) {
+        this.password = password;
     }
 
     public int getNumeroTelefono() {

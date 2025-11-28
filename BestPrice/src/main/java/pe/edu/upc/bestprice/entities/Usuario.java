@@ -2,6 +2,7 @@ package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -32,6 +33,7 @@ public class Usuario {
     @Column(name = "createdAt",length = 9,nullable = true, updatable = false)
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updatedAt",length = 9,nullable = true)
     private LocalDateTime updatedAt;
 

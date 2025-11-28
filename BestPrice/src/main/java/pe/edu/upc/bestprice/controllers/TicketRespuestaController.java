@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.TicketReporteDTOInsert;
 import pe.edu.upc.bestprice.dtos.TicketRespuestaDTOInsert;
+import pe.edu.upc.bestprice.dtos.TicketRespuestaDTOList;
 import pe.edu.upc.bestprice.dtos.UsuarioDTOList;
 import pe.edu.upc.bestprice.entities.TicketReporte;
 import pe.edu.upc.bestprice.entities.TicketRespuesta;
@@ -77,7 +78,7 @@ public class TicketRespuestaController {
                     .body("No existe un registro con el ID: " + id);
         }
         ModelMapper m = new ModelMapper();
-        TicketRespuestaDTOInsert dto = m.map(tres, TicketRespuestaDTOInsert.class);
+        TicketRespuestaDTOList dto = m.map(tres, TicketRespuestaDTOList.class);
         return ResponseEntity.ok(dto);
     }
 

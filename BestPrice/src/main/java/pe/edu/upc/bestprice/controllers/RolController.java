@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.RolDTOInsert;
+import pe.edu.upc.bestprice.dtos.RolDTOList;
 import pe.edu.upc.bestprice.entities.Rol;
 import pe.edu.upc.bestprice.serviceinterfaces.IRolService;
 
@@ -23,9 +24,9 @@ public class RolController {
     @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listar() {
-        List<RolDTOInsert> lista = rolService.listarRoles()
+        List<RolDTOList> lista = rolService.listarRoles()
                 .stream()
-                .map(a -> new ModelMapper().map(a, RolDTOInsert.class))
+                .map(a -> new ModelMapper().map(a, RolDTOList.class))
                 .collect(Collectors.toList());
 
         if (lista.isEmpty()) {
