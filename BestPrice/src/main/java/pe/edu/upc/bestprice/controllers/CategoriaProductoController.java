@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.CategoriaProductoDTO;
+import pe.edu.upc.bestprice.dtos.CategoriaProductoDTOInsert;
 import pe.edu.upc.bestprice.entities.CategoriaProducto;
 import pe.edu.upc.bestprice.serviceinterfaces.ICategoriaProductoService;
 
@@ -23,9 +23,9 @@ public class CategoriaProductoController {
     @GetMapping("/listar")
     @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
     public ResponseEntity<?> listar() {
-        List<CategoriaProductoDTO> lista = service.listarCategoriaProducto().stream().map(a -> {
+        List<CategoriaProductoDTOInsert> lista = service.listarCategoriaProducto().stream().map(a -> {
             ModelMapper m = new ModelMapper();
-            return m.map(a, CategoriaProductoDTO.class);
+            return m.map(a, CategoriaProductoDTOInsert.class);
         }).collect(Collectors.toList());
 
         if (lista.isEmpty()) {
@@ -38,7 +38,7 @@ public class CategoriaProductoController {
 
     @PostMapping("/insertar")
     @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
-    public ResponseEntity<String> insertar(@RequestBody CategoriaProductoDTO dto) {
+    public ResponseEntity<String> insertar(@RequestBody CategoriaProductoDTOInsert dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()
                     .body("El cuerpo de la solicitud está vacío o es inválido.");
@@ -64,7 +64,7 @@ public class CategoriaProductoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ningun registro de la Categoria del producto" + id);
         }
         ModelMapper m=new ModelMapper();
-        CategoriaProductoDTO cpdtos=m.map(ctps,CategoriaProductoDTO.class);
+        CategoriaProductoDTOInsert cpdtos=m.map(ctps, CategoriaProductoDTOInsert.class);
         return ResponseEntity.ok(cpdtos);
     }
 
@@ -82,7 +82,7 @@ public class CategoriaProductoController {
 
     @PutMapping("/editar")
     @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
-    public ResponseEntity<String> modificar(@RequestBody CategoriaProductoDTO dto) {
+    public ResponseEntity<String> modificar(@RequestBody CategoriaProductoDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         CategoriaProducto ctp = m.map(dto, CategoriaProducto.class);
         CategoriaProducto existente = service.listId(ctp.getIdCategoriaProducto());

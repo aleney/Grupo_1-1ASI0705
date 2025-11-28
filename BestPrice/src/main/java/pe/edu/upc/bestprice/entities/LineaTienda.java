@@ -2,8 +2,6 @@ package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-
 @Entity
 @Table(name = "LineaTienda")
 public class LineaTienda {
@@ -15,20 +13,12 @@ public class LineaTienda {
     @Column(name = "nombreLineaTienda", length = 50, nullable = false)
     private String nombreLineaTienda;
 
-    @Column(name = "detalleLineaTienda", length = 450, nullable = true)
-    private String detalleLineaTienda;
-
-    @Column(name = "createdAtLineaTienda", nullable = true)
-    private LocalDate createdAtLineaTienda;
-
     public LineaTienda() {
     }
 
-    public LineaTienda(int idLineaTienda, String nombreLineaTienda, String detalleLineaTienda, LocalDate createdAtLineaTienda) {
+    public LineaTienda(int idLineaTienda, String nombreLineaTienda) {
         this.idLineaTienda = idLineaTienda;
         this.nombreLineaTienda = nombreLineaTienda;
-        this.detalleLineaTienda = detalleLineaTienda;
-        this.createdAtLineaTienda = createdAtLineaTienda;
     }
 
     public int getIdLineaTienda() {
@@ -47,19 +37,4 @@ public class LineaTienda {
         this.nombreLineaTienda = nombreLineaTienda;
     }
 
-    public String getDetalleLineaTienda() {
-        return detalleLineaTienda;
-    }
-
-    public void setDetalleLineaTienda(String detalleLineaTienda) {
-        this.detalleLineaTienda = detalleLineaTienda;
-    }
-
-    public LocalDate getCreatedAt() {
-        return createdAtLineaTienda;
-    }
-
-    public void setCreatedAt(LocalDate createdAtLineaTienda) {
-        this.createdAtLineaTienda = createdAtLineaTienda;
-    }
 }

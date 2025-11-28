@@ -9,7 +9,7 @@ import pe.edu.upc.bestprice.serviceinterfaces.IRolService;
 import java.util.List;
 
 @Service
-public class RolServiceImplement implements IRolService{
+public class RolServiceImplement implements IRolService {
 
     @Autowired
     private IRolRepository repository;

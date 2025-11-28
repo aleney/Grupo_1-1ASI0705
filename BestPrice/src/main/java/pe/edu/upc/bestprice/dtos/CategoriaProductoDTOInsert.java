@@ -1,24 +1,9 @@
-package pe.edu.upc.bestprice.entities;
+package pe.edu.upc.bestprice.dtos;
 
-import jakarta.persistence.*;
+public class CategoriaProductoDTOInsert {
 
-@Entity
-@Table(name="CategoriaProducto")
-public class CategoriaProducto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCategoriaProducto;
-    @Column(name="nombreCategoriaProducto", nullable=false, length=50)
     private String nombreCategoriaProducto;
-
-
-    public CategoriaProducto() {
-    }
-
-    public CategoriaProducto(int idCategoriaProducto, String nombreCategoriaProducto) {
-        this.idCategoriaProducto = idCategoriaProducto;
-        this.nombreCategoriaProducto = nombreCategoriaProducto;
-    }
 
     public int getIdCategoriaProducto() {
         return idCategoriaProducto;

@@ -2,9 +2,9 @@ package pe.edu.upc.bestprice.dtos;
 
 public class UsuarioDTOList {
     private String nombre;
-    private String email;
     private boolean estado;
     private String tipoUsuario;
+
 
     public String getNombre() {
         return nombre;
@@ -12,14 +12,6 @@ public class UsuarioDTOList {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public boolean isEstado() {

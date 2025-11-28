@@ -1,8 +1,11 @@
 package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -19,29 +22,41 @@ public class Tienda {
     private String numeroTelefono;
     @Column(name="estadoTienda", nullable = false)
     private boolean estadoTienda;
-    @Column(name="fechaTienda", nullable = false, length = 13)
-    private LocalDate fechaTienda;
+
+    @CreationTimestamp
+    @Column(name="createdAtT", nullable = false, updatable = false)
+    private LocalDateTime createdAtT;
+
+    @UpdateTimestamp
+    @Column(name="updatedAtT",nullable = false)
+    private LocalDateTime updatedAtT;
+
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idTipoTienda")
     private TipoTienda tipoTienda;
 
-    @OneToMany
-    @JoinColumn(name="idProducto")
-    private List<Producto> productosTienda;
+    @ManyToOne
+    @JoinColumn(name="idlineTiend")
+    private LineaTienda lineaTienda;
 
     public Tienda() {
     }
 
-    public Tienda(int idTienda, String nombreTienda, String detalleTienda, String numeroTelefono, boolean estadoTienda, LocalDate fechaTienda, TipoTienda tipoTienda, List<Producto> productosTienda) {
+    public Tienda(int idTienda, String nombreTienda, String detalleTienda, String numeroTelefono, boolean estadoTienda, LocalDate fechaTienda, LocalDateTime createdAtT, LocalDateTime updatedAtT, Usuario usuario, TipoTienda tipoTienda, LineaTienda lineaTienda) {
         this.idTienda = idTienda;
         this.nombreTienda = nombreTienda;
         this.detalleTienda = detalleTienda;
         this.numeroTelefono = numeroTelefono;
         this.estadoTienda = estadoTienda;
-        this.fechaTienda = fechaTienda;
+        this.createdAtT = createdAtT;
+        this.updatedAtT = updatedAtT;
+        this.usuario = usuario;
         this.tipoTienda = tipoTienda;
-        this.productosTienda = productosTienda;
+        this.lineaTienda = lineaTienda;
     }
 
     public int getIdTienda() {
@@ -84,12 +99,28 @@ public class Tienda {
         this.estadoTienda = estadoTienda;
     }
 
-    public LocalDate getFechaTienda() {
-        return fechaTienda;
+    public LocalDateTime getCreatedAtT() {
+        return createdAtT;
     }
 
-    public void setFechaTienda(LocalDate fechaTienda) {
-        this.fechaTienda = fechaTienda;
+    public void setCreatedAtT(LocalDateTime createdAtT) {
+        this.createdAtT = createdAtT;
+    }
+
+    public LocalDateTime getUpdatedAtT() {
+        return updatedAtT;
+    }
+
+    public void setUpdatedAtT(LocalDateTime updatedAtT) {
+        this.updatedAtT = updatedAtT;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public TipoTienda getTipoTienda() {
@@ -100,11 +131,11 @@ public class Tienda {
         this.tipoTienda = tipoTienda;
     }
 
-    public List<Producto> getProductosTienda() {
-        return productosTienda;
+    public LineaTienda getLineaTienda() {
+        return lineaTienda;
     }
 
-    public void setProductosTienda(List<Producto> productosTienda) {
-        this.productosTienda = productosTienda;
+    public void setLineaTienda(LineaTienda lineaTienda) {
+        this.lineaTienda = lineaTienda;
     }
 }

@@ -1,6 +1,8 @@
 package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -15,9 +17,6 @@ public class Usuario {
     @Column(name = "nombre",length = 50,nullable = false)
     private String nombre;
 
-    @Column(name = "email",length = 99,nullable = false)
-    private String email;
-
     @Column(name = "password",length = 99,nullable = false)
     private String password;
 
@@ -27,9 +26,11 @@ public class Usuario {
     @Column(name = "estado",length = 9,nullable = false)
     private Boolean estado;
 
-    @Column(name = "createdAt",length = 9,nullable = false)
+    @CreationTimestamp
+    @Column(name = "createdAt",length = 9,nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updatedAt",length = 9,nullable = false)
     private LocalDateTime updatedAt;
 
@@ -37,20 +38,16 @@ public class Usuario {
     @JoinColumn(name = "idRol")
     private Rol rol;
 
-    public Usuario(int idUsuario, String nombre, String email, String password, int numeroTelefono, Boolean estado, LocalDateTime createdAt, LocalDateTime updatedAt, Rol rol) {
+    public Usuario() {
+    }
+
+    public Usuario(int idUsuario, String nombre, String password, int numeroTelefono, Boolean estado, Rol rol) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
-        this.email = email;
         this.password = password;
         this.numeroTelefono = numeroTelefono;
         this.estado = estado;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.rol = rol;
-    }
-
-    public Usuario() {
-
     }
 
     public int getIdUsuario() {
@@ -67,14 +64,6 @@ public class Usuario {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {
@@ -124,6 +113,4 @@ public class Usuario {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-
-
 }
