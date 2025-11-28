@@ -3,7 +3,7 @@ package pe.edu.upc.bestprice.entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.LocalDate;
 
 @Entity
@@ -26,12 +26,12 @@ public class Distrito {
     private BigDecimal latitudDistrito;
 
     @Column(name = "createdAtDistrito", nullable = false)
-    private Timestamp createdAtDistrito;
+    private LocalDateTime createdAtDistrito;
 
     public Distrito() {
     }
 
-    public Distrito(int idDistrito, String nombreDistrito, String descripcionDistrito, BigDecimal longitudDistrito, BigDecimal latitudDistrito, Timestamp createdAtDistrito) {
+    public Distrito(int idDistrito, String nombreDistrito, String descripcionDistrito, BigDecimal longitudDistrito, BigDecimal latitudDistrito, LocalDateTime createdAtDistrito) {
         this.idDistrito = idDistrito;
         this.nombreDistrito = nombreDistrito;
         this.descripcionDistrito = descripcionDistrito;
@@ -80,11 +80,11 @@ public class Distrito {
         this.latitudDistrito = latitudDistrito;
     }
 
-    public Timestamp getCreatedAtDistrito() {
+    public LocalDateTime getCreatedAtDistrito() {
         return createdAtDistrito;
     }
 
-    public void setCreatedAtDistrito(Timestamp createdAtDistrito) {
+    public void setCreatedAtDistrito(LocalDateTime createdAtDistrito) {
         this.createdAtDistrito = createdAtDistrito;
     }
 }
