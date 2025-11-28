@@ -3,7 +3,8 @@ package pe.edu.upc.bestprice.entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "UbicacionTienda")
@@ -22,7 +23,7 @@ public class UbicacionTienda {
     private BigDecimal latitudUbicacionTienda;
 
     @Column(name = "createdAtUbicacionTienda", nullable = false)
-    private Timestamp createdAtUbicacionTienda;
+    private LocalDateTime createdAtUbicacionTienda;
 
     @ManyToOne
     @JoinColumn(name = "idTienda")
@@ -35,7 +36,7 @@ public class UbicacionTienda {
     public UbicacionTienda() {
     }
 
-    public UbicacionTienda(int idUbicacionTienda, String direccionUbicacionTienda, BigDecimal longitudUbicacionTienda, BigDecimal latitudUbicacionTienda, Timestamp createdAtUbicacionTienda, Tienda tienda, Distrito distrito) {
+    public UbicacionTienda(int idUbicacionTienda, String direccionUbicacionTienda, BigDecimal longitudUbicacionTienda, BigDecimal latitudUbicacionTienda, LocalDateTime createdAtUbicacionTienda, Tienda tienda, Distrito distrito) {
         this.idUbicacionTienda = idUbicacionTienda;
         this.direccionUbicacionTienda = direccionUbicacionTienda;
         this.longitudUbicacionTienda = longitudUbicacionTienda;
@@ -77,11 +78,11 @@ public class UbicacionTienda {
         this.latitudUbicacionTienda = latitudUbicacionTienda;
     }
 
-    public Timestamp getCreatedAtUbicacionTienda() {
+    public LocalDateTime getCreatedAtUbicacionTienda() {
         return createdAtUbicacionTienda;
     }
 
-    public void setCreatedAtUbicacionTienda(Timestamp createdAtUbicacionTienda) {
+    public void setCreatedAtUbicacionTienda(LocalDateTime createdAtUbicacionTienda) {
         this.createdAtUbicacionTienda = createdAtUbicacionTienda;
     }
 
