@@ -16,8 +16,8 @@ public class ProductoDTOList {
     private String UnidadMetricaProducto;
     private boolean FavoritoProducto;
     private boolean DisponibleProducto;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private LocalDateTime createdAtProducto;
+    private LocalDateTime updatedAtProducto;
     private CategoriaProducto cateProduct;
     private Tienda tienda;
 
@@ -110,19 +110,19 @@ public class ProductoDTOList {
         this.tienda = tienda;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedAtProducto() {
+        return createdAtProducto;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAtProducto(LocalDateTime createdAtProducto) {
+        this.createdAtProducto = createdAtProducto;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+    public LocalDateTime getUpdatedAtProducto() {
+        return updatedAtProducto;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedAtProducto(LocalDateTime updatedAtProducto) {
+        this.updatedAtProducto = updatedAtProducto;
     }
 }

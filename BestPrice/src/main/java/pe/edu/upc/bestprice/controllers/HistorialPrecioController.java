@@ -5,7 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.HistorialPrecioDTO;
+import pe.edu.upc.bestprice.dtos.HistorialPrecioDTOInsert;
+import pe.edu.upc.bestprice.dtos.HistorialPrecioDTOList;
 import pe.edu.upc.bestprice.entities.HistorialPrecio;
 import pe.edu.upc.bestprice.serviceinterfaces.IHistorialPrecioService;
 
@@ -20,15 +21,15 @@ public class HistorialPrecioController {
     private IHistorialPrecioService service;
 
     @GetMapping("/listar")
-    public List<HistorialPrecioDTO> listar() {
+    public List<HistorialPrecioDTOList> listar() {
         return service.list().stream().map(hp -> {
             ModelMapper m = new ModelMapper();
-            return m.map(hp, HistorialPrecioDTO.class);
+            return m.map(hp, HistorialPrecioDTOList.class);
         }).collect(Collectors.toList());
     }
 
     @PostMapping("/insertar")
-    public void insertar(@RequestBody HistorialPrecioDTO dto) {
+    public void insertar(@RequestBody HistorialPrecioDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         HistorialPrecio hp = m.map(dto, HistorialPrecio.class);
         service.insert(hp);
@@ -42,7 +43,7 @@ public class HistorialPrecioController {
                     .body("No existe un historial con ID: " + id);
         }
         ModelMapper m = new ModelMapper();
-        return ResponseEntity.ok(m.map(hp, HistorialPrecioDTO.class));
+        return ResponseEntity.ok(m.map(hp, HistorialPrecioDTOList.class));
     }
 
     @DeleteMapping("/{id}")
@@ -57,7 +58,7 @@ public class HistorialPrecioController {
     }
 
     @PutMapping("/modificar")
-    public ResponseEntity<String> modificar(@RequestBody HistorialPrecioDTO dto) {
+    public ResponseEntity<String> modificar(@RequestBody HistorialPrecioDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         HistorialPrecio hp = m.map(dto, HistorialPrecio.class);
         HistorialPrecio existente = service.listId(hp.getIdHistorialPrecio());
@@ -70,19 +71,19 @@ public class HistorialPrecioController {
     }
 
     @GetMapping("/{idProducto}")
-    public List<HistorialPrecioDTO> buscarPorProducto(@PathVariable("idProducto") int idProducto) {
+    public List<HistorialPrecioDTOList> buscarPorProducto(@PathVariable("idProducto") int idProducto) {
         return service.buscarPorProducto(idProducto).stream().map(hp -> {
             ModelMapper m = new ModelMapper();
-            return m.map(hp, HistorialPrecioDTO.class);
+            return m.map(hp, HistorialPrecioDTOList.class);
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{fecha}")
-    public List<HistorialPrecioDTO> buscarPorFecha(@PathVariable("fecha") String fecha) {
+    public List<HistorialPrecioDTOList> buscarPorFecha(@PathVariable("fecha") String fecha) {
         LocalDate fechaConvertida = LocalDate.parse(fecha); // formato yyyy-MM-dd
         return service.buscarPorFecha(fechaConvertida).stream().map(hp -> {
             ModelMapper m = new ModelMapper();
-            return m.map(hp, HistorialPrecioDTO.class);
+            return m.map(hp, HistorialPrecioDTOList.class);
         }).collect(Collectors.toList());
     }
 }

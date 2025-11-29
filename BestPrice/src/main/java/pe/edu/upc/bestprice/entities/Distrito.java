@@ -27,7 +27,7 @@ public class Distrito {
     private BigDecimal latitudDistrito;
 
     @CreationTimestamp
-    @Column(name = "createdAtDistrito", nullable = false, updatable = false)
+    @Column(name = "createdAtDistrito", nullable = true, updatable = false)
     private LocalDateTime createdAtDistrito;
 
     public Distrito() {

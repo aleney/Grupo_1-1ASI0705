@@ -5,11 +5,10 @@ import pe.edu.upc.bestprice.entities.Producto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class OfertasProductoDTO {
+public class OfertasProductoDTOInsert {
     private int idOfertasProducto;
     private LocalDate fechainicioOfertasProducto;
     private LocalDate fechafinOfertasProducto;
-    private LocalDateTime createdAtOfertasProducto;
     private Producto producto;
 
     public int getIdOfertasProducto() {
@@ -34,14 +33,6 @@ public class OfertasProductoDTO {
 
     public void setFechafinOfertasProducto(LocalDate fechafinOfertasProducto) {
         this.fechafinOfertasProducto = fechafinOfertasProducto;
-    }
-
-    public LocalDateTime getCreatedAtOfertasProducto() {
-        return createdAtOfertasProducto;
-    }
-
-    public void setCreatedAtOfertasProducto(LocalDateTime createdAtOfertasProducto) {
-        this.createdAtOfertasProducto = createdAtOfertasProducto;
     }
 
     public Producto getProducto() {

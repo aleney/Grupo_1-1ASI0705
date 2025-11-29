@@ -1,6 +1,7 @@
 package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,7 +20,8 @@ public class HistorialPrecio {
     @Column(name = "fechaHistorialPrecio", nullable = false)
     private LocalDate fechaHistorialPrecio;
 
-    @Column(name = "createdAtHistorialPrecio", nullable = false)
+    @CreationTimestamp
+    @Column(name = "createdAtHistorialPrecio", nullable = true, updatable = false)
     private LocalDateTime createdAtHistorialPrecio;
 
     @ManyToOne
@@ -33,11 +35,10 @@ public class HistorialPrecio {
     public HistorialPrecio() {
     }
 
-    public HistorialPrecio(int idHistorialPrecio, BigDecimal precioHistorialPrecio, LocalDate fechaHistorialPrecio, LocalDateTime createdAtHistorialPrecio, Producto producto, Tienda tienda) {
+    public HistorialPrecio(int idHistorialPrecio, BigDecimal precioHistorialPrecio, LocalDate fechaHistorialPrecio, Producto producto, Tienda tienda) {
         this.idHistorialPrecio = idHistorialPrecio;
         this.precioHistorialPrecio = precioHistorialPrecio;
         this.fechaHistorialPrecio = fechaHistorialPrecio;
-        this.createdAtHistorialPrecio = createdAtHistorialPrecio;
         this.producto = producto;
         this.tienda = tienda;
     }

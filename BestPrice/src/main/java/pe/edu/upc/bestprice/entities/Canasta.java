@@ -16,11 +16,11 @@ public class Canasta {
     private String nombreCanasta;
 
     @CreationTimestamp
-    @Column(name = "createdAtCanasta", nullable = false, updatable = false)
+    @Column(name = "createdAtCanasta", nullable = true, updatable = false)
     private LocalDateTime createdAtCanasta;
 
     @UpdateTimestamp
-    @Column(name = "updatedAtCanasta", nullable = false)
+    @Column(name = "updatedAtCanasta", nullable = true)
     private LocalDateTime updatedAtCanasta;
 
     @ManyToOne

@@ -1,41 +1,16 @@
-package pe.edu.upc.bestprice.entities;
+package pe.edu.upc.bestprice.dtos;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
+import pe.edu.upc.bestprice.entities.Producto;
 
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "OfertasProducto")
-public class OfertasProducto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class OfertasProductoDTOList {
     private int idOfertasProducto;
-
-    @Column(name = "fechainicioOfertasProducto", nullable = false)
     private LocalDate fechainicioOfertasProducto;
-
-    @Column(name = "fechafinOfertasProducto", nullable = false)
     private LocalDate fechafinOfertasProducto;
-
-    @CreationTimestamp
-    @Column(name = "createdAtOfertasProducto", nullable = true, updatable = false)
     private LocalDateTime createdAtOfertasProducto;
-
-    @ManyToOne
-    @JoinColumn(name = "idProducto")
     private Producto producto;
-
-    public OfertasProducto() {
-    }
-
-    public OfertasProducto(int idOfertasProducto, LocalDate fechainicioOfertasProducto, LocalDate fechafinOfertasProducto, Producto producto) {
-        this.idOfertasProducto = idOfertasProducto;
-        this.fechainicioOfertasProducto = fechainicioOfertasProducto;
-        this.fechafinOfertasProducto = fechafinOfertasProducto;
-        this.producto = producto;
-    }
 
     public int getIdOfertasProducto() {
         return idOfertasProducto;

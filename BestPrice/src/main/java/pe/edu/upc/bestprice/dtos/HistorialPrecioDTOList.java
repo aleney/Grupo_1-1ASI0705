@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class HistorialPrecioDTO {
+public class HistorialPrecioDTOList {
     private int idHistorialPrecio;
     private BigDecimal precioHistorialPrecio;
     private LocalDate fechaHistorialPrecio;

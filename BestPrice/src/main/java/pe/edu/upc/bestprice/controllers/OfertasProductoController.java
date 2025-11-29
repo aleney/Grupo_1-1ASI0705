@@ -5,7 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.OfertasProductoDTO;
+import pe.edu.upc.bestprice.dtos.OfertasProductoDTOInsert;
+import pe.edu.upc.bestprice.dtos.OfertasProductoDTOList;
 import pe.edu.upc.bestprice.entities.OfertasProducto;
 import pe.edu.upc.bestprice.serviceinterfaces.IOfertasProductoService;
 
@@ -20,15 +21,15 @@ public class OfertasProductoController {
     private IOfertasProductoService service;
 
     @GetMapping("/listar")
-    public List<OfertasProductoDTO> listar() {
+    public List<OfertasProductoDTOList> listar() {
         return service.list().stream().map(o -> {
             ModelMapper m = new ModelMapper();
-            return m.map(o, OfertasProductoDTO.class);
+            return m.map(o, OfertasProductoDTOList.class);
         }).collect(Collectors.toList());
     }
 
     @PostMapping("/insertar")
-    public void insertar(@RequestBody OfertasProductoDTO dto) {
+    public void insertar(@RequestBody OfertasProductoDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         OfertasProducto op = m.map(dto, OfertasProducto.class);
         service.insert(op);
@@ -42,7 +43,7 @@ public class OfertasProductoController {
                     .body("No existe oferta con ID: " + id);
         }
         ModelMapper m = new ModelMapper();
-        OfertasProductoDTO dto = m.map(op, OfertasProductoDTO.class);
+        OfertasProductoDTOList dto = m.map(op, OfertasProductoDTOList.class);
         return ResponseEntity.ok(dto);
     }
 
@@ -58,7 +59,7 @@ public class OfertasProductoController {
     }
 
     @PutMapping("/modificar")
-    public ResponseEntity<String> modificar(@RequestBody OfertasProductoDTO dto) {
+    public ResponseEntity<String> modificar(@RequestBody OfertasProductoDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         OfertasProducto op = m.map(dto, OfertasProducto.class);
         OfertasProducto existente = service.listId(op.getIdOfertasProducto());
@@ -71,22 +72,22 @@ public class OfertasProductoController {
     }
 
     @GetMapping("/buscar-fecha")
-    public List<OfertasProductoDTO> buscarPorProductoYFecha(@RequestParam int idProducto,
-                                                            @RequestParam String fecha) {
+    public List<OfertasProductoDTOList> buscarPorProductoYFecha(@RequestParam int idProducto,
+                                                                @RequestParam String fecha) {
         LocalDate fechaConsulta = LocalDate.parse(fecha);
         return service.buscarPorProductoYFecha(idProducto, fechaConsulta)
-                .stream().map(o -> new ModelMapper().map(o, OfertasProductoDTO.class))
+                .stream().map(o -> new ModelMapper().map(o, OfertasProductoDTOList.class))
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/buscar-rango")
-    public List<OfertasProductoDTO> buscarPorProductoYRangoFechas(@RequestParam int idProducto,
-                                                                  @RequestParam String fechaInicio,
-                                                                  @RequestParam String fechaFin) {
+    public List<OfertasProductoDTOList> buscarPorProductoYRangoFechas(@RequestParam int idProducto,
+                                                                      @RequestParam String fechaInicio,
+                                                                      @RequestParam String fechaFin) {
         LocalDate inicio = LocalDate.parse(fechaInicio);
         LocalDate fin = LocalDate.parse(fechaFin);
         return service.buscarPorProductoYRangoFechas(idProducto, inicio, fin)
-                .stream().map(o -> new ModelMapper().map(o, OfertasProductoDTO.class))
+                .stream().map(o -> new ModelMapper().map(o, OfertasProductoDTOList.class))
                 .collect(Collectors.toList());
     }
 }

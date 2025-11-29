@@ -38,11 +38,11 @@ public class Producto {
 
     @CreationTimestamp
     @Column(name="createdAt",nullable=true, updatable=false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAtProducto;
 
     @UpdateTimestamp
     @Column(name="updatedAt",nullable=true)
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAtProducto;
 
     @ManyToOne
     @JoinColumn(name = "idCategoriaProducto")
@@ -141,20 +141,20 @@ public class Producto {
         this.disponibleProducto = disponibleProducto;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedAtProducto() {
+        return createdAtProducto;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAtProducto(LocalDateTime createdAtProducto) {
+        this.createdAtProducto = createdAtProducto;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+    public LocalDateTime getUpdatedAtProducto() {
+        return updatedAtProducto;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedAtProducto(LocalDateTime updatedAtProducto) {
+        this.updatedAtProducto = updatedAtProducto;
     }
 
     public CategoriaProducto getCateProduct() {
