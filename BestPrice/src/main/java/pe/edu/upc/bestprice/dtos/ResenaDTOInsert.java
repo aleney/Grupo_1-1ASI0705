@@ -1,7 +1,5 @@
 package pe.edu.upc.bestprice.dtos;
 
-import pe.edu.upc.bestprice.entities.Tienda;
-import pe.edu.upc.bestprice.entities.TipoResena;
 import pe.edu.upc.bestprice.entities.Usuario;
 
 public class ResenaDTOInsert {
