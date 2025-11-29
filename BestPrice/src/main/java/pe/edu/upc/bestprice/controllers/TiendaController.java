@@ -6,7 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.TiendaDTO;
+import pe.edu.upc.bestprice.dtos.TiendaDTOInsert;
+import pe.edu.upc.bestprice.dtos.TiendaDTOList;
 import pe.edu.upc.bestprice.entities.Tienda;
 import pe.edu.upc.bestprice.serviceinterfaces.ITiendaService;
 
@@ -23,9 +24,9 @@ public class TiendaController {
     @GetMapping("/listarTienda")
     @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
     public ResponseEntity<?> listarTienda() {
-        List<TiendaDTO> lista = service.listarTienda().stream().map(a -> {
+        List<TiendaDTOList> lista = service.listarTienda().stream().map(a -> {
             ModelMapper m = new ModelMapper();
-            return m.map(a, TiendaDTO.class);
+            return m.map(a, TiendaDTOList.class);
         }).collect(Collectors.toList());
 
         if (lista.isEmpty()) {
@@ -38,7 +39,7 @@ public class TiendaController {
 
     @PostMapping("/registrarTienda")
     @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
-    public ResponseEntity<String> registrarTienda(@RequestBody TiendaDTO dto) {
+    public ResponseEntity<String> registrarTienda(@RequestBody TiendaDTOInsert dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()
                     .body("El cuerpo de la solicitud está vacío o es inválido.");
@@ -64,7 +65,7 @@ public class TiendaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ningun registro de Tienda" + id);
         }
         ModelMapper m = new ModelMapper();
-        TiendaDTO tdt = m.map(tdtos, TiendaDTO.class);
+        TiendaDTOList tdt = m.map(tdtos, TiendaDTOList.class);
         return ResponseEntity.ok(tdt);
     }
 
@@ -82,7 +83,7 @@ public class TiendaController {
 
     @PutMapping("/editar")
     @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
-    public ResponseEntity<String> modificar(@RequestBody TiendaDTO dto) {
+    public ResponseEntity<String> modificar(@RequestBody TiendaDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Tienda t = m.map(dto, Tienda.class);
         Tienda existente = service.listarIdTienda(t.getIdTienda());

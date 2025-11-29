@@ -2,7 +2,7 @@ package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.LocalDate;
 
 @Entity
@@ -12,14 +12,14 @@ public class OfertasProducto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idOfertasProducto;
 
-    @Column(name = "fechainicioHistorialPrecio", nullable = false)
+    @Column(name = "fechainicioOfertasProducto", nullable = false)
     private LocalDate fechainicioOfertasProducto;
 
-    @Column(name = "fechafinHistorialPrecio", nullable = false)
+    @Column(name = "fechafinOfertasProducto", nullable = false)
     private LocalDate fechafinOfertasProducto;
 
     @Column(name = "createdAtOfertasProducto", nullable = false)
-    private Timestamp createdAtOfertasProducto;
+    private LocalDateTime createdAtOfertasProducto;
 
     @ManyToOne
     @JoinColumn(name = "idProducto")
@@ -28,7 +28,7 @@ public class OfertasProducto {
     public OfertasProducto() {
     }
 
-    public OfertasProducto(int idOfertasProducto, LocalDate fechainicioOfertasProducto, LocalDate fechafinOfertasProducto, Timestamp createdAtOfertasProducto, Producto producto) {
+    public OfertasProducto(int idOfertasProducto, LocalDate fechainicioOfertasProducto, LocalDate fechafinOfertasProducto, LocalDateTime createdAtOfertasProducto, Producto producto) {
         this.idOfertasProducto = idOfertasProducto;
         this.fechainicioOfertasProducto = fechainicioOfertasProducto;
         this.fechafinOfertasProducto = fechafinOfertasProducto;
@@ -60,11 +60,11 @@ public class OfertasProducto {
         this.fechafinOfertasProducto = fechafinOfertasProducto;
     }
 
-    public Timestamp getCreatedAtOfertasProducto() {
+    public LocalDateTime getCreatedAtOfertasProducto() {
         return createdAtOfertasProducto;
     }
 
-    public void setCreatedAtOfertasProducto(Timestamp createdAtOfertasProducto) {
+    public void setCreatedAtOfertasProducto(LocalDateTime createdAtOfertasProducto) {
         this.createdAtOfertasProducto = createdAtOfertasProducto;
     }
 

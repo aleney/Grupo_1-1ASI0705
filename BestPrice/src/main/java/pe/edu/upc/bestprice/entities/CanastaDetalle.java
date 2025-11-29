@@ -18,6 +18,19 @@ public class CanastaDetalle {
     @Column(name = "canastaCanastaDetalle", nullable = false)
     private int canastaCanastaDetalle;
 
+    @ManyToOne
+    @JoinColumn(name = "idProducto")
+    private Producto producto;
+
+    @ManyToOne
+    @JoinColumn(name = "idCanasta")
+    private Canasta canasta;
+
+    public CanastaDetalle(Producto producto,  Canasta canasta) {
+        this.producto = producto;
+        this.canasta = canasta;
+    }
+
     public CanastaDetalle() {
     }
 

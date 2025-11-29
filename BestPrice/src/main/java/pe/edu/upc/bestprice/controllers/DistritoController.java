@@ -4,94 +4,88 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.DistritoDTO;
 import pe.edu.upc.bestprice.entities.Distrito;
 import pe.edu.upc.bestprice.serviceinterfaces.IDistritoService;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/distrito")
 public class DistritoController {
+
     @Autowired
     private IDistritoService service;
 
+    // LISTAR
     @GetMapping("/listar")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
-    public ResponseEntity<?> listar() {
-        List<DistritoDTO> lista = service.list().stream().map(d -> {
-            ModelMapper m = new ModelMapper();
-            return m.map(d, DistritoDTO.class);
-        }).collect(Collectors.toList());
-
-        if (lista.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron distritos registrados.");
-        }
-
-        return ResponseEntity.ok(lista);
+    public List<DistritoDTO> listar() {
+        ModelMapper m = new ModelMapper();
+        return service.list().stream()
+                .map(d -> m.map(d, DistritoDTO.class))
+                .toList();
     }
 
+    // INSERTAR
     @PostMapping("/insertar")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
-    public ResponseEntity<String> insertar(@RequestBody DistritoDTO dto) {
-        if (dto == null) {
-            return ResponseEntity.badRequest()
-                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+    public ResponseEntity<?> insertar(@RequestBody DistritoDTO dto) {
+        ModelMapper m = new ModelMapper();
+        Distrito distrito = m.map(dto, Distrito.class);
+
+        // --- CLAVE PARA QUE NO SE ROMPA EL INSERT ---
+        if (distrito.getCreatedAtDistrito() == null) {
+            distrito.setCreatedAtDistrito(LocalDateTime.now());
         }
 
-        try {
-            ModelMapper m = new ModelMapper();
-            Distrito distrito = m.map(dto, Distrito.class);
-            service.insert(distrito);
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body("Distrito registrado correctamente.");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body("Error al registrar el distrito. Verifica que los datos enviados sean correctos.");
-        }
+        service.insert(distrito);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Distrito registrado correctamente.");
     }
 
+    // LISTAR POR ID
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         Distrito distrito = service.listId(id);
         if (distrito == null) {
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("No existe un registro con el ID:" + id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
         }
+
         ModelMapper m = new ModelMapper();
         DistritoDTO dto = m.map(distrito, DistritoDTO.class);
         return ResponseEntity.ok(dto);
     }
 
+    // ELIMINAR
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
-        Distrito d = service.listId(id);
-        if (d == null) {
+        Distrito distrito = service.listId(id);
+        if (distrito == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existe un registro con el ID: " + id);
         }
+
         service.delete(id);
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
+    // MODIFICAR
     @PutMapping("/modificar")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody DistritoDTO dto) {
         ModelMapper m = new ModelMapper();
-        Distrito d = m.map(dto, Distrito.class);
-        Distrito existente = service.listId(d.getIdDistrito());
+        Distrito distrito = m.map(dto, Distrito.class);
+
+        Distrito existente = service.listId(distrito.getIdDistrito());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un registro con el ID: " + d.getIdDistrito());
+                    .body("No se puede modificar. No existe un registro con el ID: " + distrito.getIdDistrito());
         }
-        service.edit(d);
-        return ResponseEntity.ok("Registro con ID " + d.getIdDistrito() + " modificado correctamente.");
+
+        // Mantener la fecha original sin modificarla
+        distrito.setCreatedAtDistrito(existente.getCreatedAtDistrito());
+
+        service.edit(distrito);
+        return ResponseEntity.ok("Registro con ID " + distrito.getIdDistrito() + " modificado correctamente.");
     }
 }

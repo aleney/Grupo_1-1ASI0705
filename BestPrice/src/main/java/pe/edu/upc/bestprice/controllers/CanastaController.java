@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.CanastaDTO;
+import pe.edu.upc.bestprice.dtos.CanastaDTOInsert;
 import pe.edu.upc.bestprice.entities.Canasta;
 import pe.edu.upc.bestprice.serviceinterfaces.ICanastaService;
 
@@ -39,7 +40,7 @@ public class CanastaController {
 
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
-    public ResponseEntity<String> insertar(@RequestBody CanastaDTO dto) {
+    public ResponseEntity<String> insertar(@RequestBody CanastaDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Canasta canasta = m.map(dto, Canasta.class);
         service.insert(canasta);
@@ -73,7 +74,7 @@ public class CanastaController {
 
     @PutMapping
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
-    public ResponseEntity<String> modificar(@RequestBody CanastaDTO dto) {
+    public ResponseEntity<String> modificar(@RequestBody CanastaDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Canasta c = m.map(dto, Canasta.class);
         Canasta existente = service.listId(c.getIdCanasta());

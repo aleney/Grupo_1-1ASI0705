@@ -32,4 +32,9 @@ public class TicketReporteServiceImplement implements ITicketReporteService {
     public TicketReporte listarId(int idTicketReporte) {
         return repository.findById(idTicketReporte).orElse(null);
     }
+
+    @Override
+    public void delete(int idTicketReporte) {
+        repository.deleteById(idTicketReporte);
+    }
 }

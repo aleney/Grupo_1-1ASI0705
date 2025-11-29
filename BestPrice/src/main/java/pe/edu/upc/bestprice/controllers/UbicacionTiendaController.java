@@ -4,7 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.UbicacionTiendaDTO;
 import pe.edu.upc.bestprice.entities.UbicacionTienda;
@@ -19,44 +18,22 @@ public class UbicacionTiendaController {
     @Autowired
     private IUbicacionTiendaService service;
 
-    @GetMapping("/listar")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
-    public ResponseEntity<?> listar() {
-        List<UbicacionTiendaDTO> lista = service.list().stream().map(u -> {
+    @GetMapping
+    public List<UbicacionTiendaDTO> listar() {
+        return service.list().stream().map(u -> {
             ModelMapper m = new ModelMapper();
             return m.map(u, UbicacionTiendaDTO.class);
         }).collect(Collectors.toList());
-
-        if (lista.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron ubicaciones de tienda registradas.");
-        }
-
-        return ResponseEntity.ok(lista);
     }
 
     @PostMapping("/insertar")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
-    public ResponseEntity<String> insertar(@RequestBody UbicacionTiendaDTO dto) {
-        if (dto == null) {
-            return ResponseEntity.badRequest()
-                    .body("El cuerpo de la solicitud está vacío o es inválido.");
-        }
-
-        try {
-            ModelMapper m = new ModelMapper();
-            UbicacionTienda u = m.map(dto, UbicacionTienda.class);
-            service.insert(u);
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body("Ubicación de tienda registrada correctamente.");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body("Error al registrar la ubicación de tienda. Verifica que los datos enviados sean correctos.");
-        }
+    public void insertar(@RequestBody UbicacionTiendaDTO dto) {
+        ModelMapper m = new ModelMapper();
+        UbicacionTienda u = m.map(dto, UbicacionTienda.class);
+        service.insert(u);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         UbicacionTienda u = service.listId(id);
         if (u == null) {
@@ -69,7 +46,6 @@ public class UbicacionTiendaController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         UbicacionTienda u = service.listId(id);
         if (u == null) {
@@ -81,7 +57,6 @@ public class UbicacionTiendaController {
     }
 
     @PutMapping("/modificar")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody UbicacionTiendaDTO dto) {
         ModelMapper m = new ModelMapper();
         UbicacionTienda u = m.map(dto, UbicacionTienda.class);

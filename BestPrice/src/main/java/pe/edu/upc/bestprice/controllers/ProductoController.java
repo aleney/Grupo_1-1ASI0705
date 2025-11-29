@@ -6,7 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.ProductoDTO;
+import pe.edu.upc.bestprice.dtos.ProductDTOInsert;
+import pe.edu.upc.bestprice.dtos.ProductoDTOList;
 import pe.edu.upc.bestprice.entities.Producto;
 import pe.edu.upc.bestprice.serviceinterfaces.IProductoService;
 
@@ -22,16 +23,16 @@ public class ProductoController {
 
     @GetMapping("/listar")
     @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
-    public List<ProductoDTO> Listar(){
+    public List<ProductoDTOList> Listar(){
         return service.List().stream().map(a->{
             ModelMapper m=new ModelMapper();
-            return m.map(a,ProductoDTO.class);
+            return m.map(a, ProductoDTOList.class);
         }).collect(Collectors.toList());
     }
 
     @PostMapping("/Registrar")
     @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
-    public void Registar(@RequestBody ProductoDTO dtos){
+    public void Registar(@RequestBody ProductDTOInsert dtos){
         ModelMapper m=new ModelMapper();
         Producto prodc=m.map(dtos,Producto.class);
         service.insert(prodc);
@@ -45,7 +46,7 @@ public class ProductoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ningun registro de producto" + id);
         }
         ModelMapper m=new ModelMapper();
-        ProductoDTO dtos=m.map(prodc,ProductoDTO.class);
+        ProductoDTOList dtos=m.map(prodc, ProductoDTOList.class);
         return ResponseEntity.ok(dtos);
     }
 
@@ -63,7 +64,7 @@ public class ProductoController {
 
     @PutMapping("/editar")
     @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
-    public ResponseEntity<String> modificar(@RequestBody ProductoDTO dto) {
+    public ResponseEntity<String> modificar(@RequestBody ProductDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Producto p = m.map(dto, Producto.class);
         Producto existente = service.listId(p.getIdProducto());

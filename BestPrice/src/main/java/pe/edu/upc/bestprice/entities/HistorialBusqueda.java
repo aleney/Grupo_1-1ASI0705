@@ -1,8 +1,9 @@
 package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "HistorialBusqueda")
@@ -11,8 +12,9 @@ public class HistorialBusqueda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idHistorialBusqueda;
 
-    @Column(name = "fechabusqueHistorialBusqueda",nullable = false)
-    private LocalDate fechabusqueHistorialBusqueda;
+    @CreationTimestamp
+    @Column(name = "fechabusqueHistorialBusqueda",nullable = false,updatable = false)
+    private LocalDateTime fechabusqueHistorialBusqueda;
 
     @Column(name = "productoidHistoriaBusqueda",nullable = false)
     private int productoidHistoriaBusqueda;
@@ -20,14 +22,23 @@ public class HistorialBusqueda {
     @Column(name = "usuarioidHistoriaBusqueda")
     private int usuarioidHistoriaBusqueda;
 
-    public HistorialBusqueda() {
+    @ManyToOne
+    @JoinColumn(name = "idProducto")
+    private Producto producto;
+
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
+
+    public HistorialBusqueda(Producto producto ,Usuario usuario){
+        this.producto = producto;
+        this.usuario = usuario;
+    }
+    public HistorialBusqueda(int idHistorialBusqueda, LocalDateTime fechabusqueHistorialBusqueda, int productoidHistoriaBusqueda, int usuarioidHistoriaBusqueda) {
     }
 
-    public HistorialBusqueda(int idHistorialBusqueda, LocalDate fechabusqueHistorialBusqueda, int productoidHistoriaBusqueda, int usuarioidHistoriaBusqueda) {
-        this.idHistorialBusqueda = idHistorialBusqueda;
-        this.fechabusqueHistorialBusqueda = fechabusqueHistorialBusqueda;
-        this.productoidHistoriaBusqueda = productoidHistoriaBusqueda;
-        this.usuarioidHistoriaBusqueda = usuarioidHistoriaBusqueda;
+    public HistorialBusqueda() {
+
     }
 
     public int getIdHistorialBusqueda() {
@@ -38,11 +49,11 @@ public class HistorialBusqueda {
         this.idHistorialBusqueda = idHistorialBusqueda;
     }
 
-    public LocalDate getFechabusqueHistorialBusqueda() {
+    public LocalDateTime getFechabusqueHistorialBusqueda() {
         return fechabusqueHistorialBusqueda;
     }
 
-    public void setFechabusqueHistorialBusqueda(LocalDate fechabusqueHistorialBusqueda) {
+    public void setFechabusqueHistorialBusqueda(LocalDateTime fechabusqueHistorialBusqueda) {
         this.fechabusqueHistorialBusqueda = fechabusqueHistorialBusqueda;
     }
 

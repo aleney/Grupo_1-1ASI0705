@@ -3,7 +3,7 @@ package pe.edu.upc.bestprice.entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.LocalDate;
 
 @Entity
@@ -16,25 +16,25 @@ public class Distrito {
     @Column(name = "nombreDistrito", length = 50, nullable = false)
     private String nombreDistrito;
 
-    @Column(name = "detalleDistrito", length = 450, nullable = false)
-    private String detalleDistrito;
+    @Column(name = "descripcionDistrito", length = 450, nullable = false)
+    private String descripcionDistrito;
 
-    @Column(name = "longitudDistrito", precision = 2, scale = 6, nullable = false)
+    @Column(name = "longitudDistrito", precision = 10, scale = 6, nullable = false)
     private BigDecimal longitudDistrito;
 
-    @Column(name = "latitudDistrito", precision = 2, scale = 6, nullable = false)
+    @Column(name = "latitudDistrito", precision = 10, scale = 6, nullable = false)
     private BigDecimal latitudDistrito;
 
     @Column(name = "createdAtDistrito", nullable = false)
-    private Timestamp createdAtDistrito;
+    private LocalDateTime createdAtDistrito;
 
     public Distrito() {
     }
 
-    public Distrito(int idDistrito, String nombreDistrito, String detalleDistrito, BigDecimal longitudDistrito, BigDecimal latitudDistrito, Timestamp createdAtDistrito) {
+    public Distrito(int idDistrito, String nombreDistrito, String descripcionDistrito, BigDecimal longitudDistrito, BigDecimal latitudDistrito, LocalDateTime createdAtDistrito) {
         this.idDistrito = idDistrito;
         this.nombreDistrito = nombreDistrito;
-        this.detalleDistrito = detalleDistrito;
+        this.descripcionDistrito = descripcionDistrito;
         this.longitudDistrito = longitudDistrito;
         this.latitudDistrito = latitudDistrito;
         this.createdAtDistrito = createdAtDistrito;
@@ -56,12 +56,12 @@ public class Distrito {
         this.nombreDistrito = nombreDistrito;
     }
 
-    public String getDetalleDistrito() {
-        return detalleDistrito;
+    public String getDescripcionDistrito() {
+        return descripcionDistrito;
     }
 
-    public void setDetalleDistrito(String detalleDistrito) {
-        this.detalleDistrito = detalleDistrito;
+    public void setDescripcionDistrito(String descripcionDistrito) {
+        this.descripcionDistrito = descripcionDistrito;
     }
 
     public BigDecimal getLongitudDistrito() {
@@ -80,11 +80,11 @@ public class Distrito {
         this.latitudDistrito = latitudDistrito;
     }
 
-    public Timestamp getCreatedAtDistrito() {
+    public LocalDateTime getCreatedAtDistrito() {
         return createdAtDistrito;
     }
 
-    public void setCreatedAtDistrito(Timestamp createdAtDistrito) {
+    public void setCreatedAtDistrito(LocalDateTime createdAtDistrito) {
         this.createdAtDistrito = createdAtDistrito;
     }
 }

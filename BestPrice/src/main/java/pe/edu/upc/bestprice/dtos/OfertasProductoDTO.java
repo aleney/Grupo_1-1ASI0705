@@ -2,14 +2,14 @@ package pe.edu.upc.bestprice.dtos;
 
 import pe.edu.upc.bestprice.entities.Producto;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class OfertasProductoDTO {
     private int idOfertasProducto;
     private LocalDate fechainicioOfertasProducto;
     private LocalDate fechafinOfertasProducto;
-    private Timestamp createdAtOfertasProducto;
+    private LocalDateTime createdAtOfertasProducto;
     private Producto producto;
 
     public int getIdOfertasProducto() {
@@ -36,11 +36,11 @@ public class OfertasProductoDTO {
         this.fechafinOfertasProducto = fechafinOfertasProducto;
     }
 
-    public Timestamp getCreatedAtOfertasProducto() {
+    public LocalDateTime getCreatedAtOfertasProducto() {
         return createdAtOfertasProducto;
     }
 
-    public void setCreatedAtOfertasProducto(Timestamp createdAtOfertasProducto) {
+    public void setCreatedAtOfertasProducto(LocalDateTime createdAtOfertasProducto) {
         this.createdAtOfertasProducto = createdAtOfertasProducto;
     }
 

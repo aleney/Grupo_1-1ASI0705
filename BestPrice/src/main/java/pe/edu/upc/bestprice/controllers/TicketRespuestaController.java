@@ -6,9 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.RolDTO;
-import pe.edu.upc.bestprice.dtos.TicketRespuestaDTO;
+import pe.edu.upc.bestprice.dtos.TicketReporteDTOInsert;
+import pe.edu.upc.bestprice.dtos.TicketRespuestaDTOInsert;
+import pe.edu.upc.bestprice.dtos.TicketRespuestaDTOList;
+import pe.edu.upc.bestprice.dtos.UsuarioDTOList;
+import pe.edu.upc.bestprice.entities.TicketReporte;
 import pe.edu.upc.bestprice.entities.TicketRespuesta;
+import pe.edu.upc.bestprice.entities.Usuario;
 import pe.edu.upc.bestprice.serviceinterfaces.ITicketRespuestaService;
 
 import java.util.HashMap;
@@ -21,12 +25,12 @@ import java.util.stream.Collectors;
 public class TicketRespuestaController {
 
     @Autowired
-    private ITicketRespuestaService reporteService;
+    private ITicketRespuestaService respuestaService;
 
     @GetMapping("/listar")
     @PreAuthorize("hasAnyAuthority('CLIENT','ADMIN')")
     public ResponseEntity<?> listar() {
-        List<TicketRespuesta> lista = reporteService.listarTicketRespuesta()
+        List<TicketRespuesta> lista = respuestaService.listarTicketRespuesta()
                 .stream()
                 .map(a -> new ModelMapper().map(a, TicketRespuesta.class))
                 .collect(Collectors.toList());
@@ -44,9 +48,50 @@ public class TicketRespuestaController {
 
     @PostMapping("/insertar")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void insertar(@RequestBody TicketRespuestaDTO dto) {
+    public void insertar(@RequestBody TicketRespuestaDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         TicketRespuesta soft = m.map(dto,TicketRespuesta.class);
-        reporteService.insertarTicketRespuesta(soft);
+        respuestaService.insertarTicketRespuesta(soft);
+    }
+
+    @PutMapping("/editar")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<String> editar(@RequestBody TicketRespuestaDTOInsert dto) {
+        ModelMapper m = new ModelMapper();
+        TicketRespuesta ticketRespuesta = m.map(dto, TicketRespuesta.class);
+        TicketRespuesta existente = respuestaService.listarId(ticketRespuesta.getIdTicketRes());
+        if (existente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se puede modificar. No existe un registro con el ID: " + ticketRespuesta.getIdTicketRes());
+        }
+        respuestaService.edit(ticketRespuesta);
+        return ResponseEntity.ok("Registro con ID " + ticketRespuesta.getIdTicketRes() + " modificado correctamente.");
+    }
+
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
+        TicketRespuesta tres = respuestaService.listarId(id);
+        if (tres == null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
+        }
+        ModelMapper m = new ModelMapper();
+        TicketRespuestaDTOList dto = m.map(tres, TicketRespuestaDTOList.class);
+        return ResponseEntity.ok(dto);
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
+        TicketRespuesta u = respuestaService.listarId(id);
+        if (u == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
+        }
+        respuestaService.delete(id);
+        return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 }
