@@ -5,7 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.DistritoDTO;
+import pe.edu.upc.bestprice.dtos.DistritoDTOInsert;
+import pe.edu.upc.bestprice.dtos.DistritoDTOList;
 import pe.edu.upc.bestprice.entities.Distrito;
 import pe.edu.upc.bestprice.serviceinterfaces.IDistritoService;
 
@@ -21,16 +22,16 @@ public class DistritoController {
 
     // LISTAR
     @GetMapping("/listar")
-    public List<DistritoDTO> listar() {
+    public List<DistritoDTOList> listar() {
         ModelMapper m = new ModelMapper();
         return service.list().stream()
-                .map(d -> m.map(d, DistritoDTO.class))
+                .map(d -> m.map(d, DistritoDTOList.class))
                 .toList();
     }
 
     // INSERTAR
     @PostMapping("/insertar")
-    public ResponseEntity<?> insertar(@RequestBody DistritoDTO dto) {
+    public ResponseEntity<?> insertar(@RequestBody DistritoDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Distrito distrito = m.map(dto, Distrito.class);
 
@@ -53,7 +54,7 @@ public class DistritoController {
         }
 
         ModelMapper m = new ModelMapper();
-        DistritoDTO dto = m.map(distrito, DistritoDTO.class);
+        DistritoDTOList dto = m.map(distrito, DistritoDTOList.class);
         return ResponseEntity.ok(dto);
     }
 
@@ -72,7 +73,7 @@ public class DistritoController {
 
     // MODIFICAR
     @PutMapping("/modificar")
-    public ResponseEntity<String> modificar(@RequestBody DistritoDTO dto) {
+    public ResponseEntity<String> modificar(@RequestBody DistritoDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Distrito distrito = m.map(dto, Distrito.class);
 

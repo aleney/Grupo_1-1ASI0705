@@ -3,7 +3,7 @@ package pe.edu.upc.bestprice.dtos;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class DistritoDTO {
+public class DistritoDTOList {
     private int idDistrito;
     private String nombreDistrito;
     private String descripcionDistrito;

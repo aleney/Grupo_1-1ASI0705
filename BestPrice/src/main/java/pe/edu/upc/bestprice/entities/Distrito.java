@@ -1,6 +1,7 @@
 package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -25,19 +26,19 @@ public class Distrito {
     @Column(name = "latitudDistrito", precision = 10, scale = 6, nullable = false)
     private BigDecimal latitudDistrito;
 
-    @Column(name = "createdAtDistrito", nullable = false)
+    @CreationTimestamp
+    @Column(name = "createdAtDistrito", nullable = false, updatable = false)
     private LocalDateTime createdAtDistrito;
 
     public Distrito() {
     }
 
-    public Distrito(int idDistrito, String nombreDistrito, String descripcionDistrito, BigDecimal longitudDistrito, BigDecimal latitudDistrito, LocalDateTime createdAtDistrito) {
+    public Distrito(int idDistrito, String nombreDistrito, String descripcionDistrito, BigDecimal longitudDistrito, BigDecimal latitudDistrito) {
         this.idDistrito = idDistrito;
         this.nombreDistrito = nombreDistrito;
         this.descripcionDistrito = descripcionDistrito;
         this.longitudDistrito = longitudDistrito;
         this.latitudDistrito = latitudDistrito;
-        this.createdAtDistrito = createdAtDistrito;
     }
 
     public int getIdDistrito() {
