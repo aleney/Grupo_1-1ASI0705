@@ -7,7 +7,15 @@ public class CanastaDTO {
     private String nombreCanasta;
     private LocalDateTime createdACanasta;  // Changed from Timestamp to LocalDateTime
     private LocalDateTime updateACanasta;   // Changed from Timestamp to LocalDateTime
-    private String usuarioCanasta;
+    private String idUsuario;
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     public int getIdCanasta() {
         return idCanasta;
@@ -41,11 +49,5 @@ public class CanastaDTO {
         this.updateACanasta = updateACanasta;
     }
 
-    public String getUsuarioCanasta() {
-        return usuarioCanasta;
-    }
 
-    public void setUsuarioCanasta(String usuarioCanasta) {
-        this.usuarioCanasta = usuarioCanasta;
-    }
 }

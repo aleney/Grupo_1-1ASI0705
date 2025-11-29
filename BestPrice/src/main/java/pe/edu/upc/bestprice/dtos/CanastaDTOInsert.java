@@ -4,15 +4,16 @@ public class CanastaDTOInsert {
    // SOLO LO QUE EL USUARIO VA A TENER QUE RELLENAR
    // NOMBRE CANASTA
         //USUARIO
+   private int idCanasta;
    private String nombreCanasta;
    private String usuarioCanasta;
 
-    public CanastaDTOInsert(String nombreCanasta, String usuarioCanasta) {
-        this.nombreCanasta = nombreCanasta;
-        this.usuarioCanasta = usuarioCanasta;
+    public int getIdCanasta() {
+        return idCanasta;
     }
 
-    public CanastaDTOInsert() {
+    public void setIdCanasta(int idCanasta) {
+        this.idCanasta = idCanasta;
     }
 
     public String getNombreCanasta() {

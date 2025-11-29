@@ -12,12 +12,6 @@ public class CanastaDetalle {
     @Column(name = "cantidadCanastaDetalle", nullable = false)
     private int cantidadCanastaDetalle;
 
-    @Column(name = "productoCanastaDetalle", nullable = false)
-    private int productoCanastaDetalle;
-
-    @Column(name = "canastaCanastaDetalle", nullable = false)
-    private int canastaCanastaDetalle;
-
     @ManyToOne
     @JoinColumn(name = "idProducto")
     private Producto producto;
@@ -26,19 +20,14 @@ public class CanastaDetalle {
     @JoinColumn(name = "idCanasta")
     private Canasta canasta;
 
-    public CanastaDetalle(Producto producto,  Canasta canasta) {
-        this.producto = producto;
-        this.canasta = canasta;
-    }
-
     public CanastaDetalle() {
     }
 
-    public CanastaDetalle(Integer idCanastaDetalle, int cantidadCanastaDetalle, int productoCanastaDetalle, int canastaCCanastaDetalle) {
+    public CanastaDetalle(Integer idCanastaDetalle, int cantidadCanastaDetalle, int productoCanastaDetalle, int canastaCanastaDetalle, Producto producto, Canasta canasta) {
         this.idCanastaDetalle = idCanastaDetalle;
         this.cantidadCanastaDetalle = cantidadCanastaDetalle;
-        this.productoCanastaDetalle = productoCanastaDetalle;
-        this.canastaCanastaDetalle = canastaCCanastaDetalle;
+        this.producto = producto;
+        this.canasta = canasta;
     }
 
     public Integer getIdCanastaDetalle() {
@@ -57,19 +46,19 @@ public class CanastaDetalle {
         this.cantidadCanastaDetalle = cantidadCanastaDetalle;
     }
 
-    public int getProductoCanastaDetalle() {
-        return productoCanastaDetalle;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setProductoCanastaDetalle(int productoCanastaDetalle) {
-        this.productoCanastaDetalle = productoCanastaDetalle;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
-    public int getCanastaCCanastaDetalle() {
-        return canastaCanastaDetalle;
+    public Canasta getCanasta() {
+        return canasta;
     }
 
-    public void setCanastaCCanastaDetalle(int canastaCCanastaDetalle) {
-        this.canastaCanastaDetalle = canastaCCanastaDetalle;
+    public void setCanasta(Canasta canasta) {
+        this.canasta = canasta;
     }
 }

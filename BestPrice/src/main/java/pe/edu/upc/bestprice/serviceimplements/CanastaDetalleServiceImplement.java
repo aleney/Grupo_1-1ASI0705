@@ -14,9 +14,10 @@ public class CanastaDetalleServiceImplement implements ICanastaDetalleService {
     @Autowired
     private ICanastaDetalleRepository repository;
 
+
     @Override
-    public List<CanastaDetalle> buscarService(String nombre) {
-        return repository.findAll();  // Retorna todos los detalles de la canasta
+    public List<CanastaDetalle> list() {
+        return repository.findAll();
     }
 
     @Override
@@ -25,24 +26,17 @@ public class CanastaDetalleServiceImplement implements ICanastaDetalleService {
     }
 
     @Override
-    public List<CanastaDetalle> list() {
-        return repository.findAll();  // Retorna todos los detalles de la canasta
+    public CanastaDetalle listId(int id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
-    public CanastaDetalle listId(String id) {
-        return null;
-    }
-
-    // Cambia el tipo de "id" a Integer, ya que idCanastaDetalle es Integer en la entidad
-    @Override
-    public CanastaDetalle listId(Integer id) {
-        return repository.findById(id).orElse(null);  // Obtiene un detalle de canasta por ID
+    public void delete(int id) {
+        repository.deleteById(id);
     }
 
     @Override
     public void edit(CanastaDetalle cd) {
         repository.save(cd);
     }
-
 }

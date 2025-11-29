@@ -1,16 +1,19 @@
 package pe.edu.upc.bestprice.dtos;//LISTAR
 
-public class CanastaDetalleDTO {
-    private String idCanastaDetalle;
-    private int cantidadCanastaDetalle;
-    private int productoCanastaDetalle;
-    private int canastaCanastaDetalle;
+import pe.edu.upc.bestprice.entities.Canasta;
+import pe.edu.upc.bestprice.entities.Producto;
 
-    public String getIdCanastaDetalle() {
+public class CanastaDetalleDTO {
+    private Integer idCanastaDetalle;
+    private int cantidadCanastaDetalle;
+    private Producto producto;
+    private Canasta canasta;
+
+    public Integer getIdCanastaDetalle() {
         return idCanastaDetalle;
     }
 
-    public void setIdCanastaDetalle(String idCanastaDetalle) {
+    public void setIdCanastaDetalle(Integer idCanastaDetalle) {
         this.idCanastaDetalle = idCanastaDetalle;
     }
 
@@ -22,19 +25,19 @@ public class CanastaDetalleDTO {
         this.cantidadCanastaDetalle = cantidadCanastaDetalle;
     }
 
-    public int getProductoCanastaDetalle() {
-        return productoCanastaDetalle;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setProductoCanastaDetalle(int productoCanastaDetalle) {
-        this.productoCanastaDetalle = productoCanastaDetalle;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
-    public int getCanastaCanastaDetalle() {
-        return canastaCanastaDetalle;
+    public Canasta getCanasta() {
+        return canasta;
     }
 
-    public void setCanastaCanastaDetalle(int canastaCanastaDetalle) {
-        this.canastaCanastaDetalle = canastaCanastaDetalle;
+    public void setCanasta(Canasta canasta) {
+        this.canasta = canasta;
     }
 }

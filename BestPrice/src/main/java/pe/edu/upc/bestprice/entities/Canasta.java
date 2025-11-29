@@ -3,9 +3,6 @@ package pe.edu.upc.bestprice.entities;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,18 +23,21 @@ public class Canasta {
     @Column(name = "updatedAtCanasta", nullable = false)
     private LocalDateTime updatedAtCanasta;
 
-    @Column(name = "usuarioCanasta", length = 50, nullable = false)
-    private String usuarioCanasta;
-
     @ManyToOne
     @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
+    private Usuario idUsuario;
 
-    public Canasta(Usuario usuario) {
-        this.usuario = usuario;
+    public Canasta(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public Canasta() {
+    }
+
+    public Canasta(int idCanasta, String nombreCanasta, Usuario idUsuario) {
+        this.idCanasta = idCanasta;
+        this.nombreCanasta = nombreCanasta;
+        this.idUsuario = idUsuario;
     }
 
     public int getIdCanasta() {
@@ -70,5 +70,13 @@ public class Canasta {
 
     public void setUpdatedAtCanasta(LocalDateTime updatedAtCanasta) {
         this.updatedAtCanasta = updatedAtCanasta;
+    }
+
+    public Usuario getUsuario() {
+        return idUsuario;
+    }
+
+    public void setUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

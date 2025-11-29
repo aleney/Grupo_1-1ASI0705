@@ -62,7 +62,7 @@ public class CanastaDetalleController{
 
     @GetMapping("/id")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<?> listarId(@PathVariable String id) {
+    public ResponseEntity<?> listarId(@PathVariable Integer id) {
         CanastaDetalle detalle = service.listId(id);
         if (detalle == null) {
             return ResponseEntity
