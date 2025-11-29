@@ -12,8 +12,6 @@ public class UsuarioDTOInsert {
     private String password;
     private int numeroTelefono;
     private Boolean estado;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
     private Rol rol;
 
     public int getIdUsuario() {
@@ -62,22 +60,6 @@ public class UsuarioDTOInsert {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public Rol getRol() {

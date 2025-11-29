@@ -1,6 +1,8 @@
 package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -27,9 +29,11 @@ public class Usuario {
     @Column(name = "estado",length = 9,nullable = false)
     private Boolean estado;
 
-    @Column(name = "createdAt",length = 9,nullable = false)
+    @CreationTimestamp
+    @Column(name = "createdAt",length = 9,nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updatedAt",length = 9,nullable = false)
     private LocalDateTime updatedAt;
 
@@ -37,15 +41,13 @@ public class Usuario {
     @JoinColumn(name = "idRol")
     private Rol rol;
 
-    public Usuario(int idUsuario, String nombre, String email, String password, int numeroTelefono, Boolean estado, LocalDateTime createdAt, LocalDateTime updatedAt, Rol rol) {
+    public Usuario(int idUsuario, String nombre, String email, String password, int numeroTelefono, Boolean estado, Rol rol) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
         this.numeroTelefono = numeroTelefono;
         this.estado = estado;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.rol = rol;
     }
 
@@ -101,20 +103,20 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Rol getRol() {
