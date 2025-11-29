@@ -1,13 +1,9 @@
 package pe.edu.upc.bestprice.dtos;
 
-import java.time.LocalDateTime;
-
-public class LineaTiendaDTOTiendasAnio {
+public class LineaTiendaDTOInsert {
     private int idLineaTienda;
     private String nombreLineaTienda;
     private String detalleLineaTienda;
-    private LocalDateTime createdAtLineaTienda;
-    private LocalDateTime updatedAtLineaTienda;
 
     public int getIdLineaTienda() {
         return idLineaTienda;
@@ -31,21 +27,5 @@ public class LineaTiendaDTOTiendasAnio {
 
     public void setDetalleLineaTienda(String detalleLineaTienda) {
         this.detalleLineaTienda = detalleLineaTienda;
-    }
-
-    public LocalDateTime getCreatedAtLineaTienda() {
-        return createdAtLineaTienda;
-    }
-
-    public void setCreatedAtLineaTienda(LocalDateTime createdAtLineaTienda) {
-        this.createdAtLineaTienda = createdAtLineaTienda;
-    }
-
-    public LocalDateTime getUpdatedAtLineaTienda() {
-        return updatedAtLineaTienda;
-    }
-
-    public void setUpdatedAtLineaTienda(LocalDateTime updatedAtLineaTienda) {
-        this.updatedAtLineaTienda = updatedAtLineaTienda;
     }
 }

@@ -4,14 +4,11 @@ import pe.edu.upc.bestprice.entities.Tienda;
 import pe.edu.upc.bestprice.entities.TipoResena;
 import pe.edu.upc.bestprice.entities.Usuario;
 
-import java.time.LocalDate;
-
 public class ResenaDTOInsert {
     private int idResena;
     private int calificacionResena;
     private String detalleResena;
     private boolean exactitudPrecioResena;
-    private LocalDate createdAtResena;
     private Usuario usuario;
     private Tienda tienda;
     private TipoResena tipoResena;
@@ -46,14 +43,6 @@ public class ResenaDTOInsert {
 
     public void setExactitudPrecioResena(boolean exactitudPrecioResena) {
         this.exactitudPrecioResena = exactitudPrecioResena;
-    }
-
-    public LocalDate getCreatedAtResena() {
-        return createdAtResena;
-    }
-
-    public void setCreatedAtResena(LocalDate createdAtResena) {
-        this.createdAtResena = createdAtResena;
     }
 
     public Usuario getUsuario() {

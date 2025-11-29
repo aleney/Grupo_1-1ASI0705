@@ -7,11 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.LineaTiendaDTO;
+import pe.edu.upc.bestprice.dtos.LineaTiendaDTOInsert;
 import pe.edu.upc.bestprice.dtos.LineaTiendaDTOTiendasAnio;
 import pe.edu.upc.bestprice.entities.LineaTienda;
 import pe.edu.upc.bestprice.serviceinterfaces.ILineaTiendaService;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,7 +45,7 @@ public class LineaTiendaController {
 
     @PostMapping("/insertar")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<String> insertar(@RequestBody LineaTiendaDTO dto) {
+    public ResponseEntity<String> insertar(@RequestBody LineaTiendaDTOInsert dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()
                     .body("El cuerpo de la solicitud está vacío o es inválido.");
@@ -85,9 +89,9 @@ public class LineaTiendaController {
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
-    @PutMapping
+    @PutMapping("/modificar")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<String> modificar(@RequestBody LineaTiendaDTO dto) {
+    public ResponseEntity<String> modificar(@RequestBody LineaTiendaDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         LineaTienda lt = m.map(dto, LineaTienda.class);
 
@@ -132,11 +136,19 @@ public class LineaTiendaController {
                     .body("No se encontraron proveedores registrados");
         }
 
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern("yyyy-MM-dd HH:mm:ss")
+                .appendFraction(ChronoField.MICRO_OF_SECOND, 1, 6, true)
+                .toFormatter();
+
         //columna -> Item de la lista de elementos que retorna monto
         for (String[] columna : tiendas) {
             LineaTiendaDTOTiendasAnio dto = new LineaTiendaDTOTiendasAnio();
-            dto.setCreatedAt(LocalDate.parse(columna[1]));
-            dto.setNombreLineaTienda((columna[0]));
+            dto.setIdLineaTienda(Integer.parseInt(columna[0]));
+            dto.setNombreLineaTienda((columna[1]));
+            dto.setDetalleLineaTienda(columna[2]);
+            dto.setCreatedAtLineaTienda(LocalDateTime.parse(columna[3], formatter));
+            dto.setUpdatedAtLineaTienda(LocalDateTime.parse(columna[4], formatter));
             ListaTiendas.add(dto);
         }
         return ResponseEntity.ok(ListaTiendas);

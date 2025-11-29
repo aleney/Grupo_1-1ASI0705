@@ -1,8 +1,11 @@
 package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table (name = "Resena")
@@ -20,8 +23,13 @@ public class Resena {
     @Column(name = "exactitudPrecioResena", nullable = true)
     private boolean exactitudPrecioResena;
 
-    @Column(name = "createdAtResena", nullable = false)
-    private LocalDate createdAtResena;
+    @CreationTimestamp
+    @Column(name = "createdAtResena", nullable = false, updatable = false)
+    private LocalDateTime createdAtResena;
+
+    @UpdateTimestamp
+    @Column(name = "updatedAtResena",nullable = false)
+    private LocalDateTime updatedAtResena;
 
     @ManyToOne
     @JoinColumn(name = "idUsuario")
@@ -39,15 +47,11 @@ public class Resena {
     public Resena() {
     }
 
-    public Resena(int idResena, int calificacionResena, String detalleResena, boolean exactitudPrecioResena, LocalDate createdAtResena) {
+    public Resena(int idResena, int calificacionResena, String detalleResena, boolean exactitudPrecioResena, LocalDateTime createdAtResena, LocalDateTime updatedAtResena, Usuario usuario, Tienda tienda, TipoResena tipoResena) {
         this.idResena = idResena;
         this.calificacionResena = calificacionResena;
         this.detalleResena = detalleResena;
         this.exactitudPrecioResena = exactitudPrecioResena;
-        this.createdAtResena = createdAtResena;
-    }
-
-    public Resena(Usuario usuario, Tienda tienda, TipoResena tipoResena) {
         this.usuario = usuario;
         this.tienda = tienda;
         this.tipoResena = tipoResena;
@@ -85,12 +89,20 @@ public class Resena {
         this.exactitudPrecioResena = exactitudPrecioResena;
     }
 
-    public LocalDate getCreatedAtResena() {
+    public LocalDateTime getCreatedAtResena() {
         return createdAtResena;
     }
 
-    public void setCreatedAtResena(LocalDate createdAtResena) {
+    public void setCreatedAtResena(LocalDateTime createdAtResena) {
         this.createdAtResena = createdAtResena;
+    }
+
+    public LocalDateTime getUpdatedAtResena() {
+        return updatedAtResena;
+    }
+
+    public void setUpdatedAtResena(LocalDateTime updatedAtResena) {
+        this.updatedAtResena = updatedAtResena;
     }
 
     public Usuario getUsuario() {

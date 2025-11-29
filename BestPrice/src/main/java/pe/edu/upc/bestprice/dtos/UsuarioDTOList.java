@@ -1,10 +1,13 @@
 package pe.edu.upc.bestprice.dtos;
 
+import pe.edu.upc.bestprice.entities.Rol;
+
 public class UsuarioDTOList {
     private String nombre;
     private String email;
     private boolean estado;
     private String tipoUsuario;
+
 
     public String getNombre() {
         return nombre;

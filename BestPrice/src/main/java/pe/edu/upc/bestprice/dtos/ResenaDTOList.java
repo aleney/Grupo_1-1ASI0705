@@ -1,10 +1,15 @@
 package pe.edu.upc.bestprice.dtos;
 
+import java.time.LocalDateTime;
+
 public class ResenaDTOList {
     private int idResena;
+    private String nombre;
     private int calificacionResena;
     private String detalleResena;
     private boolean exactitudPrecioResena;
+    private LocalDateTime createdAtResena;
+    private LocalDateTime updatedAtResena;
 
     public int getIdResena() {
         return idResena;
@@ -36,5 +41,29 @@ public class ResenaDTOList {
 
     public void setExactitudPrecioResena(boolean exactitudPrecioResena) {
         this.exactitudPrecioResena = exactitudPrecioResena;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public LocalDateTime getCreatedAtResena() {
+        return createdAtResena;
+    }
+
+    public void setCreatedAtResena(LocalDateTime createdAtResena) {
+        this.createdAtResena = createdAtResena;
+    }
+
+    public LocalDateTime getUpdatedAtResena() {
+        return updatedAtResena;
+    }
+
+    public void setUpdatedAtResena(LocalDateTime updatedAtResena) {
+        this.updatedAtResena = updatedAtResena;
     }
 }
