@@ -17,12 +17,13 @@ public class TicketReporte {
     @Column(name = "detalle",length = 99, nullable = false)
     public String detalle;
 
-    @CreationTimestamp
-    @Column(name = "createdAt", nullable = true, updatable = false)
-    public LocalDateTime createdAt;
 
     @Column(name = "status", nullable = false)
     public Boolean ticketStatus;
+
+    @CreationTimestamp
+    @Column(name = "createdAt", nullable = true, updatable = false)
+    public LocalDateTime createdAtTicketReporte;
 
     @ManyToOne
     @JoinColumn(name = "idUsuario")
@@ -55,12 +56,12 @@ public class TicketReporte {
         this.detalle = detalle;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedAtTicketReporte() {
+        return createdAtTicketReporte;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAtTicketReporte(LocalDateTime createdAtTicketReporte) {
+        this.createdAtTicketReporte = createdAtTicketReporte;
     }
 
     public Boolean getTicketStatus() {

@@ -1,19 +1,18 @@
 package pe.edu.upc.bestprice.dtos;
 
 import pe.edu.upc.bestprice.entities.TicketReporte;
+import pe.edu.upc.bestprice.entities.Usuario;
 
 import java.time.LocalDateTime;
 
 public class TicketRespuestaDTOInsert {
-    public int idTicketRes;
 
-    public String detalle;
+    private int idTicketRes;
 
-    public LocalDateTime createdAt;
+    private String detalle;
 
-    public int ticketReporte;
+    private TicketReporte ticketReporte;
 
-    public int usuario;
 
     public int getIdTicketRes() {
         return idTicketRes;
@@ -31,27 +30,11 @@ public class TicketRespuestaDTOInsert {
         this.detalle = detalle;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public int getTicketReporte() {
+    public TicketReporte getTicketReporte() {
         return ticketReporte;
     }
 
-    public void setTicketReporte(int ticketReporte) {
+    public void setTicketReporte(TicketReporte ticketReporte) {
         this.ticketReporte = ticketReporte;
-    }
-
-    public int getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(int usuario) {
-        this.usuario = usuario;
     }
 }

@@ -18,7 +18,7 @@ public class TicketRespuesta {
 
     @CreationTimestamp
     @Column(name = "createdAt", nullable = true, updatable = false)
-    public LocalDateTime createdAt;
+    public LocalDateTime createdAtTicketRespuesta;
 
     @OneToOne
     @JoinColumn(name="idTicketRep")
@@ -55,12 +55,12 @@ public class TicketRespuesta {
         this.detalle = detalle;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedAtTicketRespuesta() {
+        return createdAtTicketRespuesta;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAtTicketRespuesta(LocalDateTime createdAtTicketRespuesta) {
+        this.createdAtTicketRespuesta = createdAtTicketRespuesta;
     }
 
     public TicketReporte getTicketReporte() {
@@ -78,4 +78,6 @@ public class TicketRespuesta {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+
 }
