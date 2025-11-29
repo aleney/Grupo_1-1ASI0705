@@ -1,8 +1,5 @@
 package pe.edu.upc.bestprice.dtos;
 
-import pe.edu.upc.bestprice.entities.Producto;
-
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

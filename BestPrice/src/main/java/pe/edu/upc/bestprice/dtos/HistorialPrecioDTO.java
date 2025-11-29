@@ -1,10 +1,6 @@
 package pe.edu.upc.bestprice.dtos;
 
-import pe.edu.upc.bestprice.entities.Producto;
-import pe.edu.upc.bestprice.entities.Tienda;
-
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
