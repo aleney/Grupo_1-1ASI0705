@@ -9,6 +9,9 @@ import { Lineatiendaslist } from './components/lineatiendas/lineatiendaslist/lin
 import { seguridadGuard } from './guard/security-guard';
 import { Autenticador } from './components/autenticador/autenticador';
 import { Reportelineatiendas2025 } from './components/lineatiendas/reportelineatiendas2025/reportelineatiendas2025';
+import { Distrito } from './components/distrito/distrito';
+import { Distritolistar } from './components/distrito/distritolistar/distritolistar';
+import { Distritoinsert } from './components/distrito/distritoinsert/distritoinsert';
 
 export const routes: Routes = [
 
@@ -24,21 +27,31 @@ export const routes: Routes = [
 
     { path: 'lineatienda', component: Lineatiendas, 
       children:[
-        { path: 'lineatiendalist', component: Lineatiendaslist},
+        { path: 'listar', component: Lineatiendaslist},
         { path: 'edits/:id', component: Lineatiendasinsert},
-        { path: 'lineatiendainsert', component: Lineatiendasinsert},
-        { path: 'lineatiendas-anioactual', component: Reportelineatiendas2025}
+        { path: 'insertar', component: Lineatiendasinsert},
+        { path: 'lanioactual', component: Reportelineatiendas2025}
       ],
       canActivate: [seguridadGuard]
     },
 
     { path: 'resenia', component: Resenia, 
       children:[
-        { path: 'reseniainsert', component: Reseniainsert},
+        { path: 'insertar', component: Reseniainsert},
         { path: 'edits/:id', component: Reseniainsert},
-        { path: 'resenialist', component: Resenialist }
+        { path: 'listar', component: Resenialist }
       ],
       canActivate: [seguridadGuard]
-    }
+    },
+
+    {
+    path: 'distrito',
+    component: Distrito,
+    children: [
+      { path: 'listar', component: Distritolistar },
+      { path: 'insertar', component: Distritoinsert },
+    ],
+    //canActivate: [seguridadGuard],
+  },
 
 ];

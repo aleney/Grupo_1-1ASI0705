@@ -74,7 +74,7 @@ registrar(): void {
     })
   })
   }
-  this.router.navigate(['lineatienda/lineatiendalist']);
+  this.router.navigate(['lineatienda/listar']);
 }
 
 }
