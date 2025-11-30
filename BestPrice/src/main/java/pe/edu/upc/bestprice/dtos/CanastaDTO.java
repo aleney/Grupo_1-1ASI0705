@@ -1,12 +1,12 @@
 package pe.edu.upc.bestprice.dtos;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 public class CanastaDTO {
     private int idCanasta;
     private String nombreCanasta;
-    private LocalDateTime createdACanasta;  // Changed from Timestamp to LocalDateTime
-    private LocalDateTime updateACanasta;   // Changed from Timestamp to LocalDateTime
+    private Timestamp createdACanasta;
+    private Timestamp updateACanasta;
     private String usuarioCanasta;
 
     public int getIdCanasta() {
@@ -25,19 +25,19 @@ public class CanastaDTO {
         this.nombreCanasta = nombreCanasta;
     }
 
-    public LocalDateTime getCreatedACanasta() {
+    public Timestamp getCreatedACanasta() {
         return createdACanasta;
     }
 
-    public void setCreatedACanasta(LocalDateTime createdACanasta) {
+    public void setCreatedACanasta(Timestamp createdACanasta) {
         this.createdACanasta = createdACanasta;
     }
 
-    public LocalDateTime getUpdateACanasta() {
+    public Timestamp getUpdateACanasta() {
         return updateACanasta;
     }
 
-    public void setUpdateACanasta(LocalDateTime updateACanasta) {
+    public void setUpdateACanasta(Timestamp updateACanasta) {
         this.updateACanasta = updateACanasta;
     }
 

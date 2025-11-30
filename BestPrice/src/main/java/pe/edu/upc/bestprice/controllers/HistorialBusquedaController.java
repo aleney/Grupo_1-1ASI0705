@@ -1,10 +1,13 @@
 package pe.edu.upc.bestprice.controllers;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.HistorialBusquedaDTO;
-import pe.edu.upc.bestprice.dtos.HistorialBusquedaDTOInsert; // Importa el DTO de Inserción
+import pe.edu.upc.bestprice.entities.Distrito;
 import pe.edu.upc.bestprice.entities.HistorialBusqueda;
 import pe.edu.upc.bestprice.serviceinterfaces.IHistorialBusquedaService;
 
@@ -12,105 +15,73 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/historialbusqueda")
+@RequestMapping("/historial-busqueda")
 public class HistorialBusquedaController {
 
     @Autowired
-    private IHistorialBusquedaService historialBusquedaService;
+    private IHistorialBusquedaService service;
 
-    // Obtener todos los registros de historial de búsqueda
-    @GetMapping
-    public List<HistorialBusquedaDTO> getAllHistorialBusqueda() {
-        List<HistorialBusqueda> historialList = historialBusquedaService.getAllHistorialBusqueda();
-        return historialList.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+    @GetMapping("/listar")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> listar() {
+        List<HistorialBusquedaDTO> lista = service.list().stream().map(hb -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(hb, HistorialBusquedaDTO.class);
+        }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron historiales de búsqueda registrados.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
-    // Obtener un registro de historial de búsqueda por ID
+    @PostMapping("/insertar")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
+    public ResponseEntity<String> insertar(@RequestBody HistorialBusquedaDTO dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            HistorialBusqueda hb = m.map(dto, HistorialBusqueda.class);
+            service.insert(hb);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Historial de búsqueda registrado correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar el historial de búsqueda. Verifica que los datos enviados sean correctos.");
+        }
+    }
+
+
     @GetMapping("/{id}")
-    public ResponseEntity<HistorialBusquedaDTO> getHistorialBusquedaById(@PathVariable int id) {
-        HistorialBusqueda historial = historialBusquedaService.getHistorialBusquedaById(id);
-        if (historial != null) {
-            return ResponseEntity.ok(convertToDTO(historial));
-        } else {
-            return ResponseEntity.notFound().build();
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
+        HistorialBusqueda historialBusqueda = service.listId(id);
+        if (historialBusqueda == null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID:" + id);
         }
+        ModelMapper m = new ModelMapper();
+        HistorialBusquedaDTO dto = m.map(historialBusqueda, HistorialBusquedaDTO.class);
+        return ResponseEntity.ok(dto);
     }
 
-    /**
-     * ✅ CREAR un nuevo registro de historial de búsqueda (Usa HistorialBusquedaDTOInsert)
-     * Request Body: HistorialBusquedaDTOInsert
-     * Response Body: HistorialBusquedaDTO (El DTO completo después de la creación)
-     */
-    @PostMapping
-    public ResponseEntity<HistorialBusquedaDTO> createHistorialBusqueda(@RequestBody HistorialBusquedaDTOInsert historialBusquedaDTOInsert) {
-        // Usa la sobrecarga del método para convertir el DTO de inserción
-        HistorialBusqueda historial = convertToEntity(historialBusquedaDTOInsert);
-        HistorialBusqueda createdHistorial = historialBusquedaService.createHistorialBusqueda(historial);
-
-        // Se devuelve el DTO completo con el ID generado y la fecha generada por la DB
-        return ResponseEntity.status(201).body(convertToDTO(createdHistorial));
-    }
-
-    /**
-     * ✅ ACTUALIZAR un registro de historial de búsqueda (Usa HistorialBusquedaDTOInsert)
-     */
-    @PutMapping("/{id}")
-    public ResponseEntity<HistorialBusquedaDTO> updateHistorialBusqueda(@PathVariable int id, @RequestBody HistorialBusquedaDTOInsert historialBusquedaDTOInsert) {
-        HistorialBusqueda existingHistorial = historialBusquedaService.getHistorialBusquedaById(id);
-
-        if (existingHistorial != null) {
-            // Convertir el DTO de actualización a entidad, manteniendo la fecha original (si no se actualiza)
-            HistorialBusqueda updatedHistorial = convertToEntity(historialBusquedaDTOInsert);
-
-            // Reestablecer el ID (necesario para la actualización) y la fecha original
-            updatedHistorial.setIdHistorialBusqueda(id);
-            updatedHistorial.setFechabusqueHistorialBusqueda(existingHistorial.getFechabusqueHistorialBusqueda());
-
-            historialBusquedaService.updateHistorialBusqueda(updatedHistorial);
-            return ResponseEntity.ok(convertToDTO(updatedHistorial));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    // Eliminar un registro de historial de búsqueda
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteHistorialBusqueda(@PathVariable int id) {
-        historialBusquedaService.deleteHistorialBusqueda(id);
-        return ResponseEntity.noContent().build();
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
+        HistorialBusqueda hb = service.listId(id);
+        if (hb == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
+        }
+        service.delete(id);
+        return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
-    // --- Métodos de Conversión ---
-
-    // Convertir entidad a DTO (Para lectura/respuesta)
-    private HistorialBusquedaDTO convertToDTO(HistorialBusqueda historial) {
-        return new HistorialBusquedaDTO(
-                historial.getIdHistorialBusqueda(),
-                historial.getFechabusqueHistorialBusqueda(),
-                historial.getProductoidHistoriaBusqueda(),
-                historial.getUsuarioidHistoriaBusqueda()
-        );
-    }
-
-    // Convertir DTO a entidad (Para actualizar/lectura - Mantiene ID/Fecha para update)
-    private HistorialBusqueda convertToEntity(HistorialBusquedaDTO historialBusquedaDTO) {
-        HistorialBusqueda entity = new HistorialBusqueda();
-        entity.setIdHistorialBusqueda(historialBusquedaDTO.getIdHistorialBusqueda());
-        entity.setFechabusqueHistorialBusqueda(historialBusquedaDTO.getFechabusqueHistorialBusqueda());
-        entity.setProductoidHistoriaBusqueda(historialBusquedaDTO.getProductoidHistoriaBusqueda());
-        entity.setUsuarioidHistoriaBusqueda(historialBusquedaDTO.getUsuarioidHistoriaBusqueda());
-        return entity;
-    }
-
-    // Convertir DTOInsert a entidad (Para crear - No tiene ID ni Fecha)
-    private HistorialBusqueda convertToEntity(HistorialBusquedaDTOInsert historialBusquedaDTOInsert) {
-        // En una inserción, el ID y la fecha se generan automáticamente,
-        // solo pasamos los IDs de las claves foráneas.
-        HistorialBusqueda entity = new HistorialBusqueda();
-        entity.setProductoidHistoriaBusqueda(historialBusquedaDTOInsert.getProductoidHistoriaBusqueda());
-        entity.setUsuarioidHistoriaBusqueda(historialBusquedaDTOInsert.getUsuarioidHistoriaBusqueda());
-        return entity;
-    }
 }

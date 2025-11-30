@@ -36,6 +36,6 @@ public class RolServiceImplement implements IRolService{
 
     @Override
     public void delete(int idRol) {
-        repository.deleteById(idRol);
+       repository.deleteById(idRol);
     }
 }

@@ -1,4 +1,4 @@
-package pe.edu.upc.bestprice.dtos;//LISTAR
+package pe.edu.upc.bestprice.dtos;
 
 public class CanastaDetalleDTO {
     private String idCanastaDetalle;

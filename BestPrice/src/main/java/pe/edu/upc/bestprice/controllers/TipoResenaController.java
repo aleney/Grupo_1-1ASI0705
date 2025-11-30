@@ -1,134 +1,102 @@
 package pe.edu.upc.bestprice.controllers;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.bestprice.dtos.ResenaDTOInsert;
 import pe.edu.upc.bestprice.dtos.TipoResenaDTO;
-import pe.edu.upc.bestprice.dtos.TipoResenaDTOInsert;
 import pe.edu.upc.bestprice.entities.TipoResena;
-import pe.edu.upc.bestprice.serviceinterfaces.ITipoResenaService;
+import pe.edu.upc.bestprice.serviceimplements.TipoResenaServiceImplement;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/tiporesena")
+@RequestMapping("/tipo-resena")
 public class TipoResenaController {
 
     @Autowired
-    private ITipoResenaService tipoResenaService;
+    private TipoResenaServiceImplement service;
 
-    // ---------------------------
-    // GET: todos los tipos
-    // ---------------------------
-    @GetMapping
-    public List<TipoResenaDTO> getAllTipoResena() {
-        List<TipoResena> tipoResenaList = tipoResenaService.getAllTipoResena();
-        return tipoResenaList.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+    @GetMapping("/listar")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    public ResponseEntity<?> listar() {
+        List<TipoResenaDTO> lista = service.listarTipoResena().stream().map(a -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(a, TipoResenaDTO.class);
+        }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron tipos de reseña registrados.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
-    // ---------------------------
-    // GET: por ID
-    // ---------------------------
     @GetMapping("/{id}")
-    public ResponseEntity<TipoResenaDTO> getTipoResenaById(@PathVariable int id) {
-        TipoResena tipoResena = tipoResenaService.getTipoResenaById(id);
-        if (tipoResena != null) {
-            return ResponseEntity.ok(convertToDTO(tipoResena));
-        } else {
-            return ResponseEntity.notFound().build();
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
+        TipoResena tr = service.ListId(id);
+        if (tr == null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
+        }
+        ModelMapper m = new ModelMapper();
+        TipoResenaDTO dto = m.map(tr, TipoResenaDTO.class);
+        return ResponseEntity.ok(dto);
+    }
+
+    @PostMapping("/insertar")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
+    public ResponseEntity<String> insertar(@RequestBody TipoResenaDTO dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            TipoResena tr = m.map(dto, TipoResena.class);
+            service.insert(tr);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Tipo de reseña registrado correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar el tipo de reseña. Verifica que los datos enviados sean correctos.");
         }
     }
 
-    // ---------------------------
-    // POST: crear (usa DTOInsert)
-    // ---------------------------
-    @PostMapping
-    public ResponseEntity<TipoResenaDTOInsert> createTipoResena(
-            @RequestBody TipoResenaDTOInsert tipoResenaDTOInsert) {
+    @PutMapping("/modificar")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT','SELLER')")
+    public ResponseEntity<String> modificar(@RequestBody ResenaDTOInsert dto) {
+        ModelMapper m = new ModelMapper();
+        TipoResena tr = m.map(dto, TipoResena.class);
 
-        // Usa la sobrecarga convertToEntity(TipoResenaDTOInsert)
-        TipoResena tipoResena = convertToEntity(tipoResenaDTOInsert);
-        TipoResena createdTipoResena = tipoResenaService.createTipoResena(tipoResena);
-
-        // Devuelve TipoResenaDTOInsert (solo el campo tiporeseTipoResena)
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(convertToDTOInsert(createdTipoResena));
-    }
-
-    // ---------------------------
-    // PUT: actualizar (usa DTOInsert)
-    // ---------------------------
-    @PutMapping("/{id}")
-    public ResponseEntity<TipoResenaDTOInsert> updateTipoResena(
-            @PathVariable int id,
-            @RequestBody TipoResenaDTOInsert tipoResenaDTOInsert) {
-
-        TipoResena existingTipoResena = tipoResenaService.getTipoResenaById(id);
-
-        if (existingTipoResena != null) {
-            // Usa la sobrecarga convertToEntity(TipoResenaDTOInsert)
-            TipoResena updatedTipoResena = convertToEntity(tipoResenaDTOInsert);
-
-            // Asigna el ID existente
-            updatedTipoResena.setIdTipoResena(id);
-
-            // Si TipoResena tiene otros campos además de tiporeseTipoResena,
-            // aquí podrías copiarlos desde existingTipoResena.
-
-            tipoResenaService.updateTipoResena(updatedTipoResena);
-
-            // Devuelve TipoResenaDTOInsert (solo la descripción)
-            return ResponseEntity.ok(convertToDTOInsert(updatedTipoResena));
-        } else {
-            return ResponseEntity.notFound().build();
+        // Validación de existencia
+        TipoResena existente = service.ListId(tr.getIdTipoResena());
+        if (existente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se puede modificar. No existe un registro con el ID: " + tr.getIdTipoResena());
         }
+        // Actualización si pasa validaciones
+        service.update(tr);
+        return ResponseEntity.ok("Registro con ID " + tr.getIdTipoResena() + " modificado correctamente.");
     }
 
-    // ---------------------------
-    // DELETE: eliminar por ID
-    // ---------------------------
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTipoResena(@PathVariable int id) {
-        tipoResenaService.deleteTipoResena(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    // ===========================
-    // MÉTODOS DE CONVERSIÓN
-    // ===========================
-
-    // Entidad -> TipoResenaDTO (para GET)
-    private TipoResenaDTO convertToDTO(TipoResena tipoResena) {
-        return new TipoResenaDTO(
-                tipoResena.getIdTipoResena(),
-                tipoResena.getTiporeseTipoResena()
-        );
-    }
-
-    // Entidad -> TipoResenaDTOInsert (para respuestas de POST/PUT)
-    private TipoResenaDTOInsert convertToDTOInsert(TipoResena tipoResena) {
-        return new TipoResenaDTOInsert(
-                tipoResena.getTiporeseTipoResena()
-        );
-    }
-
-    // TipoResenaDTO -> Entidad (no lo usas ahora, pero lo dejo por si acaso)
-    private TipoResena convertToEntity(TipoResenaDTO tipoResenaDTO) {
-        return new TipoResena(
-                tipoResenaDTO.getIdTipoResena(),
-                tipoResenaDTO.getTiporeseTipoResena()
-        );
-    }
-
-    // TipoResenaDTOInsert -> Entidad (para POST y PUT)
-    private TipoResena convertToEntity(TipoResenaDTOInsert tipoResenaDTOInsert) {
-        return new TipoResena(
-                0, // el ID lo asigna la BD o se setea en el PUT
-                tipoResenaDTOInsert.getTiporeseTipoResena()
-        );
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
+        TipoResena r = service.ListId(id);
+        if (r == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
+        }
+        service.delete(id);
+        return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 }

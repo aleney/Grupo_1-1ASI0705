@@ -8,6 +8,6 @@ public interface IRolService {
     public List<Rol> listarRoles();
     public void insertarRol(Rol rol);
     public void edit(Rol r);
-    public Rol listarId(int idRol);
+    public Rol listarId(int idRol);  
     public void delete(int idRol);
 }

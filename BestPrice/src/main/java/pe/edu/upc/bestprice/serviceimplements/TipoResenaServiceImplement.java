@@ -2,42 +2,41 @@ package pe.edu.upc.bestprice.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.bestprice.entities.LineaTienda;
 import pe.edu.upc.bestprice.entities.TipoResena;
-import pe.edu.upc.bestprice.serviceinterfaces.ITipoResenaService;
 import pe.edu.upc.bestprice.repositories.ITipoResenaRepository;
+import pe.edu.upc.bestprice.serviceinterfaces.ITipoResenaService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TipoResenaServiceImplement implements ITipoResenaService {
 
     @Autowired
-    private ITipoResenaRepository tipoResenaRepository;
+    private ITipoResenaRepository repository;
 
     @Override
-    public List<TipoResena> getAllTipoResena() {
-        return tipoResenaRepository.findAll();
+    public List<TipoResena> listarTipoResena() {
+        return repository.findAll();
     }
 
     @Override
-    public TipoResena getTipoResenaById(int id) {
-        Optional<TipoResena> tipoResena = tipoResenaRepository.findById(id);
-        return tipoResena.orElse(null); // Devuelve null si no se encuentra
+    public TipoResena ListId(int id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
-    public TipoResena createTipoResena(TipoResena tipoResena) {
-        return tipoResenaRepository.save(tipoResena);
+    public void insert(TipoResena t) {
+        repository.save(t);
     }
 
     @Override
-    public void updateTipoResena(TipoResena tipoResena) {
-        tipoResenaRepository.save(tipoResena);
+    public void delete(int id) {
+        repository.deleteById(id);
     }
 
     @Override
-    public void deleteTipoResena(int id) {
-        tipoResenaRepository.deleteById(id);
+    public void update(TipoResena t) {
+        repository.save(t);
     }
 }
