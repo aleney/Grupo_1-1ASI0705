@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.UbicacionTiendaDTOInsert;
 import pe.edu.upc.bestprice.dtos.UbicacionTiendaDTOList;
@@ -19,6 +20,7 @@ public class UbicacionTiendaController {
     @Autowired
     private IUbicacionTiendaService service;
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
     @GetMapping
     public List<UbicacionTiendaDTOList> listar() {
         return service.list().stream().map(u -> {
@@ -27,6 +29,7 @@ public class UbicacionTiendaController {
         }).collect(Collectors.toList());
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER')")
     @PostMapping("/insertar")
     public void insertar(@RequestBody UbicacionTiendaDTOInsert dto) {
         ModelMapper m = new ModelMapper();
@@ -34,6 +37,7 @@ public class UbicacionTiendaController {
         service.insert(u);
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
     @GetMapping("/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         UbicacionTienda u = service.listId(id);
@@ -46,6 +50,7 @@ public class UbicacionTiendaController {
         return ResponseEntity.ok(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         UbicacionTienda u = service.listId(id);
@@ -57,6 +62,7 @@ public class UbicacionTiendaController {
         return ResponseEntity.ok("Ubicación con ID " + id + " eliminada correctamente.");
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER')")
     @PutMapping("/modificar")
     public ResponseEntity<String> modificar(@RequestBody UbicacionTiendaDTOInsert dto) {
         ModelMapper m = new ModelMapper();

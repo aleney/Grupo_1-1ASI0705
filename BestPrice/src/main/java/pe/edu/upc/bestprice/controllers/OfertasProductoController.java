@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.OfertasProductoDTOInsert;
 import pe.edu.upc.bestprice.dtos.OfertasProductoDTOList;
@@ -20,6 +21,7 @@ public class OfertasProductoController {
     @Autowired
     private IOfertasProductoService service;
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
     @GetMapping("/listar")
     public List<OfertasProductoDTOList> listar() {
         return service.list().stream().map(o -> {
@@ -28,6 +30,7 @@ public class OfertasProductoController {
         }).collect(Collectors.toList());
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER')")
     @PostMapping("/insertar")
     public void insertar(@RequestBody OfertasProductoDTOInsert dto) {
         ModelMapper m = new ModelMapper();
@@ -35,6 +38,7 @@ public class OfertasProductoController {
         service.insert(op);
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
     @GetMapping("/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         OfertasProducto op = service.listId(id);
@@ -47,6 +51,7 @@ public class OfertasProductoController {
         return ResponseEntity.ok(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         OfertasProducto op = service.listId(id);
@@ -58,6 +63,7 @@ public class OfertasProductoController {
         return ResponseEntity.ok("Oferta con ID " + id + " eliminada correctamente.");
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER')")
     @PutMapping("/modificar")
     public ResponseEntity<String> modificar(@RequestBody OfertasProductoDTOInsert dto) {
         ModelMapper m = new ModelMapper();
@@ -71,6 +77,7 @@ public class OfertasProductoController {
         return ResponseEntity.ok("Oferta con ID " + op.getIdOfertasProducto() + " modificada correctamente.");
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
     @GetMapping("/buscar-fecha")
     public List<OfertasProductoDTOList> buscarPorProductoYFecha(@RequestParam int idProducto,
                                                                 @RequestParam String fecha) {
@@ -80,6 +87,7 @@ public class OfertasProductoController {
                 .collect(Collectors.toList());
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
     @GetMapping("/buscar-rango")
     public List<OfertasProductoDTOList> buscarPorProductoYRangoFechas(@RequestParam int idProducto,
                                                                       @RequestParam String fechaInicio,

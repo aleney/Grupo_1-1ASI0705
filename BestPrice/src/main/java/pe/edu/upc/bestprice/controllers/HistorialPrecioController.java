@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.HistorialPrecioDTOInsert;
 import pe.edu.upc.bestprice.dtos.HistorialPrecioDTOList;
@@ -20,6 +21,7 @@ public class HistorialPrecioController {
     @Autowired
     private IHistorialPrecioService service;
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
     @GetMapping("/listar")
     public List<HistorialPrecioDTOList> listar() {
         return service.list().stream().map(hp -> {
@@ -28,6 +30,7 @@ public class HistorialPrecioController {
         }).collect(Collectors.toList());
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/insertar")
     public void insertar(@RequestBody HistorialPrecioDTOInsert dto) {
         ModelMapper m = new ModelMapper();
@@ -35,6 +38,7 @@ public class HistorialPrecioController {
         service.insert(hp);
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
     @GetMapping("/{id}")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         HistorialPrecio hp = service.listId(id);
@@ -46,6 +50,7 @@ public class HistorialPrecioController {
         return ResponseEntity.ok(m.map(hp, HistorialPrecioDTOList.class));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         HistorialPrecio hp = service.listId(id);
@@ -57,6 +62,7 @@ public class HistorialPrecioController {
         return ResponseEntity.ok("Historial con ID " + id + " eliminado correctamente.");
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/modificar")
     public ResponseEntity<String> modificar(@RequestBody HistorialPrecioDTOInsert dto) {
         ModelMapper m = new ModelMapper();
@@ -70,6 +76,7 @@ public class HistorialPrecioController {
         return ResponseEntity.ok("Historial con ID " + hp.getIdHistorialPrecio() + " modificado correctamente.");
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
     @GetMapping("/{idProducto}")
     public List<HistorialPrecioDTOList> buscarPorProducto(@PathVariable("idProducto") int idProducto) {
         return service.buscarPorProducto(idProducto).stream().map(hp -> {
@@ -78,6 +85,7 @@ public class HistorialPrecioController {
         }).collect(Collectors.toList());
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SELLER', 'CLIENT')")
     @GetMapping("/{fecha}")
     public List<HistorialPrecioDTOList> buscarPorFecha(@PathVariable("fecha") String fecha) {
         LocalDate fechaConvertida = LocalDate.parse(fecha); // formato yyyy-MM-dd

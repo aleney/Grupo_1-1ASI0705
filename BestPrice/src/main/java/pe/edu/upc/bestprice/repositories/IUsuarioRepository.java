@@ -19,13 +19,13 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
     @Query("select count(u.nombre) from Usuario u where u.nombre =:username")
     public int buscarNombre(@Param("nombre") String nombre);
 
-    @Query(value = "SELECT u.nombre, u.email, u.estado, r.tipo_usuario\n" +
+    @Query(value = "SELECT u.nombre, u.estado, r.tipo_usuario\n" +
             "FROM usuario u\n" +
             "INNER JOIN rol r \n" +
             "ON u.id_rol = r.id_rol;", nativeQuery = true)
     public List<String[]> buscarUsuario(@Param("nombre") String nombre);
 
-    @Query(value="SELECT u.nombre, u.email, u.estado, r.tipo_usuario\n" +
+    @Query(value="SELECT u.nombre, u.estado, r.tipo_usuario\n" +
             "FROM usuario u\n" +
             "INNER JOIN rol r \n" +
             "ON u.id_rol = r.id_rol;", nativeQuery = true)
