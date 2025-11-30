@@ -22,14 +22,17 @@ export class Lineatiendaslist implements OnInit {
 
   constructor(private ltS: LineatiendaService) {}
 
-  ngOnInit(): void {
-    this.ltS.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-    });
-    this.ltS.getList().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-    });
-  }
+ngOnInit(): void {
+
+  this.ltS.getList().subscribe((data) => {
+    this.dataSource = new MatTableDataSource(data);
+  });
+
+  this.ltS.list().subscribe((data) => {
+    this.ltS.setList(data);
+  });
+}
+
 
   eliminar(id:number){
     this.ltS.delete(id).subscribe(data=>{
