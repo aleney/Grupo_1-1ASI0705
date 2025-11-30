@@ -1,0 +1,61 @@
+<div class="page-container">
+  <mat-toolbar color="primary" class="toolbar">
+    <div class="logo-area">
+      <button matIconButton class="Menu-Desplegable" aria-label="Menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <img src="assets/images/Menu_LogoBestPrice.png" alt="" />
+      <span class="title">ESTPRICE</span>
+    </div>
+
+    <span class="spacer"></span>
+
+    <button matIconButton class="Canasta" aria-label="Carrito">
+      <mat-icon aria-hidden="false" fontIcon="shopping_cart">shopping_cart</mat-icon>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn">
+      <mat-icon>account_circle</mat-icon>
+      user_admin
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="/perfil"><mat-icon>person</mat-icon> Perfil</button>
+      <button mat-menu-item routerLink="/favorites"><mat-icon>favorite</mat-icon> Favoritos</button>
+      <button mat-menu-item routerLink="/historial"><mat-icon>history</mat-icon> Historial</button>
+      <button mat-menu-item routerLink="/ajustes"><mat-icon>settings</mat-icon> Ajustes</button>
+      <button mat-menu-item routerLink="/login" (click)="cerrar()">
+        <mat-icon>logout</mat-icon> Cerrar sesión
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <div class="top-buttons">
+    <button mat-raised-button class="btn-volver" routerLink="/menu">
+      <mat-icon>arrow_back_ios</mat-icon>Volver
+    </button>
+    <button mat-raised-button class="btn-lista" routerLink="/ofertasproducto/listar">Lista</button>
+  </div>
+
+  <h1 class="titulo">Oferta de producto</h1>
+
+  <div class="form-container">
+    <form [formGroup]="form" (submit)="registrar()" class="example-form">
+      <ng-container *ngIf="edicion">
+        <mat-form-field>
+          <mat-label>Código</mat-label>
+          <input matInput formControlName="idOfertasproducto" readonly required />
+          <mat-error *ngIf="form.get('idOfertasproducto')?.hasError('required')"
+            >El campo ID es obligatorio.</mat-error
+          >
+        </mat-form-field>
+      </ng-container>
+
+      <div style="display: flex; gap: 16px; margin-top: 12px">
+        <button mat-raised-button class="btn-registrar" type="submit">
+          {{ edicion ? 'Guardar' : 'Registrar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,142 @@
+.page-container {
+  background-color: #dadada;
+  min-height: 100vh;
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+.menu-btn {
+  margin-right: 15px;
+}
+
+.toolbar {
+  background-color: #f4a300;
+  padding: 0 20px;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-area img {
+  height: 60px;
+  margin-bottom: 5px;
+}
+
+.logo-area span{
+  font-family: 'Sundae Ice', sans-serif;
+  color: white;
+}
+
+.btc-icon {
+  font-size: 28px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-btn mat-icon {
+  margin-right: 5px;
+}
+
+/* BOTÓN VOLVER */
+.btn-volver {
+  margin: 20px;
+  font-weight: bold;
+}
+
+.btn-volver[mat-raised-button] {
+  color: rgb(238, 244, 241);
+  background-color: #f6a700;
+}
+
+/* TÍTULO CENTRAL */
+.titulo {
+  text-align: center;
+  font-size: 60px;
+  margin-top: 10px;
+  font-weight: bold;
+  font-family: "Sundae ice";
+  margin-bottom: 20px;
+}
+/* CENTRAR LA TABLA */
+.table-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+}
+.mat-elevation-z8 th {
+  background-color: #f6a700;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 12px;
+  font-size: 16px;
+}
+
+.mat-elevation-z8 td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  font-size: 15px;
+}
+
+/* Para hacer la tabla responsive */
+table {
+  width: 90%; /* O ajusta el tamaño según lo que necesites */
+  max-width: 1200px;
+  margin: 0 auto; /* Controla el tamaño máximo de la tabla */
+}
+
+/* FORMULARIO */
+.form-container {
+  width: 60%;
+  margin: 30px auto;
+  padding: 25px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.btn-registrar {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #f6a700;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-registrar[mat-raised-button] {
+  color: rgb(238, 244, 241);
+  background-color: #f6a700;
+}
+
+.btn-lista {
+  margin-right: 50px;
+  font-weight: bold;
+}
+
+.btn-lista[mat-raised-button] {
+  color: rgb(238, 244, 241);
+  background-color: #f6a700;
+}
+
+.top-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
