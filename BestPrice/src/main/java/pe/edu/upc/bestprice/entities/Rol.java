@@ -1,8 +1,6 @@
 package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,17 +17,17 @@ public class Rol {
     @Column(name = "tipoUsuario",length = 20, nullable = false)
     private String tipoUsuario;
 
-    @CreationTimestamp
-    @Column(name = "createdAt",length = 9,nullable = true, updatable = false)
-    private LocalDateTime createdAt;
+    @Column(name = "createdAt",nullable = false)
+    private LocalDate createdAt;
 
-    @UpdateTimestamp
-    @Column(name = "updatedAt",length = 9,nullable = true)
+    @Column(name = "updatedAt",nullable = false)
     private LocalDateTime updatedAt;
 
-    public Rol(int idRol, String tipoUsuario) {
+    public Rol(int idRol, String tipoUsuario, LocalDate createdAt, LocalDateTime updatedAt) {
         this.idRol = idRol;
         this.tipoUsuario = tipoUsuario;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Rol() {
@@ -52,11 +50,11 @@ public class Rol {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 

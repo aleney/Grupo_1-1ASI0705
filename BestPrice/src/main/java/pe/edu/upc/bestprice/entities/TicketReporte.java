@@ -1,7 +1,6 @@
 package pe.edu.upc.bestprice.entities;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -17,8 +16,7 @@ public class TicketReporte {
     @Column(name = "detalle",length = 99, nullable = false)
     public String detalle;
 
-    @CreationTimestamp
-    @Column(name = "createdAt", nullable = true, updatable = false)
+    @Column(name = "createdAt", nullable = false)
     public LocalDateTime createdAt;
 
     @Column(name = "status", nullable = false)
@@ -28,9 +26,10 @@ public class TicketReporte {
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
-    public TicketReporte(int idTicketRep, String detalle, Boolean ticketStatus, Usuario usuario) {
+    public TicketReporte(int idTicketRep, String detalle, LocalDateTime createdAt, Boolean ticketStatus, Usuario usuario) {
         this.idTicketRep = idTicketRep;
         this.detalle = detalle;
+        this.createdAt = createdAt;
         this.ticketStatus = ticketStatus;
         this.usuario = usuario;
     }

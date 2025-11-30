@@ -23,19 +23,4 @@ public class TicketRespuestaServiceImplement implements ITicketRespuestaService 
     public void insertarTicketRespuesta(TicketRespuesta ticketRespuesta){
         repository.save(ticketRespuesta);
     }
-
-    @Override
-    public void edit(TicketRespuesta ticketRespuesta) {
-        repository.save(ticketRespuesta);
-    }
-
-    @Override
-    public TicketRespuesta listarId(int idTicketRespuesta) {
-        return repository.findById(idTicketRespuesta).orElse(null);
-    }
-
-    @Override
-    public void delete(int ticketRespuesta) {
-        repository.deleteById(ticketRespuesta);
-    }
 }

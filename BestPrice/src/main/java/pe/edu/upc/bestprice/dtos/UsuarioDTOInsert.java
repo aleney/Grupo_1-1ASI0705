@@ -1,5 +1,10 @@
 package pe.edu.upc.bestprice.dtos;
 
+import pe.edu.upc.bestprice.entities.Rol;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class UsuarioDTOInsert {
     private int idUsuario;
     private String nombre;
@@ -7,7 +12,9 @@ public class UsuarioDTOInsert {
     private String password;
     private int numeroTelefono;
     private Boolean estado;
-    private int idRol;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private Rol rol;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -33,11 +40,11 @@ public class UsuarioDTOInsert {
         this.email = email;
     }
 
-    public String getPasword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPasword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -57,11 +64,27 @@ public class UsuarioDTOInsert {
         this.estado = estado;
     }
 
-    public int getIdRol() {
-        return idRol;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setIdRol(int idRol) {
-        this.idRol = idRol;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 }

@@ -13,22 +13,32 @@ import java.util.List;
 
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
-
     public Usuario findOneByNombre(String nombre);
+
+    //BUSCAR POR NOMBRE
+    @Query("select count(u.nombre) from Usuario u where u.nombre =:username")
+    public int buscarNombre(@Param("nombre") String nombre);
+
+    @Query(value = "SELECT u.nombre, u.email, u.estado, r.tipo_usuario\n" +
+            "FROM usuario u\n" +
+            "INNER JOIN rol r \n" +
+            "ON u.id_rol = r.id_rol;", nativeQuery = true)
+    public List<String[]> buscarUsuario(@Param("nombre") String nombre);
+
+    @Query(value="SELECT u.nombre, u.email, u.estado, r.tipo_usuario\n" +
+            "FROM usuario u\n" +
+            "INNER JOIN rol r \n" +
+            "ON u.id_rol = r.id_rol;", nativeQuery = true)
+    public List<String[]> listar();
+
+    @Query(value = "select *from usuario \n" +
+            "where estado = %estado%", nativeQuery = true)
+    public List<String[]> listarUsuariosInactivos(String estado);
 
     //INSERTAR ROLES
     @Transactional
     @Modifying
     @Query(value = "insert into roles (idRol, tipoUsuario) VALUES (:id_rol, :tipo_usuario)", nativeQuery = true)
     public void insRol(@Param("rol") String authority, @Param("user_id") Long user_id);
-
-    //BUSCAR POR NOMBRE
-    @Query(value = "Select *from Usuario WHERE nombre like (CONCAT('%', :nombre, '%'))", nativeQuery = true)
-    List<Usuario> buscarUsuario(@Param("nombre") String nombre);
-
-    // Filtrar por estado (true = activo, false = inactivo)
-    @Query(value = "SELECT id_usuario, nombre, created_at, estado FROM usuario WHERE estado = true", nativeQuery = true)
-    List<String[]> filtrarUsuariosPorEstado();
-
 
 }

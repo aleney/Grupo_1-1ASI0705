@@ -6,8 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.RolDTOInsert;
-import pe.edu.upc.bestprice.dtos.RolDTOList;
+import pe.edu.upc.bestprice.dtos.RolDTO;
 import pe.edu.upc.bestprice.entities.Rol;
 import pe.edu.upc.bestprice.serviceinterfaces.IRolService;
 
@@ -24,9 +23,9 @@ public class RolController {
     @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listar() {
-        List<RolDTOList> lista = rolService.listarRoles()
+        List<RolDTO> lista = rolService.listarRoles()
                 .stream()
-                .map(a -> new ModelMapper().map(a, RolDTOList.class))
+                .map(a -> new ModelMapper().map(a, RolDTO.class))
                 .collect(Collectors.toList());
 
         if (lista.isEmpty()) {
@@ -40,7 +39,7 @@ public class RolController {
 
     @PostMapping("/insertar")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void insertar(@RequestBody RolDTOInsert dto) {
+    public void insertar(@RequestBody RolDTO dto) {
         ModelMapper m=new ModelMapper();
         Rol soft=m.map(dto,Rol.class);
         rolService.insertarRol(soft);
@@ -48,7 +47,7 @@ public class RolController {
 
     @PutMapping("/editar")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<String> editar(@RequestBody RolDTOInsert dto) {
+    public ResponseEntity<String> editar(@RequestBody RolDTO dto) {
         ModelMapper m = new ModelMapper();
         Rol r = m.map(dto, Rol.class);
         Rol existente = rolService.listarId(r.getIdRol());
@@ -58,5 +57,18 @@ public class RolController {
         }
         rolService.edit(r);
         return ResponseEntity.ok("Registro con ID " + r.getIdRol() + " modificado correctamente.");
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
+        Rol r = rolService.listarId(id);
+        if (r == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
+        }
+        rolService.delete(id);
+        return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 }
