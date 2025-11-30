@@ -3,28 +3,44 @@ package pe.edu.upc.bestprice.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import pe.edu.upc.bestprice.entities.Canasta;
 
 import java.util.List;
 
+@Repository
 public interface ICanastaRepository extends JpaRepository<Canasta, Integer> {
 
-    @Query("SELECT c FROM Canasta c WHERE c.nombreCanasta = :nombreCanasta")
-    Canasta findByNombreCanasta(@Param("nombreCanasta") String nombreCanasta);
+    @Query(value = "SELECT * " +
+            "FROM canasta " +
+            "WHERE nombre_canasta = :nombreCanasta", nativeQuery = true)
+    public Canasta findByNombreCanasta(@Param("nombreCanasta") String nombreCanasta);
 
-    @Query("SELECT c FROM Canasta c WHERE c.usuarioCanasta = :usuarioCanasta")
-    List<Canasta> findByUsuarioCanasta(@Param("usuarioCanasta") String usuarioCanasta);
+    @Query(value = "SELECT * " +
+            "FROM canasta " +
+            "WHERE usuario_canasta = :usuarioCanasta", nativeQuery = true)
+    public List<Canasta> findByUsuarioCanasta(@Param("usuarioCanasta") String usuarioCanasta);
 
-    @Query("SELECT c FROM Canasta c ORDER BY c.nombreCanasta ASC")
-    List<Canasta> findAllOrderedByNombreCanasta();
+    @Query(value = "SELECT * " +
+            "FROM canasta " +
+            "ORDER BY nombre_canasta ASC", nativeQuery = true)
+    public List<Canasta> findAllOrderedByNombreCanasta();
 
-    @Query("SELECT COUNT(c) FROM Canasta c WHERE c.usuarioCanasta = :usuarioCanasta")
-    long countByUsuarioCanasta(@Param("usuarioCanasta") String usuarioCanasta);
+    @Query(value = "SELECT COUNT(*) " +
+            "FROM canasta " +
+            "WHERE usuario_canasta = :usuarioCanasta", nativeQuery = true)
+    public long countByUsuarioCanasta(@Param("usuarioCanasta") String usuarioCanasta);
 
-    @Query("SELECT c FROM Canasta c WHERE c.createdAtCanasta BETWEEN :fechaInicio AND :fechaFin")
-    List<Canasta> findByFechaCreacionBetween(@Param("fechaInicio") String fechaInicio,
-                                             @Param("fechaFin") String fechaFin);
+    @Query(value = "SELECT * " +
+            "FROM canasta " +
+            "WHERE created_at_canasta BETWEEN :fechaInicio AND :fechaFin", nativeQuery = true)
+    public List<Canasta> findByFechaCreacionBetween(@Param("fechaInicio") String fechaInicio,
+                                                    @Param("fechaFin") String fechaFin);
 
-     @Query("SELECT c FROM Canasta c WHERE c.usuarioCanasta = :usuarioCanasta ORDER BY c.createdAtCanasta DESC")
-    Canasta findTopByUsuarioCanastaOrderByCreatedACanastaDesc(@Param("usuarioCanasta") String usuarioCanasta);
+    @Query(value = "SELECT * " +
+            "FROM canasta " +
+            "WHERE usuario_canasta = :usuarioCanasta " +
+            "ORDER BY created_at_canasta DESC " +
+            "LIMIT 1", nativeQuery = true)
+    public Canasta findTopByUsuarioCanastaOrderByCreatedACanastaDesc(@Param("usuarioCanasta") String usuarioCanasta);
 }

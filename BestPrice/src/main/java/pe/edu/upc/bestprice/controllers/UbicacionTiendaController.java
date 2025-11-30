@@ -5,7 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.UbicacionTiendaDTO;
+import pe.edu.upc.bestprice.dtos.UbicacionTiendaDTOInsert;
+import pe.edu.upc.bestprice.dtos.UbicacionTiendaDTOList;
 import pe.edu.upc.bestprice.entities.UbicacionTienda;
 import pe.edu.upc.bestprice.serviceinterfaces.IUbicacionTiendaService;
 
@@ -19,15 +20,15 @@ public class UbicacionTiendaController {
     private IUbicacionTiendaService service;
 
     @GetMapping
-    public List<UbicacionTiendaDTO> listar() {
+    public List<UbicacionTiendaDTOList> listar() {
         return service.list().stream().map(u -> {
             ModelMapper m = new ModelMapper();
-            return m.map(u, UbicacionTiendaDTO.class);
+            return m.map(u, UbicacionTiendaDTOList.class);
         }).collect(Collectors.toList());
     }
 
     @PostMapping("/insertar")
-    public void insertar(@RequestBody UbicacionTiendaDTO dto) {
+    public void insertar(@RequestBody UbicacionTiendaDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         UbicacionTienda u = m.map(dto, UbicacionTienda.class);
         service.insert(u);
@@ -41,7 +42,7 @@ public class UbicacionTiendaController {
                     .body("No existe una ubicación con el ID: " + id);
         }
         ModelMapper m = new ModelMapper();
-        UbicacionTiendaDTO dto = m.map(u, UbicacionTiendaDTO.class);
+        UbicacionTiendaDTOList dto = m.map(u, UbicacionTiendaDTOList.class);
         return ResponseEntity.ok(dto);
     }
 
@@ -57,7 +58,7 @@ public class UbicacionTiendaController {
     }
 
     @PutMapping("/modificar")
-    public ResponseEntity<String> modificar(@RequestBody UbicacionTiendaDTO dto) {
+    public ResponseEntity<String> modificar(@RequestBody UbicacionTiendaDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         UbicacionTienda u = m.map(dto, UbicacionTienda.class);
         UbicacionTienda existente = service.listId(u.getIdUbicacionTienda());

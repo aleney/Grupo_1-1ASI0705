@@ -21,7 +21,7 @@ public class CategoriaProductoController {
     private ICategoriaProductoService service;
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENT','SELLER')")
     public ResponseEntity<?> listar() {
         List<CategoriaProductoDTO> lista = service.listarCategoriaProducto().stream().map(a -> {
             ModelMapper m = new ModelMapper();
@@ -57,7 +57,7 @@ public class CategoriaProductoController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENT','SELLER')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id){
         CategoriaProducto ctps=service.listId(id);
         if(ctps==null){

@@ -13,31 +13,41 @@ import java.util.Optional;
 public class TipoResenaServiceImplement implements ITipoResenaService {
 
     @Autowired
-    private ITipoResenaRepository tipoResenaRepository;
+    private ITipoResenaRepository repository;
+
 
     @Override
     public List<TipoResena> getAllTipoResena() {
-        return tipoResenaRepository.findAll();
+        return repository.findAll();
+    }
+
+    @Override
+    public void createTipoResena(TipoResena tr) {
+        repository.save(tr);
     }
 
     @Override
     public TipoResena getTipoResenaById(int id) {
-        Optional<TipoResena> tipoResena = tipoResenaRepository.findById(id);
-        return tipoResena.orElse(null); // Devuelve null si no se encuentra
+        return repository.findById(id).orElse(null);
     }
 
     @Override
-    public TipoResena createTipoResena(TipoResena tipoResena) {
-        return tipoResenaRepository.save(tipoResena);
-    }
-
-    @Override
-    public void updateTipoResena(TipoResena tipoResena) {
-        tipoResenaRepository.save(tipoResena);
+    public void updateTipoResena(TipoResena tr) {
+        repository.save(tr);
     }
 
     @Override
     public void deleteTipoResena(int id) {
-        tipoResenaRepository.deleteById(id);
+        repository.deleteById(id);
+    }
+
+    @Override
+    public List<TipoResena> findByTipoResena(String nombre) {
+        return repository.findByTipoResena(nombre);
+    }
+
+    @Override
+    public List<TipoResena> findAllOrderedByName() {
+        return repository.findAllOrderedByName();
     }
 }

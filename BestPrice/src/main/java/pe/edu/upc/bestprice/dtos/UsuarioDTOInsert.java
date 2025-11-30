@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 public class UsuarioDTOInsert {
     private int idUsuario;
     private String nombre;
-    private String email;
     private String password;
     private int numeroTelefono;
     private Boolean estado;
@@ -28,14 +27,6 @@ public class UsuarioDTOInsert {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {

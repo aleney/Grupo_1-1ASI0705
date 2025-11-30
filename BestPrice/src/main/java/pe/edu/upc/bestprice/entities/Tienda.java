@@ -24,11 +24,11 @@ public class Tienda {
     private boolean estadoTienda;
 
     @CreationTimestamp
-    @Column(name="createdAtT", nullable = false, updatable = false)
+    @Column(name="createdAtT", nullable = true, updatable = false)
     private LocalDateTime createdAtT;
 
     @UpdateTimestamp
-    @Column(name="updatedAtT",nullable = false)
+    @Column(name="updatedAtT",nullable = true)
     private LocalDateTime updatedAtT;
 
     @ManyToOne
@@ -52,8 +52,6 @@ public class Tienda {
         this.detalleTienda = detalleTienda;
         this.numeroTelefono = numeroTelefono;
         this.estadoTienda = estadoTienda;
-        this.createdAtT = createdAtT;
-        this.updatedAtT = updatedAtT;
         this.usuario = usuario;
         this.tipoTienda = tipoTienda;
         this.lineaTienda = lineaTienda;

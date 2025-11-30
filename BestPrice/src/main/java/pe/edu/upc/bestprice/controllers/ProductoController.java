@@ -22,7 +22,7 @@ public class ProductoController {
     private IProductoService service;
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENT','SELLER')")
     public List<ProductoDTOList> Listar(){
         return service.List().stream().map(a->{
             ModelMapper m=new ModelMapper();
@@ -39,7 +39,7 @@ public class ProductoController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENT','SELLER')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id){
         Producto prodc=service.listId(id);
         if(prodc==null){

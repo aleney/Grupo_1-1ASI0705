@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.bestprice.dtos.TipoTiendaDTOInsert;
+import pe.edu.upc.bestprice.dtos.TipoTiendaDTO;
 import pe.edu.upc.bestprice.entities.TipoTienda;
 import pe.edu.upc.bestprice.serviceinterfaces.ITipoTiendaService;
 
@@ -21,11 +21,11 @@ public class TipoTiendaController {
     private ITipoTiendaService service;
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENT','SELLER')")
     public ResponseEntity<?> listar() {
-        List<TipoTiendaDTOInsert> lista = service.listarTipoTienda().stream().map(a -> {
+        List<TipoTiendaDTO> lista = service.listarTipoTienda().stream().map(a -> {
             ModelMapper m = new ModelMapper();
-            return m.map(a, TipoTiendaDTOInsert.class);
+            return m.map(a, TipoTiendaDTO.class);
         }).collect(Collectors.toList());
 
         if (lista.isEmpty()) {
@@ -37,7 +37,7 @@ public class TipoTiendaController {
     }
 
     @PostMapping("/insertar")
-    public ResponseEntity<String> insertar(@RequestBody TipoTiendaDTOInsert dto) {
+    public ResponseEntity<String> insertar(@RequestBody TipoTiendaDTO dto) {
         if (dto == null) {
             return ResponseEntity.badRequest()
                     .body("El cuerpo de la solicitud está vacío o es inválido.");
@@ -57,14 +57,14 @@ public class TipoTiendaController {
 
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','SELLER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENT','SELLER')")
     public ResponseEntity<?> listarIdTipoTienda(@PathVariable("id") Integer id) {
         TipoTienda ttdtos = service.listarIdTipoTienda(id);
         if (ttdtos == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe ningun registro de Tipo Tienda" + id);
         }
         ModelMapper m = new ModelMapper();
-        TipoTiendaDTOInsert ttdt = m.map(ttdtos, TipoTiendaDTOInsert.class);
+        TipoTiendaDTO ttdt = m.map(ttdtos, TipoTiendaDTO.class);
         return ResponseEntity.ok(ttdt);
     }
 
@@ -81,7 +81,7 @@ public class TipoTiendaController {
 
     @PutMapping("/editar")
     @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
-    public ResponseEntity<String> modificar(@RequestBody TipoTiendaDTOInsert dto) {
+    public ResponseEntity<String> modificar(@RequestBody TipoTiendaDTO dto) {
         ModelMapper m = new ModelMapper();
         TipoTienda tt = m.map(dto, TipoTienda.class);
         TipoTienda existente = service.listarIdTipoTienda(tt.getIdTipoTienda());

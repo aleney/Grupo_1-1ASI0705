@@ -6,12 +6,11 @@ import pe.edu.upc.bestprice.entities.Tienda;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class UbicacionTiendaDTO {
+public class UbicacionTiendaDTOInsert {
     private int idUbicacionTienda;
     private String direccionUbicacionTienda;
     private BigDecimal longitudUbicacionTienda;
     private BigDecimal latitudUbicacionTienda;
-    private LocalDateTime createdAtUbicacionTienda;
     private Tienda tienda;
     private Distrito distrito;
 
@@ -45,14 +44,6 @@ public class UbicacionTiendaDTO {
 
     public void setLatitudUbicacionTienda(BigDecimal latitudUbicacionTienda) {
         this.latitudUbicacionTienda = latitudUbicacionTienda;
-    }
-
-    public LocalDateTime getCreatedAtUbicacionTienda() {
-        return createdAtUbicacionTienda;
-    }
-
-    public void setCreatedAtUbicacionTienda(LocalDateTime createdAtUbicacionTienda) {
-        this.createdAtUbicacionTienda = createdAtUbicacionTienda;
     }
 
     public Tienda getTienda() {

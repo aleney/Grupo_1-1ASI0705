@@ -1,56 +1,20 @@
-package pe.edu.upc.bestprice.entities;
+package pe.edu.upc.bestprice.dtos;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import pe.edu.upc.bestprice.entities.Distrito;
+import pe.edu.upc.bestprice.entities.Tienda;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "UbicacionTienda")
-public class UbicacionTienda {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UbicacionTiendaDTOList {
     private int idUbicacionTienda;
-
-    @Column(name = "direccionUbicacionTienda", length = 200, nullable = false)
     private String direccionUbicacionTienda;
-
-    @Column(name = "longitudUbicacionTienda", precision = 10, scale = 6, nullable = false)
     private BigDecimal longitudUbicacionTienda;
-
-    @Column(name = "latitudUbicacionTienda", precision = 10, scale = 6, nullable = false)
     private BigDecimal latitudUbicacionTienda;
-
-    @CreationTimestamp
-    @Column(name = "createdAtUbicacionTienda", nullable = true, updatable = false)
     private LocalDateTime createdAtUbicacionTienda;
-
-    @UpdateTimestamp
-    @Column(name = "updatedAtUbicacionTienda", nullable = true)
     private LocalDateTime updatedAtUbicacionTienda;
-
-    @ManyToOne
-    @JoinColumn(name = "idTienda")
     private Tienda tienda;
-
-    @ManyToOne
-    @JoinColumn(name = "idDistrito")
     private Distrito distrito;
-
-    public UbicacionTienda() {
-    }
-
-    public UbicacionTienda(int idUbicacionTienda, String direccionUbicacionTienda, BigDecimal longitudUbicacionTienda, BigDecimal latitudUbicacionTienda, LocalDateTime createdAtUbicacionTienda, Tienda tienda, Distrito distrito) {
-        this.idUbicacionTienda = idUbicacionTienda;
-        this.direccionUbicacionTienda = direccionUbicacionTienda;
-        this.longitudUbicacionTienda = longitudUbicacionTienda;
-        this.latitudUbicacionTienda = latitudUbicacionTienda;
-        this.tienda = tienda;
-        this.distrito = distrito;
-    }
 
     public int getIdUbicacionTienda() {
         return idUbicacionTienda;
