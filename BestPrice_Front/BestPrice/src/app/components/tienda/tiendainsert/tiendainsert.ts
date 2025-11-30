@@ -14,7 +14,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { Tienda } from '../../../models/tienda';
-import { Producto } from '../../../models/producto';
 import { Tiendaservice } from '../../../services/tiendaservice';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Productoservice } from '../../../services/productoservice';
@@ -23,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Loginservice } from '../../../services/loginservice';
 import { CommonModule } from '@angular/common';
+import { ProductoInsert } from '../../../models/productoinsert';
 
 @Component({
   selector: 'app-tiendainsert',
@@ -51,7 +51,7 @@ export class Tiendainsert implements OnInit {
   id: number = 0;
   today = new Date();
   //listaTT: TipoTiendas[] = [];
-  listaP: Producto[] = [];
+  listaP: ProductoInsert[] = [];
 
   TiposT: { value: string; viewValue: string }[] = [
     { value: 'Abarrotes', viewValue: 'Abarrotes' },
@@ -162,9 +162,5 @@ export class Tiendainsert implements OnInit {
 
   isSeller() {
     return this.role === 'SELLER';
-  }
-
-  isTester() {
-    return this.role === 'TESTER';
   }
 }
