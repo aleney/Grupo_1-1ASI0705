@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.bestprice.dtos.OfertasProductoDTO;
 import pe.edu.upc.bestprice.entities.OfertasProducto;
@@ -20,21 +21,43 @@ public class OfertasProductoController {
     private IOfertasProductoService service;
 
     @GetMapping("/listar")
-    public List<OfertasProductoDTO> listar() {
-        return service.list().stream().map(o -> {
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
+    public ResponseEntity<?> listar() {
+        List<OfertasProductoDTO> lista = service.list().stream().map(o -> {
             ModelMapper m = new ModelMapper();
             return m.map(o, OfertasProductoDTO.class);
         }).collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron ofertas de productos registradas.");
+        }
+
+        return ResponseEntity.ok(lista);
     }
 
     @PostMapping("/insertar")
-    public void insertar(@RequestBody OfertasProductoDTO dto) {
-        ModelMapper m = new ModelMapper();
-        OfertasProducto op = m.map(dto, OfertasProducto.class);
-        service.insert(op);
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT', 'SELLER')")
+    public ResponseEntity<String> insertar(@RequestBody OfertasProductoDTO dto) {
+        if (dto == null) {
+            return ResponseEntity.badRequest()
+                    .body("El cuerpo de la solicitud está vacío o es inválido.");
+        }
+
+        try {
+            ModelMapper m = new ModelMapper();
+            OfertasProducto op = m.map(dto, OfertasProducto.class);
+            service.insert(op);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Oferta de producto registrada correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Error al registrar la oferta de producto. Verifica que los datos enviados sean correctos.");
+        }
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         OfertasProducto op = service.listId(id);
         if (op == null) {
@@ -47,6 +70,7 @@ public class OfertasProductoController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         OfertasProducto op = service.listId(id);
         if (op == null) {
@@ -58,6 +82,7 @@ public class OfertasProductoController {
     }
 
     @PutMapping("/modificar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody OfertasProductoDTO dto) {
         ModelMapper m = new ModelMapper();
         OfertasProducto op = m.map(dto, OfertasProducto.class);
@@ -71,6 +96,7 @@ public class OfertasProductoController {
     }
 
     @GetMapping("/buscar-fecha")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<OfertasProductoDTO> buscarPorProductoYFecha(@RequestParam int idProducto,
                                                             @RequestParam String fecha) {
         LocalDate fechaConsulta = LocalDate.parse(fecha);
@@ -80,6 +106,7 @@ public class OfertasProductoController {
     }
 
     @GetMapping("/buscar-rango")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<OfertasProductoDTO> buscarPorProductoYRangoFechas(@RequestParam int idProducto,
                                                                   @RequestParam String fechaInicio,
                                                                   @RequestParam String fechaFin) {

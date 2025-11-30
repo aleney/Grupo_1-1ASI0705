@@ -1,15 +1,15 @@
 package pe.edu.upc.bestprice.dtos;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 public class DistritoDTO {
     private int idDistrito;
     private String nombreDistrito;
-    private String descripcionDistrito;
+    private String detalleDistrito;
     private BigDecimal longitudDistrito;
     private BigDecimal latitudDistrito;
-    private LocalDateTime createdAtDistrito;
+    private Timestamp createdAtDistrito;
 
     public int getIdDistrito() {
         return idDistrito;
@@ -27,12 +27,12 @@ public class DistritoDTO {
         this.nombreDistrito = nombreDistrito;
     }
 
-    public String getDescripcionDistrito() {
-        return descripcionDistrito;
+    public String getDetalleDistrito() {
+        return detalleDistrito;
     }
 
-    public void setDescripcionDistrito(String descripcionDistrito) {
-        this.descripcionDistrito = descripcionDistrito;
+    public void setDetalleDistrito(String detalleDistrito) {
+        this.detalleDistrito = detalleDistrito;
     }
 
     public BigDecimal getLongitudDistrito() {
@@ -51,11 +51,11 @@ public class DistritoDTO {
         this.latitudDistrito = latitudDistrito;
     }
 
-    public LocalDateTime getCreatedAtDistrito() {
+    public Timestamp getCreatedAtDistrito() {
         return createdAtDistrito;
     }
 
-    public void setCreatedAtDistrito(LocalDateTime createdAtDistrito) {
+    public void setCreatedAtDistrito(Timestamp createdAtDistrito) {
         this.createdAtDistrito = createdAtDistrito;
     }
 }

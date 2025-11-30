@@ -1,14 +1,17 @@
 package pe.edu.upc.bestprice.dtos;
 
+import pe.edu.upc.bestprice.entities.Producto;
+import pe.edu.upc.bestprice.entities.Tienda;
+
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class HistorialPrecioDTO {
     private int idHistorialPrecio;
     private BigDecimal precioHistorialPrecio;
     private LocalDate fechaHistorialPrecio;
-    private LocalDateTime createdAtHistorialPrecio;
+    private Timestamp createdAtHistorialPrecio;
     private Producto producto;
     private Tienda tienda;
 
@@ -36,11 +39,11 @@ public class HistorialPrecioDTO {
         this.fechaHistorialPrecio = fechaHistorialPrecio;
     }
 
-    public LocalDateTime getCreatedAtHistorialPrecio() {
+    public Timestamp getCreatedAtHistorialPrecio() {
         return createdAtHistorialPrecio;
     }
 
-    public void setCreatedAtHistorialPrecio(LocalDateTime createdAtHistorialPrecio) {
+    public void setCreatedAtHistorialPrecio(Timestamp createdAtHistorialPrecio) {
         this.createdAtHistorialPrecio = createdAtHistorialPrecio;
     }
 

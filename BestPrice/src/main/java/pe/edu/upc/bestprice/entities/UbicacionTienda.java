@@ -3,8 +3,7 @@ package pe.edu.upc.bestprice.entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "UbicacionTienda")
@@ -16,14 +15,14 @@ public class UbicacionTienda {
     @Column(name = "direccionUbicacionTienda", length = 200, nullable = false)
     private String direccionUbicacionTienda;
 
-    @Column(name = "longitudUbicacionTienda", precision = 10, scale = 6, nullable = false)
+    @Column(name = "longitudUbicacionTienda", precision = 2, scale = 6, nullable = false)
     private BigDecimal longitudUbicacionTienda;
 
-    @Column(name = "latitudUbicacionTienda", precision = 10, scale = 6, nullable = false)
+    @Column(name = "latitudUbicacionTienda", precision = 2, scale = 6, nullable = false)
     private BigDecimal latitudUbicacionTienda;
 
     @Column(name = "createdAtUbicacionTienda", nullable = false)
-    private LocalDateTime createdAtUbicacionTienda;
+    private Timestamp createdAtUbicacionTienda;
 
     @ManyToOne
     @JoinColumn(name = "idTienda")
@@ -36,7 +35,7 @@ public class UbicacionTienda {
     public UbicacionTienda() {
     }
 
-    public UbicacionTienda(int idUbicacionTienda, String direccionUbicacionTienda, BigDecimal longitudUbicacionTienda, BigDecimal latitudUbicacionTienda, LocalDateTime createdAtUbicacionTienda, Tienda tienda, Distrito distrito) {
+    public UbicacionTienda(int idUbicacionTienda, String direccionUbicacionTienda, BigDecimal longitudUbicacionTienda, BigDecimal latitudUbicacionTienda, Timestamp createdAtUbicacionTienda, Tienda tienda, Distrito distrito) {
         this.idUbicacionTienda = idUbicacionTienda;
         this.direccionUbicacionTienda = direccionUbicacionTienda;
         this.longitudUbicacionTienda = longitudUbicacionTienda;
@@ -78,11 +77,11 @@ public class UbicacionTienda {
         this.latitudUbicacionTienda = latitudUbicacionTienda;
     }
 
-    public LocalDateTime getCreatedAtUbicacionTienda() {
+    public Timestamp getCreatedAtUbicacionTienda() {
         return createdAtUbicacionTienda;
     }
 
-    public void setCreatedAtUbicacionTienda(LocalDateTime createdAtUbicacionTienda) {
+    public void setCreatedAtUbicacionTienda(Timestamp createdAtUbicacionTienda) {
         this.createdAtUbicacionTienda = createdAtUbicacionTienda;
     }
 
