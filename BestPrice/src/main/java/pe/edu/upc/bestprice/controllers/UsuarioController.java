@@ -33,9 +33,8 @@ public class UsuarioController {
         for (String[] columna : usuarios) {
             UsuarioDTOList dto = new UsuarioDTOList();
             dto.setNombre(columna[0]);
-            dto.setEmail(columna[1]);
-            dto.setEstado(Boolean.parseBoolean(columna[2]));
-            dto.setTipoUsuario(columna[3]);
+            dto.setEstado(Boolean.parseBoolean(columna[1]));
+            dto.setTipoUsuario(columna[2]);
             listaUsuarios.add(dto);
         }
         return ResponseEntity.ok(listaUsuarios);
@@ -78,9 +77,8 @@ public class UsuarioController {
         for (String[] columna : usuarios) {
             UsuarioDTOList dto = new UsuarioDTOList();
             dto.setNombre(columna[0]);
-            dto.setEmail(columna[1]);
-            dto.setEstado(Boolean.parseBoolean(columna[2]));
-            dto.setTipoUsuario(columna[3]);
+            dto.setEstado(Boolean.parseBoolean(columna[1]));
+            dto.setTipoUsuario(columna[2]);
             listaDTO.add(dto);
         }
         return ResponseEntity.ok(listaDTO);

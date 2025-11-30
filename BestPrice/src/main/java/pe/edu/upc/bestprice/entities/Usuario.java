@@ -17,8 +17,6 @@ public class Usuario {
     @Column(name = "nombre",length = 50,nullable = false)
     private String nombre;
 
-    @Column(name = "email",length = 99,nullable = false)
-    private String email;
 
     @Column(name = "password",length = 99,nullable = false)
     private String password;
@@ -44,7 +42,6 @@ public class Usuario {
     public Usuario(int idUsuario, String nombre, String email, String password, int numeroTelefono, Boolean estado, Rol rol) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
-        this.email = email;
         this.password = password;
         this.numeroTelefono = numeroTelefono;
         this.estado = estado;
@@ -71,13 +68,6 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getPassword() {
         return password;

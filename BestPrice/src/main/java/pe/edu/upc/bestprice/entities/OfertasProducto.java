@@ -1,0 +1,79 @@
+package pe.edu.upc.bestprice.entities;
+
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "OfertasProducto")
+public class OfertasProducto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idOfertasProducto;
+
+    @Column(name = "fechainicioOfertasProducto", nullable = false)
+    private LocalDate fechainicioOfertasProducto;
+
+    @Column(name = "fechafinOfertasProducto", nullable = false)
+    private LocalDate fechafinOfertasProducto;
+
+    @CreationTimestamp
+    @Column(name = "createdAtOfertasProducto", nullable = true, updatable = false)
+    private LocalDateTime createdAtOfertasProducto;
+
+    @ManyToOne
+    @JoinColumn(name = "idProducto")
+    private Producto producto;
+
+    public OfertasProducto() {
+    }
+
+    public OfertasProducto(int idOfertasProducto, LocalDate fechainicioOfertasProducto, LocalDate fechafinOfertasProducto, Producto producto) {
+        this.idOfertasProducto = idOfertasProducto;
+        this.fechainicioOfertasProducto = fechainicioOfertasProducto;
+        this.fechafinOfertasProducto = fechafinOfertasProducto;
+        this.producto = producto;
+    }
+
+    public int getIdOfertasProducto() {
+        return idOfertasProducto;
+    }
+
+    public void setIdOfertasProducto(int idOfertasProducto) {
+        this.idOfertasProducto = idOfertasProducto;
+    }
+
+    public LocalDate getFechainicioOfertasProducto() {
+        return fechainicioOfertasProducto;
+    }
+
+    public void setFechainicioOfertasProducto(LocalDate fechainicioOfertasProducto) {
+        this.fechainicioOfertasProducto = fechainicioOfertasProducto;
+    }
+
+    public LocalDate getFechafinOfertasProducto() {
+        return fechafinOfertasProducto;
+    }
+
+    public void setFechafinOfertasProducto(LocalDate fechafinOfertasProducto) {
+        this.fechafinOfertasProducto = fechafinOfertasProducto;
+    }
+
+    public LocalDateTime getCreatedAtOfertasProducto() {
+        return createdAtOfertasProducto;
+    }
+
+    public void setCreatedAtOfertasProducto(LocalDateTime createdAtOfertasProducto) {
+        this.createdAtOfertasProducto = createdAtOfertasProducto;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+}
