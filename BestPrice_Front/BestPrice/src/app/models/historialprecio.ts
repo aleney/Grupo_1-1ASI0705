@@ -1,7 +1,6 @@
+import { ProductoInsert } from "./productoinsert";
+
 export class Historialprecio {
-    idLineaTienda: number=0
-    nombreLineaTienda: string=''
-    detalleLineaTienda: string=''
-    createdAt: Date=new Date()
+    producto: ProductoInsert = new ProductoInsert;
 }
 
