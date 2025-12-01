@@ -121,6 +121,26 @@
   cursor: pointer;
 }
 
+.btn-registrar {
+  margin: 20px;
+  font-weight: bold;
+  color: white !important;
+  background-color: #f6a700 !important;
+}
+
+/* Aplicado al <div> contenedor principal */
+.contenedor-botones {
+  display: flex; /* Activa Flexbox */
+  justify-content: space-between; /* Manda el primer elemento (o grupo) a la izquierda y el último (o grupo) a la derecha */
+  align-items: center; /* Opcional: Centra verticalmente los elementos si tienen alturas diferentes */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+/* Opcional: Añade un pequeño espacio entre los botones del grupo de la derecha */
+.botones-derecha button {
+    margin-left: 10px; /* Espacio horizontal entre los botones "Registrar" y "Tiendas del año actual" */
+}
+
 /* MAPA */
 .map-container {
   width: 90%;

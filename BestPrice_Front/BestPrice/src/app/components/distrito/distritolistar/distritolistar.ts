@@ -74,17 +74,21 @@ export class Distritolistar implements OnInit {
       this.districtPositions = data;
     });
 
-    this.form.get('nombrebusqueda')?.valueChanges.subscribe((value) => {
-      this.nombrebusqueda = value;
-      this.buscar();
-    });
-
     this.dS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     });
+
+      // BUSCADOR
+    this.form.get('nombrebusqueda')?.valueChanges.subscribe((value) => {
+      this.applyFilter(value);
+    });
   }
 
+  applyFilter(value: string) {
+  value = value.trim().toLowerCase();
+  this.dataSource.filter = value;
+}
   eliminar(id: number) {
     this.dS.delete(id).subscribe(() => {
       this.dS.list().subscribe((data) => {
@@ -111,21 +115,22 @@ openInfoWindow(location: DistritoListModel, marker: MapAdvancedMarker) {
   this.infoWindowRef().open(marker, false, content);
 }
 
-  buscar() {
+ buscar() {
     const termino = this.nombrebusqueda.trim();
 
     if (termino === '') {
-      // Si el campo está vacío → listar todos los registros
       this.dS.list().subscribe((data) => {
         this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+        this.districtPositions = data;
       });
       return;
     }
 
-    // Si hay texto → buscar coincidencias
     this.dS.searchName(termino).subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
-      this.mensaje = data.length === 0 ? 'No se encontraron registros.' : '';
+      this.dataSource.paginator = this.paginator;
+      this.districtPositions = data;
     });
   }
 

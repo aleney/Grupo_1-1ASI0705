@@ -51,7 +51,7 @@ export const routes: Routes = [
       { path: 'listar', component: Distritolistar },
       { path: 'insertar', component: Distritoinsert },
     ],
-    //canActivate: [seguridadGuard],
+    canActivate: [seguridadGuard],
   },
 
 ];

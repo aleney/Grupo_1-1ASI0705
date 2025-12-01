@@ -51,6 +51,17 @@ ngOnInit(): void {
   this.ltS.list().subscribe((data) => {
     this.ltS.setList(data);
   });
+
+  // BUSCADOR
+    this.form.get('nombrebusqueda')?.valueChanges.subscribe((value) => {
+      this.applyFilter(value);
+    });
+  
+}
+
+applyFilter(value: string) {
+  value = value.trim().toLowerCase();
+  this.dataSource.filter = value;
 }
 
 

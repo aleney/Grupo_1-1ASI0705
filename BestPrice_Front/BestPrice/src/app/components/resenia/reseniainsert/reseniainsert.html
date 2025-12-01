@@ -3,43 +3,34 @@
 
   <!-- ENCABEZADO -->
   <mat-toolbar color="primary" class="toolbar">
-  <div class="logo-area">
-    <button matIconButton class="Menu-Desplegable" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <img src="assets/images/Menu_LogoBestPrice.png" alt="">
-    <span class="title">ESTPRICE</span>
-  </div>
+    <div class="logo-area">
+      <button matIconButton class="Menu-Desplegable">
+        <mat-icon>menu</mat-icon>
+      </button>
 
-  <span class="spacer"></span>
+      <img src="assets/images/Menu_LogoBestPrice.png" alt="">
+      <span class="title">ESTPRICE</span>
+    </div>
 
-<button matIconButton class="Canasta" aria-label="Example icon-button with menu icon">
-       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="shopping_cart"></mat-icon>
+    <span class="spacer"></span>
+
+    <button matIconButton class="Canasta">
+      <mat-icon fontIcon="shopping_cart"></mat-icon>
     </button>
 
-  <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn">
-    <mat-icon>account_circle</mat-icon>
-    user_admin
-  </button>
+    <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn">
+      <mat-icon>account_circle</mat-icon>
+      user_admin
+    </button>
 
-  <mat-menu #userMenu="matMenu">
-    <button mat-menu-item routerLink="/perfil">
-      <mat-icon>person</mat-icon> Perfil
-    </button>
-    <button mat-menu-item routerLink="/favorites">
-      <mat-icon>favorites</mat-icon> Favoritos
-    </button>
-    <button mat-menu-item routerLink="/historial">
-      <mat-icon>history</mat-icon> Historial
-    </button>
-    <button mat-menu-item routerLink="/ajustes">
-      <mat-icon>settings</mat-icon> Ajustes
-    </button>
-    <button mat-menu-item routerLink="/logout">
-      <mat-icon>logout</mat-icon> Cerrar sesión
-    </button>
-  </mat-menu>
-</mat-toolbar>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="/perfil"><mat-icon>person</mat-icon> Perfil</button>
+      <button mat-menu-item routerLink="/favorites"><mat-icon>favorites</mat-icon> Favoritos</button>
+      <button mat-menu-item routerLink="/historial"><mat-icon>history</mat-icon> Historial</button>
+      <button mat-menu-item routerLink="/ajustes"><mat-icon>settings</mat-icon> Ajustes</button>
+      <button mat-menu-item routerLink="/logout"><mat-icon>logout</mat-icon> Cerrar sesión</button>
+    </mat-menu>
+  </mat-toolbar>
 
   <!-- BOTÓN VOLVER -->
   <button mat-raised-button class="btn-volver" routerLink="/resenia">
@@ -53,64 +44,61 @@
   <!-- FORMULARIO -->
   <div class="form-container">
     <form [formGroup]="form" (submit)="registrar()" class="example-form">
-      @if (edicion) {
-        <mat-form-field>
-        <mat-label>Código</mat-label>
-        <input matInput formControlName="id"  required/>
 
+      @if (edicion) {
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Código</mat-label>
+        <input matInput formControlName="id" required />
         @if (form.get('id')?.hasError('required')) {
         <mat-error>El campo id es obligatorio.</mat-error>
-        } 
+        }
       </mat-form-field>
-    }
+      }
 
-      <br />
-      <div>
-        <mat-form-field class="example-full-width">
-          <mat-label>Calificacion:</mat-label>
-          <mat-select formControlName="calificacion" required>
-            @for (c of calificaciones; track c.value) {
-            <mat-option [value]="c.value">
-              {{ c.viewValue }}
-            </mat-option>
-            }
-          </mat-select>
-
-          @if (form.get('calificacion')?.hasError('required')) {
-          <mat-error>El campo Calificación es obligatorio.</mat-error>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Calificacion</mat-label>
+        <mat-select formControlName="calificacion" required>
+          @for (c of calificaciones; track c.value) {
+          <mat-option [value]="c.value">
+            {{ c.viewValue }}
+          </mat-option>
           }
-        </mat-form-field>
-      </div>
-      <br />
+        </mat-select>
+
+        @if (form.get('calificacion')?.hasError('required')) {
+        <mat-error>El campo Calificación es obligatorio.</mat-error>
+        }
+      </mat-form-field>
 
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Detalle</mat-label>
         <textarea matInput formControlName="detalle"></textarea>
         @if (form.get('detalle')?.hasError('required')) {
         <mat-error>El campo detalle es obligatorio.</mat-error>
-        } 
+        }
       </mat-form-field>
 
-    <br />
       <div class="custom-field">
-        <label>Exactitud del precio</label>
+        <label class="radio-label">Exactitud del precio</label>
+
         <mat-radio-group formControlName="exactitudPrecio" aria-label="Exactitud del precio" required>
           <mat-radio-button [value]="true">Exacto</mat-radio-button>
           <mat-radio-button [value]="false">Inexacto</mat-radio-button>
         </mat-radio-group>
       </div>
-      <br />
 
       @if (!edicion) {
       <button mat-raised-button class="btn-registrar" type="submit">
         Registrar
       </button>
-    }
+      }
+
       @if (edicion) {
       <button mat-raised-button class="btn-registrar" type="submit">
         Guardar
       </button>
-    }
+      }
+
     </form>
   </div>
 

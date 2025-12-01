@@ -86,7 +86,7 @@ registrar(): void {
     })
   })
   }
-  this.router.navigate(['resenia/list'])
+  this.router.navigate(['resenia/listar'])
 }
 
 
