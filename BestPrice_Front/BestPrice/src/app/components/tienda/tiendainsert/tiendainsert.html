@@ -1,0 +1,92 @@
+<div class="page-container">
+  <mat-toolbar color="primary" class="toolbar">
+    <div class="logo-area">
+      <button matIconButton class="Menu-Desplegable" aria-label="Menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <img src="assets/images/Menu_LogoBestPrice.png" alt="" />
+      <span class="title">ESTPRICE</span>
+    </div>
+
+    <span class="spacer"></span>
+
+    <button matIconButton class="Canasta" aria-label="Carrito">
+      <mat-icon aria-hidden="false" fontIcon="shopping_cart">shopping_cart</mat-icon>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn" (click)="verificar()">
+      <mat-icon>account_circle</mat-icon>
+      Rol: <span>{{ role }}</span>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="/perfil"><mat-icon>person</mat-icon> Perfil</button>
+      <button mat-menu-item routerLink="/favorites"><mat-icon>favorite</mat-icon> Favoritos</button>
+      <button mat-menu-item routerLink="/historial"><mat-icon>history</mat-icon> Historial</button>
+      <button mat-menu-item routerLink="/ajustes"><mat-icon>settings</mat-icon> Ajustes</button>
+      <button mat-menu-item routerLink="/login" (click)="cerrar()">
+        <mat-icon>logout</mat-icon> Cerrar sesión
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <div class="top-buttons">
+    <button mat-raised-button class="btn-volver" routerLink="/menu"><mat-icon>arrow_back_ios</mat-icon>Volver</button>
+    <button mat-raised-button class="btn-lista" routerLink="/tienda/listar">Lista</button>
+  </div>
+
+  <h1 class="titulo">{{ edicion ? 'Editar Tienda' : 'Registro de Tienda' }}</h1>
+
+  <div class="form-container">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      <ng-container *ngIf="edicion">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Código</mat-label>
+          <input matInput formControlName="id" required readonly />
+          <mat-error *ngIf="form.get('id')?.hasError('required')">
+            El campo id es obligatorio.
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombreTienda" required />
+        <mat-error *ngIf="form.get('nombreTienda')?.hasError('required')">
+          El campo tienda es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Descripción</mat-label>
+        <input matInput formControlName="descripcionTienda" required />
+        <mat-error *ngIf="form.get('descripcionTienda')?.hasError('required')">
+          El campo descripción es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="numeroTelefono" required />
+        <mat-error *ngIf="form.get('numeroTelefono')?.hasError('required')">
+          El campo teléfono es obligatorio.
+        </mat-error>
+        <mat-error *ngIf="form.get('numeroTelefono')?.hasError('pattern')"
+          >Formato numérico inválido.</mat-error
+        >
+      </mat-form-field>
+
+      <div class="estado-container">
+        <label class="estado-label"><b>Estado Tienda:</b></label>
+        <mat-radio-group formControlName="estadoTienda" class="estado-radios">
+          <mat-radio-button [value]="true">Activo</mat-radio-button>
+          <mat-radio-button [value]="false">Inactivo</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <button mat-raised-button class="btn-registrar" type="submit">
+        {{ edicion ? 'Guardar' : 'Registrar' }}
+      </button>
+    </form>
+  </div>
+</div>

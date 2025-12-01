@@ -1,0 +1,116 @@
+<div class="menu-background">
+  <mat-toolbar color="primary" class="toolbar">
+    <div class="logo-area">
+      <button
+        matIconButton
+        class="Menu-Desplegable"
+        (click)="toggleSettings()"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <img src="assets/images/Menu_LogoBestPrice.png" alt="" />
+      <span class="title">ESTPRICE</span>
+    </div>
+
+    <span class="spacer"></span>
+
+    <button matIconButton class="Canasta" aria-label="Example icon-button with menu icon">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example home icon"
+        fontIcon="shopping_cart"
+      ></mat-icon>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn" (click)="verificar()">
+      <mat-icon>account_circle</mat-icon>
+      Rol:
+        <span>{{ role }}</span>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="/perfil"><mat-icon>person</mat-icon> Perfil</button>
+      <button mat-menu-item routerLink="/favorites">
+        <mat-icon>favorites</mat-icon> Favoritos
+      </button>
+      <button mat-menu-item routerLink="/historial"><mat-icon>history</mat-icon> Historial</button>
+      <button mat-menu-item routerLink="/ajustes"><mat-icon>settings</mat-icon> Ajustes</button>
+      <button mat-menu-item routerLink="/login" (click)="cerrar()"><mat-icon>logout</mat-icon> Cerrar sesión</button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <div class="search-container">
+    <mat-form-field appearance="outline" class="search-field" style="background-color: #ffffff">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput placeholder="Buscar..." [(ngModel)]="searchText" />
+    </mat-form-field>
+  </div>
+
+  <div class="menu-grid">
+    <mat-card
+      class="menu-card"
+      *ngFor="let card of filteredCards"
+      [routerLink]="card.route"
+      role="button"
+    >
+      <img [src]="card.img" class="icon" />
+      <p>{{ card.title }}</p>
+    </mat-card>
+  </div>
+
+  <div class="full-settings-panel" *ngIf="settingsOpen">
+    <button class="volver-btn" (click)="toggleSettings()">Volver</button>
+    <div class="settings-container">
+      <div class="settings-left">
+        <h1 class="settings-title">Ajustes</h1>
+
+        <div class="settings-block">
+          <h3>Cuenta:</h3>
+          <p>Notificaciones de seguridad, información de la cuenta</p>
+        </div>
+
+        <div class="settings-block">
+          <h3>Tema:</h3>
+          <p>Fondo, colores</p>
+        </div>
+
+        <div class="settings-block">
+          <h3>Notificaciones:</h3>
+          <p>Notificaciones de la aplicación</p>
+        </div>
+
+        <div class="settings-block">
+          <h3>Editar:</h3>
+          <p>Perfil, datos, foto de perfil</p>
+        </div>
+
+        <div class="settings-block">
+          <h3>Ayuda:</h3>
+          <p>Centro de ayuda, contáctanos, políticas de privacidad</p>
+        </div>
+      </div>
+
+      <div class="settings-right">
+        <h3>Tema:</h3>
+
+        <label class="theme-option">
+          <input type="radio" name="theme" value="light" />
+          Claro
+        </label>
+
+        <label class="theme-option">
+          <input type="radio" name="theme" value="dark" />
+          Oscuro
+        </label>
+
+        <label class="theme-option">
+          <input type="radio" name="theme" value="system" />
+          Predeterminado del sistema
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-overlay" *ngIf="settingsOpen" (click)="toggleSettings()"></div>
+</div>
