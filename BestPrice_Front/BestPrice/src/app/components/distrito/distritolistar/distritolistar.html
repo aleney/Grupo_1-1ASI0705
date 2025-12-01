@@ -33,7 +33,7 @@
   </mat-toolbar>
 
   <div class="top-buttons">
-    <button mat-raised-button class="btn-volver" routerLink="/distrito">
+    <button mat-raised-button class="btn-volver" routerLink="/menu">
       <mat-icon>arrow_back_ios</mat-icon>Volver
     </button>
   </div>
@@ -115,18 +115,23 @@
     >
     </mat-paginator>
   </div>
-
-
-  <div>
-    <div>
-      <google-map 
-      [center]="center" 
-      [zoom]="zoom" 
+  <!-- MAPA -->
+  <div class="map-container">
+    <google-map 
+      mapId="d30b3e09ce332341c644fba6"
+      [center]="center"
+      [zoom]="zoom"
       height="400px"
-      width="800px"
-      />
-
-      
-    </div>
+      width="100%"
+    >
+      <map-advanced-marker
+        *ngFor="let position of districtPositions; trackBy: trackById"
+        #marker="mapAdvancedMarker"
+        (mapClick)="openInfoWindow(position, marker)"
+        [position]="{lat: position.latitudDistrito, lng: position.longitudDistrito}"
+      >
+      </map-advanced-marker>
+      <map-info-window />
+    </google-map>
   </div>
-</div>
+  </div>

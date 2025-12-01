@@ -30,7 +30,7 @@ export const routes: Routes = [
         { path: 'listar', component: Lineatiendaslist},
         { path: 'edits/:id', component: Lineatiendasinsert},
         { path: 'insertar', component: Lineatiendasinsert},
-        { path: 'lanioactual', component: Reportelineatiendas2025}
+        { path: 'anioactual', component: Reportelineatiendas2025}
       ],
       canActivate: [seguridadGuard]
     },

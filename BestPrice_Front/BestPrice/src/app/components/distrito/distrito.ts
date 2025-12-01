@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { Distritoinsert } from "./distritoinsert/distritoinsert";
+import { Distritolistar } from "./distritolistar/distritolistar";
 
 @Component({
   selector: 'app-distrito',
-  imports: [Distritoinsert, RouterOutlet],
+  imports: [RouterOutlet, Distritolistar],
   templateUrl: './distrito.html',
   styleUrl: './distrito.css',
 })

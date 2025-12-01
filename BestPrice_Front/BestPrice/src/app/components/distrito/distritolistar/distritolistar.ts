@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, viewChild, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -14,7 +14,7 @@ import { Loginservice } from '../../../services/loginservice';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DistritoService } from '../../../services/distritoservice';
 import { DistritoListModel } from '../../../models/distritolist';
-import { GoogleMap } from '@angular/google-maps';
+import { GoogleMap, MapAdvancedMarker, MapInfoWindow } from '@angular/google-maps';
 
 @Component({
   selector: 'app-distritolistar',
@@ -30,8 +30,10 @@ import { GoogleMap } from '@angular/google-maps';
     MatLabel,
     MatMenuModule,
     MatToolbarModule,
-    GoogleMap
-  ],
+    GoogleMap,
+    MapAdvancedMarker,
+    MapInfoWindow
+],
   templateUrl: './distritolistar.html',
   styleUrl: './distritolistar.css',
 })
@@ -47,6 +49,11 @@ export class Distritolistar implements OnInit {
   form: FormGroup;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  infoWindowRef = viewChild.required(MapInfoWindow);
+
+
+  districtPositions: DistritoListModel[] = [];
+
 
   constructor(
     private dS: DistritoService,
@@ -64,6 +71,7 @@ export class Distritolistar implements OnInit {
     this.dS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
+      this.districtPositions = data;
     });
 
     this.form.get('nombrebusqueda')?.valueChanges.subscribe((value) => {
@@ -85,6 +93,23 @@ export class Distritolistar implements OnInit {
       });
     });
   }
+
+  trackById(index: number, item: DistritoListModel) {
+  return item.idDistrito;
+}
+
+openInfoWindow(location: DistritoListModel, marker: MapAdvancedMarker) {
+  console.log('Marker clicked:', location);
+
+    const content = `
+    <h1>${location.nombreDistrito}</h1>
+    <p>${location.descripcionDistrito}</p>
+    <p>Latitud: ${location.latitudDistrito}</p>
+    <p>Longitud: ${location.longitudDistrito}</p>
+    `;
+
+  this.infoWindowRef().open(marker, false, content);
+}
 
   buscar() {
     const termino = this.nombrebusqueda.trim();

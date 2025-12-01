@@ -39,7 +39,7 @@
 </mat-toolbar>
 
   <!-- BOTÓN VOLVER -->
-  <button mat-raised-button class="btn-volver" routerLink="/lineatienda/lineatiendalist">
+  <button mat-raised-button class="btn-volver" routerLink="/lineatienda/listar">
     <mat-icon>arrow_back_ios</mat-icon>
     Volver
   </button>
@@ -91,5 +91,14 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+
+        <br />
+    <mat-paginator
+      [length]="100"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page"
+    >
+    </mat-paginator>
   </div>
 </div>
