@@ -1,1 +1,140 @@
-<p>ubicaciontiendainsert works!</p>
+<div class="page-container">
+  <mat-toolbar color="primary" class="toolbar">
+    <div class="logo-area">
+      <button matIconButton class="Menu-Desplegable" aria-label="Menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <img src="assets/images/Menu_LogoBestPrice.png" alt="" />
+      <span class="title">ESTPRICE</span>
+    </div>
+
+    <span class="spacer"></span>
+
+    <button matIconButton class="Canasta" aria-label="Carrito">
+      <mat-icon aria-hidden="false" fontIcon="shopping_cart">shopping_cart</mat-icon>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn" (click)="verificar()">
+      <mat-icon>account_circle</mat-icon>
+      Rol:
+      <span>{{ role }}</span>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="/perfil"><mat-icon>person</mat-icon> Perfil</button>
+      <button mat-menu-item routerLink="/favorites"><mat-icon>favorite</mat-icon> Favoritos</button>
+      <button mat-menu-item routerLink="/historial"><mat-icon>history</mat-icon> Historial</button>
+      <button mat-menu-item routerLink="/ajustes"><mat-icon>settings</mat-icon> Ajustes</button>
+      <button mat-menu-item routerLink="/login" (click)="cerrar()">
+        <mat-icon>logout</mat-icon> Cerrar sesión
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <div class="top-buttons">
+    <button mat-raised-button class="btn-volver" routerLink="/menu">
+      <mat-icon>arrow_back_ios</mat-icon>Volver
+    </button>
+    <button mat-raised-button class="btn-lista" routerLink="/ubicaciontienda/listar">Lista</button>
+  </div>
+
+  <h1 class="titulo">{{ edicion ? 'Editar Ubicacion de Tienda' : 'Registro de Ubicacion de Tienda' }}</h1>
+
+  <div class="form-container">
+    <form [formGroup]="form" (submit)="registrar()" class="example-form">
+      <ng-container *ngIf="edicion">
+        <mat-form-field>
+          <mat-label>Código</mat-label>
+          <input matInput formControlName="id" required readonly />
+          <mat-error *ngIf="form.get('id')?.hasError('required')"
+            >El campo id es obligatorio.</mat-error
+          >
+        </mat-form-field>
+      </ng-container>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Direccion</mat-label>
+        <input matInput formControlName="direccion" required />
+        <mat-error *ngIf="form.get('direccion')?.hasError('required')"
+          >El campo direccion es obligatorio.</mat-error
+        >
+        <mat-error *ngIf="form.get('direccion')?.hasError('minlength')"
+          >Mínimo 3 caracteres.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Detalle</mat-label>
+        <textarea matInput formControlName="detalle" required></textarea>
+        <mat-error *ngIf="form.get('detalle')?.hasError('required')"
+          >El campo detalle es obligatorio.</mat-error
+        >
+        <mat-error *ngIf="form.get('detalle')?.hasError('maxlength')"
+          >Máx. 450 caracteres.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Longitud</mat-label>
+        <input matInput formControlName="longitud" required />
+        <mat-hint>Ej: -77.042793</mat-hint>
+        <mat-error *ngIf="form.get('longitud')?.hasError('required')"
+          >La longitud es obligatoria.</mat-error
+        >
+        <mat-error *ngIf="form.get('longitud')?.hasError('pattern')"
+          >Formato numérico inválido.</mat-error
+        >
+      </mat-form-field>
+
+      <br /><br />
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Latitud</mat-label>
+        <input matInput formControlName="latitud" required />
+        <mat-hint>Ej: -12.046374</mat-hint>
+        <mat-error *ngIf="form.get('latitud')?.hasError('required')"
+          >La latitud es obligatoria.</mat-error
+        >
+        <mat-error *ngIf="form.get('latitud')?.hasError('pattern')"
+          >Formato numérico inválido.</mat-error
+        >
+      </mat-form-field>
+<br><br>
+      <mat-form-field class="example-full-width">
+        <mat-label>Distrito</mat-label>
+        <mat-select formControlName="distrito" required>
+          @for (p of listaDistrito; track p.idDistrito) {
+          <mat-option [value]="p.idDistrito">
+            {{ p.nombreDistrito }}
+          </mat-option>
+          }
+        </mat-select>
+
+        <mat-error *ngIf="form.get('distrito')?.hasError('required')"
+          >El campo categoria producto es obligatorio.</mat-error
+        >
+      </mat-form-field>
+<br><br>
+      <mat-form-field class="example-full-width">
+        <mat-label>Tienda</mat-label>
+        <mat-select formControlName="tiendaa" required>
+          @for (p of listaTiendaa; track p.idTienda) {
+          <mat-option [value]="p.idTienda">
+            {{ p.nombreTienda }}
+          </mat-option>
+          }
+        </mat-select>
+
+        <mat-error *ngIf="form.get('tiendaa')?.hasError('required')"
+          >El campo categoria producto es obligatorio.</mat-error
+        >
+      </mat-form-field>
+
+      <div style="display: flex; gap: 16px; margin-top: 12px">
+        <button mat-raised-button class="btn-registrar" type="submit">
+          {{ edicion ? 'Guardar' : 'Registrar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

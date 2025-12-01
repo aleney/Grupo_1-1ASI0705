@@ -51,6 +51,57 @@
         </mat-form-field>
       </ng-container>
 
+      <mat-form-field>
+        <mat-label>Fecha de inicio</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="fechainicio"
+          [max]="today"
+          required
+        />
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+        @if (form.get('fechainicio')?.hasError('required')) {
+        <mat-error>El campo fecha es obligatorio.</mat-error>
+        }
+      </mat-form-field>
+<br><br>
+      <mat-form-field>
+        <mat-label>Fecha de fin</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="fechafin"
+          [max]="today"
+          required
+        />
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+        @if (form.get('fechafin')?.hasError('required')) {
+        <mat-error>El campo fecha es obligatorio.</mat-error>
+        }
+      </mat-form-field>
+<br><br>
+      <mat-form-field class="example-full-width">
+        <mat-label>Producto</mat-label>
+        <mat-select formControlName="producto" required>
+          @for (p of listaProduct; track p.idProducto) {
+          <mat-option [value]="p.idProducto">
+            {{ p.nombreProducto }}
+          </mat-option>
+          }
+        </mat-select>
+
+        <mat-error *ngIf="form.get('producto')?.hasError('required')"
+          >El campo producto es obligatorio.</mat-error
+        >
+      </mat-form-field>
+
       <div style="display: flex; gap: 16px; margin-top: 12px">
         <button mat-raised-button class="btn-registrar" type="submit">
           {{ edicion ? 'Guardar' : 'Registrar' }}

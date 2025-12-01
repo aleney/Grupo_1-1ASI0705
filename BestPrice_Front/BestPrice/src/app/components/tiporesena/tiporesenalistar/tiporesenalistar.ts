@@ -51,7 +51,7 @@ export class Tiporesenalistar implements OnInit {
     this.tS.delete(id).subscribe((data) => {
       this.tS.list().subscribe((data) => {
         this.tS.setList(data);
-        this.showSnackBar('Tipo de reseña eliminada con éxito');
+        this.showSnackBar('Tipo de resenia eliminada con éxito');
       });
     });
   }

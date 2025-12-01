@@ -34,7 +34,7 @@ import { Loginservice } from '../../../services/loginservice';
   styleUrls: ['./categoriaproductolistar.css'],
 })
 export class Categoriaproductolistar implements OnInit {
-  displayedColumns: string[] = ['id', 'nombre', 'actions'];
+  displayedColumns: string[] = ['id', 'nombre', 'actualizar','eliminar'];
   dataSource: MatTableDataSource<CategoriaProducto> = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(

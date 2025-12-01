@@ -19,6 +19,7 @@ import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { Detalle } from '../../../models/detalle';
 import { DetalleService } from '../../../services/detalleservice';
 import { Loginservice } from '../../../services/loginservice';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-detalleinsert',
@@ -36,6 +37,7 @@ import { Loginservice } from '../../../services/loginservice';
     CommonModule,
   ],
   templateUrl: './detalleinsert.html',
+  providers: [provideNativeDateAdapter()],
   styleUrl: './detalleinsert.css',
 })
 export class Detalleinsert {

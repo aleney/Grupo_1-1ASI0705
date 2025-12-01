@@ -1,6 +1,4 @@
-<!-- CONTENEDOR GENERAL PARA EL FONDO -->
 <div class="page-container">
-  <!-- ENCABEZADO -->
   <mat-toolbar color="primary" class="toolbar">
     <div class="logo-area">
       <button
@@ -17,11 +15,9 @@
     <span class="spacer"></span>
 
     <button matIconButton class="Canasta" aria-label="Example icon-button with menu icon">
-      <mat-icon
-        aria-hidden="false"
-        aria-label="Example home icon"
-        fontIcon="shopping_cart"
-      ></mat-icon>
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="shopping_cart"
+        >shopping_cart</mat-icon
+      >
     </button>
 
     <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn" (click)="verificar()">
@@ -45,10 +41,10 @@
     <button mat-raised-button class="btn-volver" routerLink="/menu">
       <mat-icon>arrow_back_ios</mat-icon>Volver
     </button>
-    <button mat-raised-button class="btn-lista" routerLink="/lineatiendas/listar">Lista</button>
+    <button mat-raised-button class="btn-lista" routerLink="/tipotienda/listar">Lista</button>
   </div>
 
-  <h1 class="titulo">Registro de Linea de Tiendas</h1>
+  <h1 class="titulo">Registro de Tipo Tienda</h1>
 
   <div class="form-container">
     <form [formGroup]="form" (submit)="registrar()" class="example-form">
@@ -72,18 +68,11 @@
         }
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Detalle</mat-label>
-        <textarea matInput formControlName="detalle"></textarea>
-        @if (form.get('detalle')?.hasError('required')) {
-        <mat-error>El campo detalle es obligatorio.</mat-error>
-        }
-      </mat-form-field>
-      @if (!edicion) {
-      <button mat-raised-button class="btn-registrar" type="submit">Registrar</button>
-      } @if (edicion) {
-      <button mat-raised-button class="btn-registrar" type="submit">Guardar</button>
-      }
+      <div style="display: flex; gap: 16px; margin-top: 12px">
+        <button mat-raised-button class="btn-registrar" type="submit">
+          {{ edicion ? 'Guardar' : 'Registrar' }}
+        </button>
+      </div>
     </form>
   </div>
 </div>

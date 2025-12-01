@@ -24,6 +24,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { Tienda } from '../../../models/tienda';
 import { Tiendaservice } from '../../../services/tiendaservice';
 import { ProductoInsert } from '../../../models/productoinsert';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-productoinsert',
@@ -41,8 +43,10 @@ import { ProductoInsert } from '../../../models/productoinsert';
     CommonModule,
     MatRadioModule,
     MatSelectModule,
+    MatSlideToggleModule
   ],
   templateUrl: './productoinsert.html',
+  providers: [provideNativeDateAdapter()],
   styleUrl: './productoinsert.css',
 })
 export class Productoinsert {
@@ -84,10 +88,12 @@ export class Productoinsert {
       idProducto: [''],
       nombreProducto: ['', [Validators.required, Validators.minLength(3)]],
       descripcionProducto: ['', [Validators.required, Validators.maxLength(450)]],
-      marcaProducto: ['', [Validators.required]],
+      marcaProducto: ['', Validators.required],
       precioProducto: ['', [Validators.required, Validators.min(0)]],
       stockProducto: ['', [Validators.required, Validators.min(0)]],
       unidadMetricaProducto: ['', [Validators.required, Validators.min(0)]],
+      favoritoProducto: ['', Validators.required],
+      disponibleProducto: ['', Validators.required],
       tienda: ['', Validators.required],
       categoriaProducto: ['', Validators.required]
     });
@@ -131,6 +137,8 @@ export class Productoinsert {
             precioProducto: new FormControl(data.precioProducto),
             stockProducto: new FormControl(data.stockProducto),
             unidadMetricaProducto: new FormControl(data.unidadMetricaProducto),
+            favoritoProducto: new FormControl(data.favoritoProducto),
+            disponibleProducto: new FormControl(data.disponibleProducto),
             categoriaproducto: new FormControl(data.categoriaProducto.idCategoriaProducto),
             tienda: new FormControl(data.tienda.idTienda)
           });

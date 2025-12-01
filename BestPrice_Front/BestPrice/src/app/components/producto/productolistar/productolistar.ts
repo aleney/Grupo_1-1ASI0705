@@ -32,7 +32,7 @@ import { Loginservice } from '../../../services/loginservice';
 })
 export class Productolistar implements OnInit {
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10', 'c11'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10', 'c11', 'c12', 'c13'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(

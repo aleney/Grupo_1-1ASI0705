@@ -35,7 +35,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class Tiendalistar implements OnInit {
   dataSource: MatTableDataSource<Tienda> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10'];
   nombrebusqueda: string = '';
   mensaje: string = '';
   form: FormGroup;

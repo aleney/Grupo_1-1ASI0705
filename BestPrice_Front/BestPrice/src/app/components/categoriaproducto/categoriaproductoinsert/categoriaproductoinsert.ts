@@ -16,6 +16,7 @@ import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { CategoriaProducto } from '../../../models/categoriaproducto';
 import { Categoriaproductoservice } from '../../../services/categoriaproductoservice';
 import { Loginservice } from '../../../services/loginservice';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-categoriaproductoinsert',
@@ -30,6 +31,7 @@ import { Loginservice } from '../../../services/loginservice';
     MatMenuModule,
   ],
   templateUrl: './categoriaproductoinsert.html',
+  providers: [provideNativeDateAdapter()],
   styleUrl: './categoriaproductoinsert.css',
 })
 export class Categoriaproductoinsert implements OnInit {
@@ -71,6 +73,7 @@ export class Categoriaproductoinsert implements OnInit {
           this.cP.list().subscribe((data) => {
             this.cP.setList(data);
           });
+          this.router.navigate(['/categoriaproducto/listar']);
         });
       } else {
         this.cP.insert(this.catproducto).subscribe(() => {

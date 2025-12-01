@@ -88,12 +88,14 @@ export class Distritoinsert implements OnInit {
           this.ds.list().subscribe((data) => {
             this.ds.setList(data);
           })
-      })
+      });
+      this.router.navigate(['/distrito/listar']);
     } else {
       this.ds.insert(this.distrito).subscribe(()=>{
           this.ds.list().subscribe((data) => {
             this.ds.setList(data);
-          })
+          });
+          this.router.navigate(['/distrito/listar']);
       })
     }
   }

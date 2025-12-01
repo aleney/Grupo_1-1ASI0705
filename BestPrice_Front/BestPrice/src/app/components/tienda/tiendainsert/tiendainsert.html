@@ -31,7 +31,9 @@
   </mat-toolbar>
 
   <div class="top-buttons">
-    <button mat-raised-button class="btn-volver" routerLink="/menu"><mat-icon>arrow_back_ios</mat-icon>Volver</button>
+    <button mat-raised-button class="btn-volver" routerLink="/menu">
+      <mat-icon>arrow_back_ios</mat-icon>Volver
+    </button>
     <button mat-raised-button class="btn-lista" routerLink="/tienda/listar">Lista</button>
   </div>
 
@@ -58,7 +60,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Descripción</mat-label>
+        <mat-label>Detalle</mat-label>
         <input matInput formControlName="descripcionTienda" required />
         <mat-error *ngIf="form.get('descripcionTienda')?.hasError('required')">
           El campo descripción es obligatorio.
@@ -75,14 +77,40 @@
           >Formato numérico inválido.</mat-error
         >
       </mat-form-field>
+<br><br>
+      <mat-slide-toggle formControlName="estadoTienda">
+        Estado: {{ form.get('estadoTienda')?.value ? 'Activo' : 'Inactivo' }}
+      </mat-slide-toggle>
 
-      <div class="estado-container">
-        <label class="estado-label"><b>Estado Tienda:</b></label>
-        <mat-radio-group formControlName="estadoTienda" class="estado-radios">
-          <mat-radio-button [value]="true">Activo</mat-radio-button>
-          <mat-radio-button [value]="false">Inactivo</mat-radio-button>
-        </mat-radio-group>
-      </div>
+      <br /><br />
+      <mat-form-field class="example-full-width">
+        <mat-label>Linea de Tienda</mat-label>
+        <mat-select formControlName="lineaTienda" required>
+          @for (p of listaLT; track p.idLineaTienda) {
+          <mat-option [value]="p.idLineaTienda">
+            {{ p.nombreLineaTienda }}
+          </mat-option>
+          }
+        </mat-select>
+
+        <mat-error *ngIf="form.get('lineaTienda')?.hasError('required')"
+          >El campo linea tienda es obligatorio.</mat-error
+        > </mat-form-field
+      ><br /><br />
+      <mat-form-field class="example-full-width">
+        <mat-label>Tipo de Tienda</mat-label>
+        <mat-select formControlName="tipoTienda" required>
+          @for (p of listaTT; track p.idTipoTienda) {
+          <mat-option [value]="p.idTipoTienda">
+            {{ p.nombreTipoTienda }}
+          </mat-option>
+          }
+        </mat-select>
+
+        <mat-error *ngIf="form.get('tipoTienda')?.hasError('required')"
+          >El campo tipo tienda es obligatorio.</mat-error
+        >
+      </mat-form-field>
 
       <button mat-raised-button class="btn-registrar" type="submit">
         {{ edicion ? 'Guardar' : 'Registrar' }}

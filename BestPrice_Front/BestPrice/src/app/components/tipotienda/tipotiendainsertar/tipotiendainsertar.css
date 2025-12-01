@@ -63,7 +63,7 @@
 }
 
 .btn-volver[mat-raised-button] {
-  color: rgb(238, 244, 241);
+  color: rgb(255, 255, 255);
   background-color: #f6a700;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .btn-lista[mat-raised-button] {
-  color: rgb(238, 244, 241);
+  color: rgb(255, 255, 255);
   background-color: #f6a700;
 }
 

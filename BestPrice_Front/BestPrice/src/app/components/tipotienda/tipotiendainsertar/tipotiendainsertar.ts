@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,22 +17,26 @@ import { Loginservice } from '../../../services/loginservice';
 import { Tipotiendaservice } from '../../../services/tipotiendaservice';
 import { TipoTienda } from '../../../models/tipotienda';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-tipotiendainsertar',
-  imports: [ReactiveFormsModule,
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     RouterLink,
     MatIconModule,
-    MatMenuModule,],
+    MatMenuModule,
+  ],
   templateUrl: './tipotiendainsertar.html',
   providers: [provideNativeDateAdapter()],
   styleUrl: './tipotiendainsertar.css',
 })
-export class Tipotiendainsertar implements OnInit{
+export class Tipotiendainsertar implements OnInit {
   form: FormGroup = new FormGroup({});
   tT: TipoTienda = new TipoTienda();
   id: number = 0;
@@ -53,7 +63,6 @@ export class Tipotiendainsertar implements OnInit{
     this.form = this.formBuilder.group({
       id: [''],
       nombre: ['', Validators.required],
-      detalle: ['', Validators.required],
     });
   }
 
@@ -64,17 +73,18 @@ export class Tipotiendainsertar implements OnInit{
       if (this.edicion) {
         this.tTS.update(this.tT).subscribe(() => {
           this.tTS.list().subscribe((data) => {
-            //this.tTS.setList(data);
+            this.tTS.setList(data);
           });
+          this.router.navigate(['/tipotienda/listar']);
         });
       } else {
         this.tTS.insert(this.tT).subscribe(() => {
           this.tTS.list().subscribe((data) => {
-           // this.tTS.setList(data);
+            this.tTS.setList(data);
           });
         });
       }
-      this.router.navigate(['tipotienda/listar']);
+      this.router.navigate(['/tipotienda/listar']);
     }
   }
 

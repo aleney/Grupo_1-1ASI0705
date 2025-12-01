@@ -5,16 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fce5d817-226e-43bf-bd56-8944fb891d9c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BestPrice/src/main/java/pe/edu/upc/bestprice/util/CORS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BestPrice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BestPrice/src/main/java/pe/edu/upc/bestprice/controllers/DistritoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice/src/main/java/pe/edu/upc/bestprice/controllers/DistritoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BestPrice/src/main/java/pe/edu/upc/bestprice/controllers/UbicacionTiendaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice/src/main/java/pe/edu/upc/bestprice/controllers/UbicacionTiendaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BestPrice/src/main/java/pe/edu/upc/bestprice/dtos/DistritoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice/src/main/java/pe/edu/upc/bestprice/dtos/DistritoDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BestPrice/src/main/java/pe/edu/upc/bestprice/dtos/HistorialPrecioDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice/src/main/java/pe/edu/upc/bestprice/dtos/HistorialPrecioDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BestPrice/src/main/java/pe/edu/upc/bestprice/dtos/OfertasProductoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice/src/main/java/pe/edu/upc/bestprice/dtos/OfertasProductoDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BestPrice/src/main/java/pe/edu/upc/bestprice/dtos/UbicacionTiendaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice/src/main/java/pe/edu/upc/bestprice/dtos/UbicacionTiendaDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BestPrice/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BestPrice/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/categoriaproducto/categoriaproductoinsert/categoriaproductoinsert.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/categoriaproducto/categoriaproductoinsert/categoriaproductoinsert.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/categoriaproducto/categoriaproductolistar/categoriaproductolistar.html" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/categoriaproducto/categoriaproductolistar/categoriaproductolistar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/categoriaproducto/categoriaproductolistar/categoriaproductolistar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/categoriaproducto/categoriaproductolistar/categoriaproductolistar.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/distrito/distritoinsert/distritoinsert.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/distrito/distritoinsert/distritoinsert.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/producto/productoinsert/productoinsert.html" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/producto/productoinsert/productoinsert.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/producto/productoinsert/productoinsert.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/producto/productoinsert/productoinsert.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/producto/productolistar/productolistar.html" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/producto/productolistar/productolistar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/producto/productolistar/productolistar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/producto/productolistar/productolistar.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/tienda/tiendainsert/tiendainsert.css" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/tienda/tiendainsert/tiendainsert.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/tienda/tiendainsert/tiendainsert.html" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/tienda/tiendainsert/tiendainsert.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/tienda/tiendainsert/tiendainsert.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/components/tienda/tiendainsert/tiendainsert.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/environments/environment.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/canastaservice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/canastaservice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/categoriaproductoservice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/categoriaproductoservice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/detalleservice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/detalleservice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/distritoservice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/distritoservice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/lineatiendaservice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/lineatiendaservice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/ofertasproductoservice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/ofertasproductoservice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/productoservice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/productoservice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/tiendaservice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/tiendaservice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/tiporesenaservice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/tiporesenaservice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/tipotiendaservice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/BestPrice_Front/BestPrice/src/app/services/tipotiendaservice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,21 +67,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.BestPriceApplication.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "rama__fabrizzio",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Fabrizzio/Desktop/BestPrice/Grupo_1-1ASI0705",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.BestPriceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;rama__fabrizzio&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Fabrizzio/Desktop/BestPrice/Grupo_1-1ASI0705&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -23,14 +23,14 @@ import { Lineatiendaanio2025 } from '../../../models/lineatiendaanio2025';
   templateUrl: './reportelineatiendas2025.html',
   styleUrl: './reportelineatiendas2025.css',
 })
-export class Reportelineatiendas2025 {
-  constructor(private ltS: LineatiendaService) {}
+export class Reportelineatiendas2025 implements OnInit {
+  constructor(private ltS:LineatiendaService ) {}
 
   dataSource: MatTableDataSource<Lineatiendaanio2025> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5'];
 
   ngOnInit(): void {
-    this.ltS.getTiendasAnioactual().subscribe((data) => {
+    this.ltS.getTiendasAnioactual().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
     });
   }

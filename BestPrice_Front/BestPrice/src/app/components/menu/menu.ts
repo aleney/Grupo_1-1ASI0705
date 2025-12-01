@@ -38,10 +38,10 @@ export class Menu {
     { title: 'Distrito', route: '/distrito', img: 'assets/images/Menu_Distrito.png'},
     { title: 'Canasta de Compras', route: '/canasta', img: 'assets/images/Menu_Canasta.png'},
     { title: 'Detalles de canasta', route: '/detalle', img: 'assets/images/Menu_CanastaDetalle.png'},
-    { title: 'Tipo de Resenias', route:'/tiporesenia',img:'assets/imagenes/Menu_TipoResena.png'},
+    { title: 'Tipo de Resenias', route:'/tiporesena',img:'assets/imagenes/Menu_TipoResena.png'},
     { title: 'Historial de Precio', route: '/historialprecio', img: 'assets/images/Menu_HistorialPrecio.png'},
     { title: 'Ofertas de Productos', route: '/ofertasproducto', img: 'assets/images/Menu_Ofertas.png'},
-    { title: 'Ubicacion de Tiendas', route: '/lineatienda', img: 'assets/images/Menu_UbiTienda.png'},
+    { title: 'Ubicacion de Tiendas', route: '/ubicaciontienda', img: 'assets/images/Menu_UbiTienda.png'},
   ];
 
   get filteredCards() {
@@ -88,9 +88,5 @@ export class Menu {
 
   isSeller() {
     return this.role === 'SELLER';
-  }
-
-  isTester() {
-    return this.role === 'TESTER';
   }
 }

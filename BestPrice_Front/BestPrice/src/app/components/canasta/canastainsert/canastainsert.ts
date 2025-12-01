@@ -18,6 +18,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CommonModule } from '@angular/common';
 import { CanastaService } from '../../../services/canastaservice';
 import { Loginservice } from '../../../services/loginservice';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-canastainsert',
@@ -35,6 +36,7 @@ import { Loginservice } from '../../../services/loginservice';
     CommonModule,
   ],
   templateUrl: './canastainsert.html',
+  providers: [provideNativeDateAdapter()],
   styleUrl: './canastainsert.css',
 })
 export class Canastainsert {

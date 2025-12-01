@@ -6,11 +6,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatIcon } from "@angular/material/icon";
+import { MatIcon } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { MatMenu } from "@angular/material/menu";
-import { MatToolbar } from "@angular/material/toolbar";
-import { MatFormField, MatError, MatLabel } from "@angular/material/input";
+import { MatMenu } from '@angular/material/menu';
+import { MatToolbar } from '@angular/material/toolbar';
+import { MatFormField, MatError, MatLabel } from '@angular/material/input';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,11 +23,15 @@ import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
 import { Ofertasproducto } from '../../../models/ofertasproducto';
 import { Ofertasproductoservice } from '../../../services/ofertasproductoservice';
-
+import { ProductoInsert } from '../../../models/productoinsert';
+import { Productoservice } from '../../../services/productoservice';
+import { MatSelectModule } from '@angular/material/select';
+import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-ofertasproductoinsert',
-  imports: [ReactiveFormsModule,
+  imports: [
+    ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -39,23 +43,29 @@ import { Ofertasproductoservice } from '../../../services/ofertasproductoservice
     MatDatepickerModule,
     CommonModule,
     MatRadioModule,
-    MatTableModule,  
+    MatTableModule,
+    MatSelectModule,
+    MatNativeDateModule,
   ],
   templateUrl: './ofertasproductoinsert.html',
+  providers: [provideNativeDateAdapter()],
   styleUrl: './ofertasproductoinsert.css',
 })
 export class Ofertasproductoinsert {
   form: FormGroup = new FormGroup({});
-  ofertasproducto: Ofertasproducto=new Ofertasproducto();
+  ofertasproducto: Ofertasproducto = new Ofertasproducto();
   id: number = 0;
   edicion: boolean = false;
   estado: boolean = true;
+  today = new Date();
+  listaProduct: ProductoInsert[] = [];
 
   constructor(
     private ops: Ofertasproductoservice,
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute,
+    private ps: Productoservice
   ) {}
 
   ngOnInit(): void {
@@ -64,32 +74,37 @@ export class Ofertasproductoinsert {
       this.edicion = data['id'] != null;
       this.init();
     });
-  
+
+    this.ps.list().subscribe((data) => {
+      this.listaProduct = data;
+    });
+
     this.form = this.fb.group({
       idOfertasproducto: [''],
-      fechainicio: ['',[Validators.required]],
-      fechafin: ['',[Validators.required]],
+      fechainicio: ['', [Validators.required]],
+      fechafin: ['', [Validators.required]],
+      producto: ['', [Validators.required]],
     });
   }
-  
-  registrar():void{
+
+  registrar(): void {
     if (!this.form.valid) return;
 
-    this.ofertasproducto=this.form.value;
-    
-    if(this.edicion){
+    this.ofertasproducto = this.form.value;
+
+    if (this.edicion) {
       this.ops.update(this.ofertasproducto).subscribe({
-        next:()=>{
-          this.ops.list().subscribe((data)=>{
+        next: () => {
+          this.ops.list().subscribe((data) => {
             this.ops.setList(data);
           });
           this.router.navigate(['/ofertasproducto/listar']);
         },
       });
-  }else {
+    } else {
       this.ops.insert(this.ofertasproducto).subscribe({
-        next:()=>{
-          this.ops.list().subscribe((data)=>{
+        next: () => {
+          this.ops.list().subscribe((data) => {
             this.ops.setList(data);
           });
           this.router.navigate(['/ofertasproducto/listar']);
@@ -101,24 +116,23 @@ export class Ofertasproductoinsert {
   init() {
     if (this.edicion) {
       this.ops.listId(this.id).subscribe({
-      next:(data)=>{
-        this.form = new FormGroup({
-          idOfertasproducto: new FormControl(data.idOfertasproducto),
-          fechainicio: new FormControl(data.fechainicio),
-          fechafin: new FormControl(data.fechafin),
-        });
-      }
-    });
+        next: (data) => {
+          this.form = new FormGroup({
+            idOfertasproducto: new FormControl(data.idOfertasproducto),
+            fechainicio: new FormControl(data.fechainicio),
+            fechafin: new FormControl(data.fechafin),
+            producto: new FormControl(data.producto.idProducto),
+          });
+        },
+      });
+    }
   }
-}
   role: string = '';
   usuario: string = '';
 
   cerrar() {
     sessionStorage.clear();
   }
-
-
 
   isAdmin() {
     return this.role === 'ADMIN';
@@ -135,5 +149,4 @@ export class Ofertasproductoinsert {
   isTester() {
     return this.role === 'TESTER';
   }
-
 }

@@ -3,7 +3,6 @@ import { Menu } from './components/menu/menu';
 import { Lineatiendasinsert } from './components/lineatiendas/lineatiendasinsert/lineatiendasinsert';
 import { Distritoinsert } from './components/distrito/distritoinsert/distritoinsert';
 import { Ubicaciontiendainsert } from './components/ubicaciontienda/ubicaciontiendainsert/ubicaciontiendainsert';
-import { Historialprecioinsert } from './components/historialprecio/historialprecioinsert/historialprecioinsert';
 import { Ofertasproductoinsert } from './components/ofertasproducto/ofertasproductoinsert/ofertasproductoinsert';
 import { Tiendainsert } from './components/tienda/tiendainsert/tiendainsert';
 import { Productoinsert } from './components/producto/productoinsert/productoinsert';
@@ -36,6 +35,7 @@ import { Tiporesena } from './components/tiporesena/tiporesena';
 import { Tiporesenalistar } from './components/tiporesena/tiporesenalistar/tiporesenalistar';
 import { Historialprecio } from './components/historialprecio/historialprecio';
 import { Lineatiendaanio2025 } from './models/lineatiendaanio2025';
+import { Ubicaciontienda } from './components/ubicaciontienda/ubicaciontienda';
 
 export const routes: Routes = [
   {
@@ -95,7 +95,7 @@ export const routes: Routes = [
     path: 'tipotienda',
     component: Tipotiendainsertar,
     children: [
-      { path: 'listar', component: Tipotiendalistar },
+      { path: 'listar', component: Tiporesenalistar },
       { path: 'insertar', component: Tipotiendainsertar },
     ],
     //canActivate: [seguridadGuard],
@@ -122,39 +122,37 @@ export const routes: Routes = [
     //canActivate: [seguridadGuard],
   },
 
-  { 
-    path:'canasta', 
+  {
+    path: 'canasta',
     component: Canasta,
-    children:[
-      {path:'listar', component: Canastalistar},
-      {path:'insertar',component: Canastainsert}
+    children: [
+      { path: 'listar', component: Canastalistar },
+      { path: 'insertar', component: Canastainsert },
     ],
     //canActivate: [seguridadGuard],
   },
 
-  { path:'detalle',
+  {
+    path: 'detalle',
     component: Detalle,
-    children:[
-      {path:'listar', component: Detallelistar},
-      {path:'insertar', component: Detalleinsert}
+    children: [
+      { path: 'listar', component: Detallelistar },
+      { path: 'insertar', component: Detalleinsert },
     ],
     //canActivate: [seguridadGuard],
   },
 
-  { path:'tiporesena',
-      component: Tiporesena,
-      children:[
-      {path:'listar', component: Tiporesenalistar},
-    ],
+  {
+    path: 'tiporesena',
+    component: Tiporesena,
+    children: [{ path: 'listar', component: Tiporesenalistar }],
     //canActivate: [seguridadGuard],
   },
 
   {
     path: 'historialprecio',
     component: Historialprecio,
-    children: [
-      { path: 'listar', component: Historialpreciolistar },
-    ],
+    children: [{ path: 'listar', component: Historialpreciolistar }],
     //canActivate: [seguridadGuard],
   },
 
@@ -167,8 +165,11 @@ export const routes: Routes = [
 
   {
     path: 'ubicaciontienda',
-    component: Ubicaciontiendainsert,
-    children: [{ path: 'lista', component: Ubicaciontiendalistar }],
+    component: Ubicaciontienda,
+    children: [
+      { path: 'lista', component: Ubicaciontiendalistar },
+      { path: 'insertar', component: Ubicaciontiendainsert },
+    ],
     //canActivate: [seguridadGuard],
   },
 ];

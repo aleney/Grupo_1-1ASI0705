@@ -23,6 +23,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Loginservice } from '../../../services/loginservice';
 import { CommonModule } from '@angular/common';
 import { ProductoInsert } from '../../../models/productoinsert';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { Tipotiendaservice } from '../../../services/tipotiendaservice';
+import { LineatiendaService } from '../../../services/lineatiendaservice';
+import { TipoTienda } from '../../../models/tipotienda';
+import { LineatiendaInsert } from '../../../models/lineatiendainsert';
 
 @Component({
   selector: 'app-tiendainsert',
@@ -40,6 +45,7 @@ import { ProductoInsert } from '../../../models/productoinsert';
     MatIconModule,
     MatToolbarModule,
     RouterLink,
+    MatSlideToggleModule,
   ],
   templateUrl: './tiendainsert.html',
   providers: [provideNativeDateAdapter()],
@@ -50,8 +56,8 @@ export class Tiendainsert implements OnInit {
   Tiend: Tienda = new Tienda();
   id: number = 0;
   today = new Date();
-  //listaTT: TipoTiendas[] = [];
-  listaP: ProductoInsert[] = [];
+  listaTT: TipoTienda[] = [];
+  listaLT: LineatiendaInsert[] = [];
 
   TiposT: { value: string; viewValue: string }[] = [
     { value: 'Abarrotes', viewValue: 'Abarrotes' },
@@ -71,7 +77,8 @@ export class Tiendainsert implements OnInit {
     private formbuilder: FormBuilder,
     private route: ActivatedRoute,
     private sP: Productoservice,
-    //private sTT: Tipotiendaservice
+    private sTT: Tipotiendaservice,
+    private lT: LineatiendaService,
     private loginService: Loginservice
   ) {
     this.role = this.loginService.showRole();
@@ -84,8 +91,12 @@ export class Tiendainsert implements OnInit {
       this.init();
     });
 
-    this.sP.list().subscribe((data) => {
-      this.listaP = data;
+    this.sTT.list().subscribe((data) => {
+      this.listaTT = data;
+    });
+
+    this.lT.list().subscribe((data) => {
+      this.listaLT = data;
     });
 
     this.form = this.formbuilder.group({
@@ -94,21 +105,15 @@ export class Tiendainsert implements OnInit {
       descripcionTienda: ['', Validators.required],
       numeroTelefono: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
       estadoTienda: ['', Validators.required],
-      fechaTienda: ['', Validators.required],
-      foraneoTipTienda: ['', Validators.required],
+      lineaTienda: ['', Validators.required],
+      tipoTienda: ['', Validators.required],
     });
   }
 
   aceptar(): void {
-    if (this.form.valid) {
-      this.Tiend.idTienda = this.form.value.id;
-      this.Tiend.nombreTienda = this.form.value.nombreTienda;
-      this.Tiend.descripcionTienda = this.form.value.descripcionTienda;
-      this.Tiend.numeroTelefono = this.form.value.numeroTelefono;
-      this.Tiend.estadoTienda = this.form.value.estadoTienda;
-      this.Tiend.fechaTienda = this.form.value.fechaTienda;
-      //this.Tiend.TipTienda.idTipoTienda = this.form.value.foraneoTipTienda;
-    }
+    if (!this.form.valid) return;
+      this.Tiend = this.form.value;
+    
     if (this.edicion) {
       this.T.update(this.Tiend).subscribe(() => {
         this.T.list().subscribe((data) => {
@@ -133,8 +138,8 @@ export class Tiendainsert implements OnInit {
           descripcionTienda: new FormControl(data.descripcionTienda),
           numeroTelefono: new FormControl(data.numeroTelefono),
           estadoTienda: new FormControl(data.estadoTienda),
-          fechaTienda: new FormControl(data.fechaTienda),
-          //foraneoTipTienda: new FormControl(data.TipTienda.idTipoTienda),
+          lineaTienda: new FormControl(data.lineaTienda.idLineaTienda),
+          tipoTienda: new FormControl(data.tipoTienda.idTipoTienda),
         });
       });
     }

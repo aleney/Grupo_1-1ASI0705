@@ -117,7 +117,15 @@
           >Debe ser mayor a 0.</mat-error
         >
       </mat-form-field>
-      <br />
+      <br><br><br>
+      <mat-slide-toggle formControlName="favoritoProducto">
+        Favorito: {{ form.get('favoritoProducto')?.value ? 'Si' : 'No' }}
+      </mat-slide-toggle>
+        <br><br>
+      <mat-slide-toggle formControlName="disponibleProducto">
+        Disponible: {{ form.get('disponibleProducto')?.value ? 'Si' : 'No' }}
+      </mat-slide-toggle>
+      <br /><br>
       <mat-form-field class="example-full-width">
         <mat-label>Tienda</mat-label>
         <mat-select formControlName="tienda" required>

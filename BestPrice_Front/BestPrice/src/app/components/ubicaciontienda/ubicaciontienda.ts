@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { Ubicaciontiendainsert } from './ubicaciontiendainsert/ubicaciontiendainsert';
 
 @Component({
   selector: 'app-ubicaciontienda',
-  imports: [],
+  imports: [RouterOutlet, Ubicaciontiendainsert],
   templateUrl: './ubicaciontienda.html',
   styleUrl: './ubicaciontienda.css',
 })
