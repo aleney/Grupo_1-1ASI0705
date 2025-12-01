@@ -9,8 +9,8 @@ const base_url = environment.base;
   providedIn: 'root'
 })
 export class Categoriaproductoservice {
-  private url = `${base_url}/categoriaproducto`;
-  private listaLineaTienda = new Subject<CategoriaProducto[]>();
+  private url = `${base_url}/categoria-producto`;
+  private listaCatProducto = new Subject<CategoriaProducto[]>();
   constructor(private http: HttpClient) {}
   
   list() {
@@ -22,11 +22,11 @@ export class Categoriaproductoservice {
   }
 
   setList(listaNueva: CategoriaProducto[]) {
-    this.listaLineaTienda.next(listaNueva);
+    this.listaCatProducto.next(listaNueva);
   }
 
   getList() {
-    return this.listaLineaTienda.asObservable();
+    return this.listaCatProducto.asObservable();
   }
 
   listId(id: number) {
@@ -34,7 +34,7 @@ export class Categoriaproductoservice {
   }
 
   update(lt: CategoriaProducto) {
-    return this.http.put(`${this.url}/modificar`, lt, { responseType: 'text' });
+    return this.http.put(`${this.url}/editar`, lt, { responseType: 'text' });
   }
 
   delete(id: number) {

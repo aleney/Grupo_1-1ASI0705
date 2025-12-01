@@ -9,7 +9,7 @@ const base_url = environment.base;
   providedIn: 'root'
 })
 export class DetalleService {
-   private url = `${base_url}/detalle`;
+   private url = `${base_url}/canasta-detalle`;
     private listaCambio = new Subject<Detalle[]>();
     constructor(private http: HttpClient) {}
   

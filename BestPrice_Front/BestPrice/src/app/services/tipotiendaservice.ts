@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
-import { Tienda } from '../models/tienda';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { TipoTienda } from '../models/tipotienda';
@@ -11,15 +10,15 @@ const base_url=environment.base;
 })
 
 export class Tipotiendaservice {
-  private url=`${base_url}/tipotienda`;
+  private url=`${base_url}/tipo-tienda`;
   private listacamTiend=new Subject<TipoTienda[]>();
   constructor(private http:HttpClient) {}
 
   list(){
-    return this.http.get<Tienda[]>(`${this.url}/listarTienda`);
+    return this.http.get<TipoTienda[]>(`${this.url}/listar`);
   }
   insert(tt:TipoTienda){
-    return this.http.post(`${this.url}/registrarTienda`,tt);
+    return this.http.post(`${this.url}/insertar`,tt);
   }
   setList(listanuev:TipoTienda[]){
     this.listacamTiend.next(listanuev);

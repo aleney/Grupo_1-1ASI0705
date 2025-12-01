@@ -10,7 +10,7 @@ const base_url=environment.base;
 })
 
 export class TipoResenaservice {
-    private url = `${base_url}/tiporesena`;
+  private url = `${base_url}/tipo-resena`;
   private listaCambio = new Subject<TipoResena[]>();
   constructor(private http: HttpClient) {}
 
@@ -19,7 +19,7 @@ export class TipoResenaservice {
   }
 
   insert(resena: TipoResena) {
-    return this.http.post(`${this.url}/Registrar`, resena);
+    return this.http.post(`${this.url}/insertar`, resena);
   }
 
   update(resena: TipoResena) {

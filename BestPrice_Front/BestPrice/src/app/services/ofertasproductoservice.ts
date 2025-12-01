@@ -9,7 +9,7 @@ const base_url = environment.base;
 })
 
 export class Ofertasproductoservice {
-    private url = `${base_url}/ofertasproducto`;
+    private url = `${base_url}/ofertas-producto`;
     private listaoferprod = new Subject<Ofertasproducto[]>();
     constructor(private http: HttpClient) { }
 
