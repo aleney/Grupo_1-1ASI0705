@@ -2,14 +2,15 @@
   background-color: #dadada;  /* <-- Aquí cambias el color */
   margin: 0;
   font-family: Arial, sans-serif;
-  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  padding-bottom: 50px;
 }
 
 .menu-btn {
   margin-right: 15px;
 }
 
-/* Top bar */
 .toolbar {
   background-color: #f4a300;
   padding: 0 20px;
@@ -44,12 +45,10 @@
   flex: 1 1 auto;
 }
 
-/* User button */
 .user-btn mat-icon {
   margin-right: 5px;
 }
 
-/* Search + historial */
 .search-container {
   margin: 25px auto;
   max-width: 900px;
@@ -68,36 +67,28 @@
   font-size: 16px;
 }
 
-/* Cards grid */
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(2, 380px); /* 2 columnas fijas */
-  gap: 40px 80px; /* separación: filas - columnas */
-  justify-content: center; /* centra horizontalmente */
-  align-items: center; /* centra verticalmente */
+  grid-template-columns: repeat(3, 300px);
+  gap: 40px 80px;
+  justify-content: center;
+  align-items: center;
   margin-top: 40px;
 }
 
 .menu-card {
-  width: 380px;
-  height: 380px;
+  width: 300px;
+  height: 280px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 12px;
-  font-size: 40px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  cursor: pointer;        
-  user-select: none;
-}
-
-
-.menu-card {
+  border-radius: 15px;
   text-align: center;
-  padding: 15px;
   cursor: pointer;
   transition: transform 0.2s ease;
+  padding-bottom: 0%;
 }
 
 .menu-card:hover {
@@ -105,7 +96,109 @@
 }
 
 .icon {
-  width: 200px;
-  height: 200px;
-  margin-bottom: 10px;
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+}
+
+.menu-card p {
+  margin-top: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.full-settings-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #e3e3e3;
+  z-index: 3000;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.volver-btn {
+  background: #f8b332;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100px;
+}
+
+.settings-container {
+  display: flex;
+  height: 100%;
+  margin-top: 10px;
+}
+
+.settings-left {
+  width: 320px;
+  background: #f7f0df;
+  border-radius: 0 20px 20px 0;
+  padding: 30px 20px;
+}
+
+.settings-title {
+  font-size: 48px;
+  font-weight: bold;
+  font-family: 'Sundae Ice', sans-serif;
+  margin-bottom: 30px;
+}
+
+.settings-block {
+  background: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+
+.settings-block h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.settings-block p {
+  margin: 5px 0 0 0;
+  font-size: 14px;
+}
+
+.settings-right {
+  background: #333;
+  padding: 50px;
+  border-radius: 12px;
+  width: 400px;
+  height: fit-content;
+  margin-left: 40px;
+  color: white;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  padding-top: 20px;
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 2500;
 }

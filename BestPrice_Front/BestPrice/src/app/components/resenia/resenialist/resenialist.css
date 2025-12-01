@@ -7,12 +7,6 @@
 }
 
 /* ENCABEZADO */
-
-.menu-btn {
-  margin-right: 15px;
-}
-
-/* Top bar */
 .toolbar {
   background-color: #f4a300;
   padding: 0 20px;
@@ -29,61 +23,102 @@
   margin-bottom: 5px;
 }
 
-.logo-area span{
+.logo-area .title {
   font-family: 'Sundae Ice', sans-serif;
+  color: white;
+  font-size: 24px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-btn mat-icon {
+  margin-right: 5px;
   color: white;
 }
 
-.btc-icon {
-  font-size: 28px;
+/* BOTONES SUPERIORES */
+.contenedor-botones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-.title {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.spacer {
-  flex: 1 1 auto;
-}
-
-/* User button */
-.user-btn mat-icon {
-  margin-right: 5px;
-}
-
-
-.spacer {
-  flex: 1 1 auto;
+.botones-derecha button {
+  margin-left: 10px;
 }
 
 /* BOTÓN VOLVER */
 .btn-volver {
-  margin: 20px;
+  margin: 20px 0 20px 40px;
   font-weight: bold;
+  color: white !important;
+  background-color: #f6a700 !important;
 }
 
-.btn-volver[mat-raised-button] {
-  color: rgb(238, 244, 241);
-  background-color: #f6a700;
-}
-
-/* BOTÓN Registrar */
+/* BOTÓN REGISTRAR */
 .btn-registrar {
   margin: 20px;
   font-weight: bold;
+  color: white !important;
+  background-color: #f6a700 !important;
 }
 
-.btn-registrar[mat-raised-button] {
-  color: rgb(238, 244, 241);
-  background-color: #f6a700;
-}
-
-/* TÍTULO CENTRAL */
+/* TÍTULO */
 .titulo {
-  text-align: center;
   font-size: 60px;
+  text-align: center;
+  font-family: 'Sundae Ice', sans-serif;
   margin-top: 10px;
+  margin-bottom: 15px;
   font-weight: bold;
-  font-family: "Sundae ice";
+}
+
+/* CONTENEDOR DE TABLA */
+.table-container {
+  width: 90%;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+/* TABLA */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.styled-table th {
+  background-color: #f6a700;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 12px;
+  font-size: 16px;
+}
+
+.styled-table td {
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 10px;
+  font-size: 15px;
+}
+
+/* BOTÓN EDITAR */
+.btn-editar mat-icon {
+  background: #ffeaa7 !important;
+  padding: 6px;
+  border-radius: 8px;
+  color: black !important;
+}
+
+/* BOTÓN ELIMINAR */
+.btn-eliminar mat-icon {
+  background: #ff7675 !important;
+  padding: 6px;
+  border-radius: 8px;
+  color: white !important;
 }

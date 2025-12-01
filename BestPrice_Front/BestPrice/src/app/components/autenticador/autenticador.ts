@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { JwtRequestDTO } from '../../models/jwtRequestDTO';
 import { Loginservice } from '../../services/loginservice';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { JwtRequestDTO } from '../../models/jwtRequestDTO';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-autenticador',
-  imports: [MatFormFieldModule, FormsModule, MatInputModule, MatButtonModule],
+  imports: [MatFormFieldModule, FormsModule, MatInputModule, MatButtonModule, MatToolbarModule],
   templateUrl: './autenticador.html',
   styleUrl: './autenticador.css',
 })
@@ -20,11 +21,9 @@ export class Autenticador implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
-
   username: string = '';
   password: string = '';
   mensaje: string = '';
-
   ngOnInit(): void {}
   login() {
     let request = new JwtRequestDTO();
@@ -41,5 +40,4 @@ export class Autenticador implements OnInit {
       }
     );
   }
-
 }

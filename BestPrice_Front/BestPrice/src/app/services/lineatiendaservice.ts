@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { LineatiendaList } from '../models/lineatiendalist';
 import { LineatiendaInsert } from '../models/lineatiendainsert';
@@ -12,7 +12,7 @@ const base_url = environment.base;
 })
 export class LineatiendaService {
   private url = `${base_url}/linea-tienda`;
-  private listaLineaTienda = new Subject<LineatiendaList[]>();
+private listaLineaTienda = new BehaviorSubject<LineatiendaList[]>([]);
   constructor(private http: HttpClient) {}
   
   list() {

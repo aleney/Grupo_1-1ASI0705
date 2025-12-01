@@ -23,12 +23,15 @@ export class Resenialist implements OnInit {
   constructor(private rS: ReseniaService) {}
 
   ngOnInit(): void {
-    this.rS.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-    });
+    
     this.rS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
     });
+
+    this.rS.list().subscribe((data) => {
+      this.rS.setList(data);
+    });
+
   }
 
   eliminar(id:number){

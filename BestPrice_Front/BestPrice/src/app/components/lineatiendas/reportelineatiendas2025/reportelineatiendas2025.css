@@ -1,4 +1,6 @@
-/* FONDO GENERAL */
+/* =========================================================
+   FONDO GENERAL
+========================================================= */
 .page-container {
   background-color: #dadada;
   min-height: 100vh;
@@ -6,13 +8,9 @@
   padding-bottom: 40px;
 }
 
-/* ENCABEZADO */
-
-.menu-btn {
-  margin-right: 15px;
-}
-
-/* Top bar */
+/* =========================================================
+   ENCABEZADO / TOOLBAR
+========================================================= */
 .toolbar {
   background-color: #f4a300;
   padding: 0 20px;
@@ -29,13 +27,10 @@
   margin-bottom: 5px;
 }
 
-.logo-area span{
+.logo-area span {
   font-family: 'Sundae Ice', sans-serif;
   color: white;
-}
-
-.btc-icon {
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .title {
@@ -47,43 +42,88 @@
   flex: 1 1 auto;
 }
 
-/* User button */
+.shopping_cart {
+  font-size: 28px;
+  color: white;
+}
+
 .user-btn mat-icon {
   margin-right: 5px;
+  color: white;
 }
 
-
-.spacer {
-  flex: 1 1 auto;
-}
-
-/* BOTÓN VOLVER */
+/* =========================================================
+   BOTÓN VOLVER
+========================================================= */
 .btn-volver {
   margin: 20px;
+  margin-left: 40px;
   font-weight: bold;
+  color: white !important;
+  background-color: #f6a700 !important;
 }
 
-.btn-volver[mat-raised-button] {
-  color: rgb(238, 244, 241);
-  background-color: #f6a700;
-}
-
-/* BOTÓN Registrar */
-.btn-registrar {
-  margin: 20px;
-  font-weight: bold;
-}
-
-.btn-registrar[mat-raised-button] {
-  color: rgb(238, 244, 241);
-  background-color: #f6a700;
-}
-
-/* TÍTULO CENTRAL */
+/* =========================================================
+   TÍTULO CENTRAL
+========================================================= */
 .titulo {
-  text-align: center;
   font-size: 60px;
+  text-align: center;
+  font-family: 'Sundae Ice', sans-serif;
   margin-top: 10px;
+  margin-bottom: 15px;
   font-weight: bold;
-  font-family: "Sundae ice";
+}
+
+/* =========================================================
+   TABLA
+========================================================= */
+.table-container {
+  width: 90%;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.styled-table th {
+  background-color: #f6a700;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 12px;
+  font-size: 16px;
+}
+
+.styled-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  font-size: 15px;
+}
+
+/* =========================================================
+   BOTONES EDITAR / ELIMINAR (si existieran)
+========================================================= */
+.btn-editar {
+  background: #ffeaa7;
+  padding: 6px 15px;
+  border-radius: 10px;
+  border: none;
+  color: black;
+  cursor: pointer;
+}
+
+.btn-eliminar {
+  background: #ff7675;
+  padding: 6px 15px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  cursor: pointer;
 }

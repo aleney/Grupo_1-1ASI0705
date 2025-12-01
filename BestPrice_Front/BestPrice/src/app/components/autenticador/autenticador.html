@@ -1,23 +1,40 @@
-<div class="container" style="text-align: center">
-    <div>
-      <img src="assets/images/Menu_LogoBestPrice.png" alt="Logo de la empresa" >
+<div class="login-page">
 
+  <mat-toolbar color="primary" class="toolbar login-toolbar">
+    <div class="logo-area">
+      <img src="assets/images/Menu_LogoBestPrice.png" alt="Logo" class="small-logo" />
+      <span class="brand-text">ESTPRICE</span>
     </div>
-    <h2>Inicie sesión</h2>
-    <mat-form-field class="example-full-width">
-      <mat-label>Usuario</mat-label>
+
+    <span class="spacer"></span>
+
+    <button mat-raised-button class="logout-btn" routerLink="/logout">
+      Cerrar Sesión
+    </button>
+  </mat-toolbar>
+
+  <div class="logo-container">
+    <img src="assets/images/Menu_LogoBestPrice.png" class="main-logo" alt="Logo grande" />
+  </div>
+
+  <div class="login-card">
+    <h2 class="login-title">Iniciar Sesión</h2>
+
+    <label class="form-label">Usuario</label>
+    <mat-form-field appearance="outline" class="form-input">
       <input matInput placeholder="Username" [(ngModel)]="username" />
     </mat-form-field>
-    <br />
-    <mat-form-field class="example-full-width">
-      <mat-label>Password</mat-label>
-      <input
-        type="password"
-        matInput
-        placeholder="Password"
-        [(ngModel)]="password"
-      />
+
+    <label class="form-label">Contraseña</label>
+    <mat-form-field appearance="outline" class="form-input">
+      <input matInput type="password" placeholder="Password" [(ngModel)]="password" />
     </mat-form-field>
-    <br />
-    <button mat-raised-button class="custom-button" (click)="login()">Ingresar</button>
+
+    <button mat-raised-button color="primary" class="btn-login" (click)="login()">Entrar</button>
+
+    <div class="register-row">
+      <span>No tienes cuenta?</span>
+      <a class="register-link" routerLink="/registro">Regístrate</a>
+    </div>
   </div>
+</div>

@@ -7,12 +7,6 @@
 }
 
 /* ENCABEZADO */
-
-.menu-btn {
-  margin-right: 15px;
-}
-
-/* Top bar */
 .toolbar {
   background-color: #f4a300;
   padding: 0 20px;
@@ -29,13 +23,9 @@
   margin-bottom: 5px;
 }
 
-.logo-area span{
+.logo-area span {
   font-family: 'Sundae Ice', sans-serif;
   color: white;
-}
-
-.btc-icon {
-  font-size: 28px;
 }
 
 .title {
@@ -47,27 +37,13 @@
   flex: 1 1 auto;
 }
 
-/* User button */
-.user-btn mat-icon {
-  margin-right: 5px;
-}
-
-
-.spacer {
-  flex: 1 1 auto;
-}
-
 /* BOTÓN VOLVER */
 .btn-volver {
   margin: 20px;
   font-weight: bold;
-}
-
-.btn-volver[mat-raised-button] {
-  color: rgb(238, 244, 241);
+  color: white;
   background-color: #f6a700;
 }
-
 
 /* TÍTULO CENTRAL */
 .titulo {
@@ -92,15 +68,22 @@
   width: 100%;
 }
 
+/* RADIO BUTTONS */
+.custom-field {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
 .btn-registrar {
   margin-top: 20px;
   width: 100%;
   background-color: #f6a700;
   color: white;
   font-weight: bold;
-}
-
-.btn-registrar[mat-raised-button] {
-  color: rgb(238, 244, 241);
-  background-color: #f6a700;
 }

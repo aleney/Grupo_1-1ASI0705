@@ -1,4 +1,5 @@
 export const environment={
     production:false,
-    base:'http://localhost:8080'
+    base:'https://localhost:8080'
+    //base:'https://bestprice-backend.onrender.com'
 }

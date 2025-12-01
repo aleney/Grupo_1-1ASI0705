@@ -1,0 +1,169 @@
+.page-container {
+  background-color: #dadada;
+  min-height: 100vh;
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+.toolbar {
+  background-color: #f4a300;
+  padding: 0 20px;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-area img {
+  height: 60px;
+  margin-bottom: 5px;
+}
+
+.logo-area span {
+  font-family: 'Sundae Ice', sans-serif;
+  color: white;
+  font-size: 24px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-btn mat-icon {
+  margin-right: 5px;
+}
+
+.btn-volver {
+  margin: 20px;
+  margin-left: 40px;
+  font-weight: bold;
+  color: white !important;
+  background-color: #f6a700 !important;
+}
+
+.titulo {
+  font-size: 60px;
+  text-align: center;
+  font-family: 'Sundae Ice', sans-serif;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.example-full-width {
+  width: 650px !important;
+  background: #dadada;
+  padding: 0 10px;
+  border-radius: 10px;
+}
+
+.table-container {
+  width: 90%;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.styled-table th {
+  background-color: #f6a700;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 12px;
+  font-size: 16px;
+}
+
+.styled-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.btn-editar {
+  background: #ffeaa7;
+  padding: 6px 15px;
+  border-radius: 10px;
+  border: none;
+  color: black;
+  cursor: pointer;
+}
+
+.btn-editar .mat-icon{
+  color: black;
+  cursor: pointer;
+}
+
+.btn-eliminar {
+  background: #ff7675;
+  padding: 6px 15px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.btn-eliminar .mat-icon{
+  color: white;
+  cursor: pointer;
+}
+
+.btn-registrar {
+  margin: 20px;
+  font-weight: bold;
+  color: white !important;
+  background-color: #f6a700 !important;
+}
+
+/* Aplicado al <div> contenedor principal */
+.contenedor-botones {
+  display: flex; /* Activa Flexbox */
+  justify-content: space-between; /* Manda el primer elemento (o grupo) a la izquierda y el último (o grupo) a la derecha */
+  align-items: center; /* Opcional: Centra verticalmente los elementos si tienen alturas diferentes */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+/* Opcional: Añade un pequeño espacio entre los botones del grupo de la derecha */
+.botones-derecha button {
+    margin-left: 10px; /* Espacio horizontal entre los botones "Registrar" y "Tiendas del año actual" */
+}
+
+/* MAPA */
+.map-container {
+  width: 90%;
+  max-width: 1000px;
+  height: 450px;
+  margin: 40px auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.map-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+map-advanced-marker {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+map-advanced-marker:hover {
+  transform: scale(1.3);
+  z-index: 1000;
+}

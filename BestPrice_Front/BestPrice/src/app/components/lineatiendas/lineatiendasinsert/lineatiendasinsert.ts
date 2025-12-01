@@ -22,7 +22,6 @@ import { LineatiendaInsert } from '../../../models/lineatiendainsert';
     MatIconModule,
     MatMenuModule],
   templateUrl: './lineatiendasinsert.html',
-  providers: [provideNativeDateAdapter()],
   styleUrls: ['./lineatiendasinsert.css'],
 })
 export class Lineatiendasinsert implements OnInit{
@@ -43,17 +42,17 @@ constructor(
 
 ngOnInit(): void {
 
+    this.form = this.formBuilder.group({
+      id: [''],
+      nombre: ['', Validators.required],
+      detalle: ['', Validators.required],
+    });
+
   this.route.params.subscribe((data: Params) => {
     this.id = data['id'];
     this.edicion = data['id'] != null;
     this.init();
   });
-
-  this.form = this.formBuilder.group({
-      id: [''],
-      nombre: ['', Validators.required],
-      detalle: ['', Validators.required],
-    });
   
 }
 
@@ -75,9 +74,8 @@ registrar(): void {
     })
   })
   }
-  this.router.navigate(['lineatienda/lineatiendalist']);
+  this.router.navigate(['lineatienda/listar']);
 }
-
 
 }
 
