@@ -1,0 +1,115 @@
+/* FONDO GENERAL */
+.page-container {
+  background-color: #dadada;
+  min-height: 100vh;
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+/* TOOLBAR */
+.toolbar {
+  background-color: #f4a300;
+  padding: 0 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-area img {
+  height: 60px;
+  margin-bottom: 5px;
+}
+
+.logo-area span {
+  font-family: 'Sundae Ice', sans-serif;
+  color: white;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* BOTONES SUPERIORES */
+.top-buttons {
+  display: flex;
+  gap: 16px;
+  margin: 20px;
+}
+
+.btn-volver,
+.btn-lista {
+  font-weight: bold;
+}
+
+.btn-volver[mat-raised-button],
+.btn-lista[mat-raised-button] {
+  color: rgb(238, 244, 241);
+  background-color: #f6a700;
+}
+
+.btn-volver mat-icon {
+  margin-right: 4px;
+}
+
+/* TÍTULO CENTRAL */
+.titulo {
+  text-align: center;
+  font-size: 60px;
+  margin-top: 10px;
+  font-weight: bold;
+  font-family: "Sundae Ice";
+}
+
+/* CONTENEDOR */
+.form-container {
+  width: 90%;
+  margin: 30px auto;
+  padding: 25px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* TABLA */
+.mat-elevation-z8 {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f6a700;
+}
+
+.mat-header-cell {
+  background-color: #f6a700;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 12px;
+}
+
+.mat-cell {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.mat-header-row,
+.mat-row {
+  height: 48px;
+}
+
+

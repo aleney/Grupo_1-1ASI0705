@@ -1,0 +1,125 @@
+<div class="page-container">
+  <mat-toolbar color="primary" class="toolbar">
+    <div class="logo-area">
+      <button matIconButton class="Menu-Desplegable" aria-label="Menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <img src="assets/images/Menu_LogoBestPrice.png" alt="" />
+      <span class="title">ESTPRICE</span>
+    </div>
+
+    <span class="spacer"></span>
+
+    <button matIconButton class="Canasta" aria-label="Carrito">
+      <mat-icon aria-hidden="false" fontIcon="shopping_cart">shopping_cart</mat-icon>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn" (click)="verificar()">
+      <mat-icon>account_circle</mat-icon>
+      Rol: <span>{{ role }}</span>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="/perfil"><mat-icon>person</mat-icon> Perfil</button>
+      <button mat-menu-item routerLink="/favorites"><mat-icon>favorite</mat-icon> Favoritos</button>
+      <button mat-menu-item routerLink="/historial"><mat-icon>history</mat-icon> Historial</button>
+      <button mat-menu-item routerLink="/ajustes"><mat-icon>settings</mat-icon> Ajustes</button>
+      <button mat-menu-item routerLink="/login" (click)="cerrar()">
+        <mat-icon>logout</mat-icon> Cerrar sesión
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <div class="top-buttons">
+    <button mat-raised-button class="btn-volver" routerLink="/menu"><mat-icon>arrow_back_ios</mat-icon>Volver</button>
+    <button mat-raised-button class="btn-lista" routerLink="/producto/listar">Lista</button>
+  </div>
+
+  <h1 class="titulo">{{ edicion ? 'Editar Producto' : 'Registro de Producto' }}</h1>
+
+  <div class="form-container">
+    <form [formGroup]="form" (submit)="registrar()" class="example-form">
+      <ng-container *ngIf="edicion">
+        <mat-form-field>
+          <mat-label>Código</mat-label>
+          <input matInput formControlName="idProducto" readonly required />
+          <mat-error *ngIf="form.get('idProducto')?.hasError('required')"
+            >El campo ID es obligatorio.</mat-error
+          >
+        </mat-form-field>
+      </ng-container>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombreProducto" required />
+        <mat-error *ngIf="form.get('nombreProducto')?.hasError('required')"
+          >El nombre es obligatorio.</mat-error
+        >
+        <mat-error *ngIf="form.get('nombreProducto')?.hasError('minlength')"
+          >Mínimo 3 caracteres.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="descripcionProducto" required></textarea>
+        <mat-error *ngIf="form.get('descripcionProducto')?.hasError('required')"
+          >La descripción es obligatoria.</mat-error
+        >
+        <mat-error *ngIf="form.get('descripcionProducto')?.hasError('maxlength')"
+          >Máx. 450 caracteres.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Marca</mat-label>
+        <input matInput formControlName="marcaProducto" required />
+        <mat-error *ngIf="form.get('marcaProducto')?.hasError('required')"
+          >La marca es obligatoria.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Precio</mat-label>
+        <input matInput formControlName="precioProducto" required type="number" />
+        <mat-hint>Ej: 10.50</mat-hint>
+        <mat-error *ngIf="form.get('precioProducto')?.hasError('required')"
+          >El precio es obligatorio.</mat-error
+        >
+        <mat-error *ngIf="form.get('precioProducto')?.hasError('min')"
+          >Debe ser mayor a 0.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Stock</mat-label>
+        <input matInput type="number" formControlName="stockProducto" required />
+        <mat-error *ngIf="form.get('stockProducto')?.hasError('required')"
+          >El stock es obligatorio.</mat-error
+        >
+        <mat-error *ngIf="form.get('stockProducto')?.hasError('min')"
+          >Debe ser mayor o igual a 0.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Unidad Métrica</mat-label>
+        <input matInput type="number" formControlName="unidadMetricaProducto" required />
+        <mat-hint>Ej: 1, 2, 500, etc.</mat-hint>
+
+        <mat-error *ngIf="form.get('unidadMetricaProducto')?.hasError('required')"
+          >La unidad es obligatoria.</mat-error
+        >
+        <mat-error *ngIf="form.get('unidadMetricaProducto')?.hasError('min')"
+          >Debe ser mayor a 0.</mat-error
+        >
+      </mat-form-field>
+
+      <div style="display: flex; gap: 16px; margin-top: 12px">
+        <button mat-raised-button class="btn-registrar" type="submit">
+          {{ edicion ? 'Guardar' : 'Registrar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

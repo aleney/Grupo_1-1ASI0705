@@ -1,0 +1,13 @@
+.construccion-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  text-align: center;
+}
+
+.construccion-container img {
+  max-width: 70%;
+  height: auto;
+  opacity: 0.95;
+}

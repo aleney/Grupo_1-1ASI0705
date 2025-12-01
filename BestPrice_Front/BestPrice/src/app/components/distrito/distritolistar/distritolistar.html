@@ -1,0 +1,115 @@
+<div class="page-container">
+  <mat-toolbar color="primary" class="toolbar">
+    <div class="logo-area">
+      <button matIconButton class="Menu-Desplegable" aria-label="Menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <img src="assets/images/Menu_LogoBestPrice.png" alt="" />
+      <span class="title">ESTPRICE</span>
+    </div>
+
+    <span class="spacer"></span>
+
+    <button matIconButton class="Canasta" aria-label="Carrito">
+      <mat-icon aria-hidden="false" fontIcon="shopping_cart">shopping_cart</mat-icon>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn" (click)="verificar()">
+      <mat-icon>account_circle</mat-icon>
+      Rol: <span>{{ role }}</span>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="/perfil"><mat-icon>person</mat-icon> Perfil</button>
+      <button mat-menu-item routerLink="/favorites"><mat-icon>favorite</mat-icon> Favoritos</button>
+      <button mat-menu-item routerLink="/historial"><mat-icon>history</mat-icon> Historial</button>
+      <button mat-menu-item routerLink="/ajustes"><mat-icon>settings</mat-icon> Ajustes</button>
+      <button mat-menu-item routerLink="/login" (click)="cerrar()">
+        <mat-icon>logout</mat-icon> Cerrar sesión
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <div class="top-buttons">
+    <button mat-raised-button class="btn-volver" routerLink="/distrito"><mat-icon>arrow_back_ios</mat-icon>Volver</button>
+  </div>
+
+  <div style="text-align: center; margin-bottom: 50px">
+    <h1 class="titulo">Lista de distritos</h1>
+  </div>
+
+  <div class="search-container">
+    <form [formGroup]="form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Buscar distrito</mat-label>
+        <input matInput formControlName="nombrebusqueda" />
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="styled-table mat-elevation-z8">
+      <ng-container matColumnDef="c1">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element">{{ element.idDistrito }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c2">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let element">{{ element.nombreDistrito }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c3">
+        <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+        <td mat-cell *matCellDef="let element">{{ element.descripcionDistrito }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c4">
+        <th mat-header-cell *matHeaderCellDef>Longitud</th>
+        <td mat-cell *matCellDef="let element">{{ element.latitudDistrito }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef>Latitud</th>
+        <td mat-cell *matCellDef="let element">{{ element.longitudDistrito }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef>Fecha y Hora de Creación</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.createdAtDistrito | date:'yyyy-MM-dd HH:mm:ss' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="c7">
+        <th mat-header-cell *matHeaderCellDef>Actualizar</th>
+        <td mat-cell *matCellDef="let element">
+          <button matButton [routerLink]="['editD', element.idDistrito]" class="btn-editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="c8">
+        <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+        <td mat-cell *matCellDef="let element">
+          <button matButton (click)="eliminar(element.idDistrito)" class="btn-eliminar">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <br />
+    <mat-paginator
+      [length]="100"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
+</div>

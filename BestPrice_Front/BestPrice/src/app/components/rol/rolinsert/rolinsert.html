@@ -1,0 +1,76 @@
+<div class="page-container">
+  <!-- ENCABEZADO -->
+  <mat-toolbar color="primary" class="toolbar">
+    <div class="logo-area">
+      <button mat-icon-button class="Menu-Desplegable" aria-label="Menú">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <img src="assets/images/Menu_LogoBestPrice.png" alt="Logo" />
+      <span class="title">BESTPRICE</span>
+    </div>
+
+    <span class="spacer"></span>
+
+    <button mat-icon-button class="Canasta" aria-label="Carrito">
+      <mat-icon aria-hidden="false" fontIcon="shopping_cart">shopping_cart</mat-icon>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn" (click)="verificar()">
+      <mat-icon>account_circle</mat-icon>
+      Rol: <span>{{ role }}</span>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="/perfil"><mat-icon>person</mat-icon> Perfil</button>
+      <button mat-menu-item routerLink="/favorites"><mat-icon>favorite</mat-icon> Favoritos</button>
+      <button mat-menu-item routerLink="/historial"><mat-icon>history</mat-icon> Historial</button>
+      <button mat-menu-item routerLink="/ajustes"><mat-icon>settings</mat-icon> Ajustes</button>
+      <button mat-menu-item routerLink="/login" (click)="cerrar()">
+        <mat-icon>logout</mat-icon> Cerrar sesión
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <!-- BOTONES SUPERIORES -->
+  <div class="top-buttons">
+    <button mat-raised-button class="btn-volver" routerLink="/menu">
+      <mat-icon>arrow_back_ios</mat-icon>Volver 
+      </button>
+    <button mat-raised-button class="btn-lista" routerLink="/rol/list">Lista</button>
+  </div>   
+
+  <!-- TÍTULO -->
+  <h1 class="titulo">{{ edicion ? 'Editar Rol' : 'Registro de Rol' }}</h1>
+
+  <!-- FORMULARIO -->
+  <div class="form-container">
+    <form [formGroup]="form" (submit)="registrar()" class="example-form">
+
+      <!-- Código solo en edición -->
+      <ng-container *ngIf="edicion">
+        <mat-form-field>
+          <mat-label>Código</mat-label>
+          <input matInput formControlName="idRol" readonly required />
+          <mat-error *ngIf="form.get('idRol')?.hasError('required')">
+            El campo ID es obligatorio.
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+
+      <!-- Tipo de Usuario -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Tipo de Usuario</mat-label>
+        <input matInput formControlName="tipoUsuario" required />
+        <mat-error *ngIf="form.get('tipoUsuario')?.hasError('required')">
+          El campo Tipo de Usuario es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- BOTÓN -->
+      <div style="display: flex; gap: 16px; margin-top: 12px">
+        <button mat-raised-button class="btn-registrar" type="submit">
+          {{ edicion ? 'Guardar' : 'Registrar' }}
+        </button>
+      </div>
+    </form>
+  </div>
